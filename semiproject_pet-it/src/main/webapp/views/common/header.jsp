@@ -28,7 +28,38 @@
         <link href="css/style.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="css/responsive.css" rel="stylesheet" />
+        <!-- jQery -->
+        <script src="js/jquery-3.4.1.min.js"></script>
       
+      <script>
+	      	$(document).ready(function(){
+	    		/* $(".header-menu-item>a").hover(function(){
+	    			$(this).parent().find("ul").css("display","block");
+	    		})
+	    		$(".header-menu-item>ul").mouseout(function(){
+	    			$(this).css("display","none");
+	    		}) */
+	    		//hover -> 사용자가 마우스로 nav-bar 중 li에 hover시 보여주고 싶다.
+	    		//submenu위에서 menu가 유지되고 벗어날 시 사라짐
+	    		$(".header-menu-item>a").mouseenter(function(e){
+	    			$(e.target).parent().find("ul").css("display","block");
+	    			/* $(e.target).find("ul").css("display","none"); */
+	    		})
+	    		$(".header-menu-item>a").mouseleave(function(e){
+	    			$(e.target).parent().find("ul").css("display","none");
+	    			/* $(e.target).find("ul").css("display","none"); */
+	    		})
+	    		$(".sub-nav").mouseenter(function(e){
+	    			$(this).css("display","block");
+	    			/* $(e.target).find("ul").css("display","none"); */
+	    		})
+	    		$(".sub-nav").mouseleave(function(e){
+	    			$(this).css("display","none");
+	    			/* $(e.target).find("ul").css("display","none"); */
+	    		})
+	    	})
+	    	
+      </script>
       </head>
       
       <body>
@@ -49,20 +80,55 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="d-flex mx-auto flex-column flex-lg-row align-items-center" style="font-size: 15pt; font-family: G마켓 산스;">
                   <ul class="navbar-nav  ">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="index.html">Pet-It <span class="sr-only">(current)</span></a>
+                    <li class="nav-item active header-menu-item">
+                      <a class="nav-link " href="index.html">Pet-It <span class="sr-only">(current)</span></a>
+                      <ul class="sub-nav">
+                      	<li class = "sub-item">신상품</li>
+                      	<li class = "sub-item">베스트</li>
+                      	<li class = "sub-item">사료</li>
+                      	<li class = "sub-item">간식</li>
+                      	<li class = "sub-item">용품</li>  	
+                      </ul>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="about.html">이벤트</a>
+                    <li class="nav-item header-menu-item">
+                      <a class="nav-link " href="about.html">이벤트</a>
+                      <ul class="sub-nav">
+                      	<li class = "sub-item">신상품</li>
+                      	<li class = "sub-item">베스트</li>
+                      	<li class = "sub-item">사료</li>
+                      	<li class = "sub-item">간식</li>
+                      	<li class = "sub-item">용품</li>  	
+                      </ul>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="furniture.html">주요상품</a>
+                    <li class="nav-item header-menu-item">
+                      <a class="nav-link " href="furniture.html">주요상품</a>
+                      <ul class="sub-nav">
+                      	<li class = "sub-item">신상품</li>
+                      	<li class = "sub-item">베스트</li>
+                      	<li class = "sub-item">사료</li>
+                      	<li class = "sub-item">간식</li>
+                      	<li class = "sub-item">용품</li>  	
+                      </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item header-menu-item">
                       <a class="nav-link" href="blog.html">마이페이지</a>
+                      <ul class="sub-nav">
+                      	<li class = "sub-item">신상품</li>
+                      	<li class = "sub-item">베스트</li>
+                      	<li class = "sub-item">사료</li>
+                      	<li class = "sub-item">간식</li>
+                      	<li class = "sub-item">용품</li>  	
+                      </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item header-menu-item">
                       <a class="nav-link" href="contact.html">Q&A</a>
+                      <ul class="sub-nav">
+                      	<li class = "sub-item">신상품</li>
+                      	<li class = "sub-item">베스트</li>
+                      	<li class = "sub-item">사료</li>
+                      	<li class = "sub-item">간식</li>
+                      	<li class = "sub-item">용품</li>  	
+                      </ul>
                     </li>
                   </ul>
                 </div>

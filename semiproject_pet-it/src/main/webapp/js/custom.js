@@ -8,7 +8,7 @@ function getYear() {
 getYear();
 
 
-$('.custom_slick_slider').slick({
+/*$('.custom_slick_slider').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
     dots: true,
@@ -30,7 +30,7 @@ $('.slick_slider_nav').slick({
     centerMode: false,
     focusOnSelect: true,
     variableWidth: true
-});
+});*/
 
 
 /** google_map js **/
@@ -42,3 +42,7 @@ function myMap() {
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 }
+
+
+/* yc js*/
+
