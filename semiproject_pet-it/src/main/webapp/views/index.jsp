@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file ="/views/common/header.jsp" %>
+<%@ include file ="header.jsp" %>
  <!-- slider section -->
           <section class="slider_section long_section">
             <div id="customCarousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="img/banner2-1.jpg" width="1783" height="498" alt="">
+                    <img src="../img/banner2-1.jpg" width="1783" height="498" alt="">
                 </div>
                 <div class="carousel-item">
-                    <img src="img/banner3.jpg" alt="">
+                    <img src="../img/banner3.jpg" alt="">
                 </div>
                 <div class="carousel-item">
-                    <img src="img/banner1.jpg" alt="">
+                    <img src="../img/banner1.jpg" alt="">
                 </div>
               </div>
               <ol class="carousel-indicators">
@@ -41,7 +41,7 @@
               <div class="col-md-6 col-lg-4">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/f1.png" alt="">
+                    <img src="../images/f1.png" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -61,7 +61,7 @@
               <div class="col-md-6 col-lg-4">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/f2.png" alt="">
+                    <img src="../images/f2.png" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -81,7 +81,7 @@
               <div class="col-md-6 col-lg-4">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/f3.png" alt="">
+                    <img src="../images/f3.png" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -101,7 +101,7 @@
               <div class="col-md-6 col-lg-4">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/f4.png" alt="">
+                    <img src="../images/f4.png" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -121,7 +121,7 @@
               <div class="col-md-6 col-lg-4">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/f5.png" alt="">
+                    <img src="../images/f5.png" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -141,7 +141,7 @@
               <div class="col-md-6 col-lg-4">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/f6.png" alt="">
+                    <img src="../images/f6.png" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -172,7 +172,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="img-box">
-                  <img src="images/about-img.png" alt="">
+                  <img src="../images/about-img.png" alt="">
                 </div>
               </div>
               <div class="col-md-6">
@@ -209,7 +209,7 @@
               <div class="col-md-6 col-lg-4 mx-auto">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/b1.jpg" alt="">
+                    <img src="../images/b1.jpg" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -227,7 +227,7 @@
               <div class="col-md-6 col-lg-4 mx-auto">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/b2.jpg" alt="">
+                    <img src="../images/b2.jpg" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -245,7 +245,7 @@
               <div class="col-md-6 col-lg-4 mx-auto">
                 <div class="box">
                   <div class="img-box">
-                    <img src="images/b3.jpg" alt="">
+                    <img src="../images/b3.jpg" alt="">
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -282,7 +282,7 @@
                     <div class="col-md-11 col-lg-10 mx-auto">
                       <div class="box">
                         <div class="img-box">
-                          <img src="images/client.jpg" alt="" />
+                          <img src="../images/client.jpg" alt="" />
                         </div>
                         <div class="detail-box">
                           <div class="name">
@@ -306,7 +306,7 @@
                     <div class="col-md-11 col-lg-10 mx-auto">
                       <div class="box">
                         <div class="img-box">
-                          <img src="images/client.jpg" alt="" />
+                          <img src="../images/client.jpg" alt="" />
                         </div>
                         <div class="detail-box">
                           <div class="name">
@@ -330,7 +330,7 @@
                     <div class="col-md-11 col-lg-10 mx-auto">
                       <div class="box">
                         <div class="img-box">
-                          <img src="images/client.jpg" alt="" />
+                          <img src="../images/client.jpg" alt="" />
                         </div>
                         <div class="detail-box">
                           <div class="name">
@@ -458,22 +458,22 @@
                     </h5>
                     <div class="post_box">
                       <div class="img-box">
-                        <img src="images/f1.png" alt="">
+                        <img src="../images/f1.png" alt="">
                       </div>
                       <div class="img-box">
-                        <img src="images/f2.png" alt="">
+                        <img src="../images/f2.png" alt="">
                       </div>
                       <div class="img-box">
-                        <img src="images/f3.png" alt="">
+                        <img src="../images/f3.png" alt="">
                       </div>
                       <div class="img-box">
-                        <img src="images/f4.png" alt="">
+                        <img src="../images/f4.png" alt="">
                       </div>
                       <div class="img-box">
-                        <img src="images/f5.png" alt="">
+                        <img src="../images/f5.png" alt="">
                       </div>
                       <div class="img-box">
-                        <img src="images/f6.png" alt="">
+                        <img src="../images/f6.png" alt="">
                       </div>
                     </div>
                   </div>
@@ -510,4 +510,4 @@
           </div>
         </section>
         <!-- end info_section -->
-<%@ include file ="/views/common/footer.jsp" %>
+<%@ include file ="footer.jsp" %>
