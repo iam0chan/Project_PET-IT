@@ -58,13 +58,20 @@
 	    			/* $(e.target).find("ul").css("display","none"); */
 	    		})
 	    		
-	    		$(".nav-link").mouseenter(function(){
+	    		/* $(".nav-link").mouseenter(function(){
 	    			console.log($(this).children("li"));
 	    			$(this).parent().css("background-color","yellow");
 	    		})
 	    		$(".nav-link").mouseleave(function(){
 	    			console.log($(this).children("li"));
 	    			$(this).parent().css("background-color","white");
+	    		}) */
+	    		/* yc) 231109 10:19 수정  */
+	    		$(".sub-item").mouseenter(function(){
+	    			$(this).css("background-color","#04aa6d");
+	    		})
+	    		$(".sub-item").mouseleave(function(){
+	    			$(this).css("background-color","white");
 	    		})
 	    	})
 	    	
