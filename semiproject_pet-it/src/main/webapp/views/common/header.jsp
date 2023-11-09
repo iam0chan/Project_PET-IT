@@ -4,7 +4,7 @@
     <head>
         <!-- Basic -->
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="IE=chrome" />
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <!-- Site Metas -->
@@ -56,6 +56,15 @@
 	    		$(".sub-nav").mouseleave(function(e){
 	    			$(this).css("display","none");
 	    			/* $(e.target).find("ul").css("display","none"); */
+	    		})
+	    		
+	    		$(".nav-link").mouseenter(function(){
+	    			console.log($(this).children("li"));
+	    			$(this).parent().css("background-color","yellow");
+	    		})
+	    		$(".nav-link").mouseleave(function(){
+	    			console.log($(this).children("li"));
+	    			$(this).parent().css("background-color","white");
 	    		})
 	    	})
 	    	
