@@ -138,7 +138,7 @@
    		}
     	
     	div.search-bar .btn{
-    		width: 60px;
+    		width: 70px;
     		border-radius: 12px;
     		
     	}
@@ -287,10 +287,26 @@
                     </form>
                 </div>
                 <div class="btn-bottom-container">
-                    <button type="button" class="btn btn-outline-success button-bottom">수정</button>
-                    <button type="button" class="btn btn-outline-success button-bottom">삭제</button>
+                <a class="admin-btn"href="#" style="color:#28A745;">
+                    <button type="button" class="btn btn-outline-success button-bottom">
+                    	등록
+                    </button></a>
+                    <a class="admin-btn"href="#" style="color:#28A745;">
+                    <button type="button" class="btn btn-outline-success button-bottom">
+                    	삭제
+                    </button></a>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+    $(".admin-btn").mouseenter(function(){
+		$(this).css("color","white");
+	})   
+	$(".admin-btn").mouseleave(function(){
+		$(this).css("color","#28A745");
+	})   
+ 
+    </script>
+    
 <%@ include file="/views/footer.jsp"%>
