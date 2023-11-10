@@ -103,6 +103,8 @@
         }
         
         .item-img>img{
+        	width:100%;
+        	height:100%;
         	
         }
         
@@ -112,6 +114,13 @@
     		justify-content: center;
         	height:30%;
         }
+        
+       
+    	
+    	div.search-bar .btn{
+    		width: 60px;
+    		
+    	}
     </style>
     <script>
         const searchButton = document.getElementById('search-button');
@@ -156,28 +165,84 @@
                     </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
                 <div class="card">
-                    <p>card</p>
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
                 </div>
             </div>
             <div class="bottom-container">
@@ -186,13 +251,10 @@
                     <button>삭제</button>
                 </div>
                 <div class="search-bar">
-                    <div class="form-outline">
-                        <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search"/>
-                        <label class="form-label" for="form1"></label>
-                    </div>
-                    <button id="search-button" type="button" class="btn btn-primary">
-                        <i class="fas fa-search">검색</i>
-                    </button>
+                    <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass search-icon" style="width:50px;margin-top:5px"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
