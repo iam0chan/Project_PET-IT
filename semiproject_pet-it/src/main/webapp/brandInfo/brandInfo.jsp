@@ -3,11 +3,12 @@
 <%@ include file = "../views/header.jsp"%>
  <style>
         .mainTilte{
-            font-size: 44px;
+            font-size: 43px;
             line-height: 54px;
             font-weight: 200;
             margin-bottom: 10px !important;
         }
+    
         img {
              margin: content-box;
              overflow: clip;
@@ -28,7 +29,7 @@
 <div class="container"> <!-- 전체 감싸는 div -->
     <div class="space"></div> <!--윗간격 공백 div -->
     <div class="infoTitle"> <!-- 메인 타이틀 -->
-        <h5 class="subTilte">번려동물의 행복과 건강을 위한 발걸음</h5>
+        <h5 class="subTitle">번려동물의 행복과 건강을 위한 발걸음</h5>
         <h2 calss="mainTilte">Pet-it Loves Pet</h2>
         <p>
             반려동물의 힘찬 발걸음과 행복 가득한 미소가 오래오래 빛날 수 있도록 <br>
