@@ -21,6 +21,34 @@
           </button>
         </div>
       </div>
+ 
+    <!-- <div data-include-path="../product/productlist.jsp"></div>
+ 
+    <script>
+        window.addEventListener('load', function() {
+            var allElements = document.getElementsByTagName('*');
+            Array.prototype.forEach.call(allElements, function(el) {
+                var includePath = el.dataset.includePath;
+                if (includePath) {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            el.outerHTML = this.responseText;
+                        }
+                    };
+                    xhttp.open('GET', includePath, true);
+                    xhttp.send();
+                }
+            });
+        });
+    </script> -->
+    
+<!-- 	<iframe
+	 src="../product/productlist.jsp" 
+	onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"
+	>
+	</iframe> -->
+	      
 
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
