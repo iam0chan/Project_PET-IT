@@ -28,7 +28,7 @@
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "85456334",  			//주문번호가 들어가야함.
+			merchant_uid: "8544",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
 			amount:	10800,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
@@ -39,6 +39,7 @@
 		}, function(rsp){						//callback함수
 			if(rsp.success){
 				alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid);
+				
 			}else{
 				alert("실패 : 코드("+rsp.error_code+") / 메시지("+rsp.error_msg+")");
 			}
@@ -49,7 +50,7 @@
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kcp.AO09C",					//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "85456334",  			//주문번호가 들어가야함.
+			merchant_uid: "85434",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
 			amount:	10800,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
