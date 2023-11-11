@@ -3,11 +3,23 @@
 <%@ include file = "../views/header.jsp"%>
  <style>
         .mainTilte{
-            font-size: 44px;
+            font-size: 50px;
             line-height: 54px;
-            font-weight: 200;
+            font-weight: 240;
+            line-height: 300%;
             margin-bottom: 10px !important;
         }
+    
+    	.subTitle{
+    		 font-size: 13px;
+    		 line-height: 100%;
+    	}
+    	
+    	.infoTitle{
+    		 font-size: 10px;
+    		 line-height: 200%;
+    	}
+    
         img {
              margin: content-box;
              overflow: clip;
@@ -25,10 +37,10 @@
 </style>
 
 <!-- jh_브랜드소개 메인페이지 -->
-<div class="container"> <!-- 전체 감싸는 div -->
+ <div class="container"> <!-- 전체 감싸는 div -->
     <div class="space"></div> <!--윗간격 공백 div -->
     <div class="infoTitle"> <!-- 메인 타이틀 -->
-        <h5 class="subTilte">번려동물의 행복과 건강을 위한 발걸음</h5>
+        <h5 class="subTitle">번려동물의 행복과 건강을 위한 발걸음</h5>
         <h2 calss="mainTilte">Pet-it Loves Pet</h2>
         <p>
             반려동물의 힘찬 발걸음과 행복 가득한 미소가 오래오래 빛날 수 있도록 <br>
