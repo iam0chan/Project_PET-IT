@@ -12,6 +12,7 @@
             flex-direction: column;
             align-items: center;
             line-height: 1;
+            padding-top:80px;
         }
 
         .header-container,
@@ -21,6 +22,10 @@
 
         .header-title {
             margin-bottom: 30px;
+        }
+        
+        .header-container > .button{
+        	margin-bottom: 30px;
         }
 
         .header-container {
@@ -33,27 +38,31 @@
         .item-container>.container {
             display: flex;
             width: 1200px;
-            background-color: yellow;
+            /* background-color: yellow; */
             flex-wrap: wrap;
             justify-content: space-evenly;
             margin-bottom: 20px;
         }
+        
+        
 
         .item-container>.container>.card {
             width: 29%;
-            height: 500px;
-            border: 1px solid red;
+            height: 430px;
+            /* border: 1px solid red; */
+            margin-bottom : 42px;
+            boder-radius: 5px;
         }
 
         .product-wrapper .sort-list {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             margin-bottom: 10px;
 }
         }
 
         .product-wrapper .sort-list>p {
-            margin: 20px 5px;
+            margin: 0 10px;
             cursor: pointer;
         }
 
@@ -64,14 +73,21 @@
 
         .product-wrapper .button>div {
             display: flex;
-            width: 600px;
-            justify-content: space-between;
+            width: 700px;
+            justify-content: center;
         }
 
-        .product-wrapper .btn {
-            width: 1200px;
+        .product-wrapper .btn-bottom-container {
+            width: 400px;
             display: flex;
             justify-content: flex-end;
+    		text-align: center;
+        }
+       
+        
+        .product-wrapper .btn-container > button {
+            margin-left:20px;
+           
         }
 
         .product-wrapper div.btn>button {
@@ -83,8 +99,8 @@
 
         .product-wrapper .search-bar{
             display: flex;
-            width: 1200px;
-            justify-content: center;
+            width: 700px;
+    		justify-content: flex-end;
         }
         .form-outline input{
             width: 250px;
@@ -95,7 +111,7 @@
         }
         
         .item-img, item-content{
-        	border: 1px solid red;
+        	/* border: 1px solid red; */
         }
         
         .item-img{
@@ -115,20 +131,38 @@
         	height:30%;
         }
         
-       
+   		.product-wrapper .bottom-container{
+   			display:flex;
+   			height:38px;
+   			justify-content: center;
+   		}
     	
     	div.search-bar .btn{
-    		width: 60px;
+    		width: 70px;
+    		border-radius: 12px;
     		
+    	}
+    	.btn-container{
+    		display:flex;
+    		justify-content:center;
+    	}
+    	
+    	.button-bottom{
+    		margin-right:15px;
     	}
     </style>
     <script>
-        const searchButton = document.getElementById('search-button');
+    /*     const searchButton = document.getElementById('search-button');
         const searchInput = document.getElementById('search-input');
-        searchButton.addEventListener('click', () => {
+        searchButton.onclick( () => {
             const inputValue = searchInput.value;
             alert(inputValue);
-        });
+        }); */
+        
+        $(".btn").mouseenter(function(){
+        	console.log($(".btn"));
+			$(this).css("background-color","#04aa6d");
+		})
     </script>
 <div class="product-wrapper">
         <div class="header-container">
@@ -136,12 +170,12 @@
                 <h1>DOG</h1>
             </div>
             <div class="button">
-                <div>
-                    <button>샘플</button>
-                    <button>샘플</button>
-                    <button>샘플</button>
-                    <button>샘플</button>
-                    <button>샘플</button>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>신상품</a></button>
+                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 베스트</a></button>
+                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 사료</a></button>
+                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 간식</a></button>
+                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 용품</a></button>
                 </div>
             </div>
         </div>
@@ -246,17 +280,33 @@
                 </div>
             </div>
             <div class="bottom-container">
-                <div class="btn">
-                    <button>수정</button>
-                    <button>삭제</button>
-                </div>
                 <div class="search-bar">
                     <form class="d-flex">
                       <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
                       <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass search-icon" style="width:50px;margin-top:5px"></i></button>
                     </form>
                 </div>
+                <div class="btn-bottom-container">
+                <a class="admin-btn"href="<%=request.getContextPath()%>/product/productEnroll.do" style="color:#28A745;">
+                    <button type="button" class="btn btn-outline-success button-bottom">
+                    	등록
+                    </button></a>
+                    <a class="admin-btn"href="#" style="color:#28A745;">
+                    <button type="button" class="btn btn-outline-success button-bottom">
+                    	삭제
+                    </button></a>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+    $(".admin-btn").mouseenter(function(){
+		$(this).css("color","white");
+	})   
+	$(".admin-btn").mouseleave(function(){
+		$(this).css("color","#28A745");
+	})   
+ 
+    </script>
+    
 <%@ include file="/views/footer.jsp"%>
