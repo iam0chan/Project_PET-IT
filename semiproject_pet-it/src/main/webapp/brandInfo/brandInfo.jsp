@@ -3,11 +3,22 @@
 <%@ include file = "../views/header.jsp"%>
  <style>
         .mainTilte{
-            font-size: 43px;
+            font-size: 50px;
             line-height: 54px;
-            font-weight: 200;
+            font-weight: 240;
+            line-height: 300%;
             margin-bottom: 10px !important;
         }
+    
+    	.subTitle{
+    		 font-size: 13px;
+    		 line-height: 100%;
+    	}
+    	
+    	.infoTitle{
+    		 font-size: 10px;
+    		 line-height: 200%;
+    	}
     
         img {
              margin: content-box;
@@ -26,7 +37,7 @@
 </style>
 
 <!-- jh_브랜드소개 메인페이지 -->
-<div class="container"> <!-- 전체 감싸는 div -->
+ <div class="container"> <!-- 전체 감싸는 div -->
     <div class="space"></div> <!--윗간격 공백 div -->
     <div class="infoTitle"> <!-- 메인 타이틀 -->
         <h5 class="subTitle">번려동물의 행복과 건강을 위한 발걸음</h5>
