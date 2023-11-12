@@ -87,7 +87,6 @@
 					<col style="width: 150px";>
 					<col style="width: 150px";>
 					<col style="width: 150px";>
-					<col style="width: 150px";>
 
 				</colgroup>
 				<thead calss="listHeard">
@@ -95,7 +94,6 @@
 						<th scope="col">번호</th>
 						<th scope="col">카테고리</th>
 						<th scope="col">제목</th>
-						<th scope="col">작성자</th>
 						<th scope="col">작성일</th>
 						<th scope="col">조회수</th>
 					</tr>
@@ -105,8 +103,6 @@
 						<td>10</td>
 						<td>공지사항</td>
 						<td class=""><a href="">추석배송안내</a></td>
-
-						<td>Pet-it</td>
 						<td>2023-11-11</td>
 						<td>56</td>
 
@@ -117,7 +113,6 @@
 						<td>이용안내</td>
 						<td class=""><a href="">추석배송안내</a></td>
 
-						<td>Pet-it</td>
 						<td>2023-11-11</td>
 						<td>74</td>
 
@@ -131,9 +126,6 @@
 	<div class="pageingBar">
 	<h2>페이징바 영역</h2>
 	</div>
-
-
-
 
 
 <div class="boardsearchAll">

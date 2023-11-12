@@ -93,7 +93,7 @@
                 <div class="d-flex mx-auto flex-column flex-lg-row align-items-center" style="font-size: 15pt; font-family: G마켓 산스;">
                   <ul class="navbar-nav  ">
                     <li class="nav-item active header-menu-item">
-                      <a class="nav-link " href="<%=request.getContextPath() %>/brandInfo/brandInfo.jsp">Pet-It <span class="sr-only">(current)</span></a>
+                      <a class="nav-link " href="<%=request.getContextPath() %>/brandInfo/brandInfoPage.jsp">Pet-It <span class="sr-only">(current)</span></a>
                       <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
