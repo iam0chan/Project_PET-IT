@@ -107,7 +107,7 @@
 					<tr>
 						<td>3</td>
 						<td>배송</td>
-						<td class=""><a href="">배송질문 있습니다.</a></td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">배송질문 있습니다.</a></td>
 						<td>이오공</td>
 						<td>2023-11-11</td>
 						<td>O</td>
@@ -115,7 +115,7 @@
 					<tr>
 						<td>2</td>
 						<td>제품/서비스이용불만</td>
-						<td class=""><a href="">북어트릿 맛없어요.</a></td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">북어트릿 맛없어요.</a></td>
 						<td>이오공</td>
 						<td>2023-10-11</td>
 						<td>O</td>
@@ -123,7 +123,7 @@
 					<tr>
 						<td>1</td>
 						<td>제품문의</td>
-						<td class=""><a href="">북어트릿 주문확인 부탁드려요.</a></td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">북어트릿 주문확인 부탁드려요.</a></td>
 						<td>이오공</td>
 						<td>2023-10-08</td>
 						<td>O</td>

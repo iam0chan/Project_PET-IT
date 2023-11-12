@@ -51,6 +51,8 @@
 }
 
 
+
+
 </style>
 
 </head>
@@ -102,7 +104,7 @@
 					<tr>
 						<td>10</td>
 						<td>공지사항</td>
-						<td class=""><a href="">추석배송안내</a></td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 						<td>2023-11-11</td>
 						<td>56</td>
 
@@ -111,7 +113,7 @@
 					<tr>
 						<td>9</td>
 						<td>이용안내</td>
-						<td class=""><a href="">추석배송안내</a></td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
 						<td>2023-11-11</td>
 						<td>74</td>
