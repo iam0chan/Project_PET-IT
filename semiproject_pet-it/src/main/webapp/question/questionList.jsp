@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../views/header.jsp"%>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>공지사항 메인화면</title>
-
-
+<title>question 메인화면</title>
 
 <style>
 .titleArea {
@@ -36,31 +32,36 @@
 	align-items: left;
 }
 
-.boardsearchAll{
+.boardsearchAll {
 	text-align: center;
 }
 
-.pageingBar{
+.pageingBar {
 	text-align: center;
 }
 
-#search{
+#search {
 	text-align: center;
-	height : 25px;
+	height: 25px;
+}
+
+#writeBtn{
 	
+	float : right;
 }
-
 
 </style>
+
+
 
 </head>
 <body>
 	<!-- 전체화면 div -->
 	<div class="space">
-		<!-- 공지사항 header div -->
+		<!-- 1대1문의 header div -->
 		<div class="titleArea">
-			<h2>공지사항</h2>
-			<p>Pet-it에서 안내드립니다.</p>
+			<h2>1:1문의</h2>
+			<p>문의내용을 남겨주시면 빠른 시간 내 답변을 드리겠습니다.</p>
 		</div>
 	</div>
 
@@ -71,20 +72,23 @@
 			<span class="categoryBar"> <!-- 카테고리 선택 메뉴바 --> <select
 				id="selectCategory" name="selectCategory">
 					<option value selected="selected">전체</option>
-					<option value="1">공지사항</option>
-					<option value="2">이용안내</option>
+					<option value="1">회원서비스</option>
+					<option value="2">제품문의</option>
+					<option value="3">주문/결제</option>
+					<option value="4">배송</option>
+					<option value="5">취소/반품/교환</option>
+					<option value="6">제품/서비스 이용불만</option>
+					<option value="7">기타</option>
 			</select>
 			</span>
-
 		</div>
-
 		<div class="boardTable">
-
 			<table border="0" class="table table-hover table-sm">
 				<colgroup>
 					<col style="width: 50px";>
-					<col style="width: 100px";>
+					<col style="width: 170px";>
 					<col style="width: 300px";>
+					<col style="width: 150px";>
 					<col style="width: 150px";>
 					<col style="width: 60px";>
 
@@ -94,58 +98,63 @@
 						<th scope="col">번호</th>
 						<th scope="col">카테고리</th>
 						<th scope="col">제목</th>
+						<th scope="col">작성자</th>
 						<th scope="col">작성일</th>
-						<th scope="col">조회수</th>
+						<th scope="col">답변</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>10</td>
-						<td>공지사항</td>
-						<td class=""><a href="">추석배송안내</a></td>
+						<td>3</td>
+						<td>배송</td>
+						<td class=""><a href="">배송질문 있습니다.</a></td>
+						<td>이오공</td>
 						<td>2023-11-11</td>
-						<td>56</td>
-
+						<td>O</td>
 					</tr>
-
 					<tr>
-						<td>9</td>
-						<td>이용안내</td>
-						<td class=""><a href="">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
+						<td>2</td>
+						<td>제품/서비스이용불만</td>
+						<td class=""><a href="">북어트릿 맛없어요.</a></td>
+						<td>이오공</td>
+						<td>2023-10-11</td>
+						<td>O</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제품문의</td>
+						<td class=""><a href="">북어트릿 주문확인 부탁드려요.</a></td>
+						<td>이오공</td>
+						<td>2023-10-08</td>
+						<td>O</td>
 					</tr>
 				</tbody>
-
+				
+				
 			</table>
 		</div>
+				<div id="writeBtn">
+					<button class="btn btn-outline-success" onclick="#">
+						<span class="customerBtn"> 글쓰기	</span>
+					</button>
+				</div>
 	</div>
-
 	<div class="pageingBar">
-	<h2>페이징바 영역</h2>
+		<h2>페이징바 영역</h2>
 	</div>
-
-
-<div class="boardsearchAll">
+	<div class="boardsearchAll">
 		<fieldset class="boardSearch">
 			<p>
 				<select id="searchKey" name="searchKey">
 					<option value="subject">제목</option>
 					<option value="subject">내용</option>
-				</select> 
-				<input id="search" name="search" 
-					placeholder="입력하세요">
+				</select> <input id="search" name="search" placeholder="입력하세요">
 				<button class="btn btn-primary btn-sm">
 					<a href="#none">SEARCH</a>
 				</button>
 			</p>
 		</fieldset>
-	</div> 
-	
-
-
+	</div>
 
 </body>
 </html>
