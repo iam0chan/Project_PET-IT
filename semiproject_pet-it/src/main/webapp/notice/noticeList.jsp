@@ -51,7 +51,7 @@
 }
 
 table#tbl-notice td,table#tbl-notice th{
-	line-height:10px !important;
+	line-height:35px !important;
 }
 
 
@@ -86,9 +86,9 @@ table#tbl-notice td,table#tbl-notice th{
 
 			<table id="tbl-notice" class="table table-hover table-sm">
 				<colgroup>
-					<col style="width: 50px";>
-					<col style="width: 100px";>
-					<col style="width: 300px";>
+					<col style="width: 60px";>
+					<col style="width: 120px";>
+					<col style="width: 550px";>
 					<col style="width: 150px";>
 					<col style="width: 60px";>
 
@@ -104,7 +104,7 @@ table#tbl-notice td,table#tbl-notice th{
 				</thead>
 				<tbody>
 					<tr>
-						<td>10</td>
+						<td>20</td>
 						<td>공지사항</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 						<td>2023-11-11</td>
@@ -113,7 +113,7 @@ table#tbl-notice td,table#tbl-notice th{
 					</tr>
 
 					<tr>
-						<td>9</td>
+						<td>19</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
@@ -122,7 +122,7 @@ table#tbl-notice td,table#tbl-notice th{
 
 					</tr>
 					<tr>
-						<td>9</td>
+						<td>18</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
@@ -131,7 +131,7 @@ table#tbl-notice td,table#tbl-notice th{
 
 					</tr>
 					<tr>
-						<td>9</td>
+						<td>17</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
@@ -140,7 +140,7 @@ table#tbl-notice td,table#tbl-notice th{
 
 					</tr>
 					<tr>
-						<td>9</td>
+						<td>16</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
@@ -149,7 +149,7 @@ table#tbl-notice td,table#tbl-notice th{
 
 					</tr>
 					<tr>
-						<td>9</td>
+						<td>15</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
@@ -158,7 +158,7 @@ table#tbl-notice td,table#tbl-notice th{
 
 					</tr>
 					<tr>
-						<td>9</td>
+						<td>14</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
@@ -166,6 +166,34 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
+					<tr>
+						<td>13</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>12</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+				
 				</tbody>
 
 			</table>

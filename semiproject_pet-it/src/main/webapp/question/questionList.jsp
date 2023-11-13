@@ -50,10 +50,12 @@
 	float : right;
 }
 
+table#tbl-question td,table#tbl-question th{
+	line-height:35px !important;
+}
+
+
 </style>
-
-
-
 </head>
 <body>
 	<!-- 전체화면 div -->
@@ -83,7 +85,7 @@
 			</span>
 		</div>
 		<div class="boardTable">
-			<table border="0" class="table table-hover table-sm">
+			<table id="tbl-question" class="table table-hover table-sm">
 				<colgroup>
 					<col style="width: 50px";>
 					<col style="width: 170px";>
