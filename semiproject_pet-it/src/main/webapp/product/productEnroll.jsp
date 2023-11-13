@@ -9,7 +9,7 @@
 	*{
 		margin: 0px;
 		padding: 0px;
-		/* border: 1px solid red; */
+		border: 1px solid red;
 	}
 	.wrapper{
 		width:100%;
@@ -41,7 +41,7 @@
 	}
 	
 	.detail-container-l{
-		width:600px;
+		width:400px;
 		display:flex;
 		flex-direction:column;
 		align-items:flex-end;
@@ -63,8 +63,17 @@
 		display:flex;
 		flex-direction:column;
 		align-items:center;
+		jutsify-content:center;
 	}
 	
+	div.category{
+		display:flex;
+		justify-content:space-around;
+	}
+	
+	div.category span{
+		margin-left: 10px;
+	}
 	
 	
 	.enroll-content-container{
@@ -79,13 +88,13 @@
 		justify-content:center;
 	}
 	.enrollpage-content{
-		width:400px;
+		width:500px;
 		display:flex;
 		align-items:center;
 	}
 	.enrollpage-content>input{
 		height: 40px;
-    	width: 360px;
+    	width: 498px;
     	padding-left:10px;
 	}
 	.enrollpage-title{
@@ -130,7 +139,7 @@
 				</div>
 				<div class="detail-container-r">
 				<!-- 입력데이터 DB 저장 후 저장된 정보를 가지고 product List에서 해당 컬럼데이터에 맞게 출력 -->
-				<form action="" method="post">
+				<form action="" method="post" style="margin-top:30px;">
 					<div class='enroll-content-container'>
 						<div class="enrollpage-title">
 							<h4>상품명 : </h4>
@@ -152,7 +161,35 @@
 							<h4>한줄설명 : </h4>
 						</div>
 						<div class="enrollpage-content">
-							<input type="number" name="productPrice" placeholder="상품가격을 입력하세요" min="0" step="1000"/>
+							<input type="text" name="productSummary" placeholder="상품소개 간단히 한줄 요약" />
+						</div>
+					</div>
+					<div class='enroll-content-container'>
+						<div class="enrollpage-title">
+							<h4>카테고리: </h4>
+						</div>
+						<div class="enrollpage-content category" style="text-align:center;">
+						<span>1차 분류</span> 
+							<select name="1st_category" style="width:150px">
+								<option value="1">Dog</option>
+								<option value="2">Cat</option>
+							</select>
+						<span>2차 분류</span>
+							<select name="2nd_category" style="width:150px">
+								<option value="1">사료</option>
+								<option value="2">간식</option>
+								<option value="3">용품</option>
+							</select>
+						</div>
+					</div>
+					<div class='enroll-content-container'>
+						<div class="enrollpage-title">
+							
+							<h4><button id="option-btn">+</button>옵션 : </h4>
+						</div>
+						<div class="enrollpage-content option">
+							<input type="text" name="optionName" placeholder="가격옵션명" />
+							<input type="number" name="productSummary" placeholder="가격" />
 						</div>
 					</div>
 				</form>
@@ -195,5 +232,16 @@
         $("input[type=button]").on("click",function(){
         	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px height=450px");
         })
+        
+        document.querySelector("#option-btn").addEventListener("click",()=>{
+        	/* alert("이벤트발생"); */
+        	let i = 1;
+        	const option = document.querySelector(".option");
+        	const div = document.createElement('div[name=optionName'+i+']');
+        	i++;
+        	div.innerHTML="<input type='text' /><input type='number'/>";
+        	cosole.log(div);
+        	option.appendChild(div);
+        });
     </script>
 <%@ include file="/views/footer.jsp" %>
