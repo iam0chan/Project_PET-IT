@@ -39,8 +39,16 @@
     	background-color : #F2F2F2;
 	    
     }
-   
+ 
+	#product-info>li{
+		 list-style-type : none
+	}
 
+    .productDiv,.discountDiv{
+    	display:flex;
+    	align-items : center;
+    }
+    
     
 </style>
 
@@ -48,7 +56,7 @@
 	<section id="header-section">
 		<div id="title-container">
 			<div id="title-text">
-				<h1> 주문 /결제 페이지 </h1>
+				<h1><b> 주문 /결제 페이지 </b></h1>
 			</div>
 		</div>
 	</section>
@@ -61,7 +69,7 @@
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingOne">
 			      <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-			        <div class="btn-text">배송지 입력</div>
+			        <div class="btn-text"><b>배송지 입력</b></div>
 			      </button>
 			    </h2>
 			    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
@@ -69,7 +77,7 @@
 			      <div class="accordion-body">
 		      		<table id="addr-form" style="width:100%" >
 			      		<tr>
-				      		<td>받는 사람 <strong>*</strong></td>
+				      		<td style="font-size:1.15rem">받는 사람 <strong>*</strong></td>
 				      		<td>
 					      		<div class="input-group input-group col-lg-3">
 								  <input type="text" class="form-control" placeholder="받는 사람">
@@ -78,7 +86,7 @@
 						</tr>
 						<tr style="height:10px"></tr>
 						<tr rowspan=3>
-							<td>주소 <strong>*</strong></td>
+							<td style="font-size:1.15rem">주소 <strong>*</strong></td>
 							<td>	
 								<div class="input-group input-group col-lg-4">
 								  <input type="text" class="form-control" placeholder="우편 번호">
@@ -96,7 +104,7 @@
 						</tr>
 						<tr style="height:10px"></tr>
 			      		<tr>
-			      			<td>휴대 전화 <strong>*</strong></td>
+			      			<td style="font-size:1.15rem">휴대 전화 <strong>*</strong></td>
 			      			<td>
 			      				<div class="input-group input-group col-lg-5">
 								  <input type="text" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
@@ -105,10 +113,21 @@
 			      		</tr>
 			      		<tr style="height:10px"></tr>
 			      		<tr>
-			      			<td>이메일</td>
+			      			<td style="font-size:1.15rem">이메일</td>
 			      			<td>
-			      				<div class="input-group input-group col-lg-5">
-								  <input type="email" class="form-control" placeholder="이메일">
+			      				<div class="input-group col-lg-9">
+		   						    <input type="text" class="form-control" placeholder="이메일" aria-label="Username">
+								  	<span class="input-group-text">@</span>
+								  	<input type="text" class="form-control" id="textEmail" placeholder="이메일 선택">
+									<select class="form-select" id="select">
+									  	 <option disabled selected>이메일 선택</option>
+									 	 <option value="naver.com" id="naver.com" selected>naver.com</option>
+										 <option value="hanmail.net" id="hanmail.net">hanmail.net</option>
+										 <option value="hotmail.com" id="hotmail.com">hotmail.com</option>
+										 <option value="nate.com" id="nate.com">nate.com</option>
+										 <option value="gmail.com" id="gmail.com">gmail.com</option>
+										 <option value="directly" id="textEmail">직접 입력하기</option>
+									</select>	 
 								</div>
 			      			</td>
 			      		</tr>
@@ -121,31 +140,82 @@
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingTwo">
 			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-			        <div class="btn-text">주문 상품</div>
+			        <div class="btn-text"><b>주문 상품</b></div>
 			      </button>
 			    </h2>
 			    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
 			      <div class="accordion-body">
-			        <p>테스트2<p>
+				      <div class="productDiv">
+					       <div style="width:15%; text-align:center">
+					       		<img src="../img/testimg.jpg" width="100px" height="100px">
+					       </div>
+					       <div style="width:70%">
+					       		<ul id="product-info">
+						       		<li style="font-size:1.1rem;font-weight:bolder">사나운 벌꿀오소리</li>
+						       		<li>수량 : 00개</li>
+						       		<li>총 가격 : 2,500원</li>
+					       		</ul>
+					       </div>
+					       <div style="width:15%; text-align:center">
+					       		<a href="#"><img alt="" src="../img/x-button.png" width="30px" height="30px"></a>
+					       </div>
+				       </div>
+				       <br>
+				       <div class="productDiv">
+					       <div style="width:15%; text-align:center">
+					       		<img src="../img/testimg.jpg" width="100px" height="100px">
+					       </div>
+					       <div style="width:70%">
+					       		<ul id="product-info">
+						       		<li style="font-size:1.1rem;font-weight:bolder">귀여운 벌꿀오소리</li>
+						       		<li>수량 : 00개</li>
+						       		<li>총 가격 : 2,500원</li>
+					       		</ul>
+					       </div>
+					       <div style="width:15%; text-align:center">
+					       		<a href="#"><img alt="" src="../img/x-button.png" width="30px" height="30px"></a>
+					       </div>
+				       </div>
 			      </div>
 			    </div>
 			  </div>
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingThree">
 			      <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-			        <div class="btn-text">할인 / 부가결제</div>
+			        <div class="btn-text"><b>할인 / 부가결제</b></div>
 			      </button>
 			    </h2>
 			    <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
 			      <div class="accordion-body">
-			        <p>테스트3<p>
+			      	<div class="discountDiv">
+				         <div style="width:20%; text-align:left">
+				       		<span style="font-size:1.1rem"><b>쿠폰 할인</b></span>
+				      	 </div>
+				      	 <div style="width:70%; text-align:right">
+				      	 	<span style="font-size:1.1rem"><b>00원</b></span>
+				      	 </div>
+				      	 <div style="width:20%; text-align:left">
+				      	 	<button class="btn btn-outline-success">쿠폰 적용</button>
+				      	 </div>
+			      	</div> 
+			      	<div class="discountDiv">
+				         <div style="width:20%; text-align:left">
+				       		<span style="font-size:1.1rem"><b>적립금 적용</b></span>
+				      	 </div>
+				      	 <div style="width:70%;">
+						 	<input type="text" class="form-control" placeholder="사용금액 입력">
+						 </div>
+				      	 <div style="width:20%; text-align:left">
+				      	 	<button class="btn btn-outline-success">적립금사용</button>
+				      	 </div>
+			      	</div> 
 			      </div>
 			    </div>
 			  </div>
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingFour">
 			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-			        <div class="btn-text">결제 정보</div>
+			        <div class="btn-text"><b>결제 정보</b></div>
 			      </button>
 			    </h2>
 			    <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
@@ -157,7 +227,7 @@
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingFive">
 			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-			        <div class="btn-text">결제방법 선택</div>
+			        <div class="btn-text"><b>결제방법 선택</b></div>
 			      </button>
 			    </h2>
 			    <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
@@ -171,6 +241,19 @@
 	</section>
 </div>
 
+<script>
+    $(function() {
+        $('#select').change(function() {
+            if ($('#select').val() == 'directly') {
+                $('#textEmail').attr("disabled", false);
+                $('#textEmail').val("");
+                $('#textEmail').focus();
+            } else {
+                $('#textEmail').val($('#select').val());
+            }
+        })
+    });
+</script> 	
 
    
  
