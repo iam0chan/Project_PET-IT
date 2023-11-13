@@ -79,7 +79,7 @@ tr.item:hover {
 
 <body>
 	<div class="titleArea">
-		<h2>FNQ 메인화면</h2>
+		<h2>FNQ</h2>
 		<p>무엇이든지 물어보세요!</p>
 	</div>
 	<div id="content-container">
