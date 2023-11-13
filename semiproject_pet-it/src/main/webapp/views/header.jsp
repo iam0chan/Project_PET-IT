@@ -30,7 +30,7 @@
         <link href="<%=request.getContextPath()%>/css/responsive.css" rel="stylesheet" />
         <!-- jQery -->
 
-        <script src="/js/jquery-3.4.1.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 
       
       <script>
