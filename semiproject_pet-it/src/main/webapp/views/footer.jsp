@@ -7,7 +7,7 @@
           <div class="container">
             <p>
               &copy; <span id="displayYear"></span> All Rights Reserved By
-              <a href="https://html.design/">주식회사 PET-IT</a>
+              <a href="#">주식회사 PET-IT</a>
             </p>
             <div class="footer">
 	            [이용약관] [개인정보처리방침] [개인정보관리책임자 : 김태윤]<br>

@@ -3,8 +3,6 @@
 
 <%@ include file="/views/header.jsp"%>
 
-
-
 <style>
 	#content-container {
 		margin : 0 auto;
@@ -98,12 +96,12 @@
 							<td style="font-size:1.15rem; text-align:center; width:20%">주소 <strong>*</strong></td>
 							<td>	
 								<div class="input-group input-group col-lg-4">
-								  <input id="zipcode" type="text" class="form-control" placeholder="우편 번호">
-								  <input class="btn btn-outline-secondary" type="button" id="addrBtn" onclick="addrBtn()" value="주소 검색">							
+								  <input id="zipcode" type="text" class="form-control" placeholder="우편 번호" >
+								  <input id="addrBtn" class="btn btn-outline-success" type="button" onclick="addrBtnAction()" value="주소 검색">
 								</div>
 							
 			      				<div class="input-group input-group col-lg-9">
-								  <input id="addr" type="text" class="form-control" placeholder="기본 주소">
+								  <input id="addr" type="text" class="form-control" placeholder="기본 주소" >
 								</div>
 			      			
 			      				<div class="input-group input-group col-lg-9">
@@ -319,10 +317,10 @@
 					      <div class="accordion-body">
 				      		<div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
 						      	<div style="margin-left:60px; width:80%">
-						      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem"><b>회원적립혜택</b></span>
+						      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem">회원적립혜택</span>
 						      	</div>
 						      	<div style="margin-left:60px; width:20%; text-align:center;">
-						      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>0000원</b></span>
+						      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem">0000원 예정</span>
 						      	</div>
 						      </div>
 				          </div>  		        
@@ -358,7 +356,7 @@
 <!-- 주소입력창 daum지도주소 api 적용 --> 	
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    function addrBtn() {
+    function addrBtnAction() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -398,7 +396,7 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode;
+                document.getElementById("zipcode").value = data.zonecode;
                 document.getElementById("addr").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("detailAddr").focus();
