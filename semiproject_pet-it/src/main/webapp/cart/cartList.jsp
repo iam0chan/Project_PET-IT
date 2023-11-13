@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../views/header.jsp"%>
+<%@ include file="/views/header.jsp"%>
 
 <style>
 .mainTitle {
@@ -260,7 +260,7 @@ td {
 			<tbody>
 				<tr class="cart__list__detail">
 					<td><input type="checkbox"></td>
-					<td><img src="../img/" alt="dog_feed"></td>
+					<td><img src="/img/" alt="dog_feed"></td>
 					<!-- 상품 리스트로 이동하게끔 주소 넣기 -->
 					<td><a href="#" style="color: #04aa6d;">pet-it</a>
 						<p>너무 맛있어서 주인도 탐내는 유기농 사료</p></td>
@@ -272,7 +272,7 @@ td {
 				</tr>
 				<tr class="cart__list__detail">
 					<td style="width: 2%;"><input type="checkbox"></td>
-					<td style="width: 13%;"><img src="../img/" alt="cat_chu">
+					<td style="width: 13%;"><img src="/img/" alt="cat_chu">
 					</td>
 					<td style="width: 27%;"><a href="#" style="color: #04aa6d;">pet-it</a>
 						<p>츄르릅 츄르</p>
@@ -302,4 +302,4 @@ td {
 	</div>
 </section>
 
-<%@ include file="../views/footer.jsp"%>
+<%@ include file="/views/footer.jsp"%>

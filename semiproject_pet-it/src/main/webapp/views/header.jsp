@@ -29,7 +29,9 @@
         <!-- responsive style -->
         <link href="<%=request.getContextPath()%>/css/responsive.css" rel="stylesheet" />
         <!-- jQery -->
-        <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+
+        <script src="/js/jquery-3.4.1.min.js"></script>
+
       
       <script>
 	      	$(document).ready(function(){
@@ -75,7 +77,7 @@
       </head>
       
       <body>
-      
+      	
         <div class="hero_area">
           <!-- header section strats -->
           <header class="header_section long_section px-0">
