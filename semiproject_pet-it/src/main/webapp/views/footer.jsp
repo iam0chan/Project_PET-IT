@@ -9,14 +9,14 @@
               &copy; <span id="displayYear"></span> All Rights Reserved By
               <a href="#">주식회사 PET-IT</a>
             </p>
+          </div>
+        </footer>
+        <!-- footer section -->
             <div class="footer">
 	            [이용약관] [개인정보처리방침] [개인정보관리책임자 : 김태윤]<br>
 	            [대표 : 윤영찬] [사업자등록번호 : 777-123-456]<br>
 	            [통신판매신고번호 : 2015-서울강남-00077] [사업자정보확인]
         	</div>
-          </div>
-        </footer>
-        <!-- footer section -->
       
       
         
