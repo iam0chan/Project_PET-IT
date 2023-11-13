@@ -215,8 +215,11 @@ table#tbl-notice td,table#tbl-notice th{
 				<input id="search" name="search" 
 					placeholder="입력하세요">
 				<button class="btn btn-primary btn-sm">
-					<a href="#none">SEARCH</a>
+					<span id="searchbtn">SEARCH</span>
 				</button>
+				<%-- <%if(){ %> --%>  <!--관리자로 로그인 했을 때 보이는 버튼 구현하기, 로그인 구현되면 가능  -->
+				<!-- <button>글쓰기</button> -->
+				<%-- <%} %> --%>
 			</p>
 		</fieldset>
 	</div> 

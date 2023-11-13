@@ -60,7 +60,6 @@
             <div class="titleArea">
                 <h2>공지사항 작성</h2>
             </div>
-
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -99,10 +98,33 @@
                 <br>
                 </form>                
               </div>
+         
+              <div class="container mt-3">
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                    <form action="#"> <!--noticeList  -->
+                        <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th style="text-align: center; width: 80px;  background-color: #F2F2F2;">첨부파일</th>
+                            <th>
+                                <input class="fileBtn" type="submit" onclick="test();" value="첨부파일" />
+                            </th>
+                            </tr>
+                        </table>
+
+
+
               <div id="submitBtn">
                 <input class="Btn" type="submit" onclick="test();" value="작성완료" />
               </div>
-              <script>		
+              <script>
+              
+              
+
+
+
 	var editor;
 	ClassicEditor
 	.create(document.querySelector('#editor'), {
