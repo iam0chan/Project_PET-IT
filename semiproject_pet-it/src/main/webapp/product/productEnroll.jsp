@@ -5,113 +5,7 @@
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <!-- TUI 에디터 CSS CDN -->
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-<style>
-	*{
-		margin: 0px;
-		padding: 0px;
-		/* border: 1px solid red; */
-	}
-	.wrapper{
-		width:100%;
-		display: flex;
-		justify-content:center;
-	}
-	.product-enroll-wrapper{
-		width:1200px;
-		
-    	
-	}
-	
-	.product-enroll-container>div{
-		margin: 0 auto;
-		margin-bottom:30px;
-	}
-	
-	.product-enroll-container > h2{
-		text-align:center;
-		padding-top: 80px;
-		margin-bottom:3px;
-		
-		
-	}
-	
-	.product-detail-container{
-		width:1200px;
-		display:flex;
-	}
-	
-	.detail-container-l{
-		width:600px;
-		display:flex;
-		flex-direction:column;
-		align-items:flex-end;
-	}
-	
-	.detail-container-l img{
-		width:230px;
-		height:260px;
-		margin-bottom:2px;
-	}
-	
-	.img-container{
-		display:flex;
-		flex-direction:column;
-	}
-	
-	.detail-container-r{
-		width:800px;
-		display:flex;
-		flex-direction:column;
-		align-items:center;
-	}
-	
-	
-	
-	.enroll-content-container{
-		width:100%;
-		height:45px;
-		display:flex;
-		justify-content:center;
-	}
-	.enrollpage-title{
-		width:120px;
-		display:flex;
-		justify-content:center;
-	}
-	.enrollpage-content{
-		width:400px;
-		display:flex;
-		align-items:center;
-	}
-	.enrollpage-content>input{
-		height: 40px;
-    	width: 360px;
-    	padding-left:10px;
-	}
-	.enrollpage-title{
-		display:flex;
-		align-items:center;
-		width:200px;
-	}
-	.enrollpage-title > h4{
-		width:160px;
-		height:40px;
-		letter-spacing:4px;
-		text-align:right;
-		margin-bottom:0;
-	}
-	.line{
-		width:200px;
-		border-top:8px solid #04aa6d;
-		height:40px;
-	}
-	
-	.editor-botton-container{
-		display:flex;
-		justify-content:flex-end;
-		margin-top:30px;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productenroll.css"/>
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
@@ -126,7 +20,7 @@
 				</div>
 				<div class="detail-container-r">
 				<!-- 입력데이터 DB 저장 후 저장된 정보를 가지고 product List에서 해당 컬럼데이터에 맞게 출력 -->
-				<form action="" method="post">
+				<form action="" method="post" style="margin-top:30px;">
 					<div class='enroll-content-container'>
 						<div class="enrollpage-title">
 							<h4>상품명 : </h4>
@@ -148,9 +42,38 @@
 							<h4>한줄설명 : </h4>
 						</div>
 						<div class="enrollpage-content">
-							<input type="number" name="productPrice" placeholder="상품가격을 입력하세요" min="0" step="1000"/>
+							<input type="text" name="productSummary" placeholder="상품소개 간단히 한줄 요약" />
 						</div>
 					</div>
+					<div class='enroll-content-container'>
+						<div class="enrollpage-title">
+							<h4>카테고리: </h4>
+						</div>
+						<div class="enrollpage-content category" style="text-align:center;">
+						<span>1차 분류</span> 
+							<select name="1st_category" style="width:150px">
+								<option value="1">Dog</option>
+								<option value="2">Cat</option>
+							</select>
+						<span>2차 분류</span>
+							<select name="2nd_category" style="width:150px">
+								<option value="1">사료</option>
+								<option value="2">간식</option>
+								<option value="3">용품</option>
+							</select>
+						</div>
+					</div>
+					<div class='enroll-content-container'>
+						<div class="enrollpage-title">
+							<h4>옵션 : </h4>
+							<button id="option-btn">+</button>
+						</div>
+						<div class="enrollpage-content option">
+							<input type="text" name="optionName" placeholder="가격옵션명" />
+							<input type="number" name="productSummary" placeholder="가격" />
+						</div>
+					</div>
+					
 				</form>
 				</div>
 				
@@ -191,5 +114,10 @@
         $("input[type=button]").on("click",function(){
         	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px height=450px");
         })
+        
+     	document.querySelector("#option-btn").addEventListener("click",(e)=>{
+        	/* alert("이벤트발생"); */
+        	console.log(e);
+        });
     </script>
 <%@ include file="/views/footer.jsp" %>
