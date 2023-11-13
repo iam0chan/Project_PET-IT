@@ -70,15 +70,11 @@
                             <tr>
                             <th style="text-align: center; background-color: #F2F2F2;">제목</th>
                             <th>
-                                <select id="board_category" name="board_category" >
-                                    <option value="1">회원서비스</option>
-                                    <option value="2">제품문의</option>
-                                    <option value="3">주문/결제</option>
-                                    <option value="4">배송</option>
-                                    <option value="5">취소/반품/교환</option>
-                                    <option value="6">제품/서비스 이용 불만</option>
-                                    <option value="7">기타</option>
-                                </select>
+                                <select id="selectCategory" name="selectCategory">
+										<option value selected="selected">전체</option>
+										<option value="1">공지사항</option>
+										<option value="2">이용안내</option>
+								</select>
                                 <input id="notice-title" style="width: 400px;" type="text">
                             </th>
                             </tr>
