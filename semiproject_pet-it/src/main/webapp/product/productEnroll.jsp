@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../views/header.jsp" %>
+<%@ include file="/views/header.jsp" %>
 <!-- TUI 에디터 JS CDN -->
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <!-- TUI 에디터 CSS CDN -->
@@ -192,4 +192,4 @@
         	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px height=450px");
         })
     </script>
-<%@ include file="../views/footer.jsp" %>
+<%@ include file="/views/footer.jsp" %>
