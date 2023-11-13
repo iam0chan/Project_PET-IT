@@ -117,108 +117,6 @@ td {
 	padding: 15px 0px;
 	border-bottom: 1px solid lightgrey;
 }
-
-.cart__list__detail :nth-child(3) {
-	vertical-align: top;
-}
-
-.cart__list__detail :nth-child(3) a {
-	font-size: 12px;
-}
-
-.cart__list__detail :nth-child(3) p {
-	margin-top: 6px;
-	font-weight: bold;
-}
-
-.cart__list__smartstore {
-	font-size: 12px;
-	color: gray;
-}
-
-.cart__list__option {
-	vertical-align: top;
-	padding: 20px;
-}
-
-.cart__list__option p {
-	margin-bottom: 25px;
-	position: relative;
-}
-
-.cart__list__option p::after {
-	content: "";
-	width: 90%;
-	height: 1px;
-	background-color: lightgrey;
-	left: 0px;
-	top: 25px;
-	position: absolute;
-}
-
-.cart__list__optionbtn {
-	background-color: white;
-	font-size: 10px;
-	border: lightgrey solid 1px;
-	padding: 7px;
-}
-
-.cart__list__detail :nth-child(4), .cart__list__detail :nth-child(5),
-	.cart__list__detail :nth-child(6) {
-	border-left: 2px solid whitesmoke;
-}
-
-.cart__list__detail :nth-child(5), .cart__list__detail :nth-child(6) {
-	text-align: center;
-}
-
-.cart__list__detail :nth-child(5) button {
-	background-color: limegreen;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	padding: 4px 8px;
-	font-size: 12px;
-	margin-top: 5px;
-}
-
-.price {
-	font-weight: bold;
-}
-
-.cart__mainbtns {
-	width: 420px;
-	height: 200px;
-	padding-top: 40px;
-	display: block;
-	margin: auto;
-}
-
-.cart__bigorderbtn {
-	width: 200px;
-	height: 50px;
-	font-size: 16px;
-	margin: auto;
-	border-radius: 5px;
-}
-
-.cart__bigorderbtn.left {
-	background-color: white;
-	border: 1px lightgray solid;
-}
-
-.cart__bigorderbtn.right {
-	background-color: white;
-	color: #000000;
-	border: 1px #04aa6d solid;
-	transition: background-color 0.3s;
-}
-
-.cart__bigorderbtn.right:hover {
-	background-color: #04aa6d;
-	color: #ffffff;
-	border: 1px lightgray solid;
-}
 </style>
 
 <section>
@@ -241,65 +139,109 @@ td {
 			</ul>
 
 		</div>
-	</div>
-	<table class="cart__list">
-		<form>
+		<table border="0" summary
+			class="xans-element- xans-order xans-order-normnormal xans-record-">
+
+			<!-- 메뉴바 크기 조정 -->
+			<colgroup>
+				<col style="width: 27px">
+				<col style="width: 92px">
+				<col style="width: auto">
+				<col style="width: 98px">
+				<col style="width: 75px">
+				<col style="width: 98px">
+				<col style="width: 98px">
+				<col style="width: 85px">
+				<col style="width: 98px">
+				<col style="width: 110px">
+			</colgroup>
+			<!-- 장바구니 메뉴 바 생성 -->
 			<thead>
 				<tr>
-					<td><input type="checkbox"></td>
-					<td>이미지</td>
-					<td colspan="2">상품정보</td>
-					<td>판매가</td>
-					<td>수량</td>
-					<td>적립금</td>
-					<td>배송비</td>
-					<td>합계</td>
-					<td>선택</td>
+					<th scope="col"><input type="checkbox"
+						onclick="Basket.setCheckBasketList('basket_product_normal_type_normal', this);">
+					</th>
+					<th scope="col">이미지</th>
+					<th scope="col">상품정보</th>
+					<th scope="col">판매가</th>
+					<th scope="col">수량</th>
+					<th scope="col" class="mileage">적립금</th>
+					<th scope="col">배송 구분</th>
+					<th scope="col">배송비</th>
+					<th scope="col">합계</th>
+					<th scope="col">선택</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr class="cart__list__detail">
-					<td><input type="checkbox"></td>
-					<td><img src="../img/" alt="dog_feed"></td>
-					<!-- 상품 리스트로 이동하게끔 주소 넣기 -->
-					<td><a href="#" style="color: #04aa6d;">pet-it</a>
-						<p>너무 맛있어서 주인도 탐내는 유기농 사료</p></td>
-					<td><span class="price">30,000원</span><span
-						style="text-decoration: line-through; color: lightgray;">32,000원</span>
-					</td>
-					<td style="width: 15%;">무료</td>
-
-				</tr>
-				<tr class="cart__list__detail">
-					<td style="width: 2%;"><input type="checkbox"></td>
-					<td style="width: 13%;"><img src="../img/" alt="cat_chu">
-					</td>
-					<td style="width: 27%;"><a href="#" style="color: #04aa6d;">pet-it</a>
-						<p>츄르릅 츄르</p>
-					<td><sapn class="price">8,000원</sapn><span
-						style="text-decoration: line-through; color: lightgray;">8,500원</span>
-					</td>
-
-
-					<td style="width: 15%;">무료</td>
-				</tr>
-			</tbody>
-			<tfoot>
-
+			<tfoot class="right">
 				<tr>
-					<td colspan="3"><input type="checkbox">
-						<button class="cart__list__optionbtn">선택상품 삭제</button></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td colspan="10">상품구매금액 <strong>10,000<span
+							class="displaynone"></span></strong> <span>원</span> + 배송비 : <span
+						id="normal_normal_ship_fee">2,500</span> <span
+						id="normal_normal_benefit_price_area" class="displaynone">
+							- 상품 할인 금액 <span id="normal_normal_benefir_price">0</span>
+					</span> = 합계 : <strong class="txtEm gIndent10"> <span
+							id="normal_normal_ship_fee_sum" class="txt18">4,700</span> 원
+					</strong> <span class="displaynone"> </span>
+					</td>
 				</tr>
 			</tfoot>
-		</form>
-	</table>
-	<div class="cart__mainbtns">
-		<button class="cart__bigorderbtn left">쇼핑 계속하기</button>
-		<button class="cart__bigorderbtn right">주문하기</button>
-	</div>
-</section>
+			<tbody class="xans-element- xans-order xans-order-list center">
+				<tr class="xans-record-">
+					<td><input type="checkbox" id="basket_chk_id_0"
+						name="basket_product_normal_type_normal"></td>
+					<td class="thumb gClearLine"><strong class="thumb gClearLine">
+							<a href=""> <img src="" alt="dog_feed"></a></td>
+					<td class="left gClearLine"><strong class="name"> <a
+							href="" class="ec-procuct-name">주인도 탐내는 유기농 사료</a>
+					</strong>
+					<td class="right">
+						<!-- line-throught 이용해서 할인 금액 넣기 -->
+						<div id="product_price_div0" class>
+							<strong>30,000원</strong>
+							<p class="displaynone"></p>
+						</div>
 
-<%@ include file="../views/footer.jsp"%>
+					</td>
+					<td>
+						<!-- 수량 증감 버튼 생성 --> <span class> <span class="ec-base-qty">
+								<input id="quantity_id_0" name="quantity_name=0" size="2"
+								value="1" type="text"> <a href="javascript:;" class="up"
+								onclick="Basket.addQuantityShortcut('quantity_id_0', 0);"> <img
+									src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"
+									alt="수량증가">
+							</a> <a href="javascript:;" class="down"
+								onclick="Basket.outQuantityShortcut('quantity_id_0', 0);"> <img
+									src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"
+									alt="수량감소">
+							</a>
+						</span> <a href="javascript:;" class="btnNormal gBlank5"
+							onclick="Basket.modifyQuantity()">변경</a>
+					</span> <span class="displaynone">1</span>
+					</td>
+					<td><span id="product_mileage0" class="txtInfo0"> <input
+							id="product_mileage_cash" name="product_miileage_cash" value="60"
+							type="hidden"> 30원<br>
+					</span></td>
+					<td>
+						<div class="txtInfo">
+							기본배송<br>
+						</div>
+					</td>
+					<td rowspan="1" class>
+						<p class>
+							2,500원 <span class="displaynone"><br></span>
+					<td class="right"><strong> <span
+							id="sum_price_front0">32,500</span>원
+					</strong>
+						<div class="displaynone"></div></td>
+					<td class="button"><a href="javascript:;" class="btnSubmit "
+						onclick="Basket.orderBasketItem(0);">주문하기</a><br> <a
+						href="javascript:;" class="btnNormal"
+						onclick="BasketNew.moveWish(0);">관심상품등록</a> <br><a href="javascript:;"
+						class="btnNormal" onclick="Basket.deleteBasketItem(0);"> <i
+							class="icoDelete">  </i> 삭제 </span> </span>
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
