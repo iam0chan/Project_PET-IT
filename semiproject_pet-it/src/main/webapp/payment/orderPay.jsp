@@ -8,7 +8,7 @@
 		margin : 0 auto;
 		font-family:'G마켓 산스';
 		align-items:center;
-		width :65%;
+		width :60%;
 
 	
 	#title-container {
@@ -195,7 +195,7 @@
 			    <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
 			      <div class="accordion-body">
 			      	<div class="couponDiv">
-				         <div style="width:20%; text-align:left;">
+				         <div style="width:20%; text-align:center;">
 				       		<span style="font-size:1.1rem"><b>쿠폰 할인</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
@@ -214,8 +214,8 @@
 				      	 </div>
 			      	</div> 
 			      	<div class="discountDiv">
-				         <div style="width:20%; text-align:left;">
-				       		<span style="font-size:1.1rem"><b>적립금 적용</b></span>
+				         <div style="width:20%; text-align:center;">
+				       		<span style="font-size:1.1rem;"><b>적립금 적용</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
 						 	<input type="text" class="form-control" placeholder="사용금액 입력">
@@ -244,7 +244,32 @@
 			    </h2>
 			    <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
 			      <div class="accordion-body">
-			        <p>테스트3<p>
+			        <table style="width:95%">
+			        	<tr>
+				        	<td style="width:5%"></td>
+				        	<td style="width:70%"><p><b>상품 금액</b></p></td>
+				        	<td style="width:15%; text-align:right"><p>0000원</p></td>
+				        </tr>
+				        <tr>
+				        	<td style="width:5%"></td>
+				        	<td style="width:70%"><p><b>배송비</b></p></td>
+				        	<td style="width:15%; text-align:right"><p>0000원</p></td>
+				        </tr>
+				        <tr>
+				        	<td style="width:5%"></td>
+				        	<td style="width:70%"><p><b>적립금/쿠폰적용</b></p></td>
+				        	<td style="width:15%; text-align:right"><p>0000원</p></td>
+				        </tr>
+				        </tr>
+			        </table>
+			      </div>
+			      <div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
+			      	<div style="margin-left:60px; width:80%">
+			      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem"><b>최종결제금액</b></span>
+			      	</div>
+			      	<div style="margin-left:60px; width:20%; text-align:center;">
+			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>0000원</b></span>
+			      	</div>
 			      </div>
 			    </div>
 			  </div>
@@ -256,9 +281,54 @@
 			    </h2>
 			    <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
 			      <div class="accordion-body">
-			        <p>테스트3<p>
+				      	<div style="margin-left:50px">
+			        		<div class="form-check">
+							  <input class="form-check-input" name="payment-btn" type="radio" id="card-payment" value="option1" checked>
+							  <label class="form-check-label" for="card-payment">
+							    <img alt="" src="<%=request.getContextPath()%>/img/card_payment.png">&nbsp&nbsp신용카드 결제
+							  </label>
+							</div>
+							<br>
+							<div class="form-check">
+							  <input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
+							  <label class="form-check-label" for="Npay">
+							    <img alt="" src="<%=request.getContextPath()%>/img/Npay_badge.png">&nbsp&nbsp네이버페이
+							  </label>
+							</div>
+							<br>
+							<div class="form-check">
+							  <input class="form-check-input" name="payment-btn" type="radio" id="Kakaopay" value="option3">
+							  <label class="form-check-label" for="Kakaopay">
+							    <img alt="" src="<%=request.getContextPath()%>/img/KakaoPay_badge.png">&nbsp&nbsp카카오페이
+							  </label>
+							</div>
+						</div>
+			        </div>  		        
 			      </div>
 			    </div>
+				    <div class="accordion-item">
+					    <h2 class="accordion-header" id="headingSix">
+					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+					        <div class="btn-text"><b>적립혜택</b></div>
+					      </button>
+					    </h2>
+					    <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix">
+					      <div class="accordion-body">
+				      		<div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
+						      	<div style="margin-left:60px; width:80%">
+						      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem"><b>회원적립혜택</b></span>
+						      	</div>
+						      	<div style="margin-left:60px; width:20%; text-align:center;">
+						      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>0000원</b></span>
+						      	</div>
+						      </div>
+				          </div>  		        
+				      	</div>
+			    	</div>
+			      <br>
+			      	<div class="d-grid gap-2">
+					  <input class="btn btn-primary btn-lg btn-success" type="button" value="결제하기">
+					</div>
 			  </div>
 			</div>
 		</form>
