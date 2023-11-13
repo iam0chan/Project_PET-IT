@@ -5,49 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	#myform fieldset{
-    display: inline-block;
-    direction: rtl;
-    border:0;
-	}
-	#myform fieldset legend{
-	    text-align: right;
-	}
-	#myform input[type=radio]{
-	    display: none;
-	}
-	#myform label{
-	    font-size: 3em;
-	    color: transparent;
-	    text-shadow: 0 0 0 #f0f0f0;
-	}
-	#myform label:hover{
-	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-	}
-	#myform label:hover ~ label{
-	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-	}
-	#myform input[type=radio]:checked ~ label{
-	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-	}
-	#reviewContents {
-	    width: 100%;
-	    height: 150px;
-	    padding: 10px;
-	    box-sizing: border-box;
-	    border: solid 1.5px #D3D3D3;
-	    border-radius: 5px;
-	    font-size: 16px;
-	    resize: none;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/product_review_write.css"/>
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/bootstrap.css" />
 </head>
 <body>
-	<div>
-		<!-- 후기 이미지 등록 영역 -->
+	<div class="wrapper">
+	<div id="image-container">
+		<img src="" alt="후기이미지">
 	</div>
-	<form class="mb-3" name="myform" id="myform" method="post">
+	<form class="mb-3" name="myform" id="myform" method="post" enctype="multipart/form-data">
+	<input type="file" name="reviewImg" id="file"/><br>
 	<fieldset>
 		<span class="text-bold">별점을 선택해주세요</span>
 		<input type="radio" name="reviewStar" value="5" id="rate1"><label
@@ -61,10 +29,25 @@
 		<input type="radio" name="reviewStar" value="1" id="rate5"><label
 			for="rate5">★</label>
 	</fieldset>
-	<div>
+	<div class="content-container">
 		<textarea class="col-auto form-control" type="text" id="reviewContents"
 				  placeholder="좋은 수강평을 남겨주세요!!! - PET-IT -"></textarea>
 	</div>
+	<div class="review-btn-container">
+		<button id="review-enroll" class="btn btn-outline-success">후기등록</button>
+	</div>
+	</div>
 </form>
+<script>
+	const file = document.querySelector("input[name=reviewImg]");
+	const img = document.querySelector("#image-container>img");
+	file.addEventListener("change",()=>{
+		const reader = new FileReader();
+		reader.onload = e =>{
+			img.src = e.target.result;
+		};
+		reader.readAsDataURL(file.files[0]);
+	});
+</script>
 </body>
 </html>

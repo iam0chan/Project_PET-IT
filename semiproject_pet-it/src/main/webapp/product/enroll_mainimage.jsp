@@ -58,12 +58,14 @@
             <div class="image-content">
                 <img class="image-box" src="mainImg-sample.png" style="width:230px; height:260px;">
             </div>
+            <form action="#" method="post">
             <div class="file-container">
-                <input type="file" id="file">
+                <input type="file" name = "upfile" id="file">
             </div>
             <div>
-            	<button id="enroll-btn" class="btn btn-outline-success">등록</button>
+            	<input type="submit" id="enroll-btn" class="btn btn-outline-success" value="등록">
             </div>
+            </form>
         </div>
     </div>
 
