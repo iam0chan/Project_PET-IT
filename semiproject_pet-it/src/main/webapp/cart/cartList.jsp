@@ -41,6 +41,31 @@ section {
 	text-align: center;
 }
 
+.cart_total_area>p {
+	font-size: 20px
+}
+
+.cart_table .cart_total_area .cart_total_price {
+	border: 2px solid #707070;
+	padding: 2rem;
+	margin: 2rem auto;
+	text-align: center;
+}
+
+.cart_table .cart_total_area .cart_total_price p {
+	display: inline-block;
+	text-align: left;
+}
+
+.cart_table .cart_total_area .cart_total_price p>span {
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 20px;
+	background-size: cover !important;
+}
+
 ul.mileage {
 	color: #333;
 	line-height: 1.5em;
@@ -237,11 +262,131 @@ td {
 					<td class="button"><a href="javascript:;" class="btnSubmit "
 						onclick="Basket.orderBasketItem(0);">주문하기</a><br> <a
 						href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a> <br><a href="javascript:;"
-						class="btnNormal" onclick="Basket.deleteBasketItem(0);"> <i
-							class="icoDelete">  </i> 삭제 </span> </span>
+						onclick="BasketNew.moveWish(0);">관심상품등록</a> <br> <a
+						href="javascript:;" class="btnNormal"
+						onclick="Basket.deleteBasketItem(0);"> <i class="icoDelete">
+						</i> 삭제 </span> </span>
 					</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<div
+		class="xans-element- xans-order xans-order-selectorder ec-base-button ">
+		<span class="gLeft"> <a href="#none" class="btnEm"
+			onclick="Basket.deleteBasket()"> 선택 상품 삭제</a> <span class="gRight">
+				<a href="" class="btnNormal" onclick="Basket.emptyBasket()">장바구니
+					비우기</a>
+		</span>
+	</div>
+	<div
+		class="xans-element- xans-order xans-order-totalsummary ec-base-table typeList gBorder total  ">
+		<table border="0" summary>
+			<caption>총 주문금액</caption>
+			<colgroup>
+				<col style="width: 17%;">
+				<col style="width: 17%;" class="displaynone">
+				<col style="width: 19%;">
+				<col style="width: 17%;" class="displaynone">
+				<col style="width: auto;">
+			</colgroup>
+			<div class="cart_total_area">
+				<p>결제 정보</p>
+
+				<div class="cart_total_price">
+					<p>
+						총 상품금액 <strong class="item_price">60,000</strong>원 <span
+							class="plus_ic"></span>
+					</p>
+					<p>
+						할인금액 <strong class="sale_price color-symbol">-10,000</strong>원 <span
+							class="plus_ic"></span>
+					</p>
+					<p>
+						총 배송비 <strong class="delivery_price">2,500</strong>원 <span
+							class="equal_ic"></span>
+					</p>
+					<p>
+						총 결제금액 <strong class="total_price color-red">52,500</strong>원
+					</p>
+				</div>
+			</div>
+
+			<div class="btn_box">
+				<button type="button" onclick="goBack()" class="btn wh-btn">계속
+					쇼핑하기</button>
+				<button type="button" class="btn black-btn">구매하기</button>
+			</div>
+
+			</div>
+			<!-- <thead>
+	<tr>
+	<th scope="col">
+	<strong>총 상품금액</strong>
+	</th>
+	<th scope="col">
+	<strong>총 배송비</strong>
+	</th>
+	<th scope="col">
+	<strong>결제 예정 금액</strong>
+	</th>
+	</tr>
+	</thead>
+	<tbody class="center">
+	<tr>
+	<td>
+	<div class="box txt16">
+	<strong>
+	<span class="txt23">
+	<span class="total_product_price_display_front">30,000</span>
+	</span>원</strong>
+	<span class="txt14 displaynone">
+	<span class="total_product_price_display_back"></span>
+	</span>
+	</div>
+	</td>
+	<td>
+	<div class="box shipping txt16">
+	<strong class="txt23">+</strong>
+	<strong>
+	<span id="total_delv_price_front" class="txt23">
+	<span class="total_delv_price_front">2,500</span>
+	</span>원</strong>
+	<span class="txt14 displaynone">
+	<span class="total_product_vat_price_back"></span>
+	</span>
+	</div>
+	</td>
+	<td>
+	<div class="box shipping txt16">
+	<strong class="txt23">+ </strong>
+	<strong>
+	<span id="total_delv_price_front" class="txt23">
+    <span class="total_delv_price_front">2,500</span>
+    </span>
+    원
+    </strong>
+    <span class="txt14 displaynone">
+    <span class="total_delv_price_back"></span>
+    </span>
+    <div class="dispalynone">
+     -->
+
+			</div>
+
+
+
+
+
+			</span>
+			</strong>
+
+			</div>
+
+
+
+			</tbody>
+
+
+
+		</table>
