@@ -111,6 +111,10 @@
 		justify-content:flex-end;
 		margin-top:30px;
 	}
+	
+	.editor-container input, button, select, optgroup, textarea{
+		line-height:1.0 !important;
+	}
 </style>
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
