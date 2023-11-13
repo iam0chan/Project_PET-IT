@@ -47,8 +47,12 @@
 #search{
 	text-align: center;
 	height : 25px;
+	
 }
 
+table#tbl-notice td,table#tbl-notice th{
+	line-height:35px !important;
+}
 
 
 </style>
@@ -80,48 +84,116 @@
 
 		<div class="boardTable">
 
-			<table border="0" class="table table-hover table-sm">
+			<table id="tbl-notice" class="table table-hover table-sm">
 				<colgroup>
-					<col style="width: 90px";>
+					<col style="width: 60px";>
+					<col style="width: 120px";>
+					<col style="width: 550px";>
 					<col style="width: 150px";>
-					<col style="width: 150px";>
-					<col style="width: 150px";>
-					<col style="width: 150px";>
-					<col style="width: 150px";>
+					<col style="width: 60px";>
 
 				</colgroup>
-				<thead calss="listHeard">
+				<thead class="listHeard">
 					<tr>
 						<th scope="col">번호</th>
 						<th scope="col">카테고리</th>
 						<th scope="col">제목</th>
-						<th scope="col">작성자</th>
 						<th scope="col">작성일</th>
 						<th scope="col">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>10</td>
+						<td>20</td>
 						<td>공지사항</td>
-						<td class=""><a href="">추석배송안내</a></td>
-
-						<td>Pet-it</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 						<td>2023-11-11</td>
 						<td>56</td>
 
 					</tr>
 
 					<tr>
-						<td>9</td>
+						<td>19</td>
 						<td>이용안내</td>
-						<td class=""><a href="">추석배송안내</a></td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
 
-						<td>Pet-it</td>
 						<td>2023-11-11</td>
 						<td>74</td>
 
 					</tr>
+					<tr>
+						<td>18</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>17</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>16</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>15</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>14</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>13</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>12</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>이용안내</td>
+						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
+
+						<td>2023-11-11</td>
+						<td>74</td>
+
+					</tr>
+				
 				</tbody>
 
 			</table>
@@ -131,9 +203,6 @@
 	<div class="pageingBar">
 	<h2>페이징바 영역</h2>
 	</div>
-
-
-
 
 
 <div class="boardsearchAll">
@@ -151,7 +220,7 @@
 			</p>
 		</fieldset>
 	</div> 
-
+	
 
 
 
