@@ -47,7 +47,7 @@
             Pet-it으로 초대합니다!<br>
         </p>
     </div>
-    <img src="../img/shushu.jpg" width="300" height="300" class="brandInfoPohto">
+    <img src="<%=request.getContextPath()%>/img/shushu.jpg" width="300" height="300" class="brandInfoPohto">
     &nbsp;
     <div class="Content"> <!-- 메인내용제목-->
         <h3 class=mainContentTitle>반려동물의 행복을 위하는 Pet-it </h3>

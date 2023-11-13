@@ -36,10 +36,20 @@
         display: flex;
         justify-content:center;
     }
-   .editor{
-   	witdth: 50px;
-   
-   } 
+.ck.ck-editor {
+   width: 100%;
+   max-width: 850px;
+   margin: 0 auto;
+}
+
+.ck-editor__editable {
+   height: 50vh;
+} 
+
+#submitBtn{
+	text-align:center;
+	
+}
      
     </style>
 
@@ -55,6 +65,7 @@
                 <div class="row">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
+                    <form action="#"> <!--noticeList  -->
                         <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -85,13 +96,12 @@
                     <div class="col-lg-2"></div>
                 </div>
                 <div id="editor"></div>
-                <input type="button" onclick="test();" value="작성완료" />
-                
-                
-                
-                
+                <br>
+                </form>                
               </div>
-              
+              <div id="submitBtn">
+                <input class="Btn" type="submit" onclick="test();" value="작성완료" />
+              </div>
               <script>		
 	var editor;
 	ClassicEditor
