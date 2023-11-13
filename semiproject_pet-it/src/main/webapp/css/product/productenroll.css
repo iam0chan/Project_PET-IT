@@ -1,0 +1,118 @@
+*{
+		margin: 0px;
+		padding: 0px;
+		border: 1px solid red;
+	}
+	.wrapper{
+		width:100%;
+		display: flex;
+		justify-content:center;
+	}
+	.product-enroll-wrapper{
+		width:1200px;
+		
+    	
+	}
+	
+	.product-enroll-container>div{
+		margin: 0 auto;
+		margin-bottom:30px;
+	}
+	
+	.product-enroll-container > h2{
+		text-align:center;
+		padding-top: 80px;
+		margin-bottom:3px;
+		
+		
+	}
+	
+	.product-detail-container{
+		width:1200px;
+		display:flex;
+	}
+	
+	.detail-container-l{
+		width:400px;
+		display:flex;
+		flex-direction:column;
+		align-items:flex-end;
+	}
+	
+	.detail-container-l img{
+		width:230px;
+		height:260px;
+		margin-bottom:2px;
+	}
+	
+	.img-container{
+		display:flex;
+		flex-direction:column;
+	}
+	
+	.detail-container-r{
+		width:800px;
+		display:flex;
+		flex-direction:column;
+		align-items:center;
+		jutsify-content:center;
+	}
+	
+	div.category{
+		display:flex;
+		justify-content:space-around;
+	}
+	
+	div.category span{
+		margin-left: 10px;
+	}
+	
+	
+	.enroll-content-container{
+		width:100%;
+		height:45px;
+		display:flex;
+		justify-content:center;
+	}
+	.enrollpage-title{
+		width:120px;
+		display:flex;
+		justify-content:center;
+	}
+	.enrollpage-content{
+		width:500px;
+		display:flex;
+		align-items:center;
+	}
+	.enrollpage-content>input{
+		height: 40px;
+    	width: 498px;
+    	padding-left:10px;
+	}
+	.enrollpage-title{
+		display:flex;
+		align-items:center;
+		width:200px;
+	}
+	.enrollpage-title > h4{
+		width:160px;
+		height:40px;
+		letter-spacing:4px;
+		text-align:right;
+		margin-bottom:0;
+	}
+	.line{
+		width:200px;
+		border-top:8px solid #04aa6d;
+		height:40px;
+	}
+	
+	.editor-botton-container{
+		display:flex;
+		justify-content:flex-end;
+		margin-top:30px;
+	}
+	
+	.editor-container input, button, select, optgroup, textarea{
+		line-height:1.0 !important;
+	}

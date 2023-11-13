@@ -1,156 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .product-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 1;
-            padding-top:80px;
-        }
-
-        .header-container,
-        .item-container {
-            width: 1200px;
-        }
-
-        .header-title {
-            margin-bottom: 30px;
-        }
-        
-        .header-container > .button{
-        	margin-bottom: 30px;
-        }
-
-        .header-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .item-container>.container {
-            display: flex;
-            width: 1200px;
-            /* background-color: yellow; */
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            margin-bottom: 20px;
-        }
-        
-        
-
-        .item-container>.container>.card {
-            width: 29%;
-            height: 430px;
-            /* border: 1px solid red; */
-            margin-bottom : 42px;
-            boder-radius: 5px;
-        }
-
-        .product-wrapper .sort-list {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-}
-        }
-
-        .product-wrapper .sort-list>p {
-            margin: 0 10px;
-            cursor: pointer;
-        }
-
-        .product-wrapper button {
-            width: 100px;
-            height: 40px;
-        }
-
-        .product-wrapper .button>div {
-            display: flex;
-            width: 700px;
-            justify-content: center;
-        }
-
-        .product-wrapper .btn-bottom-container {
-            width: 400px;
-            display: flex;
-            justify-content: flex-end;
-    		text-align: center;
-        }
-       
-        
-        .product-wrapper .btn-container > button {
-            margin-left:20px;
-           
-        }
-
-        .product-wrapper div.btn>button {
-            width: 100px;
-            height: 40px;
-            margin: 0 10px;
-            margin-bottom: 1px;
-        }
-
-        .product-wrapper .search-bar{
-            display: flex;
-            width: 700px;
-    		justify-content: flex-end;
-        }
-        .form-outline input{
-            width: 250px;
-        }
-
-        #search-button{
-            width: 60px;
-        }
-        
-        .item-img, item-content{
-        	/* border: 1px solid red; */
-        }
-        
-        .item-img{
-        	height:350px;
-        }
-        
-        .item-img>img{
-        	width:100%;
-        	height:100%;
-        	
-        }
-        
-        .item-content{
-            display: flex;
-    		flex-direction: column;
-    		justify-content: center;
-        	height:30%;
-        }
-        
-   		.product-wrapper .bottom-container{
-   			display:flex;
-   			height:38px;
-   			justify-content: center;
-   		}
-    	
-    	div.search-bar .btn{
-    		width: 70px;
-    		border-radius: 12px;
-    		
-    	}
-    	.btn-container{
-    		display:flex;
-    		justify-content:center;
-    	}
-    	
-    	.button-bottom{
-    		margin-right:15px;
-    	}
-    </style>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productlist.css"/>
     <script>
     /*     const searchButton = document.getElementById('search-button');
         const searchInput = document.getElementById('search-input');
@@ -279,6 +130,9 @@
                     </div>
                 </div>
             </div>
+            <div style="margin-bottom:25px;"> 
+            	페이징바
+            </div>
             <div class="bottom-container">
                 <div class="search-bar">
                     <form class="d-flex">
@@ -307,6 +161,13 @@
 		$(this).css("color","#28A745");
 	})   
  
+	$(".card").mouseenter(function(){
+		$(this).css("cursor","pointer");
+		$(this).click(function(){
+			location.href='<%=request.getContextPath()%>/product/productview.jsp';	
+		})
+	})
+	
     </script>
     
 <%@ include file="/views/footer.jsp"%>
