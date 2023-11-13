@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../views/header.jsp" %>
+<%@ include file="/views/header.jsp" %>
 
 
 <style>
@@ -8,7 +8,7 @@
 		margin : 0 auto;
 		font-family:'G마켓 산스';
 		align-items:center;
-		width :75%;
+		width :65%;
 
 	
 	#title-container {
@@ -36,6 +36,7 @@
     
     
     .accordion-body{
+    	
     	background-color : #F2F2F2;
 	    
     }
@@ -44,7 +45,13 @@
 		 list-style-type : none
 	}
 
-    .productDiv,.discountDiv{
+    .productDiv{
+    	
+    	display:flex;
+    	align-items : center;
+    }
+    .couponDiv,.discountDiv{
+    	
     	display:flex;
     	align-items : center;
     }
@@ -75,9 +82,9 @@
 			    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
 			      
 			      <div class="accordion-body">
-		      		<table id="addr-form" style="width:100%" >
+		      		<table id="addr-form" style="width:100%">
 			      		<tr>
-				      		<td style="font-size:1.15rem">받는 사람 <strong>*</strong></td>
+				      		<td style="font-size:1.15rem; text-align:center;">받는 사람 <strong>*</strong></td>
 				      		<td>
 					      		<div class="input-group input-group col-lg-3">
 								  <input type="text" class="form-control" placeholder="받는 사람">
@@ -86,7 +93,7 @@
 						</tr>
 						<tr style="height:10px"></tr>
 						<tr rowspan=3>
-							<td style="font-size:1.15rem">주소 <strong>*</strong></td>
+							<td style="font-size:1.15rem; text-align:center; width:20%">주소 <strong>*</strong></td>
 							<td>	
 								<div class="input-group input-group col-lg-4">
 								  <input type="text" class="form-control" placeholder="우편 번호">
@@ -104,7 +111,7 @@
 						</tr>
 						<tr style="height:10px"></tr>
 			      		<tr>
-			      			<td style="font-size:1.15rem">휴대 전화 <strong>*</strong></td>
+			      			<td style="font-size:1.15rem; text-align:center;">휴대 전화 <strong>*</strong></td>
 			      			<td>
 			      				<div class="input-group input-group col-lg-5">
 								  <input type="text" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
@@ -113,7 +120,7 @@
 			      		</tr>
 			      		<tr style="height:10px"></tr>
 			      		<tr>
-			      			<td style="font-size:1.15rem">이메일</td>
+			      			<td style="font-size:1.15rem; text-align:center;">이메일</td>
 			      			<td>
 			      				<div class="input-group col-lg-9">
 		   						    <input type="text" class="form-control" placeholder="이메일" aria-label="Username">
@@ -131,9 +138,9 @@
 								</div>
 			      			</td>
 			      		</tr>
-
 					</table>
-					        
+					<br>
+					<div style="text-align:right; width:75%"><p>*항목은 필수 입력사항입니다.</p></div>        
 			      </div>
 			    </div>
 			  </div>
@@ -147,7 +154,7 @@
 			      <div class="accordion-body">
 				      <div class="productDiv">
 					       <div style="width:15%; text-align:center">
-					       		<img src="../img/testimg.jpg" width="100px" height="100px">
+					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
@@ -157,13 +164,13 @@
 					       		</ul>
 					       </div>
 					       <div style="width:15%; text-align:center">
-					       		<a href="#"><img alt="" src="../img/x-button.png" width="30px" height="30px"></a>
+					       		<a href="#"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
 				       <br>
 				       <div class="productDiv">
 					       <div style="width:15%; text-align:center">
-					       		<img src="../img/testimg.jpg" width="100px" height="100px">
+					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
@@ -173,7 +180,7 @@
 					       		</ul>
 					       </div>
 					       <div style="width:15%; text-align:center">
-					       		<a href="#"><img alt="" src="../img/x-button.png" width="30px" height="30px"></a>
+					       		<a href="#"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
 			      </div>
@@ -187,28 +194,45 @@
 			    </h2>
 			    <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
 			      <div class="accordion-body">
-			      	<div class="discountDiv">
-				         <div style="width:20%; text-align:left">
+			      	<div class="couponDiv">
+				         <div style="width:20%; text-align:left;">
 				       		<span style="font-size:1.1rem"><b>쿠폰 할인</b></span>
 				      	 </div>
-				      	 <div style="width:70%; text-align:right">
-				      	 	<span style="font-size:1.1rem"><b>00원</b></span>
+				      	 <div style="width:85%;" class="input-group mb-3">
+						 	<input type="text" class="form-control" placeholder="쿠폰 할인액" readonly>
+						 	<button class="btn btn-outline-success">쿠폰  적용</button>
+						 </div>
+				      	 <div style="width:5%; text-align:left"></div>
+			      	</div>
+			      	<div class="discountDiv">
+				         <div style="width:20%; text-align:left;">
 				      	 </div>
-				      	 <div style="width:20%; text-align:left">
-				      	 	<button class="btn btn-outline-success">쿠폰 적용</button>
+				      	 <div style="width:85%; text-align:right">
+						 	<p>현재 보유쿠폰 : 00개<p>
+						 </div>
+				      	 <div style="width:5%; text-align:left">
 				      	 </div>
 			      	</div> 
 			      	<div class="discountDiv">
-				         <div style="width:20%; text-align:left">
+				         <div style="width:20%; text-align:left;">
 				       		<span style="font-size:1.1rem"><b>적립금 적용</b></span>
 				      	 </div>
-				      	 <div style="width:70%;">
+				      	 <div style="width:85%;" class="input-group mb-3">
 						 	<input type="text" class="form-control" placeholder="사용금액 입력">
+						 	<button class="btn btn-outline-success">적립금 사용</button>
 						 </div>
-				      	 <div style="width:20%; text-align:left">
-				      	 	<button class="btn btn-outline-success">적립금사용</button>
-				      	 </div>
+				      	 <div style="width:5%; text-align:left"></div>
 			      	</div> 
+			      	<div class="discountDiv">
+				         <div style="width:20%; text-align:left;">
+				      	 </div>
+				      	 <div style="width:85%; text-align:right">
+						 	<p>적립금은 2000원 이상부터 적용가능<p>
+						 </div>
+				      	 <div style="width:5%; text-align:left">
+				      	 </div>
+			      	</div>
+				      	 
 			      </div>
 			    </div>
 			  </div>
@@ -262,4 +286,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
 
-<%@ include file="../views/footer.jsp"%>
+<%@ include file="/views/footer.jsp"%>
