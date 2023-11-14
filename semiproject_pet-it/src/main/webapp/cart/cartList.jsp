@@ -142,6 +142,24 @@ td {
 	padding: 15px 0px;
 	border-bottom: 1px solid lightgrey;
 }
+
+.cart__bigorderbtn.left {
+	background-color: white;
+	border: 1px lightgray solid;
+}
+
+.cart__bigorderbtn.right {
+	background-color: white;
+	color: #000000;
+	border: 1px #04aa6d solid;
+	transition: background-color 0.3s;
+}
+
+.cart__bigorderbtn.right:hover {
+	background-color: #04aa6d;
+	color: #ffffff;
+	border: 1px lightgray solid;
+}
 </style>
 
 <section>
@@ -162,47 +180,47 @@ td {
 				<li style="margin: 15px auto 10px 96px !important; float: right;"><a
 					href="" style="color: #04aa6d;">쿠폰 : <strong>2개</strong></a></li>
 			</ul>
-
 		</div>
-		<table border="0" summary
-			class="xans-element- xans-order xans-order-normnormal xans-record-">
+	</div>
+	<table border="0" summary
+		class="xans-element- xans-order xans-order-normnormal xans-record-">
 
-			<!-- 메뉴바 크기 조정 -->
-			<colgroup>
-				<col style="width: 27px">
-				<col style="width: 92px">
-				<col style="width: auto">
-				<col style="width: 98px">
-				<col style="width: 75px">
-				<col style="width: 98px">
-				<col style="width: 98px">
-				<col style="width: 85px">
-				<col style="width: 98px">
-				<col style="width: 110px">
-			</colgroup>
-			<!-- 장바구니 메뉴 바 생성 -->
-			<thead>
-				<tr>
-					<th scope="col"><input type="checkbox"
-						onclick="Basket.setCheckBasketList('basket_product_normal_type_normal', this);">
-					</th>
-					<th scope="col">이미지</th>
-					<th scope="col">상품정보</th>
-					<th scope="col">판매가</th>
-					<th scope="col">수량</th>
-					<th scope="col" class="mileage">적립금</th>
-					<th scope="col">배송 구분</th>
-					<th scope="col">배송비</th>
-					<th scope="col">합계</th>
-					<th scope="col">선택</th>
-				</tr>
-			</thead>
+		<!-- 메뉴바 크기 조정 -->
+		<colgroup>
+			<col style="width: 27px">
+			<col style="width: 92px">
+			<col style="width: auto">
+			<col style="width: 98px">
+			<col style="width: 75px">
+			<col style="width: 98px">
+			<col style="width: 98px">
+			<col style="width: 85px">
+			<col style="width: 98px">
+			<col style="width: 110px">
+		</colgroup>
+		<!-- 장바구니 메뉴 바 생성 -->
+		<thead>
+			<tr>
+				<th scope="col"><input type="checkbox"
+					onclick="Basket.setCheckBasketList('basket_product_normal_type_normal', this);">
+				</th>
+				<th scope="col">이미지</th>
+				<th scope="col">상품정보</th>
+				<th scope="col">판매가</th>
+				<th scope="col">수량</th>
+				<th scope="col" class="mileage">적립금</th>
+				<th scope="col">배송 구분</th>
+				<th scope="col">배송비</th>
+				<th scope="col">합계</th>
+				<th scope="col">선택</th>
+			</tr>
+		</thead>
 
-			<tbody>
+		<!-- <tbody>
 				<tr class="cart__list__detail">
 					<td><input type="checkbox"></td>
 					<td><img src="/img/" alt="dog_feed"></td>
-					<!-- 상품 리스트로 이동하게끔 주소 넣기 -->
+					상품 리스트로 이동하게끔 주소 넣기
 					<td><a href="#" style="color: #04aa6d;">pet-it</a>
 						<p>너무 맛있어서 주인도 탐내는 유기농 사료</p></td>
 					<td><span class="price">30,000원</span><span
@@ -224,88 +242,86 @@ td {
 
 					<td style="width: 15%;">무료</td>
 				</tr>
-			</tbody>
-			<tfoot>
+			</tbody> -->
+		<tfoot>
 
->>>>>>> refs/heads/dev
-				<tr>
-					<td colspan="10">상품구매금액 <strong>10,000<span
-							class="displaynone"></span></strong> <span>원</span> + 배송비 : <span
-						id="normal_normal_ship_fee">2,500</span> <span
-						id="normal_normal_benefit_price_area" class="displaynone">
-							- 상품 할인 금액 <span id="normal_normal_benefir_price">0</span>
-					</span> = 합계 : <strong class="txtEm gIndent10"> <span
-							id="normal_normal_ship_fee_sum" class="txt18">4,700</span> 원
-					</strong> <span class="displaynone"> </span>
-					</td>
-				</tr>
-			</tfoot>
-			<tbody class="xans-element- xans-order xans-order-list center">
-				<tr class="xans-record-">
-					<td><input type="checkbox" id="basket_chk_id_0"
-						name="basket_product_normal_type_normal"></td>
-					<td class="thumb gClearLine"><strong class="thumb gClearLine">
-							<a href=""> <img src="" alt="dog_feed"></a></td>
-					<td class="left gClearLine"><strong class="name"> <a
-							href="" class="ec-procuct-name">주인도 탐내는 유기농 사료</a>
-					</strong>
-					<td class="right">
-						<!-- line-throught 이용해서 할인 금액 넣기 -->
-						<div id="product_price_div0" class>
-							<strong>30,000원</strong>
-							<p class="displaynone"></p>
-						</div>
 
-<<<<<<< HEAD
-					</td>
-					<td>
-						<!-- 수량 증감 버튼 생성 --> <span class> <span class="ec-base-qty">
-								<input id="quantity_id_0" name="quantity_name=0" size="2"
-								value="1" type="text"> <a href="javascript:;" class="up"
-								onclick="Basket.addQuantityShortcut('quantity_id_0', 0);"> <img
-									src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"
-									alt="수량증가">
-							</a> <a href="javascript:;" class="down"
-								onclick="Basket.outQuantityShortcut('quantity_id_0', 0);"> <img
-									src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"
-									alt="수량감소">
-							</a>
-						</span> <a href="javascript:;" class="btnNormal gBlank5"
-							onclick="Basket.modifyQuantity()">변경</a>
-					</span> <span class="displaynone">1</span>
-					</td>
-					<td><span id="product_mileage0" class="txtInfo0"> <input
-							id="product_mileage_cash" name="product_miileage_cash" value="60"
-							type="hidden"> 30원<br>
-					</span></td>
-					<td>
-						<div class="txtInfo">
-							기본배송<br>
-						</div>
-					</td>
-					<td rowspan="1" class>
-						<p class>
-							2,500원 <span class="displaynone"><br></span>
-					<td class="right"><strong> <span
-							id="sum_price_front0">32,500</span>원
-					</strong>
-						<div class="displaynone"></div></td>
-					<td class="button"><a href="javascript:;" class="btnSubmit "
-						onclick="Basket.orderBasketItem(0);">주문하기</a><br> <a
-						href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a> <br> <a
-						href="javascript:;" class="btnNormal"
-						onclick="Basket.deleteBasketItem(0);"> <i class="icoDelete">
-						</i> 삭제 </span> </span>
-					</a></td>
-				</tr>
-			</tbody>
-		</table>
+			<tr>
+				<td colspan="10">상품구매금액 <strong>30,000<span
+						class="displaynone"></span></strong> <span>원</span> + 배송비 : <span
+					id="normal_normal_ship_fee">2,500</span> <span
+					id="normal_normal_benefit_price_area" class="displaynone"> -
+						상품 할인 금액 <span id="normal_normal_benefir_price">0</span>
+				</span> = 합계 : <strong class="txtEm gIndent10"> <span
+						id="normal_normal_ship_fee_sum" class="txt18">32,500</span> 원
+				</strong> <span class="displaynone"> </span>
+				</td>
+			</tr>
+		</tfoot>
+		<tbody class="xans-element- xans-order xans-order-list center">
+			<tr class="xans-record-">
+				<td><input type="checkbox" id="basket_chk_id_0"
+					name="basket_product_normal_type_normal"></td>
+				<td class="thumb gClearLine"><strong class="thumb gClearLine">
+						<a href=""> <img src="" alt="dog_feed"></a></td>
+				<td class="left gClearLine"><strong class="name"> <a
+						href="" class="ec-procuct-name">주인도 탐내는 유기농 사료</a>
+				</strong>
+				<td class="right">
+					<!-- line-throught 이용해서 할인 금액 넣기 -->
+					<div id="product_price_div0" class>
+						<strong>30,000원</strong>
+						<p class="displaynone"></p>
+					</div>
+
+				</td>
+				<td>
+					<!-- 수량 증감 버튼 생성 --> <span class> <span class="ec-base-qty">
+							<input id="quantity_id_0" name="quantity_name=0" size="2"
+							value="1" type="text"> <a href="javascript:;" class="up"
+							onclick="Basket.addQuantityShortcut('quantity_id_0', 0);"> <img
+								src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"
+								alt="수량증가">
+						</a> <a href="javascript:;" class="down"
+							onclick="Basket.outQuantityShortcut('quantity_id_0', 0);"> <img
+								src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"
+								alt="수량감소">
+						</a>
+					</span> <a href="javascript:;" class="btnNormal gBlank5"
+						onclick="Basket.modifyQuantity()">변경</a>
+				</span> <span class="displaynone">1</span>
+				</td>
+				<td><span id="product_mileage0" class="txtInfo0"> <input
+						id="product_mileage_cash" name="product_miileage_cash" value="60"
+						type="hidden"> 30원<br>
+				</span></td>
+				<td>
+					<div class="txtInfo">
+						기본배송<br>
+					</div>
+				</td>
+				<td rowspan="1" class>
+					<p class>
+						2,500원 <span class="displaynone"><br></span>
+				<td class="right"><strong> <span id="sum_price_front0">32,500</span>원
+				</strong>
+					<div class="displaynone"></div></td>
+				<td class="button"><a href="javascript:;" class="btnSubmit "
+					onclick="Basket.orderBasketItem(0);">주문하기</a><br> <a
+					href="javascript:;" class="btnNormal"
+					onclick="BasketNew.moveWish(0);">관심상품등록</a> <br> <a
+					href="javascript:;" class="btnNormal"
+					onclick="Basket.deleteBasketItem(0);"> <i class="icoDelete">
+					</i> 삭제 </span> </span>
+				</a></td>
+			</tr>
+		</tbody>
+	</table>
 	</div>
 	<div
 		class="xans-element- xans-order xans-order-selectorder ec-base-button ">
 		<span class="gLeft"> <a href="#none" class="btnEm"
-			onclick="Basket.deleteBasket()"> 선택 상품 삭제</a> <span class="gRight">
+			onclick="Basket.deleteBasket()"> 선택상품 삭제</a> <span class="gRight">
 				<a href="" class="btnNormal" onclick="Basket.emptyBasket()">장바구니
 					비우기</a>
 		</span>
@@ -326,11 +342,11 @@ td {
 
 				<div class="cart_total_price">
 					<p>
-						총 상품금액 <strong class="item_price">60,000</strong>원 <span
+						총 상품금액 <strong class="item_price">30,000</strong>원 <span
 							class="plus_ic"></span>
 					</p>
 					<p>
-						할인금액 <strong class="sale_price color-symbol">-10,000</strong>원 <span
+						할인금액 <strong class="sale_price color-symbol">0</strong>원 <span
 							class="plus_ic"></span>
 					</p>
 					<p>
@@ -338,17 +354,14 @@ td {
 							class="equal_ic"></span>
 					</p>
 					<p>
-						총 결제금액 <strong class="total_price color-red">52,500</strong>원
+						총 결제금액 <strong class="total_price color-red">32,500</strong>원
 					</p>
 				</div>
 			</div>
 
-			<div class="btn_box">
-				<button type="button" onclick="goBack()" class="btn wh-btn">계속
-					쇼핑하기</button>
-				<button type="button" class="btn black-btn">구매하기</button>
-			</div>
-
+			<div class="cart__mainbtns">
+				<button class="cart__bigorderbtn left">쇼핑 계속하기</button>
+				<button class="cart__bigorderbtn right">주문하기</button>
 			</div>
 			<!-- <thead>
 	<tr>
@@ -421,6 +434,5 @@ td {
 
 
 		</table>
-=======
-<%@ include file="/views/footer.jsp"%>
->>>>>>> refs/heads/dev
+
+		<%@ include file="/views/footer.jsp"%>
