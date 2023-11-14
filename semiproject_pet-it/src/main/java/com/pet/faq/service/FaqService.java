@@ -16,7 +16,7 @@ public class FaqService {
 		public List<Faq> selectFaq(int cPage,int numPerpage){
 			Connection conn=getConnection();
 			List<Faq> result=dao.selectFaq(conn, cPage, numPerpage);
-			 //BoardDao의 selectBoard 메서드를 호출하여 게시물 목록을 가져옴
+			 
 			close(conn);
 			return result;
 		}

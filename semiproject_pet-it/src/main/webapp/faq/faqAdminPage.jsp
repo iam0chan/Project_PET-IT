@@ -28,7 +28,7 @@
             display:flex;
             flex-direction: column;
             justify-content: center;
-            width:50%;
+            width:100%;
         }
 
         .faq-content {
@@ -38,7 +38,7 @@
 
         .ck.ck-editor {
             width: 100%;
-            max-width: 850px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 

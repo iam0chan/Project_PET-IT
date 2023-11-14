@@ -55,7 +55,7 @@ div.col-md-8 {
 	text-align: center;
 }
 
-.pageingBar {
+.pageBar {
 	text-align: center;
 }
 
@@ -174,9 +174,11 @@ tr.item:hover {
 		</table>
 	</div>
 
-	<div class="pageingBar">
-		<h2>페이징바 영역</h2>
+	<div class="pageBar">
+		<div><%=request.getAttribute("pageBar") %></div>
+		
 	</div>
+	
 
 
 	<div class="boardsearchAll">

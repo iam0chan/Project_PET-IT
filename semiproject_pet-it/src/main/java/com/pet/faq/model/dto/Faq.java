@@ -8,7 +8,7 @@ import lombok.Data;
 public class Faq {
 
 	private int faqNo;
-	private String faqcategory;
+	private String faqCategory;
 	private String faqTitle;
 	private int faqHits;
 	private String faqContent;
