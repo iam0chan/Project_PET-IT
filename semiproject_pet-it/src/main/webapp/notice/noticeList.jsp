@@ -54,6 +54,18 @@ table#tbl-notice td,table#tbl-notice th{
 	line-height:35px !important;
 }
 
+tr.item {
+  color: #000; /* 텍스트 색상 */
+  background-color: #fff; /* 기본 배경 색상 */
+}
+
+tr.item:hover {
+  color: #000; /* 마우스를 올렸을 때 텍스트 색상 */
+  background-color: #04aa6d; 
+}
+
+
+
 
 </style>
 
@@ -84,7 +96,7 @@ table#tbl-notice td,table#tbl-notice th{
 
 		<div class="boardTable">
 
-			<table id="tbl-notice" class="table table-hover table-sm">
+			<table id="tbl-notice" class="table table-sm">
 				<colgroup>
 					<col style="width: 60px";>
 					<col style="width: 120px";>
@@ -103,7 +115,7 @@ table#tbl-notice td,table#tbl-notice th{
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr class="item">
 						<td>20</td>
 						<td>공지사항</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -112,7 +124,7 @@ table#tbl-notice td,table#tbl-notice th{
 
 					</tr>
 
-					<tr>
+					<tr class="item">
 						<td>19</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -121,7 +133,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>18</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -130,7 +142,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>17</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -139,7 +151,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>16</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -148,7 +160,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>15</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -157,7 +169,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>14</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -166,7 +178,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>13</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -175,7 +187,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>12</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -184,7 +196,7 @@ table#tbl-notice td,table#tbl-notice th{
 						<td>74</td>
 
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>11</td>
 						<td>이용안내</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
@@ -215,8 +227,11 @@ table#tbl-notice td,table#tbl-notice th{
 				<input id="search" name="search" 
 					placeholder="입력하세요">
 				<button class="btn btn-primary btn-sm">
-					<a href="#none">SEARCH</a>
+					<span id="searchbtn">SEARCH</span>
 				</button>
+				<%-- <%if(){ %> --%>  <!--관리자로 로그인 했을 때 보이는 버튼 구현하기, 로그인 구현되면 가능  -->
+				<!-- <button>글쓰기</button> -->
+				<%-- <%} %> --%>
 			</p>
 		</fieldset>
 	</div> 

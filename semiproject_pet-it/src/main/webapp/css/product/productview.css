@@ -99,14 +99,14 @@
 
         .item-option {
             display: flex;
-            margin-bottom:80px !important;
+            margin-bottom:35px !important;
             padding: 0px 10px;
-            justify-content: flex-end;
+            justify-content: center;
 
         }
 
         .total-price {
-            margin-bottom: 0px !important;
+            margin-bottom: 15px !important;
             padding: 0px 10px;
             display: flex;
             justify-content: flex-end;

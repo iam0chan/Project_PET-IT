@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../views/header.jsp"%>
+<%@ include file="/views/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +55,18 @@ table#tbl-question td,table#tbl-question th{
 }
 
 
+tr.item {
+  color: #000; /* 텍스트 색상 */
+  background-color: #fff; /* 기본 배경 색상 */
+}
+
+tr.item:hover {
+  color: #000; /* 마우스를 올렸을 때 텍스트 색상 */
+  background-color: #04aa6d; 
+}
+
+
+
 </style>
 </head>
 <body>
@@ -85,7 +97,7 @@ table#tbl-question td,table#tbl-question th{
 			</span>
 		</div>
 		<div class="boardTable">
-			<table id="tbl-question" class="table table-hover table-sm">
+			<table id="tbl-question" class="table table-sm">
 				<colgroup>
 					<col style="width: 50px";>
 					<col style="width: 170px";>
@@ -106,7 +118,7 @@ table#tbl-question td,table#tbl-question th{
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr class="item">
 						<td>3</td>
 						<td>배송</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">배송질문 있습니다.</a></td>
@@ -114,7 +126,7 @@ table#tbl-question td,table#tbl-question th{
 						<td>2023-11-11</td>
 						<td>O</td>
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>2</td>
 						<td>제품/서비스이용불만</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">북어트릿 맛없어요.</a></td>
@@ -122,7 +134,7 @@ table#tbl-question td,table#tbl-question th{
 						<td>2023-10-11</td>
 						<td>O</td>
 					</tr>
-					<tr>
+					<tr class="item">
 						<td>1</td>
 						<td>제품문의</td>
 						<td class=""><a href="" style="text-decoration:none; color:black;">북어트릿 주문확인 부탁드려요.</a></td>
