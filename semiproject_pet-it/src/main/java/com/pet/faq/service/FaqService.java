@@ -6,6 +6,7 @@ import static com.pet.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
+import com.pet.faq.model.dao.FaqDao;
 import com.pet.faq.model.dto.Faq;
 
 public class FaqService {
