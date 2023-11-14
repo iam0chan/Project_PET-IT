@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file = "../views/header.jsp"%>
+<%@ include file = "/views/header.jsp"%>
  <style>
         .mainTilte{
             font-size: 50px;
@@ -64,7 +64,7 @@
             <br>
         </p>
     </div>
-    <img src="../img/sena.jpg" width="300" height="300" class="brandInfoPohto">
+    <img src="<%=request.getContextPath()%>/sena.jpg" width="300" height="300" class="brandInfoPohto">
     &nbsp;
     <div class="Content"> <!-- 메인내용제목2-->
         <h3 class=mainContentTitle> Pet-it 의 약속</h3>
@@ -106,4 +106,4 @@
     
 </div>
 
-<%@ include file = "../views/footer.jsp"%>
+<%@ include file = "/views/footer.jsp"%>
