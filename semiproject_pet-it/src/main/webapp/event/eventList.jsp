@@ -84,7 +84,7 @@
             text-align: center;
         }
         
-        .productImg{
+        .eventImg{
         	width:320px;
         	height:340px;
         }
@@ -135,7 +135,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -147,7 +147,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -159,7 +159,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -171,7 +171,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -183,7 +183,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -195,7 +195,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -207,7 +207,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -219,7 +219,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">

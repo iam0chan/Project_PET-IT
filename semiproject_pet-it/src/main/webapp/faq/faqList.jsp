@@ -3,7 +3,7 @@
 <%@ include file="/views/header.jsp"%>
 
 
-<title>fnq</title>
+<title>faq</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -27,7 +27,7 @@
 	align-items: left;
 }
 
-#fnaTable {
+#faqTable {
 	width: 1150px;
 }
 
@@ -79,7 +79,7 @@ tr.item:hover {
 
 <body>
 	<div class="titleArea">
-		<h2>FNQ</h2>
+		<h2>FAQ</h2>
 		<p>무엇이든지 물어보세요!</p>
 	</div>
 	<div id="content-container">
@@ -99,7 +99,7 @@ tr.item:hover {
 		</div>
 		<br>
 		<!-- 테이블 시작 -->
-		<table id="fnaTable" class="table recruit">
+		<table id="faqTable" class="table recruit">
 			<thead>
 				<tr class="fnaTitle">
 					<th scope="col" class="active text-center" style="width: 10px;">번호</th>
@@ -114,7 +114,7 @@ tr.item:hover {
 				<tr class="item">
 					<td>4</td>
 					<td>자주하는질문</td>
-					<td><span class='title'>발송 마감 시간은 언제인가요?</span></td>
+					<td><span class='title'><%=request.getAttribute("content") %></span></td>
 					<td>58</td>
 				</tr>
 				<!-- 아코디언효과를 넣은 리뷰내용 -->
@@ -128,7 +128,7 @@ tr.item:hover {
 				<tr class="item">
 					<td>3</td>
 					<td>회원서비스</td>
-					<td><span class='title'>세금계산서 발행은 어떻게 신청하나요?</span></td>
+					<td><span class='title'><%=request.getAttribute("content") %></span></td>
 					<td>36</td>
 				</tr>
 				<tr class="hide">
@@ -142,7 +142,7 @@ tr.item:hover {
 				<tr class="item">
 					<td>2</td>
 					<td>취소/반품/교환</td>
-					<td><span class='title'>주문취소는 어떻게 하나요?</span></td>
+					<td><span class='title'><%=request.getAttribute("content") %></span></td>
 					<td>65</td>
 				</tr>
 				<tr class="hide">
@@ -157,7 +157,7 @@ tr.item:hover {
 				<tr class="item">
 					<td>1</td>
 					<td>배송</td>
-					<td><span class='title'>상품을 주문하면 언제 받을 수 있나요?</span></td>
+					<td><span class='title'><%=request.getAttribute("content") %></span></td>
 					<td>33</td>
 				</tr>
 				<tr class="hide">
