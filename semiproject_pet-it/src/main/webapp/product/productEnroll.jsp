@@ -20,7 +20,8 @@
 				</div>
 				<div class="detail-container-r">
 				<!-- 입력데이터 DB 저장 후 저장된 정보를 가지고 product List에서 해당 컬럼데이터에 맞게 출력 -->
-				<form action="" method="post" style="margin-top:30px;">
+				<form action="<%=request.getContextPath()%>/productListServlet.do" method="post" style="margin-top:30px;">
+					<input type="hidden" name="imageId" id="imageId"/>
 					<div class='enroll-content-container'>
 						<div class="enrollpage-title">
 							<h4>상품명 : </h4>
@@ -66,14 +67,13 @@
 					<div class='enroll-content-container'>
 						<div class="enrollpage-title">
 							<h4>옵션 : </h4>
-							<button id="option-btn">+</button>
+							<button type="button" id="option-btn">+</button>
 						</div>
 						<div class="enrollpage-content option">
 							<input type="text" name="optionName" placeholder="가격옵션명" />
 							<input type="number" name="productSummary" placeholder="가격" />
 						</div>
-					</div>
-					
+					</div>		
 				</form>
 				</div>
 				
@@ -114,10 +114,49 @@
         $("input[type=button]").on("click",function(){
         	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px height=450px");
         })
-        
-     	document.querySelector("#option-btn").addEventListener("click",(e)=>{
+     	$("#option-btn").on("click",(e)=>{
         	/* alert("이벤트발생"); */
-        	console.log(e);
+        	const optionBox = $(".detail-container-r>form");
+        	const test = $("<div class='enroll-content-container'></div>");
+        	const test2 = $("<div class='enrollpage-title'></div>");
+        	const test3 = $("<div class='enrollpage-content option'></div>");
+        	$(test).append(test2);
+        	$(test).append(test3);
+        	const inputName = $('<input type="text" name="optionName" placeholder="가격옵션명" />');
+        	$(test3).append(inputName);
+        	const inputPrice = $('<input type="number" name="productSummary" placeholder="가격" />');
+        	$(test3).append(inputPrice);
+        	$(optionBox).append(test);
+        	
         });
+        
+        
+        $("#enroll-itemcontent-btn").on("click",function(){
+        	const formdata = $(".detail-container-r>form").serialize();
+        	/* $(".detail-container-r>form").submit(); */
+        	/* console.log(formdata); */
+        	alert("asd");
+        	const optionArr = [];
+        	$.each($(".option>input[name=optionName]"),(i,e)=>{
+        		/* console.log($(e).val()); */
+        		optionArr.push($(e).val());
+        		console.log(optionArr);
+        	})
+        	/* header, body로 나눠서 보낸다. real!!! */
+        	<%-- $.ajax({
+        		url:'<%=request.getContextPath()%>/productListServlet.do',
+        		type:"get",
+        		data:formdata, /* json은 아님 */
+        		/* contentType: 'application/json; charset=utf-8', */
+        		success:data=>{
+        			console.log(data);
+        		},
+        		error:(r,e)=>{
+        			console.log(r);
+        			console.log(e);
+        		}
+        	}); --%>
+        })
+        /*  */
     </script>
 <%@ include file="/views/footer.jsp" %>
