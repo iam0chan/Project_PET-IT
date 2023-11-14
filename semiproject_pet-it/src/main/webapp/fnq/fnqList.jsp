@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../views/header.jsp"%>
+<%@ include file="/views/header.jsp"%>
 
 
-<title>FNQ</title>
+<title>fnq</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -86,8 +86,8 @@ tr.item:hover {
 
 		<div class="boardSort">
 			<p class="boardSort"></p>
-			<span class="categoryBar"> <!-- 카테고리 선택 메뉴바 --> <select
-				id="selectCategory" name="selectCategory">
+			<span class="categoryBar"> 
+			 <select id="selectCategory" name="selectCategory">
 					<option value selected="selected">전체</option>
 					<option value="1">자주하는질문</option>
 					<option value="2">회원서비스</option>
@@ -236,4 +236,4 @@ tr.item:hover {
 
 </body>
 </html>
-<%@ include file="../views/footer.jsp"%>
+<%@ include file="/views/footer.jsp"%>
