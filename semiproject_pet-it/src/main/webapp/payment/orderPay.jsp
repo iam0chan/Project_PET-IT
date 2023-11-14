@@ -12,7 +12,7 @@
 		margin : 0 auto;
 		font-family:'G마켓 산스';
 		align-items:center;
-		width :60%;
+		width :55%;
 
 	
 	#title-container {
@@ -157,37 +157,25 @@
 			    </h2>
 			    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
 			      <div class="accordion-body">
-				      <div class="productDiv">
+				      <div class="productDiv" id="productDiv">
 					       <div style="width:15%; text-align:center">
 					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
-						       		<li style="font-size:1.1rem;font-weight:bolder">사나운 벌꿀오소리</li>
+						       		<li style="font-size:1.1rem; font-weight:bolder">사나운 벌꿀오소리</li>
+						       		<input type='hidden' id='productName' name='productName' value=''>
 						       		<li>수량 : 00개</li>
+						       		<input type='hidden' id='productCount' name='productCount' value=''>
 						       		<li>총 가격 : 2,500원</li>
+						       		<input type='hidden' id='productPrice' name='productPrice' value=''>
 					       		</ul>
 					       </div>
 					       <div style="width:15%; text-align:center">
-					       		<a href="#"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
+					       		<a href="#" id="deleteProduct"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
-				       <br>
-				       <div class="productDiv">
-					       <div style="width:15%; text-align:center">
-					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
-					       </div>
-					       <div style="width:70%">
-					       		<ul id="product-info">
-						       		<li style="font-size:1.1rem;font-weight:bolder">귀여운 벌꿀오소리</li>
-						       		<li>수량 : 00개</li>
-						       		<li>총 가격 : 2,500원</li>
-					       		</ul>
-					       </div>
-					       <div style="width:15%; text-align:center">
-					       		<a href="#"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
-					       </div>
-				       </div>
+				       
 			      </div>
 			    </div>
 			  </div>
@@ -270,7 +258,7 @@
 			      </div>
 			      <div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
 			      	<div style="margin-left:60px; width:80%">
-			      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem"><b>최종결제금액</b></span>
+			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>최종결제금액</b></span>
 			      	</div>
 			      	<div style="margin-left:60px; width:20%; text-align:center;">
 			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>0000원</b></span>
@@ -321,7 +309,7 @@
 					      <div class="accordion-body">
 				      		<div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
 						      	<div style="margin-left:60px; width:80%">
-						      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem">회원적립혜택</span>
+						      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem">회원적립혜택</span>
 						      	</div>
 						      	<div style="margin-left:60px; width:20%; text-align:center;">
 						      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem">0000원 예정</span>
@@ -355,7 +343,24 @@
     });
 </script>
 
-<!-- 주소입력창 daum지도주소 api 적용 --> 	
+<!-- 주문상품 삭제버튼 js구현 -->
+<script>
+	$(function(){
+		$('#deleteProduct').click(function(){
+			$("#productDiv").hide();
+			$("#productName").attr("disabled",true);
+			$("#productCount").attr("disabled",true);
+			$("#productPrice").attr("disabled",true);
+		});	
+	});
+	
+	
+	
+</script>
+
+
+
+<!-- 주소입력창 daum지도주소 api 적용 js --> 	
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function addrBtnAction() {
@@ -407,8 +412,8 @@
     }
 </script>
 
-<!-- 주문상품 삭제버튼 js구현 -->   
 
+   
 
 
 <%@ include file="/views/footer.jsp"%>
