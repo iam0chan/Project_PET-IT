@@ -6,6 +6,7 @@
 <!-- TUI 에디터 CSS CDN -->
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productenroll.css"/>
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
@@ -20,8 +21,9 @@
 				</div>
 				<div class="detail-container-r">
 				<!-- 입력데이터 DB 저장 후 저장된 정보를 가지고 product List에서 해당 컬럼데이터에 맞게 출력 -->
-				<form action="<%=request.getContextPath()%>/productListServlet.do" method="post" style="margin-top:30px;">
+				<form action="<%=request.getContextPath()%>/product/productEnrollEnd.do" method="post" style="margin-top:30px;">
 					<input type="hidden" name="imageId" id="imageId"/>
+					<input type="hidden" name="content" id="product-content"/>
 					<div class='enroll-content-container'>
 						<div class="enrollpage-title">
 							<h4>상품명 : </h4>
@@ -71,7 +73,7 @@
 						</div>
 						<div class="enrollpage-content option">
 							<input type="text" name="optionName" placeholder="가격옵션명" />
-							<input type="number" name="productSummary" placeholder="가격" />
+							<input type="number" name="optionPrice" placeholder="가격" />
 						</div>
 					</div>		
 				</form>
@@ -82,38 +84,98 @@
 	    <!-- 에디터를 적용할 요소 (컨테이너) -->
 	    <div class="editor-wrapper">
 		    <div id="editor-container">
-				
+				<form action="<%=request.getContextPath()%>/product/productFileUpload.do" method="post">  
+				<div id="editor"></div>
+				<input type="button" class="btn btn-secondary mt-3 mx-2" value="작성취소" />
+				<input type="hidden" value="" name="upload" id="upload">
+				<button id="submit">전송</button>
+				</form>
 		    </div>
 		    <div class="editor-botton-container">
 		    	<button id="enroll-itemcontent-btn" class="btn btn-outline-success">등록완료</button>
 		    	
 		    </div>
 	    </div>
+		
+	    <!-- 등록확인 모달 -->
+                    <div class="modal" tabindex="-1">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title">상품등록</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        <p>상품을 등록하시겠습니까?</p>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary">등록</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!--  -->
 	</div>
 </div>
 
-<!-- 테스트 container -->
-<div id="contents">
-	 
-</div>
    <!-- =======================================================================================================  -->
     <script>
-        const editor = new toastui.Editor({
+        <%-- const editor = new toastui.Editor({
             el: document.querySelector('#editor-container'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-            previewStyle: 'vertical'                // 마크다운 프리뷰 스타일 (tab || vertical)
-        });
+            previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)
+            	hooks: {
+       		    	addImageBlobHook: (blob, callback) => {
+       		    		// blob : Java Script 파일 객체
+       		    		//console.log(blob);
+       		    		
+       		    		const formData = new FormData();
+       		        	formData.append('image', blob);
+       		        	
+       		        	let url = '/images/';
+       		   			$.ajax({
+       		           		type: 'POST',
+       		           		enctype: 'multipart/form-data',
+       		           		url: '<%=request.getContextPath()%>/product/productFileUpload.do',
+       		           		data: formData,
+       		           		dataType: 'json',
+       		           		processData: false,
+       		           		contentType: false,
+       		           		cache: false,
+       		           		timeout: 600000,
+       		           		success: function(data) {
+       		           			console.log('ajax 이미지 업로드 성공');
+       		           			url += data.filename;
+       		           			
+       		           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
+       		        			// 형식 : ![대체 텍스트](주소)
+       		           			callback(url, '사진 대체 텍스트 입력');
+       		           		},
+       		           		error: function(e) {
+       		           			console.log('ajax 이미지 업로드 실패');
+       		           			console.log(e);
+       		           			//console.log(e.abort([statusText]));
+       		           			
+       		           			callback('image_load_fail', '사진 대체 텍스트 입력');
+       		           		}
+       		           	});
+       		    	}
+        		    }
+        }); --%>
         
-        $("#enroll-itemcontent-btn").on("click",function(){
+       /*  $("#enroll-itemcontent-btn").on("click",function(){
         	document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
             //콘솔창에 표시
             console.log(editor.getHTML());	
-        })
+        }) */
+        
         $("input[type=button]").on("click",function(){
-        	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px height=450px");
+          	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px height=450px");
         })
+        
      	$("#option-btn").on("click",(e)=>{
         	/* alert("이벤트발생"); */
         	const optionBox = $(".detail-container-r>form");
@@ -124,7 +186,7 @@
         	$(test).append(test3);
         	const inputName = $('<input type="text" name="optionName" placeholder="가격옵션명" />');
         	$(test3).append(inputName);
-        	const inputPrice = $('<input type="number" name="productSummary" placeholder="가격" />');
+        	const inputPrice = $('<input type="number" name="optionPrice" placeholder="가격" />');
         	$(test3).append(inputPrice);
         	$(optionBox).append(test);
         	
@@ -132,10 +194,30 @@
         
         
         $("#enroll-itemcontent-btn").on("click",function(){
-        	const formdata = $(".detail-container-r>form").serialize();
-        	/* $(".detail-container-r>form").submit(); */
+        	alert("발생");
+        	
+           
+        	$(".modal").css("display","block").css("top","230px");
+           	
+           	
+           	$(".modal-footer>.btn:nth-child(1)").click(function(){
+           		console.log("이벤트발생");
+           		$(".modal").css("display","none");
+           	})
+           	
+           	$(".modal-footer>.btn:nth-child(2)").click(function(){
+           		console.log("이벤트발생");
+           		const editorData = editor.getData();
+           		$(".modal").css("display","none");
+           	 	$("#product-content").val(editorData);
+           		const formdata = $(".detail-container-r>form").serialize();
+            	$(".detail-container-r>form").submit();
+           		<%-- location.href='<%=request.getContextPath()%>/product/productlist.jsp'; --%>
+           		/* ajax or get-> queryString방식으로 product# 넘기기 ,  */
+           	})
+        	
         	/* console.log(formdata); */
-        	alert("asd");
+        	/* alert("asd"); */
         	const optionArr = [];
         	$.each($(".option>input[name=optionName]"),(i,e)=>{
         		/* console.log($(e).val()); */
@@ -157,6 +239,31 @@
         		}
         	}); --%>
         })
-        /*  */
+       
+    var editor;
+	ClassicEditor
+	.create(document.querySelector('#editor-container'), {
+		ckfinder: {
+			uploadUrl : '<%=request.getContextPath()%>/upload/productdetailImg/'
+		}
+	})
+	.then(e => {
+		editor = e;
+		console.log('Editor was initialized');
+	})
+	.catch(error => {
+		console.error(error);
+	});
+	
+	function test(){	
+	    const editorData = editor.getData();
+	    /* console.log(editorData); */
+	    $("#upload").attr("value",editorData);
+	    console.log($("#upload").val());
+	}
+	    
+  
     </script>
+
+
 <%@ include file="/views/footer.jsp" %>
