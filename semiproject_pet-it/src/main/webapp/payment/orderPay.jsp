@@ -3,6 +3,10 @@
 
 <%@ include file="/views/header.jsp"%>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
 <style>
 	#content-container {
 		margin : 0 auto;
@@ -290,17 +294,17 @@
 							  </label>
 							</div>
 							<br>
-							<div class="form-check">
+ 							<%--<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
 							  <label class="form-check-label" for="Npay">
 							    <img alt="" src="<%=request.getContextPath()%>/img/Npay_badge.png">&nbsp&nbsp네이버페이
 							  </label>
-							</div>
+							</div> --%>
 							<br>
 							<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="Kakaopay" value="option3">
 							  <label class="form-check-label" for="Kakaopay">
-							    <img alt="" src="<%=request.getContextPath()%>/img/KakaoPay_badge.png">&nbsp&nbsp카카오페이
+							    <img alt="" src="<%=request.getContextPath()%>/img/KakaoPay_badge.png" width="60px" height="25px">&nbsp&nbsp카카오페이
 							  </label>
 							</div>
 						</div>
@@ -336,8 +340,8 @@
 	</section>
 </div>
 
+<!-- email select에 따른 값 변화주기 jquery -->
 <script>
-	//email select에 따른 값 변화주기 jquery
     $(function() {
         $('#select').change(function() {
             if ($('#select').val() == 'directly') {
@@ -349,8 +353,6 @@
             }
         })
     });
-    
-	
 </script>
 
 <!-- 주소입력창 daum지도주소 api 적용 --> 	
@@ -405,11 +407,8 @@
     }
 </script>
 
-   
- 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<!-- 주문상품 삭제버튼 js구현 -->   
+
 
 
 <%@ include file="/views/footer.jsp"%>
