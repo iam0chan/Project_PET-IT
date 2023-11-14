@@ -6,12 +6,12 @@
         <div class="item-info-container">
             <div class="item-image">
                 <div>
-                    <img src="https://naturalcore.co.kr/web/product/small/202109/472c0fefa2afeba6b907c34cd2884faa.jpg" width="300px"
-                        height="300px">
+                    <img src="https://naturalcore.co.kr/web/product/small/202109/472c0fefa2afeba6b907c34cd2884faa.jpg" width="400px"
+                        height="420px">
                 </div>
-                <div class="summary">
+                <!-- <div class="summary">
                     <span>상품설명란?</span>
-                </div>
+                </div> -->
             </div>
             <div class="item-info">
                 <div class="info item-title">
@@ -37,15 +37,35 @@
                         </select>
                     </div>
                     <div class="amountbtn">
-                        <button style="width: 20px;">-</button>
-                        <input type="text" value="1" style="text-align: right; width: 30px;" max="99">
-                        <button style="width: 20px;">+</button>
+                        <button id="btn-l" style="width: 20px;">-</button>
+                        <input id="product-order-amount" type="text" value="1" min="0" style="text-align: right; width: 30px;" max="99">
+                        <button id="btn-r" style="width: 20px;">+</button>
                     </div>
                 </div>
-                <div class="info total-price"><span>총 금액 <strong>10,900원</strong></span></div>
+                <div class="info total-price"><span>총 금액 <strong>10900</strong>원</span></div>
+                <input id="price" type="hidden" value="10900">
                 <div class="info button-container">
                     <button class="btn btn-outline-success">구매하기</button>
-                    <button class="btn btn-outline-success">장바구니</button>
+                    <button id="cart-btn" class="btn btn-outline-success">장바구니</button>
+                    <!-- 장바구니 모달 -->
+                    <div class="modal" tabindex="-1">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title">장바구니 확인</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        <p>장바구니에 담으시겠습니까?</p>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary">담기</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!--  -->
                 </div>
             </div>
         </div>
@@ -234,11 +254,55 @@
         </div>
     </div>
     <script>
-    	const review = document.querySelector("#review-btn");
-    	
-    	review.addEventListener('click',()=>{
-    		open("<%=request.getContextPath()%>/product/review_write.jsp","_blank","width=800px,height=500px")
-    	})
-    
+   		const review = document.querySelector("#review-btn");
+       	
+       	review.addEventListener('click',()=>{
+       		open("<%=request.getContextPath()%>/product/review_write.jsp","_blank","width=800px,height=500px")
+       	})
+       	
+       	const value = $("#product-order-amount");
+       	const price = $(".total-price>span>strong"); 
+       	const oriPrice = $('#price').val();
+       	var num = Number(value.val());
+       	$("#btn-r").click(function(){
+       		if(num<=99){
+   				num = num+1;
+   				value.val(num);
+   				price.html(oriPrice*num);
+   			/* console.log(num); */
+       		}else{
+       			alert("주문 가능 최대 갯수는 99개 입니다.");
+       		}
+
+       	})
+       	$("#btn-l").click(function(){
+       		if(num>1){
+	   			num = num-1;
+	   			value.val(num);
+   				price.html(parseInt(price.html())-oriPrice);
+	   			/* console.log(num); */
+       		}else{
+       			num = 1;
+       		}
+
+       	})
+       	
+       	$("#cart-btn").click(function(){
+       		$(".modal").css("display","block").css("top","230px");
+       	})
+       	
+       	$(".modal-footer>.btn:nth-child(1)").click(function(){
+       		console.log("이벤트발생");
+       		$(".modal").css("display","none");
+       	})
+       	
+       	$(".modal-footer>.btn:nth-child(2)").click(function(){
+       		console.log("이벤트발생");
+       		$(".modal").css("display","none");
+       		location.href='<%=request.getContextPath()%>/cart/cartList.jsp';
+       		/* ajax or get-> queryString방식으로 product# 넘기기 ,  */
+       	})
+       	
+       	
     </script>
 <%@ include file="/views/footer.jsp" %>
