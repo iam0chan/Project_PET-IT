@@ -147,7 +147,7 @@
                   </ul>
                 </div>
                 <div class="quote_btn-container">
-                  <a href="<%=request.getContextPath()%>/loginView.do"> <!--11.13 12:07 jm 연결주소 추가-->
+                  <a href="<%=request.getContextPath()%>/member/login.jsp"> <!--11.13 12:07 jm 연결주소 추가-->
                     <i class="fa-solid fa-dog"></i>
                     <span>Login</span>
                   </a>

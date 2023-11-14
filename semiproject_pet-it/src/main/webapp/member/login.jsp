@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../views/header.jsp"%>
+<%@ include file="/views/header.jsp"%>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
@@ -67,8 +67,8 @@
         <hr>
         <div class="sns-login">
             <h4 style="font-size:18px">SNS간편 로그인</h4>
-            <a href="javascript:kakaoLogin()"><img src="../img/kakao_login.png" style="width: 300px"></a>
-            <div id="naver_id_login"><img src="../img/naver_login.png" style="width: 300px; height:45px"></div>
+            <a href="javascript:kakaoLogin()"><img src="<%=request.getContextPath()%>/img/kakao_login.png" style="width: 300px"></a>
+            <div id="naver_id_login"><img src="<%=request.getContextPath()%>/img/naver_login.png" style="width: 300px; height:45px"></div>
             <!-- <span class="btn btn-success" style="width:300px; height:45px">네이버 로그인</span> -->
         </div>
     </div>
@@ -106,4 +106,4 @@ function kakaoLogin() {
 	naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
 </script>
-<%@ include file="../views/footer.jsp"%>
+<%@ include file="/views/footer.jsp"%>

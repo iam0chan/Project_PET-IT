@@ -27,7 +27,7 @@ public class LoginViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.sendRedirect(request.getContextPath()+"/member/login.jsp");
+		response.sendRedirect(request.getContextPath()+"/login.do");
 	}
 
 	/**
