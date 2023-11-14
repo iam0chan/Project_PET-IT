@@ -30,7 +30,7 @@
         <link href="<%=request.getContextPath()%>/css/responsive.css" rel="stylesheet" />
         <!-- jQery -->
 
-        <script src="/js/jquery-3.4.1.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 
       
       <script>
@@ -74,6 +74,12 @@
 	    		
 	    	}
       </script>
+      <style>
+      	.sub-nav li{
+      		height: 65px;
+      		line-height:3.0 !important;
+      	}
+      </style>
       </head>
       
       <body>
@@ -95,54 +101,54 @@
                 <div class="d-flex mx-auto flex-column flex-lg-row align-items-center" style="font-size: 15pt; font-family: G마켓 산스;">
                   <ul class="navbar-nav  ">
                     <li class="nav-item active header-menu-item">
-                      <a class="nav-link " href="<%=request.getContextPath() %>/brandInfo/brandInfo.jsp">Pet-It <span class="sr-only">(current)</span></a>
-                      <ul class="sub-nav">
-                      	<li class = "sub-item">신상품</li>
+                      <a class="nav-link " href="<%=request.getContextPath() %>/brandInfo/brandInfoPage.jsp">Pet-It <span class="sr-only">(current)</span></a>
+                      <!-- <ul class="sub-nav">
+                      	<a href="#"><li class = "sub-item">신상품</li></a>
                       	<li class = "sub-item">베스트</li>
                       	<li class = "sub-item">사료</li>
                       	<li class = "sub-item">간식</li>
                       	<li class = "sub-item">용품</li>  	
-                      </ul>
+                      </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
                       <a class="nav-link " href="about.html">이벤트</a>
-                      <ul class="sub-nav">
+                     <!--  <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
                       	<li class = "sub-item">사료</li>
                       	<li class = "sub-item">간식</li>
                       	<li class = "sub-item">용품</li>  	
-                      </ul>
+                      </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
                       <a class="nav-link " href="<%=request.getContextPath()%>/productListServlet.do">주요상품</a>
                       <ul class="sub-nav">
-                      	<li class = "sub-item">신상품</li>
-                      	<li class = "sub-item">베스트</li>
-                      	<li class = "sub-item">사료</li>
-                      	<li class = "sub-item">간식</li>
-                      	<li class = "sub-item">용품</li>  	
+                      	<a href="#"><li class = "sub-item">신상품</li></a>
+                      	<a href="#"><li class = "sub-item">베스트</li></a>
+                      	<a href="#"><li class = "sub-item">사료</li></a>
+                      	<a href="#"><li class = "sub-item">간식</li></a>
+                      	<a href="#"><li class = "sub-item">용품</li></a>
                       </ul>
                     </li>
                     <li class="nav-item header-menu-item">
                       <a class="nav-link" href="blog.html">마이페이지</a>
-                      <ul class="sub-nav">
+                      <!-- <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
                       	<li class = "sub-item">사료</li>
                       	<li class = "sub-item">간식</li>
                       	<li class = "sub-item">용품</li>  	
-                      </ul>
+                      </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
                       <a class="nav-link" href="contact.html">Q&A</a>
-                      <ul class="sub-nav">
+                      <!-- <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
                       	<li class = "sub-item">사료</li>
                       	<li class = "sub-item">간식</li>
                       	<li class = "sub-item">용품</li>  	
-                      </ul>
+                      </ul> -->
                     </li>
                   </ul>
                 </div>

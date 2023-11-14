@@ -1,186 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp" %>
-	    <style>
-        * {
-            margin: 0;
-            padding: 0;
-           	border: 1px solid red;
-            list-style: none;
-            text-decoration: none;
-        }
-
-        .wrapper {
-            width: auto;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top:80px;
-            line-height:1;
-        }
-
-        div.item-info-container {
-            width: 1100px;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            /* margin-bottom:30px; */
-        }
-
-        div.item-image {
-            width: 430px;
-            height:530px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        div.item-image>div:nth-child(1){
-            margin-bottom: 10px;
-
-        }
-
-        div.summary{
-            width: 300px;
-            height: 100px;
-        }
-
-        div.item-info {
-            width: 550px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            line-height:1;
-        }
-
-        .item-info>div {
-            width: 100%;
-            text-align: center;
-            margin-bottom:20px;
-        }
-
-        div.info {
-            /* margin-bottom: 25px; */
-        }
-
-        .item-price-info{
-            height:auto;
-        }
-
-        div.item-description-container {
-            width: 1100px;
-            height: auto;
-        }
-        .item-description{
-            display: flex;
-            justify-content: center;
-        }
-
-        div.item-instruction {
-            width: 1100px;
-            height: auto;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-        }
-        
-         .item-instruction-container{
-        	width:1000px;
-        	color:#333;
-        	background-color:#fafafa;
-        	padding: 0px 10px;
-        	line-height:1.3;
-        }
-
-        div.item-review-container {
-            width: 1100px;
-            height: auto;
-
-        }
-
-        .item-option {
-            display: flex;
-            margin-bottom:80px !important;
-            padding: 0px 10px;
-            justify-content: flex-end;
-
-        }
-
-        .total-price {
-            margin-bottom: 0px !important;
-            padding: 0px 10px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .button-container>button{
-            width: 260px;
-            height: 55px;
-            margin: 15px 5px;
-
-        }
-        .description-header ul{
-            display: flex;
-            justify-content: center;
-            text-align: center;
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-
-        .description-header li{
-            width: 150px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f9f9f9;
-            
-        }
-
-        .description-header li:nth-child(3)>a{
-            letter-spacing: 10px;
-            padding-left: 5px;
-            
-        }
-       
-
-        .review-item-container{
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        .review-item-container>div{
-            margin-bottom: 10px;
-        }
-        
-        .review-item-container>div>div{
-            width: 200px;
-            height: 60px;
-        }
-        
-        .review-btn{
-        	display:flex;
-        	justify-content:flex-end;
-        	padding: 10px 10px;
-        }
-    </style>
-
-
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productview.css"/>
     <div class="wrapper">
         <div class="item-info-container">
             <div class="item-image">
                 <div>
-                    <img src="https://naturalcore.co.kr/web/product/small/202109/472c0fefa2afeba6b907c34cd2884faa.jpg" width="300px"
-                        height="300px">
+                    <img src="https://naturalcore.co.kr/web/product/small/202109/472c0fefa2afeba6b907c34cd2884faa.jpg" width="400px"
+                        height="420px">
                 </div>
-                <div class="summary">
+                <!-- <div class="summary">
                     <span>상품설명란?</span>
-                </div>
+                </div> -->
             </div>
             <div class="item-info">
                 <div class="info item-title">
@@ -206,15 +37,35 @@
                         </select>
                     </div>
                     <div class="amountbtn">
-                        <button style="width: 20px;">-</button>
-                        <input type="text" value="1" style="text-align: right; width: 30px;" max="99">
-                        <button style="width: 20px;">+</button>
+                        <button id="btn-l" style="width: 20px;">-</button>
+                        <input id="product-order-amount" type="text" value="1" min="0" style="text-align: right; width: 30px;" max="99">
+                        <button id="btn-r" style="width: 20px;">+</button>
                     </div>
                 </div>
-                <div class="info total-price"><span>총 금액 <strong>10,900원</strong></span></div>
+                <div class="info total-price"><span>총 금액 <strong>10900</strong>원</span></div>
+                <input id="price" type="hidden" value="10900">
                 <div class="info button-container">
                     <button class="btn btn-outline-success">구매하기</button>
-                    <button class="btn btn-outline-success">장바구니</button>
+                    <button id="cart-btn" class="btn btn-outline-success">장바구니</button>
+                    <!-- 장바구니 모달 -->
+                    <div class="modal" tabindex="-1">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title">장바구니 확인</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        <p>장바구니에 담으시겠습니까?</p>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary">담기</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!--  -->
                 </div>
             </div>
         </div>
@@ -403,11 +254,55 @@
         </div>
     </div>
     <script>
-    	const review = document.querySelector("#review-btn");
-    	
-    	review.addEventListener('click',()=>{
-    		open("<%=request.getContextPath()%>/product/review_write.jsp","_blank","width=800px,height=500px")
-    	})
-    
+   		const review = document.querySelector("#review-btn");
+       	
+       	review.addEventListener('click',()=>{
+       		open("<%=request.getContextPath()%>/product/review_write.jsp","_blank","width=800px,height=500px")
+       	})
+       	
+       	const value = $("#product-order-amount");
+       	const price = $(".total-price>span>strong"); 
+       	const oriPrice = $('#price').val();
+       	var num = Number(value.val());
+       	$("#btn-r").click(function(){
+       		if(num<=99){
+   				num = num+1;
+   				value.val(num);
+   				price.html(oriPrice*num);
+   			/* console.log(num); */
+       		}else{
+       			alert("주문 가능 최대 갯수는 99개 입니다.");
+       		}
+
+       	})
+       	$("#btn-l").click(function(){
+       		if(num>1){
+	   			num = num-1;
+	   			value.val(num);
+   				price.html(parseInt(price.html())-oriPrice);
+	   			/* console.log(num); */
+       		}else{
+       			num = 1;
+       		}
+
+       	})
+       	
+       	$("#cart-btn").click(function(){
+       		$(".modal").css("display","block").css("top","230px");
+       	})
+       	
+       	$(".modal-footer>.btn:nth-child(1)").click(function(){
+       		console.log("이벤트발생");
+       		$(".modal").css("display","none");
+       	})
+       	
+       	$(".modal-footer>.btn:nth-child(2)").click(function(){
+       		console.log("이벤트발생");
+       		$(".modal").css("display","none");
+       		location.href='<%=request.getContextPath()%>/cart/cartList.jsp';
+       		/* ajax or get-> queryString방식으로 product# 넘기기 ,  */
+       	})
+       	
+       	
     </script>
 <%@ include file="/views/footer.jsp" %>

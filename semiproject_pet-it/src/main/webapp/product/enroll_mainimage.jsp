@@ -58,12 +58,14 @@
             <div class="image-content">
                 <img class="image-box" src="mainImg-sample.png" style="width:230px; height:260px;">
             </div>
+            <form action="#" method="post">
             <div class="file-container">
-                <input type="file" id="file">
+                <input type="file" name = "upfile" id="file">
             </div>
             <div>
-            	<button id="enroll-btn" class="btn btn-outline-success">등록</button>
+            	<input type="submit" id="enroll-btn" class="btn btn-outline-success" value="등록">
             </div>
+            </form>
         </div>
     </div>
 
@@ -85,6 +87,8 @@
         
         btn.addEventListener('click',()=>	{
         	opener.document.querySelector("#image-box").src = document.querySelector(".image-box").src;
+        	opener.document.querySelector("#imageId").value = document.querySelector(".image-box").src;
+        	/* input hidden 태그를 이용해서 src값 저장해서 form태그로 서버에 전송 */
         	window.close();
         });
 
