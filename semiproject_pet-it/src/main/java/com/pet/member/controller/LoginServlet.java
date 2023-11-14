@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.web.pet.member.dto.Member;
-import com.web.pet.member.service.MemberService;
+import com.pet.member.dto.Member;
+import com.pet.member.service.MemberService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -31,10 +31,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId=request.getParameter("userId");
-		String password=request.getParameter("password");
+		String memberId=request.getParameter("memberId");
+		String memberPw=request.getParameter("memberPw");
 		 
-		Member m = new MemberService().selectMemberByIdAndPw(userId, password);
+		Member m = new MemberService().selectMemberByIdAndPw(memberId, memberPw);
 		
 		//로그인성공
 		HttpSession session = request.getSession();
