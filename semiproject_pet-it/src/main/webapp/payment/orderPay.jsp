@@ -205,7 +205,7 @@
 								    	<span>개</span>
 								    </li>
 						       		<li><p><span>합계 가격 :&nbsp</span><span id="totalPrice">0</span>원</p></li>
-						       		<input type='hidden' id='productPrice' name='productPrice' value=''>
+						       		<input type='hidden' id='productPrice' name='productTotalPrice' value=''>
 					       		</ul>
 					       </div>
 					       <div style="width:15%; text-align:center">
@@ -228,7 +228,7 @@
 				       		<span style="font-size:1.1rem"><b>쿠폰 할인</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
-						 	<select class="form-select form-select" aria-label=".form-select-sm example">
+						 	<select class="form-select form-select" name="couponValue" aria-label=".form-select-sm example">
 							  <option selected>쿠폰을 선택하세요</option>
 							  <option value="1">One</option>
 							  <option value="2">Two</option>
