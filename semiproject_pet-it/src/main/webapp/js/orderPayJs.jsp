@@ -58,6 +58,62 @@
     });
 </script>
 
+<!-- 상품수량에 따라 총 가격 변화 -->
+<script>
+	$(document).ready(function(){
+	    function calculateTotalPrice() {
+	        var price = parseInt($('.price').text());
+	        var count = $('#count').val();
+	        var totalPrice = price * count;
+	        $('#totalPrice').text(totalPrice);
+	    }
+	    
+	    $('#count').on('input', calculateTotalPrice);
+	
+	    // 페이지 로드 시 총 금액 계산
+	    calculateTotalPrice();
+	});
+</script>
+
+<!-- 결제정보 자동으로 변화되어 표시되게 -->
+<script>
+	$(document).ready(function(){
+	    function calculateTotalPrice() {
+	        var price = parseInt($('.price').text());
+	        var count = $('#count').val();
+	        var totalPrice = price * count;
+	        $('#allProductPrice').text(totalPrice);
+	    }
+	    
+	    $('#count').on('input', calculateTotalPrice);
+	
+	    // 페이지 로드 시 총 금액 계산
+	    calculateTotalPrice();
+	});
+
+</script>
+
+<!-- 결제정보에 따른 최종결제금액 계산 -->
+<script>
+$(document).ready(function(){ 
+    function calculateTotalCost() {
+        var productPrice = parseInt($('#allProductPrice').text());
+        var deliveryCost = parseInt($('#delivery-cost').text());
+        var discountPrice = parseInt($('#discountPrice').text());
+        var totalCost = productPrice + deliveryCost - discountPrice;
+        $('#allPayCost').text(totalCost.toLocaleString('ko-KR'));
+    }
+
+    // 해당 값들이 변경되면 자동으로 총 금액을 다시 계산
+    $('#allProductPrice, #delivery-cost, #discountPrice').change(calculateTotalCost);
+
+    // 페이지가 로드될 때 총 금액을 계산
+    calculateTotalCost();
+});
+
+</script>
+
+
 <!-- 주문상품 삭제버튼 jquery -->
 <script>
 	$(function(){
@@ -73,10 +129,10 @@
 
 <!-- 주문상품이 모두 삭제되면 화면 전환 jquery -->
 <script>
-	$("div#productAll > div.productDiv").each(function(){
-		if($(this).attr('disabled')=='true'){
-			var hiddenDivs = $(this).parent().children('div:hide').length;
-			var totalDivs = $(this).parent().childeren('div').length;
+	$("div#productAll > div#productDiv").each(function(){
+		if($(this).is(':hidden')){
+			var hiddenDivs = $(this).parent().children('div:hidden').length;
+			var totalDivs = $(this).parent().children('div').length;
 			if(hiddenDivs == totalDivs){
 				alert('주문상품이 모두 삭제되어 장바구니로 돌아갑니다');
 				window.location.href="<%=request.getContextPath()%>/cart/cartList.jsp"
@@ -104,29 +160,36 @@
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "223456",  			//주문번호가 들어가야함.
+			merchant_uid: "2234156",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
-			amount:	10800,						//결제 금액
+			amount:	100,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
 			buyer_name : "홍길동",				//주문자 이름
 			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 	//주문자 주소
+			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
 			buyer_postcode : "139-91",			//주문자 우편번호
 		}, function(rsp){						//callback함수
 			if(rsp.success){
 				
 				$.ajax({
-					url : "<%=request.getContextPath()%>/paydemo.do",
+					url : "<%=request.getContextPath()%>/payment.do",
 					type : "POST",
 					dataType : "json",
 					data : {
 						imp_uid : rsp.imp_uid,
                         merchant_uid : rsp.merchant_uid,
                         paid_amount : rsp.paid_amount,
-                        apply_num : rsp.apply_num
+                        apply_num : rsp.apply_num,
+                        pay_method : rsp.pay_method,
+                        paid_at : rsp.paid_at
 					},
 					success : function(data){
-						alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid);
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
+						Swal.fire({
+							  title: "결제 완료",
+							  text: "주문번호 : "+merchant_uid,
+							  icon: "success"
+							});
 					}
 				});
 				
@@ -145,29 +208,36 @@
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kcp.AO09C",					//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "1234567",  			//주문번호가 들어가야함.
+			merchant_uid: "3234567",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
 			amount:	100,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
 			buyer_name : "홍길동",				//주문자 이름
 			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 	//주문자 주소
+			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
 			buyer_postcode : "139-91",			//주문자 우편번호
 		}, function(rsp){						//callback함수
 			if(rsp.success){
 				
 				$.ajax({
-					url : "<%=request.getContextPath()%>/paydemo.do",
+					url : "<%=request.getContextPath()%>/payment.do",
 					type : "POST",
 					dataType : "json",
 					data : {
 						imp_uid : rsp.imp_uid,
                         merchant_uid : rsp.merchant_uid,
                         paid_amount : rsp.paid_amount,
-                        apply_num : rsp.apply_num
+                        apply_num : rsp.apply_num,
+                        pay_method : rsp.pay_method,
+                        paid_at : rsp.paid_at
 					},
 					success : function(data){
-						alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid);
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
+						Swal.fire({
+							  title: "결제 완료",
+							  text: "주문번호 : "+merchant_uid,
+							  icon: "success"
+							});
 					}
 				});
 				
