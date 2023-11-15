@@ -51,6 +51,7 @@
 	                    	<p><%= p.getProductName()%></p>
 	                    	<p><%= p.getProductInfo() %></p>
 	                    	<p><%= p.getProductPrice() %>원</p>
+	                    	<p style="display:none"><%=p.getProductNo()%><p>
 	                    </div>
 	                </div>
 	    		<%} %>
@@ -88,11 +89,17 @@
  
 	$(".card").mouseenter(function(){
 		$(this).css("cursor","pointer");
+		$(this).css("border","1px solid #28A745")
 		$(this).click(function(){
-			location.href='<%=request.getContextPath()%>/product/productview.jsp';	
+			const productNo = $("div.item-content>p:nth-child(4)").html();
+			console.log(productNo)
+			location.href='<%=request.getContextPath()%>/product/productview.do?productNo='+productNo;	
 		})
 	})
 	
+	$(".card").mouseout(function(){
+		$(this).css("border","none");
+	});
     </script>
     
 <%@ include file="/views/footer.jsp"%>

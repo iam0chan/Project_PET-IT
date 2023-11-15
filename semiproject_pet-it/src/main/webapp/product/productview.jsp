@@ -14,7 +14,7 @@
                 </div> -->
             </div>
             <div class="item-info">
-                <div class="info item-title">
+                <div class="info item-tit2le">
                     <h1>노을이가 좋아하는 간식</h1>
                     <p>구름이가 질투할만한 노을이 간식</p>
                 </div>
