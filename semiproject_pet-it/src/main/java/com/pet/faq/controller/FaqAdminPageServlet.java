@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pet.faq.model.dto.Faq;
+import com.pet.faq.service.FaqService;
+
 /**
  * Servlet implementation class faqAdminPageServlet
  */
@@ -30,10 +33,25 @@ public class FaqAdminPageServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		String content = request.getParameter("content");
-		request.setAttribute("content", content);
-		request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response);
-
+		String title = request.getParameter("title");
+		String board_category = request.getParameter("board_category");
 		
+		
+		Faq q = Faq.builder()
+				.faqTitle(title)
+				.faqCategory(board_category)
+				.faqContent(content)
+				.build();
+		System.out.println(q);
+		int insertFaq = new FaqService().insertFaq(q);
+		System.out.println(insertFaq);
+		if(insertFaq==0) {
+			System.out.println("작성실패");
+			
+		}else {
+			System.out.println("작성성공");
+			request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
+		}
 		
 		
 		

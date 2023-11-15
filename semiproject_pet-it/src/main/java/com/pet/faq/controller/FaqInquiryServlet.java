@@ -3,6 +3,7 @@ package com.pet.faq.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,18 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.pet.faq.model.dto.Faq;
 import com.pet.faq.service.FaqService;
 
-
 /**
- * Servlet implementation class faqListServlet
+ * Servlet implementation class FaqInquiryServlet
  */
-@WebServlet("/faqList.do")
-public class FaqListServlet extends HttpServlet {
+@WebServlet("/faqinquiry.do")
+public class FaqInquiryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqListServlet() {
+    public FaqInquiryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +32,15 @@ public class FaqListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String category =  request.getParameter("faqs");
+		System.out.print(category);
 		int cPage,numPerpage=10; 
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		List<Faq> faqs=new FaqService().selectFaq(cPage, numPerpage);
+		List<Faq> faqs=new FaqService().selectFaqCategory(cPage, numPerpage,category);
 		int totalData=new FaqService().selectFaqCount();  
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
@@ -80,6 +82,7 @@ public class FaqListServlet extends HttpServlet {
 		request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
 		
 	}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

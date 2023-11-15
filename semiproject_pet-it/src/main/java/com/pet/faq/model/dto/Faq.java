@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class Faq {
 
-	private int faqNo;
+	private String faqNo;
 	private String faqCategory;
 	private String faqTitle;
 	private int faqHits;

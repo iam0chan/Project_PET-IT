@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List,com.pet.faq.model.dto.Faq" %>
+<%
+
+	List<Faq> faqs = (List<Faq>)request.getAttribute("faqs");
+
+%>
 <%@ include file="/views/header.jsp"%>
 
 
@@ -87,14 +93,18 @@ tr.item:hover {
 		<div class="boardSort">
 			<p class="boardSort"></p>
 			<span class="categoryBar"> 
+		
 			 <select id="selectCategory" name="selectCategory">
 					<option value selected="selected">전체</option>
-					<option value="1">자주하는질문</option>
-					<option value="2">회원서비스</option>
-					<option value="3">주문/결제</option>
-					<option value="4">배송</option>
-					<option value="5">취소/반품/교환</option>
+					<option value="자주하는질문">자주하는질문</option>
+					<option value="회원서비스">회원서비스</option>
+					<option value="주문/결제">주문/결제</option>
+					<option value="배송">배송</option>
+					<option value="취소/반품/교환">취소/반품/교환</option>
+					<!-- DB에서 where절 ? 벨류값 가져오기 위해서
+					폼추가, 벨류 영어로 변경-> 서블릿에서 겟팔라미터로 벨류값 가져오기 SQL에서 WHERE 조건문에 카테고리 해당하는 리스트 가져오기 -->
 			</select>
+		
 			</span>
 		</div>
 		<br>
@@ -111,64 +121,24 @@ tr.item:hover {
 
 			<!-- 테이블별 장소 -->
 			<tbody class="text-center">
+			<%if(faqs!=null&&!faqs.isEmpty()){ 
+				for(Faq f : faqs){%>
 				<tr class="item">
-					<td>4</td>
-					<td>자주하는질문</td>
-					<td><span class='title'><%=request.getAttribute("content") %></span></td>
-					<td>58</td>
+					<td><%=f.getFaqNo() %></td>
+					<td><%=f.getFaqCategory() %></td>
+					<td><span class='title'><%=f.getFaqTitle() %></span></td>
+					<td><%=f.getFaqHits() %></td>
 				</tr>
 				<!-- 아코디언효과를 넣은 리뷰내용 -->
-				<tr class="hide">
+				<tr class="hide" >
 					<td colspan="5">
 						<p>
-							<a> 당일 발송(출고)을 위한 주문마감 시간은 오후 2시 입니다. (2022년부터)당일 발송(출고)된 상품은 영업일 기준 다음날부터 받아보실 수 있습니다. </a>
+							<%=f.getFaqContent()%>
 						</p>
 					</td>
 				</tr>
-				<tr class="item">
-					<td>3</td>
-					<td>회원서비스</td>
-					<td><span class='title'><%=request.getAttribute("content") %></span></td>
-					<td>36</td>
-				</tr>
-				<tr class="hide">
-					<!-- 아코디언효과를 넣은 리뷰내용 -->
-					<td colspan="5">
-						<p>
-							<a> 현재 Pet-it 공식몰에서의 결제방법은 카드이며 카드 결제시 자동으로 부가세 신고가 됩니다. </a>
-						</p>
-					</td>
-				</tr>
-				<tr class="item">
-					<td>2</td>
-					<td>취소/반품/교환</td>
-					<td><span class='title'><%=request.getAttribute("content") %></span></td>
-					<td>65</td>
-				</tr>
-				<tr class="hide">
-					<!-- 아코디언효과를 넣은 리뷰내용 -->
-					<td colspan="5">
-						<p>
-							<a> 입금완료, 상품준비중 상태인 경우 '[MY페이지 > 주문 내역 조회 > 주문 취소]에서 취소 가능합니다. '배송준비중' '배송대기' 상태인 경우 배송사로 인계되어<br>
-								 취소가 불가능하므로, 수령하신 후 반품해 주셔야하며 반품 배송비는 고객님께서 부담하시게 됩니다. </a>
-						</p>
-					</td>
-				</tr>
-				<tr class="item">
-					<td>1</td>
-					<td>배송</td>
-					<td><span class='title'><%=request.getAttribute("content") %></span></td>
-					<td>33</td>
-				</tr>
-				<tr class="hide">
-					<!-- 아코디언효과를 넣은 리뷰내용 -->
-					<td colspan="5">
-						<p>
-							<a> 월~금요일 오전 11시까지 결제 완료한 상품은 영업일 기준 다음날부터 받아보실 수 있으며, 영업일 기준으로 3일 이내 배송을 원칙으로 하고 있습니다.<br> 
-								다만, 도서산간 등 배송 지역과 기상 상태 등에 따라 받으실 수 있는 기간이 더 소요될 수 있으니 배송기간을 고려하여 주문해 주시기 바랍니다. </a>
-						</p>
-					</td>
-				</tr>
+				<%} 
+				}%>
 			</tbody>
 
 		</table>
@@ -232,6 +202,15 @@ tr.item:hover {
 			});
 
 		});
+		
+		const selectCategory = document.getElementById("selectCategory");
+		console.log(selectCategory)
+		selectCategory.addEventListener("change",function(e){
+		location.replace("<%=request.getContextPath() %>/faqinquiry.do?faqs="+ e.target.value);
+		});
+		
+		
+		
 		
 	</script>
 	
