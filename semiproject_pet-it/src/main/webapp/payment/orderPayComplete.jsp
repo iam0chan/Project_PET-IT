@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-
+<%@ page import="com.pet.payment.model.dto.Payment" %>
+<% Payment p = (Payment) request.getAttribute("payment"); %>
 <style>
 	section {
 		margin : 0 auto;
@@ -49,7 +50,7 @@
 			</div>
 			<div style="width:50%"></div>
 			<div style="width:30%; text-align:center;">
-				2880123
+				<%=p.getMerchant_uid() %>
 			</div>
 		</div>
 		<p></p>
@@ -81,7 +82,7 @@
 			</div>
 			<div style="width:50%"></div>
 			<div style="width:30%; text-align:center;">
-				<span>0000</span><span>원</span>
+				<span><%=p.getPaid_amount() %></span><span>원</span>
 			</div>
 		</div>	
 	</div>
@@ -92,7 +93,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div style="width:30%; text-align:center;">
-			<span id="payMethod">카드</span>
+			<span id="payMethod"><%=p.getPay_method() %></span>
 		</div>
 	</div>	
 	
@@ -102,7 +103,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div style="width:30%; text-align:center;">
-			<span id="acceptNo">123124</span>
+			<span id="acceptNo"><%=p.getApply_num() %></span>
 		</div>
 	</div>
 </section>

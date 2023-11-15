@@ -160,9 +160,9 @@ $(document).ready(function(){
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "223456",  			//주문번호가 들어가야함.
+			merchant_uid: "2234156",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
-			amount:	10800,						//결제 금액
+			amount:	100,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
 			buyer_name : "홍길동",				//주문자 이름
 			buyer_tel : "01064269887",			//주문자 전화번호
@@ -172,22 +172,24 @@ $(document).ready(function(){
 			if(rsp.success){
 				
 				$.ajax({
-					url : "<%=request.getContextPath()%>/paydemo.do",
+					url : "<%=request.getContextPath()%>/payment.do",
 					type : "POST",
 					dataType : "json",
 					data : {
 						imp_uid : rsp.imp_uid,
                         merchant_uid : rsp.merchant_uid,
                         paid_amount : rsp.paid_amount,
-                        apply_num : rsp.apply_num
+                        apply_num : rsp.apply_num,
+                        pay_method : rsp.pay_method,
+                        paid_at : rsp.paid_at
 					},
 					success : function(data){
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
 						Swal.fire({
 							  title: "결제 완료",
 							  text: "주문번호 : "+merchant_uid,
 							  icon: "success"
 							});
-						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
 					}
 				});
 				
@@ -206,7 +208,7 @@ $(document).ready(function(){
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kcp.AO09C",					//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "1234567",  			//주문번호가 들어가야함.
+			merchant_uid: "3234567",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
 			amount:	100,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
@@ -218,23 +220,24 @@ $(document).ready(function(){
 			if(rsp.success){
 				
 				$.ajax({
-					url : "<%=request.getContextPath()%>/paydemo.do",
+					url : "<%=request.getContextPath()%>/payment.do",
 					type : "POST",
 					dataType : "json",
 					data : {
 						imp_uid : rsp.imp_uid,
                         merchant_uid : rsp.merchant_uid,
                         paid_amount : rsp.paid_amount,
-                        apply_num : rsp.apply_num
+                        apply_num : rsp.apply_num,
+                        pay_method : rsp.pay_method,
+                        paid_at : rsp.paid_at
 					},
 					success : function(data){
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
 						Swal.fire({
 							  title: "결제 완료",
 							  text: "주문번호 : "+merchant_uid,
 							  icon: "success"
 							});
-						
-						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
 					}
 				});
 				
