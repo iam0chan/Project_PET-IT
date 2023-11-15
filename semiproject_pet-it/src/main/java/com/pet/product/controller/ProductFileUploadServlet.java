@@ -42,13 +42,10 @@ public class ProductFileUploadServlet extends HttpServlet {
 				files.add(Map.of("rename",re,"oriName",ori));
 			}
 			files.forEach(e->{System.out.println(e);});
-			/*
-			 * request.getRequestDispatcher("/product/productFileUploadEnd.do").forward(
-			 * request, response);
-			 */
-		response.setHeader("Content-Type", "application/x-wwww-form-urlencoded");
-		PrintWriter out = response.getWriter();
-        out.print(re);
+			 
+			response.setHeader("Content-Type", "application/x-wwww-form-urlencoded");
+			PrintWriter out = response.getWriter();
+	        out.print(re);
 		}
     	
 
