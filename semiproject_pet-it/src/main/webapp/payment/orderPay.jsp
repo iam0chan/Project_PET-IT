@@ -163,7 +163,7 @@
 			      			<td style="font-size:1.15rem; text-align:center;">배송요청사항</td>
 			      			<td>
 			      				<div class="input-group input-group col-lg-10">
-			      					<input type="text" class="form-control" name="emailTail" id="textDelivery" placeholder="배송요청사항 선택">
+			      					<input type="text" class="form-control" name="textDelivery" id="textDelivery" placeholder="배송요청사항 선택">
 				      				<select class="form-select" id="selectAddr">
 									  	 <option disabled selected>배송요청사항 선택</option>
 									 	 <option value="문앞에 놔주세요" selected>문앞에 놔주세요</option>
@@ -190,18 +190,21 @@
 			      <div class="accordion-body" id="productAll">
 				      <div class="productDiv" id="productDiv">
 					       <div style="width:15%; text-align:center">
-					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
+					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="120px" height="120px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
 						       		<li style="font-size:1.1rem; font-weight:bolder">사나운 벌꿀오소리</li>
 						       		<input type='hidden' id='productName' name='productName' value=''>
 						       		<li><p><p></li>
+						       		<input type='hidden' id='productName' name='productPrice' value=''>
+								    <li><p><span>상품 가격 :&nbsp</span><span class="price">2500</span>원<p></li>
 						       		<li style="display:flex; text-align:center;">
 									    <p>상품수량 : &nbsp</p>
-							       		<input type="number" min="1" id="typeNumber" class="form-control productCount" value=1 style="font-size:13px; width:60px; height:25px;">
+							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value=1 style="font-size:13px; width:60px; height:25px;">
+								    	<span>개</span>
 								    </li>
-						       		<li>총 가격 : 2,500원</li>
+						       		<li><p><span>합계 가격 :&nbsp</span><span id="totalPrice">0</span>원</p></li>
 						       		<input type='hidden' id='productPrice' name='productPrice' value=''>
 					       		</ul>
 					       </div>
@@ -266,18 +269,18 @@
 			        <table style="width:95%">
 			        	<tr>
 				        	<td style="width:5%"></td>
-				        	<td style="width:70%"><p><b>상품 금액</b></p></td>
-				        	<td style="width:15%; text-align:right"><p>0000원</p></td>
+				        	<td style="width:70%"><p><b>총 상품 금액</b></p></td>
+				        	<td style="width:15%; text-align:right"><p><span id="allProductPrice">0</span>원</p></td>
 				        </tr>
 				        <tr>
 				        	<td style="width:5%"></td>
 				        	<td style="width:70%"><p><b>배송비</b></p></td>
-				        	<td style="width:15%; text-align:right"><p>0000원</p></td>
+				        	<td style="width:15%; text-align:right"><p><span id="delivery-cost">2500</span>원</p></td>
 				        </tr>
 				        <tr>
 				        	<td style="width:5%"></td>
 				        	<td style="width:70%"><p><b>적립금/쿠폰적용</b></p></td>
-				        	<td style="width:15%; text-align:right"><p>0000원</p></td>
+				        	<td style="width:15%; text-align:right"><p><span id="discountPrice">0</span>원</p></td>
 				        </tr>
 				        </tr>
 			        </table>
@@ -287,7 +290,7 @@
 			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>최종결제금액</b></span>
 			      	</div>
 			      	<div style="margin-left:60px; width:20%; text-align:center;">
-			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>0000원</b></span>
+			      		<p style="line-height:50px; vertical-align:middle; font-size:1.3rem; font-weight:bolder"><span id="allPayCost"></span>원</p>
 			      	</div>
 			      </div>
 			    </div>

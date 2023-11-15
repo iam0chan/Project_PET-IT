@@ -58,6 +58,62 @@
     });
 </script>
 
+<!-- 상품수량에 따라 총 가격 변화 -->
+<script>
+	$(document).ready(function(){
+	    function calculateTotalPrice() {
+	        var price = parseInt($('.price').text());
+	        var count = $('#count').val();
+	        var totalPrice = price * count;
+	        $('#totalPrice').text(totalPrice);
+	    }
+	    
+	    $('#count').on('input', calculateTotalPrice);
+	
+	    // 페이지 로드 시 총 금액 계산
+	    calculateTotalPrice();
+	});
+</script>
+
+<!-- 결제정보 자동으로 변화되어 표시되게 -->
+<script>
+	$(document).ready(function(){
+	    function calculateTotalPrice() {
+	        var price = parseInt($('.price').text());
+	        var count = $('#count').val();
+	        var totalPrice = price * count;
+	        $('#allProductPrice').text(totalPrice);
+	    }
+	    
+	    $('#count').on('input', calculateTotalPrice);
+	
+	    // 페이지 로드 시 총 금액 계산
+	    calculateTotalPrice();
+	});
+
+</script>
+
+<!-- 결제정보에 따른 최종결제금액 계산 -->
+<script>
+$(document).ready(function(){ 
+    function calculateTotalCost() {
+        var productPrice = parseInt($('#allProductPrice').text());
+        var deliveryCost = parseInt($('#delivery-cost').text());
+        var discountPrice = parseInt($('#discountPrice').text());
+        var totalCost = productPrice + deliveryCost - discountPrice;
+        $('#allPayCost').text(totalCost.toLocaleString('ko-KR'));
+    }
+
+    // 해당 값들이 변경되면 자동으로 총 금액을 다시 계산
+    $('#allProductPrice, #delivery-cost, #discountPrice').change(calculateTotalCost);
+
+    // 페이지가 로드될 때 총 금액을 계산
+    calculateTotalCost();
+});
+
+</script>
+
+
 <!-- 주문상품 삭제버튼 jquery -->
 <script>
 	$(function(){
@@ -126,7 +182,12 @@
                         apply_num : rsp.apply_num
 					},
 					success : function(data){
-						alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid);
+						Swal.fire({
+							  title: "결제 완료",
+							  text: "주문번호 : "+merchant_uid,
+							  icon: "success"
+							});
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
 					}
 				});
 				
@@ -167,7 +228,13 @@
                         apply_num : rsp.apply_num
 					},
 					success : function(data){
-						alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid);
+						Swal.fire({
+							  title: "결제 완료",
+							  text: "주문번호 : "+merchant_uid,
+							  icon: "success"
+							});
+						
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
 					}
 				});
 				
