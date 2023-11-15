@@ -74,9 +74,9 @@
 <!-- 주문상품이 모두 삭제되면 화면 전환 jquery -->
 <script>
 	$("div#productAll > div.productDiv").each(function(){
-		if($(this).attr('disabled')=='true'){
-			var hiddenDivs = $(this).parent().children('div:hide').length;
-			var totalDivs = $(this).parent().childeren('div').length;
+		if($(this).is(':hidden')){
+			var hiddenDivs = $(this).parent().children('div:hidden').length;
+			var totalDivs = $(this).parent().children('div').length;
 			if(hiddenDivs == totalDivs){
 				alert('주문상품이 모두 삭제되어 장바구니로 돌아갑니다');
 				window.location.href="<%=request.getContextPath()%>/cart/cartList.jsp"

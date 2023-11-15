@@ -211,7 +211,6 @@
 					       		<a href="#" id="deleteProduct"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
-				       
 			      </div>
 			    </div>
 			  </div>
