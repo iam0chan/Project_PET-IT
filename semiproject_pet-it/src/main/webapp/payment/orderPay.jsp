@@ -4,12 +4,13 @@
 <%@ include file="/views/header.jsp"%>
 
 
+
 <style>
 	#content-container {
 		margin : 0 auto;
 		font-family:'G마켓 산스';
 		align-items:center;
-		width :55%;
+		width :60%;
 
 	
 	#title-container {
@@ -57,24 +58,6 @@
     	align-items : center;
     }
     
-	.modal{ 
-	  position:absolute; 
-	  width:100%; 
-	  height:100%;
-	  background: rgba(0,0,0,0.8); 
-	  top:0; left:0; 
-	  display:none;
-	}
-	
-	.coupon_modal{
-	  width:400px; height:300px;
-	  background:#fff; border-radius:10px;
-	  position:relative; top:50%; left:50%;
-	  margin-top:-100px; margin-left:-200px;
-	  text-align:center;
-	  box-sizing:border-box; padding:74px 0;
-	  line-height:23px; cursor:pointer;
-	}
     
 </style>
 
@@ -89,7 +72,7 @@
 	
 	<section id="body-section">
 	
-		<form action="<%=request.getContextPath()%>/" id="formData">
+		<form action="#">
 			
 			<div class="accordion" id="accordion-container">
 			  <div class="accordion-item">
@@ -106,7 +89,7 @@
 				      		<td style="font-size:1.15rem; text-align:center;">받는 사람 <strong>*</strong></td>
 				      		<td>
 					      		<div class="input-group input-group col-lg-3">
-								  <input type="text" name="orderName" class="form-control" placeholder="받는 사람">
+								  <input type="text" class="form-control" placeholder="받는 사람">
 								</div>
 							</td>
 						</tr>
@@ -114,18 +97,17 @@
 						<tr rowspan=3>
 							<td style="font-size:1.15rem; text-align:center; width:20%">주소 <strong>*</strong></td>
 							<td>	
-								<div class="input-group input-group col-lg-5">
-								  <input id="zipcode" name="orderZipcode" type="text" class="form-control" placeholder="우편 번호" >
-								  <input id="addrBtn" class="btn btn-outline-success" type="button" onclick="addrBtnAction()" value="주소 검색">
+								<div class="input-group input-group col-lg-4">
+								  <input type="text" class="form-control" placeholder="우편 번호">
+								  <button class="btn btn-outline-secondary" type="button" id="addrBtn">주소 검색</button>
 								</div>
 							
-			      				<div class="input-group input-group col-lg-10">
-								  <input id="addr" name="orderAddr" type="text" class="form-control" placeholder="기본 주소" >
+			      				<div class="input-group input-group col-lg-9">
+								  <input type="text" class="form-control" placeholder="기본 주소">
 								</div>
 			      			
-			      				<div class="input-group input-group col-lg-10">
-								  <input id="detailAddr" name="orderDefAddr" type="text" class="form-control" placeholder="상세 주소">
-								  <input id="extraAddr" type="text" class="form-control" placeholder="참조 주소">
+			      				<div class="input-group input-group col-lg-9">
+								  <input type="text" class="form-control" placeholder="상세 주소">
 								</div>
 			      			</td>
 						</tr>
@@ -133,8 +115,8 @@
 			      		<tr>
 			      			<td style="font-size:1.15rem; text-align:center;">휴대 전화 <strong>*</strong></td>
 			      			<td>
-			      				<div class="input-group input-group col-lg-7">
-								  <input type="text" name="orderPhone" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
+			      				<div class="input-group input-group col-lg-5">
+								  <input type="text" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
 								</div>
 			      			</td>
 			      		</tr>
@@ -143,10 +125,10 @@
 			      			<td style="font-size:1.15rem; text-align:center;">이메일</td>
 			      			<td>
 			      				<div class="input-group col-lg-9">
-		   						    <input type="text" class="form-control" name="emailHead" placeholder="이메일" aria-label="Username">
+		   						    <input type="text" class="form-control" placeholder="이메일" aria-label="Username">
 								  	<span class="input-group-text">@</span>
-								  	<input type="text" class="form-control" name="emailTail" id="textEmail" placeholder="이메일 선택">
-									<select class="form-select" id="selectEmail">
+								  	<input type="text" class="form-control" id="textEmail" placeholder="이메일 선택">
+									<select class="form-select" id="select">
 									  	 <option disabled selected>이메일 선택</option>
 									 	 <option value="naver.com" id="naver.com" selected>naver.com</option>
 										 <option value="hanmail.net" id="hanmail.net">hanmail.net</option>
@@ -158,25 +140,9 @@
 								</div>
 			      			</td>
 			      		</tr>
-			      		<tr style="height:10px"></tr>
-			      		<tr>
-			      			<td style="font-size:1.15rem; text-align:center;">배송요청사항</td>
-			      			<td>
-			      				<div class="input-group input-group col-lg-10">
-			      					<input type="text" class="form-control" name="emailTail" id="textDelivery" placeholder="배송요청사항 선택">
-				      				<select class="form-select" id="selectAddr">
-									  	 <option disabled selected>배송요청사항 선택</option>
-									 	 <option value="문앞에 놔주세요" selected>문앞에 놔주세요</option>
-										 <option value="경비실에 보관해주세요">경비실에 보관해주세요</option>
-										 <option value="배송 전 연락바랍니다">배송 전 연락바랍니다</option>
-										 <option value="directly" id="textDelivery">직접 입력하기</option>
-									</select>	 
-								</div>
-			      			</td>
-			      		</tr>
 					</table>
 					<br>
-					<div style="text-align:right; width:90%"><p>*항목은 필수 입력사항입니다.</p></div>        
+					<div style="text-align:right; width:75%"><p>*항목은 필수 입력사항입니다.</p></div>        
 			      </div>
 			    </div>
 			  </div>
@@ -187,31 +153,38 @@
 			      </button>
 			    </h2>
 			    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
-			      <div class="accordion-body" id="productAll">
-				      <div class="productDiv" id="productDiv">
+			      <div class="accordion-body">
+				      <div class="productDiv">
 					       <div style="width:15%; text-align:center">
 					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
-						       		<li style="font-size:1.1rem; font-weight:bolder">사나운 벌꿀오소리</li>
-						       		<input type='hidden' id='productName' name='productName' value=''>
-						       		<li style="display:flex;">
-									    <div>
-									    	<p>상품수량 :</p>
-									    </div>
-							       		<input type="number" min="1" id="typeNumber" class="form-control" style="font-size:15px; width:65px; height:35px;">
-								    </li>
-						       		<input type='hidden' id='productCount' name='productCount' value=''>
+						       		<li style="font-size:1.1rem;font-weight:bolder">사나운 벌꿀오소리</li>
+						       		<li>수량 : 00개</li>
 						       		<li>총 가격 : 2,500원</li>
-						       		<input type='hidden' id='productPrice' name='productPrice' value=''>
 					       		</ul>
 					       </div>
 					       <div style="width:15%; text-align:center">
-					       		<a href="#" id="deleteProduct"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
+					       		<a href="#"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
-				       
+				       <br>
+				       <div class="productDiv">
+					       <div style="width:15%; text-align:center">
+					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
+					       </div>
+					       <div style="width:70%">
+					       		<ul id="product-info">
+						       		<li style="font-size:1.1rem;font-weight:bolder">귀여운 벌꿀오소리</li>
+						       		<li>수량 : 00개</li>
+						       		<li>총 가격 : 2,500원</li>
+					       		</ul>
+					       </div>
+					       <div style="width:15%; text-align:center">
+					       		<a href="#"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
+					       </div>
+				       </div>
 			      </div>
 			    </div>
 			  </div>
@@ -228,22 +201,27 @@
 				       		<span style="font-size:1.1rem"><b>쿠폰 할인</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
-						 	<select class="form-select form-select" aria-label=".form-select-sm example">
-							  <option selected>쿠폰을 선택하세요</option>
-							  <option value="1">One</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
-							</select>
+						 	<input type="text" class="form-control" placeholder="쿠폰 할인액" readonly>
+						 	<button class="btn btn-outline-success">쿠폰  적용</button>
 						 </div>
 				      	 <div style="width:5%; text-align:left"></div>
-			
+			      	</div>
+			      	<div class="discountDiv">
+				         <div style="width:20%; text-align:left;">
+				      	 </div>
+				      	 <div style="width:85%; text-align:right">
+						 	<p>현재 보유쿠폰 : 00개<p>
+						 </div>
+				      	 <div style="width:5%; text-align:left">
+				      	 </div>
+			      	</div> 
 			      	<div class="discountDiv">
 				         <div style="width:20%; text-align:center;">
 				       		<span style="font-size:1.1rem;"><b>적립금 적용</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
 						 	<input type="text" class="form-control" placeholder="사용금액 입력">
-						 	<button class="btn btn-outline-success" id="pointBtn" type="button">적립금 사용</button>
+						 	<button class="btn btn-outline-success">적립금 사용</button>
 						 </div>
 				      	 <div style="width:5%; text-align:left"></div>
 			      	</div> 
@@ -289,7 +267,7 @@
 			      </div>
 			      <div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
 			      	<div style="margin-left:60px; width:80%">
-			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>최종결제금액</b></span>
+			      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem"><b>최종결제금액</b></span>
 			      	</div>
 			      	<div style="margin-left:60px; width:20%; text-align:center;">
 			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>0000원</b></span>
@@ -307,23 +285,23 @@
 			      <div class="accordion-body">
 				      	<div style="margin-left:50px">
 			        		<div class="form-check">
-							  <input class="form-check-input" name="payment-btn" type="radio" id="card-payment" value="card" checked>
+							  <input class="form-check-input" name="payment-btn" type="radio" id="card-payment" value="option1" checked>
 							  <label class="form-check-label" for="card-payment">
 							    <img alt="" src="<%=request.getContextPath()%>/img/card_payment.png">&nbsp&nbsp신용카드 결제
 							  </label>
 							</div>
 							<br>
- 							<%--<div class="form-check">
+							<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
 							  <label class="form-check-label" for="Npay">
 							    <img alt="" src="<%=request.getContextPath()%>/img/Npay_badge.png">&nbsp&nbsp네이버페이
 							  </label>
-							</div> --%>
+							</div>
 							<br>
 							<div class="form-check">
-							  <input class="form-check-input" name="payment-btn" type="radio" id="kakaopay" value="kakaopay">
-							  <label class="form-check-label" for="kakaopay">
-							    <img alt="" src="<%=request.getContextPath()%>/img/KakaoPay_badge.png" width="60px" height="25px">&nbsp&nbsp카카오페이
+							  <input class="form-check-input" name="payment-btn" type="radio" id="Kakaopay" value="option3">
+							  <label class="form-check-label" for="Kakaopay">
+							    <img alt="" src="<%=request.getContextPath()%>/img/KakaoPay_badge.png">&nbsp&nbsp카카오페이
 							  </label>
 							</div>
 						</div>
@@ -339,11 +317,11 @@
 					    <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix">
 					      <div class="accordion-body">
 				      		<div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
-						      	<div style="margin-left:30px; width:70%">
-						      		<span style="line-height:50px; vertical-align:middle; font-size:1.0rem">회원적립혜택</span>
+						      	<div style="margin-left:60px; width:80%">
+						      		<span style="line-height:50px; vertical-align:middle; margin-left:20px; font-size:1.3rem"><b>회원적립혜택</b></span>
 						      	</div>
-						      	<div style="margin-right:60px; width:30%; text-align:center;">
-						      		<span style="line-height:50px; vertical-align:middle; font-size:1.0rem">0000원 예정</span>
+						      	<div style="margin-left:60px; width:20%; text-align:center;">
+						      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>0000원</b></span>
 						      	</div>
 						      </div>
 				          </div>  		        
@@ -351,7 +329,7 @@
 			    	</div>
 			      <br>
 			      	<div class="d-grid gap-2">
-					  <input id="paymentBtn" class="btn btn-primary btn-lg btn-success" type="button" value="결제하기">
+					  <input class="btn btn-primary btn-lg btn-success" type="button" value="결제하기">
 					</div>
 			  </div>
 			</div>
@@ -359,11 +337,25 @@
 	</section>
 </div>
 
-<!-- js 묶음 -->
-<%@ include file="/js/orderPayJs.jsp" %>
-
+<script>
+    $(function() {
+        $('#select').change(function() {
+            if ($('#select').val() == 'directly') {
+                $('#textEmail').attr("disabled", false);
+                $('#textEmail').val("");
+                $('#textEmail').focus();
+            } else {
+                $('#textEmail').val($('#select').val());
+            }
+        })
+    });
+</script> 	
 
    
+ 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
 
 <%@ include file="/views/footer.jsp"%>
