@@ -98,6 +98,26 @@ public class ProductDao {
 		return result;
 	}
 	
+	public Product selectProductByNo(Connection conn, String ProductNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Product product = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectProductByNo"));
+			pstmt.setString(1, ProductNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				product = getProduct(rs);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(product.toString());
+		return product;
+	}
+	
 	
 	/* Product-Table
 	 * PRODUCT_NO, CATEGORY_NO, TYPE_NO, PRODUCT_NAME, 

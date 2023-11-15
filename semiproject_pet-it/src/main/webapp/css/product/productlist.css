@@ -16,6 +16,12 @@
         .item-container {
             width: 1200px;
         }
+        
+        .item-container{
+			border: 1px solid #04aa6d;
+    		height: auto;
+    		padding: 20px;
+		}
 
         .header-title {
             margin-bottom: 30px;
@@ -105,8 +111,9 @@
             width: 60px;
         }
         
-        .item-img, item-content{
-        	/* border: 1px solid red; */
+        .item-content{
+        	padding-top:10px;
+        	padding-left: 10px;
         }
         
         .item-img{

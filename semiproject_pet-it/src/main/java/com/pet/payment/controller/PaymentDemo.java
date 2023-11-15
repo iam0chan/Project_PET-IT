@@ -31,9 +31,9 @@ public class PaymentDemo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String imp_uid = request.getParameter("imp_uid");
-	    String merchant_uid = request.getParameter("merchant_uid");
+	    int merchant_uid = Integer.parseInt(request.getParameter("merchant_uid"));
 	    int paid_amount = Integer.parseInt(request.getParameter("paid_amount"));
-	    String apply_num = request.getParameter("apply_num");
+	    int apply_num = Integer.parseInt(request.getParameter("apply_num"));
 
 	    Payment p = Payment.builder()
 	    		.imp_uid(imp_uid)

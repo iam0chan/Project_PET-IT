@@ -67,6 +67,9 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			}else {
 				System.out.println("입력실패");
 			}
+			
+			//대표이미지 저장시키기, 에디터 저장 이미지 디비에 저장할 수 있는 방법 생각해보기
+			
 			/*
 			 * Map<String,String> option = new HashMap<>(); for (String n : optionNames) {
 			 * System.out.println("옵션상품명:"+n); } for (String p : optionPrice) {

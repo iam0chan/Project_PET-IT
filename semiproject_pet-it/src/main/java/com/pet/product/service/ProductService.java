@@ -35,4 +35,12 @@ public class ProductService {
 		
 		return count;
 	}
+	
+	public Product selectProductByNo(String productNo) {
+		Connection conn = getConnection();
+		Product product = dao.selectProductByNo(conn,productNo);
+		close(conn);
+		
+		return product;
+	}
 }
