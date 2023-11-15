@@ -34,7 +34,7 @@ public class PaymentServlet extends HttpServlet {
 		String imp_uid = request.getParameter("imp_uid");
 	    String merchant_uid = request.getParameter("merchant_uid");
 	    int paid_amount = Integer.parseInt(request.getParameter("paid_amount"));
-	    String apply_num = request.getParameter("apply_num");
+	    int apply_num = Integer.parseInt(request.getParameter("apply_num"));
 	    String pay_method = request.getParameter("pay_method");
 	    
 	    System.out.println("imp_uid: " + imp_uid);

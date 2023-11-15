@@ -208,7 +208,7 @@ $(document).ready(function(){
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kcp.AO09C",					//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "3234567",  			//주문번호가 들어가야함.
+			merchant_uid: "8234567",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
 			amount:	100,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email

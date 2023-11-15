@@ -33,7 +33,7 @@ private Properties sql = new Properties();
 			pstmt.setString(2, p.getMerchant_uid());
 			pstmt.setInt(3, p.getPaid_amount());
 			pstmt.setString(4, p.getPay_method());
-			pstmt.setString(5, p.getApply_num());
+			pstmt.setInt(5, p.getApply_num());
 			
 			result = pstmt.executeUpdate();
 			
