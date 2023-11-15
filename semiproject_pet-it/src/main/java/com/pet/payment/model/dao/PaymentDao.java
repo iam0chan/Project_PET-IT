@@ -3,7 +3,10 @@ package com.pet.payment.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Properties;
+import static com.pet.common.JDBCTemplate.*;
 
 import com.pet.payment.model.dto.Payment;
 
@@ -21,8 +24,8 @@ private Properties sql = new Properties();
 	}
 	
 	public int insertPaymentResult(Connection conn, Payment p) {
+		PreparedStatement pstmt = null;
 		int result = 0;
-		
 
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("insertPaymentResult"));
