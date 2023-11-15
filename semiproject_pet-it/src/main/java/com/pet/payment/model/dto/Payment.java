@@ -14,5 +14,6 @@ public class Payment {
     private int apply_num;
     private String pay_method;
     private Date paid_at;
-    
+
+
 }

@@ -1,15 +1,15 @@
 package com.pet.payment.model.dao;
 
-import static com.pet.common.JDBCTemplate.close;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
+import static com.pet.common.JDBCTemplate.*;
 
 import com.pet.payment.model.dto.Payment;
+
 public class PaymentDao {
 	
 private Properties sql = new Properties();
@@ -24,9 +24,9 @@ private Properties sql = new Properties();
 	}
 	
 	public int insertPaymentResult(Connection conn, Payment p) {
-		int result = 0;
 		PreparedStatement pstmt = null;
-		
+		int result = 0;
+
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("insertPaymentResult"));
 			pstmt.setString(1, p.getImp_uid());
@@ -42,6 +42,7 @@ private Properties sql = new Properties();
 		}finally {
 			close(pstmt);
 		}
+
 		return result;
 	}
 }
