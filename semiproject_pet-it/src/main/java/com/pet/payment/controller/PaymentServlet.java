@@ -32,7 +32,7 @@ public class PaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String imp_uid = request.getParameter("imp_uid");
-	    String merchant_uid = request.getParameter("merchant_uid");
+	    int merchant_uid = Integer.parseInt(request.getParameter("merchant_uid"));
 	    int paid_amount = Integer.parseInt(request.getParameter("paid_amount"));
 	    int apply_num = Integer.parseInt(request.getParameter("apply_num"));
 	    String pay_method = request.getParameter("pay_method");
