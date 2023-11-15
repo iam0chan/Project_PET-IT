@@ -19,5 +19,3 @@ private MemberDao dao = new MemberDao();
 		return m;
 	}
 }
-	
-}
