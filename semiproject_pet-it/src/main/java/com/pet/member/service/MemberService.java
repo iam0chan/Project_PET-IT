@@ -12,9 +12,11 @@ public class MemberService {
 
 private MemberDao dao = new MemberDao();
 	
-	public Member selectMemberByIdAndPw(String userId, String password) {
+	public Member selectMemberByIdAndPw(String memberId, String memberPw) {
 		Connection conn = getConnection();
-		Member m = dao.selectMemberByIdAndPw(conn, userId, password);
+		Member m = dao.selectMemberByIdAndPw(conn, memberId, memberPw);
 		close(conn);
 		return m;
+}
+	
 }
