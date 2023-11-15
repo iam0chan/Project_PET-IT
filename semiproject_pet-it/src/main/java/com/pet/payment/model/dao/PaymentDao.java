@@ -23,6 +23,23 @@ private Properties sql = new Properties();
 	public int insertPaymentResult(Connection conn, Payment p) {
 		int result = 0;
 		
+
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("insertPaymentResult"));
+			pstmt.setString(1, p.getImp_uid());
+			pstmt.setInt(2, p.getMerchant_uid());
+			pstmt.setInt(3, p.getPaid_amount());
+			pstmt.setString(4, p.getPay_method());
+			pstmt.setInt(5, p.getApply_num());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
 		return result;
 	}
 }
