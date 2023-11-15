@@ -1,7 +1,7 @@
 *{
 		margin: 0px;
 		padding: 0px;
-		border: 1px solid red;
+		/*border: 1px solid red;*/
 	}
 	.wrapper{
 		width:100%;
@@ -30,6 +30,7 @@
 	.product-detail-container{
 		width:1200px;
 		display:flex;
+		margin-bottom:20px;
 	}
 	
 	.detail-container-l{
@@ -40,8 +41,8 @@
 	}
 	
 	.detail-container-l img{
-		width:230px;
-		height:260px;
+		width:328px;
+		height:329px;
 		margin-bottom:2px;
 	}
 	

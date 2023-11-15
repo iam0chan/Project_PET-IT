@@ -1,7 +1,5 @@
 package com.pet.payment.model.dto;
 
-import java.sql.Date;
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,5 +12,6 @@ public class Payment {
     private int apply_num;
     private String pay_method;
     private Date paid_at;
-    
+    private String apply_num;
+
 }
