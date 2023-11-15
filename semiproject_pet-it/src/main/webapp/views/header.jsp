@@ -88,7 +88,7 @@
           <!-- header section strats -->
           <header class="header_section long_section px-0">
             <nav class="navbar navbar-expand-lg custom_nav-container ">
-              <a class="navbar-brand" href="index.html">
+              <a class="navbar-brand" href="<%=request.getContextPath()%>">
                 <span>
                   <img src="<%=request.getContextPath()%>/img/petit_logo_bk.png" width="185" height="65">
                 </span>
@@ -121,7 +121,7 @@
                       </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link " href="<%=request.getContextPath()%>/productListServlet.do">주요상품</a>
+                      <a class="nav-link " href="<%=request.getContextPath()%>/productList.do">주요상품</a>
                       <ul class="sub-nav">
                       	<a href="#"><li class = "sub-item">신상품</li></a>
                       	<a href="#"><li class = "sub-item">베스트</li></a>
