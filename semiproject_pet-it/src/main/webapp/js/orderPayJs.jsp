@@ -73,7 +73,7 @@
 
 <!-- 주문상품이 모두 삭제되면 화면 전환 jquery -->
 <script>
-	$("div#productAll > div.productDiv").each(function(){
+	$("div#productAll > div#productDiv").each(function(){
 		if($(this).is(':hidden')){
 			var hiddenDivs = $(this).parent().children('div:hidden').length;
 			var totalDivs = $(this).parent().children('div').length;
@@ -110,7 +110,7 @@
 			buyer_email : "mkty0328@gmail.com", //주문자 email
 			buyer_name : "홍길동",				//주문자 이름
 			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 	//주문자 주소
+			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
 			buyer_postcode : "139-91",			//주문자 우편번호
 		}, function(rsp){						//callback함수
 			if(rsp.success){
@@ -151,7 +151,7 @@
 			buyer_email : "mkty0328@gmail.com", //주문자 email
 			buyer_name : "홍길동",				//주문자 이름
 			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 	//주문자 주소
+			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
 			buyer_postcode : "139-91",			//주문자 우편번호
 		}, function(rsp){						//callback함수
 			if(rsp.success){
