@@ -4,7 +4,14 @@
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+	* {
+	font-family: 'Noto Sans KR', sans-serif;
+	}
+	
 	body {
         box-sizing: border-box;
     }
@@ -46,15 +53,16 @@
     }
 </style>
 
+<%if(loginMember==null){ %>
 <section id=container>
 		<div class="login-container">
         <h2>로그인</h2>
         <form id="loginFrm" action="<%=request.getContextPath()%>/login.do" method="post">
             <div class="form-group">
-                <input type="text" name="userId" placeholder="아이디" class="form-control" style="width:300px;">
+                <input type="text" name="memberId" placeholder="아이디" class="form-control" style="width:300px;">
             </div>
             <div class="form-group">
-                <input type="password" name="password" placeholder="비밀번호" class="form-control" style="width:300px;">
+                <input type="password" name="memberPw" placeholder="비밀번호" class="form-control" style="width:300px;">
             </div>
             <input type="submit" class="btn btn-primary btn-sm" style="width:300px; height:35px;" value="로그인">
         </form>
@@ -73,7 +81,7 @@
         </div>
     </div>
 </section>
-
+<%} %>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 /* 카카오 로그인 */
