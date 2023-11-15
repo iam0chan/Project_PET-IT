@@ -6,8 +6,7 @@
 <!-- TUI 에디터 CSS CDN -->
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productenroll.css"/>
-<!-- <script	src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script> -->
-
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
@@ -22,7 +21,7 @@
 				</div>
 				<div class="detail-container-r">
 				<!-- 입력데이터 DB 저장 후 저장된 정보를 가지고 product List에서 해당 컬럼데이터에 맞게 출력 -->
-				<form action="<%=request.getContextPath()%>/product/productEnrollEnd.do" method="post" style="margin-top:30px;" enctype="mulipart/form-data">
+				<form action="<%=request.getContextPath()%>/product/productEnrollEnd.do" method="post" style="margin-top:30px;">
 					<input type="hidden" name="imageId" id="imageId"/>
 					<input type="hidden" name="content" id="product-content"/>
 					<div class='enroll-content-container'>
@@ -84,7 +83,14 @@
 		</div>
 	    <!-- 에디터를 적용할 요소 (컨테이너) -->
 	    <div class="editor-wrapper">
-		    <div id="editor-container"></div>
+		    <div id="editor-container">
+				<form action="<%=request.getContextPath()%>/product/productFileUpload.do" method="post">  
+				<div id="editor"></div>
+				<input type="button" class="btn btn-secondary mt-3 mx-2" value="작성취소" />
+				<input type="hidden" value="" name="upload" id="upload">
+				<button id="submit">전송</button>
+				</form>
+		    </div>
 		    <div class="editor-botton-container">
 		    	<button id="enroll-itemcontent-btn" class="btn btn-outline-success">등록완료</button>
 		    	
@@ -114,43 +120,39 @@
 </div>
 
    <!-- =======================================================================================================  -->
-   
     <script>
-    
-        const editor = new toastui.Editor({
+        <%-- const editor = new toastui.Editor({
             el: document.querySelector('#editor-container'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
-            initialEditType: 'wysiwyg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-            initialValue: '',     					// 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-            previewStyle: 'tab',                // 마크다운 프리뷰 스타일 (tab || vertical)
-            
-            hooks: {
+            initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+            initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+            previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)
+            	hooks: {
        		    	addImageBlobHook: (blob, callback) => {
        		    		// blob : Java Script 파일 객체
-       		    		console.log("blob:",blob);
+       		    		//console.log(blob);
        		    		
        		    		const formData = new FormData();
-       		    		formData.append("image", blob);
-       		    		console.log(formData);
+       		        	formData.append('image', blob);
        		        	
-       		        	let url = "<%=request.getContextPath()%>"+'/upload/';
+       		        	let url = '/images/';
        		   			$.ajax({
        		           		type: 'POST',
        		           		enctype: 'multipart/form-data',
        		           		url: '<%=request.getContextPath()%>/product/productFileUpload.do',
        		           		data: formData,
-       		           		/* dataType: 'json', */
+       		           		dataType: 'json',
        		           		processData: false,
        		           		contentType: false,
        		           		cache: false,
+       		           		timeout: 600000,
        		           		success: function(data) {
-       		           			const test = data;
-       		           			alert('ajax 이미지 업로드 성공');
-       		           			url += test;
-       		           			console.log(url);
+       		           			console.log('ajax 이미지 업로드 성공');
+       		           			url += data.filename;
+       		           			
        		           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
        		        			// 형식 : ![대체 텍스트](주소)
-       		           			callback(url, data);
+       		           			callback(url, '사진 대체 텍스트 입력');
        		           		},
        		           		error: function(e) {
        		           			console.log('ajax 이미지 업로드 실패');
@@ -162,9 +164,9 @@
        		           	});
        		    	}
         		    }
-        });
+        }); --%>
         
-      /*  $("#enroll-itemcontent-btn").on("click",function(){
+       /*  $("#enroll-itemcontent-btn").on("click",function(){
         	document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
             //콘솔창에 표시
             console.log(editor.getHTML());	
@@ -205,7 +207,7 @@
            	
            	$(".modal-footer>.btn:nth-child(2)").click(function(){
            		console.log("이벤트발생");
-           		const editorData = editor.getHTML();
+           		const editorData = editor.getData();
            		$(".modal").css("display","none");
            	 	$("#product-content").val(editorData);
            		const formdata = $(".detail-container-r>form").serialize();
@@ -237,16 +239,16 @@
         		}
         	}); --%>
         })
-   <%--     
+       
     var editor;
 	ClassicEditor
-	.create(document.querySelector('#editor'), {
+	.create(document.querySelector('#editor-container'), {
 		ckfinder: {
-			uploadUrl : '<%=request.getContextPath()%>/product/productFileUpload.do'
+			uploadUrl : '<%=request.getContextPath()%>/upload/productdetailImg/'
 		}
 	})
-	.then(newEditor => {
-		editor = newEditor;
+	.then(e => {
+		editor = e;
 		console.log('Editor was initialized');
 	})
 	.catch(error => {
@@ -259,7 +261,7 @@
 	    $("#upload").attr("value",editorData);
 	    console.log($("#upload").val());
 	}
-	     --%>
+	    
   
     </script>
 

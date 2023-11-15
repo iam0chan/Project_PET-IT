@@ -24,3 +24,6 @@ hs_err_pid*
 replay_pid*
 
 *.properties
+.settings/
+/src/main/resources/
+/src/main/webapp/WEB-INF/classes/
