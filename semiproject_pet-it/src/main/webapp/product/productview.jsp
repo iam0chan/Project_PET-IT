@@ -79,9 +79,16 @@
                     </ul>
                 </div>
             </div>
+            <style>
+            		.item-description img{
+            			width:100%;
+            		}
+            	</style>
             <a id="check1"></a>
             <div class="item-description">
-                <img src="https://naturalcore.co.kr/detail/dog/feed/mystew_dv.jpg" alt="">
+            	
+                <!-- <img src="https://naturalcore.co.kr/detail/dog/feed/mystew_dv.jpg" alt=""> -->
+                <p><img src="/semiproject_pet-it/upload/pxfuel.jpg" alt="사진 대체 텍스트 입력" contenteditable="false"><img src="/semiproject_pet-it/upload/pxfuel1.jpg" alt="사진 대체 텍스트 입력" contenteditable="false"><br></p>
             </div>
         </div>
         <div class="item-instruction">

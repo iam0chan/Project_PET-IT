@@ -19,7 +19,7 @@ public class JDBCTemplate {
 			Class.forName(driver.getProperty("driver"));
 			conn=DriverManager.getConnection(driver.getProperty("url"),
 					driver.getProperty("user"),
-					driver.getProperty("pwd"));
+					driver.getProperty("pw"));
 			conn.setAutoCommit(false);
 		}catch(Exception e) {
 			e.printStackTrace();
