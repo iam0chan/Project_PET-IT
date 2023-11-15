@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 11.14 17:22 jm member.dto, loginMember추가-->
-<%@ page import="com.pet.member.dto.Member" %>
-<%
-	Member loginMember=(Member)session.getAttribute("loginMember");
-%>
 <!doctype html>
     <head>
         <!-- Basic -->
@@ -158,38 +153,10 @@
                   </ul>
                 </div>
                 <div class="quote_btn-container">
-
-                  <%if(loginMember==null) {%>
-                  <a href="<%=request.getContextPath()%>/member/login.jsp"> <!--11.13 12:07 jm 연결주소 추가-->
-
+                  <a href="">
                     <i class="fa-solid fa-dog"></i>
                     <span>Login</span>
                   </a>
-                  <%}else{ %>
-                  	<i class="fa-solid fa-dog"></i>
-                  	<span id="memberName"><%=loginMember.getMemberName() %>님</span><br>
-                  	<span id="logoutbtn" style="display:none;"
-                  		onclick="location.assign('<%=request.getContextPath()%>/logout.do');">로그아웃</span>
-                  <%} %>
-                  <style>
-                  	
-                  </style>
-                  <script>
-				  document.getElementById('memberName').addEventListener('click', function() {
-				    var logoutbtn = document.getElementById('logoutbtn');
-				    
-				    if (logoutbtn.style.display === 'none') {
-				      logoutbtn.style.display = 'block';
-				    } else {
-				      logoutbtn.style.display = 'none';
-				    }
-				  });
-				  
-				  /* document.getElementById('logoutbtn').addEventListener('click', function(){
-					 location.replace
-					  
-				  }); */
-				  </script>
                   <a href="">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>장바구니</span>

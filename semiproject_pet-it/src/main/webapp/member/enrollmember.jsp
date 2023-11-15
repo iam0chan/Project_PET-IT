@@ -2,20 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp" %>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-
-	* {
-	font-family: 'Noto Sans KR', sans-serif;
-	}
-	
 	body {
         box-sizing: border-box;
     }
     
     .enroll{
-    text-align:center;
-    width: 1200px;
+    width: 400px;
+    border: 1px solid #000;
     margin: auto; /*중앙 정렬*/
+    padding: 0 20px;
+    margin-bottom: 20px;
 }
 	/* section {
         text-align:center;
@@ -27,19 +23,10 @@
 	    background: white;
     } */
     .enroll .field{
-    	
-    }
-    
-    .field_addr input[type="text"]{
-    	height: 40px;
-    }
-    
-    .field input {
-    	height: 40px;
+    	margin: 5px 0;
     }
 </style>
 <div class="enroll">
-<br>
 <h2>회원가입</h2><br>
 	<form action="<%=request.getContextPath()%>/member/enrollMember.do" method="post" onsubmit="">								
 			<div class="field">	
@@ -72,12 +59,6 @@
 					<input type="email" placeholder="abc@xyz.com" name="memberEmail" id="memberEmail">
 				</span>
 			</div>
-			<div class="field">
-				<b>휴대폰</b>
-				<span>	
-					<input type="text" placeholder="숫자만 입력해주세요" name="memberPhone" id="memberPhone">
-				</span>
-			</div>
 			<div class="field_addr">
 				<b>주소</b>	
 					<input type="text" id="memberZipCode" placeholder="우편번호">
@@ -85,42 +66,9 @@
 					<input type="text" id="memberAddr" placeholder="주소"><br>
 					<input type="text" id="memberDetailAddr" placeholder="상세주소">
 			</div>
-	
-	<div class="checkbox-group">
-    <!-- 첫 번째 동의 항목 -->
-    <div class="checkbox-item">
-        <label for="TermsAgreeAll">
-            <input id="TermsAgreeAll" type="checkbox" class="checkbox-input">
-            <span>전체 동의합니다.</span>
-        </label>
-        <p class="description" style="font-size:12px">(선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.)</p>
-    </div>
-	<div>
-		<input type="checkbox">
-		<span>이용약관 동의(필수)</span>
-		<a>약관보기</a>
-	</div>
-    <div>
-		<input type="checkbox">
-		<span>개인정보 수집,이용 동의(필수)</span>
-		<a>약관보기</a>
-	</div>
-	<div>
-		<input type="checkbox">
-		<span>개인정보 수집,이용 동의(선택)</span>
-		<a>약관보기</a>
-	</div>
-    </div>
-	    <script>
-	        $(document).ready(function() {
-	            $('#TermsAgreeAll').change(function() {
-	                var isChecked = $(this).prop('checked');
-	                $('.checkbox-group input[type="checkbox"]').prop('checked', isChecked);
-	            });
-	        });
-	    </script>
 	</form>
-		<input type="submit" value="가입하기" >
+		<input type="submit" value="가입" >
+		<input type="reset" value="취소">
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

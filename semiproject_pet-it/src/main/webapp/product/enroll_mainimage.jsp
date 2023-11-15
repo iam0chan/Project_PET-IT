@@ -101,8 +101,6 @@
         btn.addEventListener('click',()=>	{
         	opener.document.querySelector("#image-box").src = document.querySelector(".image-box").src;
         	opener.document.querySelector("#main-image").value = document.querySelector("#file").value;
-        	opener.document.querySelector("#imageId").value = document.querySelector(".image-box").src;
-
         	/* input hidden 태그를 이용해서 src값 저장해서 form태그로 서버에 전송 */
         	window.close();
         });
