@@ -2,21 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ include file ="/views/header.jsp" %>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-
-	* {
-	font-family: 'Noto Sans KR', sans-serif;
-	}
 	body {
     box-sizing: border-box;
     	}
     .findId{
     text-align:center;
-  	width: 700px;
+  	width: 400px;
     border: 1px solid #000;
     margin: auto; /*중앙 정렬*/
     padding: 0 20px;
-    height:500px;
+    margin-bottom: 20px;
+    height:650px;
     }
 /*     .findId .title{
     	border:1px solid;
@@ -38,11 +34,6 @@
    .title>li:first-child>a{
    		border-right:1px solid lightgray;
    }
-   .field input{
-   		height:40px;
-   }
-   
-   
 </style>
 <div class="findId">
 	<ul class="title">
@@ -68,10 +59,10 @@
 				<b style="font-size: 14px">정보보호를위해 아래 자동입력방지 문자를 입력해주세요</b>
 			</div>  
 			<div>
-					<input type="text" style="height:80px; border:1px solid" value="(자동입력방지문구)">
+					<input type="text" style="height:150px; border:1px solid" value="(자동입력방지문구)">
 			</div>
 	</form>
-		<input type="text" style="height:40px;" placeholder="위에 보이는 문자를 입력해주세요">
-		<input type="submit" style="height:60px;" value="인증번호 받기" >
+		<input type="text" placeholder="위에 보이는 문자를 입력해주세요">
+		<input type="submit" value="인증번호 받기" >
 </div>
 <%@ include file ="/views/footer.jsp" %>
