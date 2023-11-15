@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
 <%@ page import="com.pet.payment.model.dto.Payment" %>
-<% Payment p = (Payment) request.getAttribute("payment"); %>
+<% Payment p = (Payment)request.getAttribute("payment"); %>
 <style>
 	section {
 		margin : 0 auto;

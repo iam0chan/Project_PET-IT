@@ -56,7 +56,11 @@ public class PaymentServlet extends HttpServlet {
 	    
 	    if(result>0) System.out.println("결제+DB저장 성공");
 	    else System.out.println("실패");
+	    
 	    request.setAttribute("payment", p);
+	    
+	    System.out.println(p);
+	    
 	    request.getRequestDispatcher("/payment/orderPayComplete.jsp").forward(request, response);
 		
 	}
