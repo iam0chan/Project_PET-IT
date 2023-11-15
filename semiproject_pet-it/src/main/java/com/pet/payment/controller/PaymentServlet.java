@@ -36,13 +36,6 @@ public class PaymentServlet extends HttpServlet {
 	    int paid_amount = Integer.parseInt(request.getParameter("paid_amount"));
 	    int apply_num = Integer.parseInt(request.getParameter("apply_num"));
 	    String pay_method = request.getParameter("pay_method");
-	    
-	    System.out.println("imp_uid: " + imp_uid);
-	    System.out.println("merchant_uid: " + merchant_uid);
-	    System.out.println("paid_amount: " + paid_amount);
-	    System.out.println("apply_num: " + apply_num);
-	    System.out.println("pay_method: " + pay_method);
-	    
 
 	    Payment p = Payment.builder()
 	    		.imp_uid(imp_uid)
