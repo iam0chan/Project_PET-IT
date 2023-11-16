@@ -4,7 +4,6 @@ import static com.pet.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.channels.SelectableChannel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -70,14 +69,32 @@ public class FaqDao {
     	
     	
     }
-    
-    
     public int selectFaqCount(Connection conn) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         int result = 0;
         try {
             pstmt = conn.prepareStatement(sql.getProperty("selectFaqCount"));
+            rs = pstmt.executeQuery();
+            if (rs.next()) result = rs.getInt(1);
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return result;
+    }
+
+    
+    public int selectFaqCountByCategory(Connection conn, String category) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            pstmt = conn.prepareStatement(sql.getProperty("selectFaqCountByCategory"));
+            pstmt.setString(1, category);
             rs = pstmt.executeQuery();
             if (rs.next()) result = rs.getInt(1);
         } catch (SQLException e) {
@@ -97,9 +114,9 @@ public class FaqDao {
 
         try {
             pstmt = conn.prepareCall(sql.getProperty("selectFaqCategory"));
-            pstmt.setInt(1, (cPage - 1) * numPerpage + 1);
-            pstmt.setInt(2, cPage * numPerpage);
-            pstmt.setString(3, category);
+            pstmt.setString(1, category);
+            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+            pstmt.setInt(3, cPage * numPerpage);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 result.add(getFaq(rs));
@@ -114,12 +131,43 @@ public class FaqDao {
         return result;
     }
    
-    
-    
-    
-    
-    
+    public List<Faq> searchFaqByMenu(Connection conn, String title, String content, int cPage, int numPerPage) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Faq> result = new ArrayList<>();
+        String query = sql.getProperty("searchFaqByMenu");
+        query = query.replace("#COL", title);
 
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, title);
+            pstmt.setString(2, content);
+            pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
+            pstmt.setInt(4, cPage * numPerPage);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(searchFaq(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+
+        return result;
+    }
+
+    private Faq searchFaq(ResultSet rs) throws SQLException {
+        return Faq.builder()
+                .faqTitle(rs.getString("FAQ_TITLE"))
+                .faqContent(rs.getString("FAQ_CONTENT"))
+                .build();
+    }
+    
+  
     private Faq getFaq(ResultSet rs) throws SQLException {
         return Faq.builder()
                 .faqNo(rs.getString("FAQ_NO"))

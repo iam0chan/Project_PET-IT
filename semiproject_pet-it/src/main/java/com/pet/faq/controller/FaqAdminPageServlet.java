@@ -50,7 +50,7 @@ public class FaqAdminPageServlet extends HttpServlet {
 			
 		}else {
 			System.out.println("작성성공");
-			request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
+			response.sendRedirect(request.getContextPath()+"/faqList.do"); 
 		}
 		
 		

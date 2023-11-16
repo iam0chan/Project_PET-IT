@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.pet.faq.model.dto.Faq" %>
+<%@ page import="java.util.List,com.pet.faq.model.dto.Faq"%>
 <%
-
-	List<Faq> faqs = (List<Faq>)request.getAttribute("faqs");
-
+List<Faq> faqs = (List<Faq>) request.getAttribute("faqs");
 %>
 <%@ include file="/views/header.jsp"%>
 
@@ -71,16 +69,14 @@ div.col-md-8 {
 }
 
 tr.item {
-  color: #000; /* 텍스트 색상 */
-  background-color: #fff; /* 기본 배경 색상 */
+	color: #000; /* 텍스트 색상 */
+	background-color: #fff; /* 기본 배경 색상 */
 }
 
 tr.item:hover {
-  color: #000; /* 마우스를 올렸을 때 텍스트 색상 */
-  background-color: #04aa6d; 
+	color: #000; /* 마우스를 올렸을 때 텍스트 색상 */
+	background-color: #04aa6d;
 }
-
-
 </style>
 
 <body>
@@ -92,19 +88,17 @@ tr.item:hover {
 
 		<div class="boardSort">
 			<p class="boardSort"></p>
-			<span class="categoryBar"> 
-		
-			 <select id="selectCategory" name="selectCategory">
-					<option value selected="selected">전체</option>
-					<option value="자주하는질문">자주하는질문</option>
-					<option value="회원서비스">회원서비스</option>
-					<option value="주문/결제">주문/결제</option>
-					<option value="배송">배송</option>
-					<option value="취소/반품/교환">취소/반품/교환</option>
-					<!-- DB에서 where절 ? 벨류값 가져오기 위해서
-					폼추가, 벨류 영어로 변경-> 서블릿에서 겟팔라미터로 벨류값 가져오기 SQL에서 WHERE 조건문에 카테고리 해당하는 리스트 가져오기 -->
+			<span class="categoryBar"> <select id="selectCategory"
+				name="selectCategory">
+					<option value="전체" <%=request.getParameter("faqs")!=null&&request.getParameter("faqs").equals("전체")?"selected":"" %>>전체</option>
+					<option value="자주하는질문" <%=request.getParameter("faqs")!=null&&request.getParameter("faqs").equals("자주하는질문")?"selected":"" %>>자주하는질문</option>
+					<option value="회원서비스" <%=request.getParameter("faqs")!=null&&request.getParameter("faqs").equals("회원서비스")?"selected":"" %>>회원서비스</option>
+					<option value="주문/결제" <%=request.getParameter("faqs")!=null&&request.getParameter("faqs").equals("주문/결제")?"selected":"" %>>주문/결제</option>
+					<option value="배송" <%=request.getParameter("faqs")!=null&&request.getParameter("faqs").equals("배송")?"selected":"" %>>배송</option>
+					<option value="취소/반품/교환" <%=request.getParameter("faqs")!=null&&request.getParameter("faqs").equals("취소/반품/교환")?"selected":"" %>>취소/반품/교환</option>
+					
 			</select>
-		
+
 			</span>
 		</div>
 		<br>
@@ -121,39 +115,51 @@ tr.item:hover {
 
 			<!-- 테이블별 장소 -->
 			<tbody class="text-center">
-			<%if(faqs!=null&&!faqs.isEmpty()){ 
-				for(Faq f : faqs){%>
+				<%
+				if (faqs != null && !faqs.isEmpty()) {
+					for (Faq f : faqs) {
+				%>
 				<tr class="item">
-					<td><%=f.getFaqNo() %></td>
-					<td><%=f.getFaqCategory() %></td>
-					<td><span class='title'><%=f.getFaqTitle() %></span></td>
-					<td><%=f.getFaqHits() %></td>
+					<td><%=f.getFaqNo()%></td>
+					<td><%=f.getFaqCategory()%></td>
+					<td><span class='title'><%=f.getFaqTitle()%></span></td>
+					<td><%=f.getFaqHits()%></td>
 				</tr>
 				<!-- 아코디언효과를 넣은 리뷰내용 -->
-				<tr class="hide" >
+				<tr class="hide">
 					<td colspan="5">
 						<p>
 							<%=f.getFaqContent()%>
 						</p>
 					</td>
 				</tr>
-				<%} 
-				}%>
+				<%
+				}
+				}
+				%>
 			</tbody>
 
 		</table>
 	</div>
 
 	<div class="pageBar">
-		<div><%=request.getAttribute("pageBar") %></div>
-		
-	</div>
-	
+		<div><%=request.getAttribute("pageBar")%></div>
 
+	</div>
 
 	<div class="boardsearchAll">
-		<fieldset class="boardSearch">
-			<p>
+		<form action='<%=request.getContextPath()%>/searchMenu.do' method="post" > 
+			<select id="searchKey" name="searchKey">
+				<option value="subject">제목</option>
+				<option value="subject">내용</option>
+			</select>
+		<input type="search" id="searchMenu">
+			<button>Search</button>
+		
+		</form>
+
+		<!-- <fieldset class="boardSearch">
+			<form>
 				<select id="searchKey" name="searchKey">
 					<option value="subject">제목</option>
 					<option value="subject">내용</option>
@@ -161,9 +167,11 @@ tr.item:hover {
 				<button class="btn btn-primary btn-sm">
 					<a href="#none">SEARCH</a>
 				</button>
-			</p>
-		</fieldset>
+			</form>
+		</fieldset> -->
 	</div>
+	<br>
+
 
 
 
@@ -206,14 +214,17 @@ tr.item:hover {
 		const selectCategory = document.getElementById("selectCategory");
 		console.log(selectCategory)
 		selectCategory.addEventListener("change",function(e){
-		location.replace("<%=request.getContextPath() %>/faqinquiry.do?faqs="+ e.target.value);
+		location.replace("<%=request.getContextPath()%>/faqinquiry.do?faqs="+ e.target.value);
 		});
-		
-		
-		
+
+			
 		
 	</script>
-	
+
+
+
+
+
 
 </body>
 </html>

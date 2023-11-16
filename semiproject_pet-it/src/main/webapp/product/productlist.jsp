@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, java.util.List"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<%  List<Product> products = (List<Product>)request.getAttribute("products"); 
-    StringBuilder pageBar = (StringBuilder)request.getAttribute("pageBar");
-%>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productlist.css"/>
     <script>
     /*     const searchButton = document.getElementById('search-button');
@@ -42,21 +39,99 @@
                 <p>금액내림차순</p>
             </div>
             <div class="container">
-	            <%for(Product p : products){ %>
-	                <div class="card">
-	                    <div class="item-img">
-	                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
-	                    </div>
-	                    <div class="item-content">
-	                    	<p><%= p.getProductName()%></p>
-	                    	<p><%= p.getProductInfo() %></p>
-	                    	<p><%= p.getProductPrice() %>원</p>
-	                    </div>
-	                </div>
-	    		<%} %>
+                <div class="card">
+                    <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
+                <div class="card">
+                     <div class="item-img">
+                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+                    </div>
+                    <div class="item-content">
+                    	<p>세나가 좋아하는 간식</p>
+                    	<p>슈가 질투할만한 간식</p>
+                    	<p>10,900원</p>
+                    </div>
+                </div>
             </div>
             <div style="margin-bottom:25px;"> 
-            	<%=pageBar%>
+            	페이징바
             </div>
             <div class="bottom-container">
                 <div class="search-bar">

@@ -59,44 +59,50 @@
                 <h2>faq 작성</h2>
             </div>
             <div class="container mt-3">
-                <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-8">
-                        <form id="faqform" action="<%=request.getContextPath() %>/faqadminpage.do" method="post">
-                    		<input type="hidden" value="" name="content" id="content">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center; background-color: #F2F2F2;">제목</th>
-                                        <th>
-                                            <select id="board_category" name="board_category">
-                                                <option value="자주하는질문">자주하는질문</option>
-                                                <option value="회원서비스">회원서비스</option>
-                                                <option value="주문/결제">주문/결제</option>
-                                                <option value="배송">배송</option>
-                                                <option value="취소/반품/교환">취소/반품/교환</option>
-                                            </select>
-                                            <input id="faq-title" name="title" style="width: 400px;" type="text">
-                                            
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
-                    </div>
-                    <div class="col-lg-2"></div>
-                 </div>
-                    <div id="editor"></div>
-                    <br>
-                </div>
-                <div id="submitBtn">
-                	<button type="button" class="Btn" onclick="test();" >작성완료</button>
-                	
-                    <!-- <input class="Btn" type="submit" value="작성완료" /> -->
-                    <input class="Btn" type="reset"  value="작성취소" />
-	            </div>
-	     	</form>
-	          </div>
-	          </section>
+              <form id="faqform" action="<%=request.getContextPath() %>/faqadminpage.do" method="post">
+	               <div class="row">
+	                    <div class="col-lg-2"></div>
+	                    <div class="col-lg-8">
+	                    		<input type="hidden" value="" name="content" id="content">
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th style="text-align: center; background-color: #F2F2F2;">제목</th>
+	                                        <th>
+	                                            <select id="board_category" name="board_category">
+	                                                <option value="자주하는질문">자주하는질문</option>
+	                                                <option value="회원서비스">회원서비스</option>
+	                                                <option value="주문/결제">주문/결제</option>
+	                                                <option value="배송">배송</option>
+	                                                <option value="취소/반품/교환">취소/반품/교환</option>
+	                                            </select>
+	                                            <input id="faq-title" name="title" style="width: 400px;" type="text">
+	                                            
+	                                        </th>
+	                                    </tr>
+	                                </thead>
+	                            </table>
+	                    </div>
+	                    <div class="col-lg-2"></div>
+	                 </div>
+	                 <div class="row">
+	                    	<div id="editor"></div>
+	                 </div>
+	                <div id="submitBtn" class="row">
+	                	<div class="col-5"></div>
+	                	<div class="col-1">
+	                		<button type="button" class="Btn" onclick="test();" >작성완료</button>
+	                	</div>
+	                    <!-- <input class="Btn" type="submit" value="작성완료" /> -->
+	                    <div class="col-1">
+	                    	<input class="Btn" type="reset"  value="작성취소" />
+	                    </div>
+	                    <div class="col-5"></div>
+		            </div>
+		     	</form>
+             </div>
+        </div>
+     </section>
         </body>
         <script>
             var editor;

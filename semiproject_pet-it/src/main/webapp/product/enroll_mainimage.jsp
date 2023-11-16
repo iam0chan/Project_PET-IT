@@ -15,7 +15,7 @@
 	*{
 		margin: 0;
 		padding: 0;
-		/* border:1px solid red; */
+		border:1px solid red;
 	}
 	body{
 		display:flex;
@@ -24,7 +24,7 @@
 	}
 	.wrapper{
 		width:630px;
-		height:500px;
+		height:430px;
 		display:flex;
 		flex-direction:column;
 		align-items:center;
@@ -42,26 +42,11 @@
 		align-items:center;
 	}
 	
-	.image-content{
-		border: 1px solid #04aa6d;
-		margin-bottom:5px;
-	}
-	
 	img{
 		margin-bottom:10px;
-		
 	}
 	.file-container{
-		display:flex;
-		justify-content:center;
-		text-align:center;
 		margin-bottom:10px;
-		padding-bottom: 4px;
-    	border-bottom: 1px solid #04aa6d;
-	}
-	.image-enroll{
-		display:flex;
-		justify-content:center;
 	}
 	
 </style>
@@ -71,14 +56,16 @@
         <h1>대표이미지등록</h1>
         <div class="image-container">
             <div class="image-content">
-                <img class="image-box" src="<%=request.getContextPath()%>/img/Image-Size.jpg" style="width:328.59px; height:329.13px;">
+                <img class="image-box" src="mainImg-sample.png" style="width:230px; height:260px;">
             </div>
+            <form action="#" method="post">
             <div class="file-container">
-                <input type="file" name = "upfile" id="file" style="width:230px;">
+                <input type="file" name = "upfile" id="file">
             </div>
-            <div class = "image-enroll">
-            	<input type="button" id="enroll-btn" class="btn btn-outline-success" value="등록">
-            </div>            
+            <div>
+            	<input type="submit" id="enroll-btn" class="btn btn-outline-success" value="등록">
+            </div>
+            </form>
         </div>
     </div>
 
@@ -100,7 +87,7 @@
         
         btn.addEventListener('click',()=>	{
         	opener.document.querySelector("#image-box").src = document.querySelector(".image-box").src;
-        	opener.document.querySelector("#main-image").value = document.querySelector("#file").value;
+        	opener.document.querySelector("#imageId").value = document.querySelector(".image-box").src;
         	/* input hidden 태그를 이용해서 src값 저장해서 form태그로 서버에 전송 */
         	window.close();
         });

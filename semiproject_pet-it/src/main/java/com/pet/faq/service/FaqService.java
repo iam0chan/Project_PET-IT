@@ -4,6 +4,7 @@ import static com.pet.common.JDBCTemplate.close;
 import static com.pet.common.JDBCTemplate.getConnection;
 import static com.pet.common.JDBCTemplate.commit;
 import static com.pet.common.JDBCTemplate.rollback;
+import static com.pet.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
@@ -31,6 +32,14 @@ public class FaqService {
 			close(conn);
 			return result;
 		}
+		public int selectFaqCountByCategory(String category) {
+			Connection conn=getConnection();
+			int result=dao.selectFaqCountByCategory(conn, category);
+			if(result>0)commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
 		
 		public int insertFaq(Faq f) {
 			Connection conn=getConnection();
@@ -43,13 +52,19 @@ public class FaqService {
 		public List<Faq> selectFaqCategory(int cPage,int numPerpage, String category){
 			Connection conn=getConnection();
 			List<Faq> result=dao.selectFaqCategory(conn, cPage, numPerpage, category);
-			if(result!=null)commit(conn);
-			else rollback(conn);
 			close(conn);
 			return result;
 		}
 		
 		
+		public List<Faq> searchFaqByMenu(String title, String content,
+				int cPage,int numPerpage){
+			Connection conn=getConnection();
+			List<Faq> result=dao.searchFaqByMenu(conn,title,content,cPage,numPerpage);
+			close(conn);
+			return result;
+			
+		}
 		
 		
 		

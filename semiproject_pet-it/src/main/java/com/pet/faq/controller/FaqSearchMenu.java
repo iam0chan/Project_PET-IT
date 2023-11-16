@@ -3,7 +3,6 @@ package com.pet.faq.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +13,16 @@ import com.pet.faq.model.dto.Faq;
 import com.pet.faq.service.FaqService;
 
 /**
- * Servlet implementation class FaqInquiryServlet
+ * Servlet implementation class FaqSearchMenu
  */
-@WebServlet("/faqinquiry.do")
-public class FaqInquiryServlet extends HttpServlet {
+@WebServlet("/searchMenu.do")
+public class FaqSearchMenu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqInquiryServlet() {
+    public FaqSearchMenu() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +31,15 @@ public class FaqInquiryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String category =  request.getParameter("faqs");
-		System.out.print(category);
+		String keyword = request.getParameter("keyword");
 		int cPage,numPerpage=10; 
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		List<Faq> faqs;
-		int totalData;
-		if(category.equals("전체")) {
-			faqs=new FaqService().selectFaq(cPage, numPerpage);
-			totalData=new FaqService().selectFaqCount();  
-		}else {
-			faqs=new FaqService().selectFaqCategory(cPage, numPerpage,category);
-			totalData=new FaqService().selectFaqCountByCategory(category);  
-		}
-		
+		List<Faq> faqs=new FaqService().selectFaq(cPage, numPerpage);
+		int totalData=new FaqService().selectFaqCount();  
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1; 
@@ -89,8 +79,8 @@ public class FaqInquiryServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar); 
 		request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
 		
-	}
 		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
