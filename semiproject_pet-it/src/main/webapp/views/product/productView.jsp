@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product"%>
+    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, com.pet.product.model.dto.ProductImageFile"%>
 <%@ include file="/views/header.jsp" %>
 <%
 	Product p = (Product)request.getAttribute("product");
 	int discountPrice = (int)(request.getAttribute("discountPrice"));
+	ProductImageFile file = (ProductImageFile)request.getAttribute("file");
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productview.css"/>
     <div class="wrapper">
         <div class="item-info-container">
             <div class="item-image">
                 <div>
-                    <img src="https://naturalcore.co.kr/web/product/small/202109/472c0fefa2afeba6b907c34cd2884faa.jpg" width="400px"
-                        height="420px">
+                	<%if(file!=null){ %>
+                    <img src="<%=request.getContextPath()%>/upload/<%=file.getProductFileRename()%>" width="400px"
+                        height="420px" id="item-image">
+                     <%} %>
                 </div>
                 <!-- <div class="summary">
                     <span>상품설명란?</span>
@@ -314,7 +317,7 @@
        	$(".modal-footer>.btn:nth-child(2)").click(function(){
        		console.log("이벤트발생");
        		$(".modal").css("display","none");
-       		location.href='<%=request.getContextPath()%>/cart/cartList.jsp';
+       		location.href='<%=request.getContextPath()%>/views/cart/cartList.jsp?productNo=<%=p.getProductNo()%>';
        		/* ajax or get-> queryString방식으로 product# 넘기기 ,  */
        	})
        	

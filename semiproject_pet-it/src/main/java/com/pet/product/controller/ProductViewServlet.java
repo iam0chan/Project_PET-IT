@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pet.product.model.dto.Product;
+import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.service.ProductService;
 
 /**
@@ -23,16 +24,19 @@ public class ProductViewServlet extends HttpServlet {
 		String productNo = request.getParameter("productNo");
 		System.out.println(productNo);
 		Product product = new ProductService().selectProductByNo(productNo);
-		if(product!=null) {
+		ProductImageFile file = new ProductService().selectMainImageFile(product.getProductNo());
+		System.out.println(file.toString());
+		if(product!=null && file!=null) {
 			request.setAttribute("product", product);
+			request.setAttribute("file", file);
 			if(product.getProductDiscount()!=null) {
 				int discountPrice = (int)(product.getProductPrice()-(product.getProductPrice()*Double.parseDouble(product.getProductDiscount())));
 				request.setAttribute("discountPrice", discountPrice);
 			}
-			request.getRequestDispatcher("/views/product/productView.jsp").forward(request, response);
 		}else {
 			System.out.println("조회실패!!");
 		}
+		request.getRequestDispatcher("/views/product/productView.jsp").forward(request, response);
 		
 		
 		

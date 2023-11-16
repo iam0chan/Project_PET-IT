@@ -170,6 +170,25 @@ public class ProductDao {
 		return files;		
 	}
 	
+	public ProductImageFile selectMainImageFile(Connection conn, String productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductImageFile file = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMainImageFile"));
+			pstmt.setString(1, productNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) file = getMainImageFile(rs);
+			System.out.println(file.toString());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}		
+		return file;
+	}
+	
 	
 	/* Product-Table
 	 * PRODUCT_NO, CATEGORY_NO, TYPE_NO, PRODUCT_NAME, 

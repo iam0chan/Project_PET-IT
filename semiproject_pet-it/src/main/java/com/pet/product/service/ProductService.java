@@ -61,4 +61,12 @@ public class ProductService {
 		
 		return files;
 	}
+	
+	public ProductImageFile selectMainImageFile(String productNo) {
+		Connection conn = getConnection();
+		ProductImageFile file = dao.selectMainImageFile(conn,productNo);
+		close(conn);
+		
+		return file;
+	}
 }

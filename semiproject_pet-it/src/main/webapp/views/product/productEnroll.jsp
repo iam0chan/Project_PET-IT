@@ -251,6 +251,7 @@ $("#main-image").change(e=>{
            }
         });
       
+        /* 모달 컨트롤 스크립트  */
         $("#enroll-itemcontent-btn").on("click",function(){    
            $(".modal").css("display","block").css("top","230px");
                             

@@ -109,7 +109,7 @@
  
    $(".card").mouseenter(function(){
       $(this).css("cursor","pointer");
-      $(this).css("border","1px solid #28A745")
+      $(this).css("border","2px solid #28A745")
       $(this).click(function(){
          const productNo = $(this).prop("id");
          console.log(productNo);
@@ -118,7 +118,7 @@
    })
    
    $(".card").mouseout(function(){
-      $(this).css("border","none");
+      $(this).css("border","1px solid #dbdbd9");
    });    
     </script>
     
