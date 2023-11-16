@@ -153,8 +153,8 @@ tr.item:hover {
 				<option value="subject">제목</option>
 				<option value="subject">내용</option>
 			</select>
-		<input type="search" id="searchMenu">
-			<button>Search</button>
+		<input type="search" id="searchMenu" >
+			<input type="submit" name="selectSearch" value="검색">
 		
 		</form>
 
@@ -169,6 +169,9 @@ tr.item:hover {
 				</button>
 			</form>
 		</fieldset> -->
+		
+		
+		
 	</div>
 	<br>
 
