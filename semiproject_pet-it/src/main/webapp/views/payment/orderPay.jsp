@@ -30,7 +30,7 @@
 	<section id="body-section">
 	
 	<!-- -----------------주문자정보 입력폼 start--------------- -->
-		<form action="<%=request.getContextPath()%>/payment.do" id="formData">
+		<form action="#" id="formData">
 			
 			<div class="accordion" id="accordion-container">
 			  <div class="accordion-item">
@@ -89,7 +89,7 @@
 								  	<input type="text" class="form-control" name="emailTail" id="textEmail" placeholder="이메일 선택">
 									<select class="form-select" id="selectEmail">
 									  	 <option disabled selected>이메일 선택</option>
-									 	 <option value="naver.com" id="naver.com" selected>naver.com</option>
+									 	 <option value="naver.com" id="naver.com">naver.com</option>
 										 <option value="hanmail.net" id="hanmail.net">hanmail.net</option>
 										 <option value="hotmail.com" id="hotmail.com">hotmail.com</option>
 										 <option value="nate.com" id="nate.com">nate.com</option>
@@ -107,7 +107,7 @@
 			      					<input type="text" class="form-control" name="textDelivery" id="textDelivery" placeholder="배송요청사항 선택">
 				      				<select class="form-select" id="selectAddr">
 									  	 <option disabled selected>배송요청사항 선택</option>
-									 	 <option value="문앞에 놔주세요" selected>문앞에 놔주세요</option>
+									 	 <option value="문앞에 놔주세요">문앞에 놔주세요</option>
 										 <option value="경비실에 보관해주세요">경비실에 보관해주세요</option>
 										 <option value="배송 전 연락바랍니다">배송 전 연락바랍니다</option>
 										 <option value="directly" id="textDelivery">직접 입력하기</option>
@@ -320,8 +320,9 @@
 
 <!-- js -->
 <script src="<%=request.getContextPath()%>/js/orderPay.js"></script>
+
+<!-- 결제하기 버튼 클릭 js -->
 <script>
-//결제창 버튼
 
 var IMP = window.IMP;
 IMP.init("imp58177585");
@@ -339,7 +340,7 @@ function payment_kakao(){
 	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 		pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
 		pay_method : "card",				//지불방법
-		merchant_uid: "2334156",  			//주문번호가 들어가야함.
+		merchant_uid: "2434157",  			//주문번호가 들어가야함.
 		name : "강아지간식",					//결제창에 노출될 상품명
 		amount:	100,						//결제 금액
 		buyer_email : "mkty0328@gmail.com", //주문자 email
@@ -361,24 +362,24 @@ function payment_kakao(){
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at
-				},
-				success : function(data){
-					/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
-					Swal.fire({
-						  title: "결제 완료",
-						  text: "주문번호 : "+merchant_uid,
-						  icon: "success"
-					});
 				}
+			}).done(function(data){
+				window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
+				
+			}).fail(function(data){
+					Swal.fire({
+				  		title: "카카오페이 실패",
+				  		text: "다시 시도하세요😢"+rsp.error_msg,
+				  		icon: "error"
+					});
 			});
 			
 		}else{
 			Swal.fire({
-				  title: "결제 실패",
-				  text: rsp.error_msg,
-				  icon: "error"
-				});
-			/* alert("실패 : 코드("+rsp.error_code+") / 메시지("+rsp.error_msg+")"); */
+		  		title: "카카오페이 실패",
+		  		text: "다시 시도하세요😢"+rsp.error_msg,
+		  		icon: "error"
+			});
 		}
 	});
 }
@@ -387,7 +388,7 @@ function payment_card(){
 	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 		pg : "kcp.AO09C",					//결제사명.PG상점아이디
 		pay_method : "card",				//지불방법
-		merchant_uid: "2234567",  			//주문번호가 들어가야함.
+		merchant_uid: "4534571",  			//주문번호가 들어가야함.
 		name : "강아지간식",					//결제창에 노출될 상품명
 		amount:	100,						//결제 금액
 		buyer_email : "mkty0328@gmail.com", //주문자 email
@@ -409,24 +410,28 @@ function payment_card(){
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at
-				},
-				success : function(data){
-						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
-						Swal.fire({
-							  title: "결제 완료",
-							  text: "주문번호 : "+merchant_uid,
-							  icon: "success"
-						});
 				}
+			}).done(function(data){
+				// 데이터를 문자열로 변환
+			    var jsonString = JSON.stringify(data);
+			    // SessionStorage에 데이터를 저장
+			    sessionStorage.setItem('data', jsonString);
+			    window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
+					
+			}).fail(function(data){
+					Swal.fire({
+				  		title: "카드 결제 실패",
+				  		text: "다시 시도하거나 관리자에게 문의하세요😢",
+				  		icon: "error"
+					});
 			});
 			
 		}else{
 			Swal.fire({
-				  title: "결제 실패",
-				  text: rsp.error_msg,
-				  icon: "error"
+		  		title: "카드 결제 실패",
+		  		text: rsp.error_msg,
+		  		icon: "error"
 			});
-			/* alert("실패 : 코드("+rsp.error_code+") / 메시지("+rsp.error_msg+")"); */
 		}
 	});
 }

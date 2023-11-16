@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<%@ page import="com.pet.payment.model.dto.Payment" %>
-<% Payment p = (Payment) request.getAttribute("payment"); %>
+
 <style>
 	section {
 		margin : 0 auto;
@@ -32,8 +31,18 @@
     section{
     	background-color:#F0FFF0;
     }
-   
+      
 </style>	
+<script>
+//SessionStorage에서 데이터를 가져옴
+var jsonString = sessionStorage.getItem('data');
+
+// 데이터를 JSON 객체로 변환
+var data = JSON.parse(jsonString);
+
+$("#orderNo").text(data.merchant_uid);
+
+</script>
 	
 	<div class="title-container">
 		<div class="title-text">
@@ -49,8 +58,8 @@
 				주문 번호
 			</div>
 			<div style="width:50%"></div>
-			<div style="width:30%; text-align:center;">
-				<%=p.getMerchant_uid() %>
+			<div id="orderNo" style="width:30%; text-align:center;">
+				
 			</div>
 		</div>
 		<p></p>
@@ -71,9 +80,9 @@
 					<span>0000</span><span>원</span>
 				</div>
 			</div>
-			<div style="width:30%; text-align:center;">
+			<!-- <div style="width:30%; text-align:center;">
 				<button class="btn btn-outline-success">상품 상세페이지</button>
-			</div>
+			</div> -->
 		</div>
 		
 		<div  style="display:flex; font-size:1.2rem; font-weight:bolder">
@@ -82,7 +91,7 @@
 			</div>
 			<div style="width:50%"></div>
 			<div style="width:30%; text-align:center;">
-				<span><%=p.getPaid_amount() %></span><span>원</span>
+				<span> # </span><span>원</span>
 			</div>
 		</div>	
 	</div>
@@ -93,7 +102,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div style="width:30%; text-align:center;">
-			<span id="payMethod"><%=p.getPay_method() %></span>
+			<span id="payMethod"> # </span>
 		</div>
 	</div>	
 	
@@ -103,7 +112,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div style="width:30%; text-align:center;">
-			<span id="acceptNo"><%=p.getApply_num() %></span>
+			<span id="acceptNo"> # </span>
 		</div>
 	</div>
 </section>
@@ -116,7 +125,7 @@
 
 <script>
 	$(".continueBtn").click(function(){
-		$(window).prop("location","<%=request.getContextPath()%>/product/productlist.jsp")
+		$(window).prop("location","<%=request.getContextPath()%>/views/product/productlist.jsp")
 	})
 </script>
 

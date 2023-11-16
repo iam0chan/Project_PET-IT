@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
 import com.pet.payment.model.dto.Order;
 import com.pet.payment.model.dto.Payment;
 import com.pet.payment.service.PaymentService;
@@ -50,12 +53,16 @@ public class PaymentServlet extends HttpServlet {
 	    
 	    if(result>0) System.out.println("DB저장 성공");
 	    else System.out.println("DB저장 실패");
-	    
 	    System.out.println(p);
-
-	    request.setAttribute("payment", p);
-	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp").forward(request, response);
-		
+	   
+	    response.setContentType("application/json;charset=utf-8");
+		Gson gson = new Gson();
+		gson.toJson(p,response.getWriter());
+		System.out.println(gson.toJson(p));
+	    
+//		String data = gson.toJson(p);
+//	    request.setAttribute("data", data);
+//	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp");
 	}
 
 	/**
