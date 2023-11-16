@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, java.util.List"%>
+    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, java.util.List, com.pet.product.model.dto.ProductImageFile"%>
 <%@ include file="/views/header.jsp"%>
 <%  List<Product> products = (List<Product>)request.getAttribute("products"); 
     StringBuilder pageBar = (StringBuilder)request.getAttribute("pageBar");
+    List<ProductImageFile> files = (List<ProductImageFile>)request.getAttribute("files");
     String productNo = "";
     String no="";
 %>
@@ -48,7 +49,13 @@
 	            <%for(Product p : products){ %>
 	                <div class="card" id=<%=p.getProductNo()%>>
 	                    <div class="item-img">
-	                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+	                    <%if(files!=null && !files.isEmpty()){ %>
+	                    	<%for(ProductImageFile f : files){ %>
+	                    		<%if(p.getProductNo().equals(f.getProductNo())){ %>
+	                    		<img src="<%=request.getContextPath()%>/upload/<%=f.getProductFileRename()%>"/>
+	                    		<%} %>
+	                    	<%} %>
+	                    <%} %>
 	                    </div>
 	                    <div class="item-content">
 	                    	<p style="font-size:1.1rem; font-weight: bold; margin-bottom:10px;"><%= p.getProductName()%></p>
@@ -111,7 +118,7 @@
 	
 	$(".card").mouseout(function(){
 		$(this).css("border","none");
-	});
+	});    
     </script>
     
 <%@ include file="/views/footer.jsp"%>

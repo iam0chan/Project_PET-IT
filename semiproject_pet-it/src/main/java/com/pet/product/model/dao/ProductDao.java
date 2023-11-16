@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.pet.product.model.dto.Product;
+import com.pet.product.model.dto.ProductImageFile;
 
 public class ProductDao {
 	private Properties sql = new Properties();
@@ -55,7 +56,6 @@ public class ProductDao {
 		}finally {
 			close(pstmt);			
 		}
-		
 		return result;
 	
 	}
@@ -118,6 +118,56 @@ public class ProductDao {
 		return product;
 	}
 	
+	public int insertMainImageFile(Connection conn, String oriname, String rename) {
+		/*
+		 * PRODUCT_FILE_NO
+		 * PRODUCT_NO(FK)
+		 * PRODUCT_FILE_ORINAME
+		 * PRODUCT_FILE_RENAME
+		 * PRODUCT_FILE_ENROLL_DATE
+		 * PRODUCT_FILE_MAIN_IMAGE
+		 * PRODUCT_FILE_DETAIL_IMAGE
+		 */
+		PreparedStatement pstmt = null;
+		int fileUploadResult = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("insertMainImageFile"));
+			pstmt.setString(1, oriname);
+			pstmt.setString(2, rename);
+			
+			fileUploadResult = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return fileUploadResult;
+	}
+	
+	public List<ProductImageFile> selectMainImageFileAll(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ProductImageFile> files = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMainImageFileAll"));
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				files.add(getMainImageFile(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return files;		
+	}
+	
 	
 	/* Product-Table
 	 * PRODUCT_NO, CATEGORY_NO, TYPE_NO, PRODUCT_NAME, 
@@ -143,6 +193,17 @@ public class ProductDao {
 				.prouctPoint(rs.getInt("product_point"))
 				.productContent(rs.getString("product_content")).build();
 				
+	}
+	
+	private ProductImageFile getMainImageFile(ResultSet rs) throws SQLException {
+		return ProductImageFile.builder()
+				.productFileNo(rs.getString("product_file_no"))
+				.productNo(rs.getString("product_no"))
+				.productFileOriName(rs.getString("product_file_oriname"))
+				.productFileRename(rs.getString("product_file_rename"))
+				.productFileEnrollDate(rs.getDate("product_file_enroll_date"))
+				.productFileMainImage(rs.getString("product_file_main_Image"))
+				.build();
 	}
 	
 }

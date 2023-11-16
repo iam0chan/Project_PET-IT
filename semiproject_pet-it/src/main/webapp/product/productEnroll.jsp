@@ -20,6 +20,18 @@
 		flex-direction:column;
 		align-items:center;
 	}
+	div.option-fix{
+		width: 550px;
+    	padding-left: 25px;
+	}
+	input#optionName{
+		width:247px;
+		padding: 0px 5px;
+	}
+	
+	input#optionPrice{
+		width:247px;
+	}
 
 </style>
 <script>
@@ -115,13 +127,16 @@ $("#main-image").change(e=>{
 					<div class='enroll-content-container'>
 						<div class="enrollpage-title">
 							<h4>옵션 : </h4>
-							<button type="button" id="option-btn">+</button>
 						</div>
-						<div class="enrollpage-content option">
-							<input type="text" name="optionName" placeholder="가격옵션명" />
-							<input type="number" name="optionPrice" placeholder="가격" />
+						<div class="enrollpage-content option-fix">
+							<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" />
+							<input type="number" name="optionPrice" id="optionPrice" placeholder="가격" />
+							<button type="button" id="option-btn">+</button>						
 						</div>
+						<div id="option-btn"style="line-height:3.0">
+						</div>					
 					</div>		
+					
 				
 				</div>
 				</form>
@@ -217,21 +232,22 @@ $("#main-image").change(e=>{
         $("input[type=button]").on("click",function(){
           	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px, height=500px, top=50, left=300");
         })
-        
+        let count = 0;
      	$("#option-btn").on("click",(e)=>{
-        	/* alert("이벤트발생"); */
-        	const optionBox = $(".detail-container-r>form");
-        	const test = $("<div class='enroll-content-container'></div>");
+        	if(count<2){
+        	const optionBox = $(".detail-container-r");
+        	const test = $("<div class='enroll-content-container '></div>");
         	const test2 = $("<div class='enrollpage-title'></div>");
-        	const test3 = $("<div class='enrollpage-content option'></div>");
+        	const test3 = $("<div class='enrollpage-content new-option'></div>");
         	$(test).append(test2);
         	$(test).append(test3);
-        	const inputName = $('<input type="text" name="optionName" placeholder="가격옵션명" />');
+        	const inputName = $('<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" />');
         	$(test3).append(inputName);
-        	const inputPrice = $('<input type="number" name="optionPrice" placeholder="가격" />');
+        	const inputPrice = $('<input type="number" name="optionPrice" id="optionPrice" placeholder="가격" />');
         	$(test3).append(inputPrice);
         	$(optionBox).append(test);
-        	
+        	++count;
+     		}
         });
       
         $("#enroll-itemcontent-btn").on("click",function(){ 	

@@ -1,5 +1,6 @@
 package com.pet.product.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -25,27 +26,30 @@ public class ProductEnrollEndServlet extends HttpServlet {
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException("안돼!");
 		} else {
+			//file upload 
 			String path = getServletContext().getRealPath("/upload/");
 			MultipartRequest mr = new MultipartRequest(request, path, 1024 * 1024 * 100, "UTF-8", new DefaultFileRenamePolicy());
-			String re = mr.getFilesystemName("mainImage");
-			String ori = mr.getOriginalFileName("mainImage");
+			String oriname = mr.getOriginalFileName("mainImage");
+			String rename = mr.getFilesystemName("mainImage");
+			
+			
+			//상품정보
 			String productName = mr.getParameter("productName");
 			int productPrice = Integer.parseInt(mr.getParameter("productPrice"));
 			String productSummary = mr.getParameter("productSummary");
-			String mainImage = mr.getParameter("mainImage");
 			int productStock = Integer.parseInt(mr.getParameter("productStock"));
 			String category = mr.getParameter("1st_category");
 			String type = mr.getParameter("2nd_category");
 			String productContent = mr.getParameter("content");
 			String[] optionNames = mr.getParameterValues("optionName");
 			String[] optionPrice = (mr.getParameterValues("optionPrice"));
-
+			
 			System.out.println("상품 이름 : " + productName);
 			System.out.println("상품 가격 : " + productPrice);
 			System.out.println("상품 설명 : " + productSummary);
 			System.out.println("상품 재고 : " + productStock);
-			System.out.println("대표이미지 : " + ori);
-			System.out.println("대표이미지 수정이름 : "+re);
+			System.out.println("대표이미지 : " + oriname);
+			System.out.println("대표이미지 수정이름 : "+rename);
 			System.out.println("1차 카테고리 : " + type);
 			System.out.println("2차 카테고리 : " + category);
 			System.out.println("내용 : " + productContent);
@@ -61,11 +65,17 @@ public class ProductEnrollEndServlet extends HttpServlet {
 					.productContent(productContent)
 					.build();
 			
-			int result = new ProductService().insertProduct(item);
+			int result = new ProductService().insertProduct(item, oriname, rename);
 			if(result>0) {
+				//int fileUploadResult = new ProductService().insertMainImageFile(oriname, rename);
 				System.out.println("입력성공");
 			}else {
 				System.out.println("입력실패");
+				
+				File delFile = new File("/upload/"+rename);
+				if(delFile.exists()) {
+					delFile.delete();
+				}
 			}
 			
 			//대표이미지 저장시키기, 에디터 저장 이미지 디비에 저장할 수 있는 방법 생각해보기
