@@ -87,9 +87,9 @@
 
 
 
-//주문상품이 모두 삭제되면 화면 전환 jquery
+//주문상품이 모두 삭제되면 화면 전환 jquery -> 보류
 
-	$("div#productAll > div#productDiv").each(function(){
+/*	$("div#productAll > div#productDiv").each(function(){
 		if($(this).is(':hidden')){
 			var hiddenDivs = $(this).parent().children('div:hidden').length;
 			var totalDivs = $(this).parent().children('div').length;
@@ -98,7 +98,7 @@
 				window.location.href="<%=request.getContextPath()%>/cart/cartList.jsp"
 			}
 		}
-	});
+	});*/
 
 
 //결제창 버튼
@@ -107,7 +107,7 @@
 	IMP.init("imp58177585");
 	$("#paymentBtn").on("click",function(){
 		
-		$("#formData").submit();
+		/*$("#formData").submit();*/
 		
 		if($("#card-payment").is(":checked")){
 			payment_card1();	
