@@ -1,34 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-<!-- jQuery -->
-<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- PortOne SDK -->
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
-<!-- Sweet alert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- <!-- coupon modal -->
-<script>
-	$(function(){
-		$("#couponBtn").click(function(){
-			$(".modal").fadeIn();
-		});
-		$(".modal-close").click(function(){
-			$(".modal").fadeOut();
-		});
-		$(".modal-insert").click(function(){
-			$(".modal").fadeOut();
-		});
-		
-	});
-</script> -->
-
-
-<!-- 배송요청 select에 따른 값 변화주기 jquery -->
-<script>
+//배송요청 select에 따른 값 변화주기 jquery
     $(function() {
         $('#selectAddr').change(function() {
             if ($('#selectAddr').val() == 'directly') {
@@ -39,12 +10,10 @@
                 $('#textDelivery').val($('#selectAddr').val());
             }
         })
-    });
-</script>
+    }); 
 
 
-<!-- email select에 따른 값 변화주기 jquery -->
-<script>
+//email select에 따른 값 변화주기 jquery
     $(function() {
         $('#selectEmail').change(function() {
             if ($('#selectEmail').val() == 'directly') {
@@ -56,10 +25,56 @@
             }
         })
     });
-</script>
 
-<!-- 주문상품 삭제버튼 jquery -->
-<script>
+//상품수량에 따라 총 가격 변화
+	$(document).ready(function(){
+	    function calculateTotalPrice() {
+	        var price = parseInt($('.price').text());
+	        var count = $('#count').val();
+	        var totalPrice = price * count;
+	        $('#totalPrice').text(totalPrice);
+	    }
+	    
+	    $('#count').on('input', calculateTotalPrice);
+	
+	    // 페이지 로드 시 총 금액 계산
+	    calculateTotalPrice();
+	});
+
+//결제정보 자동으로 변화되어 표시되게
+	$(document).ready(function(){
+	    function calculateTotalPrice() {
+	        var price = parseInt($('.price').text());
+	        var count = $('#count').val();
+	        var totalPrice = price * count;
+	        $('#allProductPrice').text(totalPrice);
+	    }
+	    
+	    $('#count').on('input', calculateTotalPrice);
+	
+	    // 페이지 로드 시 총 금액 계산
+	    calculateTotalPrice();
+	});
+
+//결제정보에 따른 최종결제금액 계산
+	$(document).ready(function(){ 
+	    function calculateTotalCost() {
+	        var productPrice = parseInt($('#allProductPrice').text());
+	        var deliveryCost = parseInt($('#delivery-cost').text());
+	        var discountPrice = parseInt($('#discountPrice').text());
+	        var totalCost = productPrice + deliveryCost - discountPrice;
+	        $('#allPayCost').text(totalCost.toLocaleString('ko-KR'));
+	    }
+	
+	    // 해당 값들이 변경되면 자동으로 총 금액을 다시 계산
+	    $('#allProductPrice, #delivery-cost, #discountPrice').change(calculateTotalCost);
+	
+	    // 페이지가 로드될 때 총 금액을 계산
+	    calculateTotalCost();
+	});
+
+
+//주문상품 삭제버튼 jquery
 	$(function(){
 		$('#deleteProduct').click(function(){
 			$("#productDiv").hide();
@@ -67,107 +82,73 @@
 			$("#productCount").attr("disabled",true);
 			$("#productPrice").attr("disabled",true);
 		});	
+		
 	});
-</script>
 
 
-<!-- 주문상품이 모두 삭제되면 화면 전환 jquery -->
-<script>
-	$("div#productAll > div.productDiv").each(function(){
-		if($(this).attr('disabled')=='true'){
-			var hiddenDivs = $(this).parent().children('div:hide').length;
-			var totalDivs = $(this).parent().childeren('div').length;
+
+//주문상품이 모두 삭제되면 화면 전환 jquery
+
+	$("div#productAll > div#productDiv").each(function(){
+		if($(this).is(':hidden')){
+			var hiddenDivs = $(this).parent().children('div:hidden').length;
+			var totalDivs = $(this).parent().children('div').length;
 			if(hiddenDivs == totalDivs){
 				alert('주문상품이 모두 삭제되어 장바구니로 돌아갑니다');
 				window.location.href="<%=request.getContextPath()%>/cart/cartList.jsp"
 			}
 		}
-	})
-</script>
+	});
 
-<!-- 결제방법 선택에 따른 결제버튼 전환 -->
-<script>
+
+//결제창 버튼
+
 	var IMP = window.IMP;
 	IMP.init("imp58177585");
 	$("#paymentBtn").on("click",function(){
-		/* var checked = $("#card-payment").is(":checked"); */
-		/* var checked = $('input[name=payment-btn]:checked').val(); */
+		
+		$("#formData").submit();
+		
 		if($("#card-payment").is(":checked")){
-			payment_card();	
+			payment_card1();	
 		}else{
-			payment_kakao();
+			payment_kakao1();
 		}
-		/* $("#formData").submit(); */
 	});
-	
-	function payment_kakao(){
+	function payment_kakao1(){
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "223456",  			//주문번호가 들어가야함.
-			name : "강아지간식",					//결제창에 노출될 상품명
-			amount:	10800,						//결제 금액
-			buyer_email : "mkty0328@gmail.com", //주문자 email
-			buyer_name : "홍길동",				//주문자 이름
-			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 	//주문자 주소
-			buyer_postcode : "139-91",			//주문자 우편번호
-		}, function(rsp){						//callback함수
-			if(rsp.success){
-				
-				$.ajax({
-					url : "<%=request.getContextPath()%>/paydemo.do",
-					type : "POST",
-					dataType : "json",
-					data : {
-						imp_uid : rsp.imp_uid,
-                        merchant_uid : rsp.merchant_uid,
-                        paid_amount : rsp.paid_amount,
-                        apply_num : rsp.apply_num
-					},
-					success : function(data){
-						alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid);
-					}
-				});
-				
-			}else{
-				Swal.fire({
-					  title: "결제 실패",
-					  text: rsp.error_msg,
-					  icon: "error"
-					});
-				/* alert("실패 : 코드("+rsp.error_code+") / 메시지("+rsp.error_msg+")"); */
-			}
-		});
-	}
-	
-	function payment_card(){
-		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
-			pg : "kcp.AO09C",					//결제사명.PG상점아이디
-			pay_method : "card",				//지불방법
-			merchant_uid: "9234567",  			//주문번호가 들어가야함.
+			merchant_uid: "2334156",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
 			amount:	100,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
 			buyer_name : "홍길동",				//주문자 이름
 			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 	//주문자 주소
+			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
 			buyer_postcode : "139-91",			//주문자 우편번호
 		}, function(rsp){						//callback함수
 			if(rsp.success){
 				
 				$.ajax({
-					url : "<%=request.getContextPath()%>/paydemo.do",
+					url : "<%=request.getContextPath()%>/payment.do",
 					type : "POST",
 					dataType : "json",
 					data : {
 						imp_uid : rsp.imp_uid,
-                        merchant_uid : rsp.merchant_uid,
-                        paid_amount : rsp.paid_amount,
-                        apply_num : rsp.apply_num
+	                    merchant_uid : rsp.merchant_uid,
+	                    paid_amount : rsp.paid_amount,
+	                    apply_num : rsp.apply_num,
+	                    pay_method : rsp.pay_method,
+	                    paid_at : rsp.paid_at
 					},
 					success : function(data){
-						alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid);
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
+						Swal.fire({
+							  title: "결제 완료",
+							  text: "주문번호 : "+merchant_uid,
+							  icon: "success"
+						});
 					}
 				});
 				
@@ -181,12 +162,58 @@
 			}
 		});
 	}
-</script>
+	
+	function payment_card1(){
+		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
+			pg : "kcp.AO09C",					//결제사명.PG상점아이디
+			pay_method : "card",				//지불방법
+			merchant_uid: "1834567",  			//주문번호가 들어가야함.
+			name : "강아지간식",					//결제창에 노출될 상품명
+			amount:	100,						//결제 금액
+			buyer_email : "mkty0328@gmail.com", //주문자 email
+			buyer_name : "홍길동",				//주문자 이름
+			buyer_tel : "01064269887",			//주문자 전화번호
+			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
+			buyer_postcode : "139-91",			//주문자 우편번호
+		}, function(rsp){						//callback함수
+			if(rsp.success){
+				
+				$.ajax({
+					url : "<%=request.getContextPath()%>/payment.do",
+					type : "POST",
+					dataType : "json",
+					data : {
+						imp_uid : rsp.imp_uid,
+	                    merchant_uid : rsp.merchant_uid,
+	                    paid_amount : rsp.paid_amount,
+	                    apply_num : rsp.apply_num,
+	                    pay_method : rsp.pay_method,
+	                    paid_at : rsp.paid_at
+					},
+					success : function(data){
+						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
+						Swal.fire({
+						  title: "결제 완료",
+						  text: "결제에 성공했습니다",
+						  icon: "success"
+						});
+					}
+				});
+				
+			}else{
+				Swal.fire({
+					  title: "결제 실패",
+					  text: rsp.error_msg,
+					  icon: "error"
+				});
+				/* alert("실패 : 코드("+rsp.error_code+") / 메시지("+rsp.error_msg+")"); */
+			}
+		});
+	}
 
 
-<!-- 주소입력창 daum지도주소 api 적용 js --> 	
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+//주소입력창 daum지도주소 api 적용 js
+
     function addrBtnAction() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -234,4 +261,3 @@
             }
         }).open();
     }
-</script>

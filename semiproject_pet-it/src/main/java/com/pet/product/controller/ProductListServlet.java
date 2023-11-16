@@ -23,8 +23,73 @@ public class ProductListServlet extends HttpServlet {
 		/*
 		 * System.out.println(names); response.getWriter().append('o');
 		 */
+
+		int cPage;
+
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage = 1;
+		}
+		int pageBarSize = 5;
+		int numPerpage = 9;
+		int totalData = new ProductService().getProductCount();
+		int totalPage = (int)Math.ceil((double)totalData/numPerpage);
+		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd = pageNo*pageBarSize+1;
 		
-		response.sendRedirect(request.getContextPath()+"/product/productlist.jsp");
+		List<Product> products = new ArrayList<>();
+		products = new ProductService().selectProductListAll(cPage,numPerpage);
+		List<ProductImageFile> files = new ProductService().selectMainImageFileAll();
+		for(ProductImageFile f : files) {
+			System.out.println(f);
+		}
+		
+		StringBuilder pageBar = new StringBuilder();
+		
+		pageBar.append("<ul class='pagination justify-content-center'>");
+		
+//		String pageBar = "<ul class='pagination justify-content-center'>";
+		
+		if(pageNo==1) {
+//			pageBar += "<li calss = 'page-item disabled'><a class='page-link' href='#'>이전</a></li>";
+			pageBar.append("<li class='page-item disabled'><a class='page-link' href='#'>이전</a></li>");
+		}else {
+//			pageBar += "<li calss = 'page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>이전</a></li>";
+			pageBar.append("<li calss = 'page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>이전</a></li>");
+		}
+		
+		while(!(pageNo>pageEnd || pageNo>totalPage)) {
+			if(pageNo==cPage) {
+//				pageBar+="<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>";
+				pageBar.append("<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>");
+			}else {
+//				pageBar+="<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageBar.append("<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"'>"+pageNo+"</a></li>");
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+//			pageBar+="<li class='page-item disabled'><a class='page-link' href='#'>다음</a></li>";
+			pageBar.append("<li class='page-item disabled'><a class='page-link' href='#'>다음</a></li>");
+		}else {
+//			pageBar+="<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"'>다음</a></li>";
+			pageBar.append("<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"'>다음</a></li>");
+		}
+		
+//		pageBar+="</ul>";
+		pageBar.append("</ul>");
+		
+			
+		if(!products.isEmpty()) {
+			request.setAttribute("products", products);
+			request.setAttribute("pageBar", pageBar);	
+			request.setAttribute("files", files);
+		}
+		
+		request.getRequestDispatcher("/views/product/productlist.jsp").forward(request, response);
+		
 		
 	}
 

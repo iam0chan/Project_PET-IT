@@ -1,4 +1,4 @@
-package com.pet.faq.controller;
+ackage com.pet.faq.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -66,3 +66,4 @@ public class FaqAdminPageServlet extends HttpServlet {
 	}
 
 }
+

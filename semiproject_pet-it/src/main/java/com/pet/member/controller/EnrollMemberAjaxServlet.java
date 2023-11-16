@@ -1,25 +1,23 @@
 package com.pet.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class EnrollMemberAjaxServlet
  */
-@WebServlet("/logout.do")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/ajax/enrollmember.do")
+public class EnrollMemberAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public EnrollMemberAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,13 +26,9 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
 		
-		if(session!=null) {
-			session.invalidate();
-		}
-		
-		response.sendRedirect(request.getContextPath());
+		response.setContentType("text/plain;charset=utf-8");
+		response.getWriter().print("하이");
 	}
 
 	/**

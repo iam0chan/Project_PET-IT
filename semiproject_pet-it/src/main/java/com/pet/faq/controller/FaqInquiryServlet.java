@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.pet.faq.controller;
 
 import java.io.IOException;
@@ -101,3 +102,4 @@ public class FaqInquiryServlet extends HttpServlet {
 	}
 
 }
+

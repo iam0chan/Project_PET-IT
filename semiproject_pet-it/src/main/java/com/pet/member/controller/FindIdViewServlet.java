@@ -27,7 +27,7 @@ public class FindIdViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.sendRedirect(request.getContextPath()+"/member/findId.jsp");
+		response.sendRedirect(request.getContextPath()+"/views/member/findId.jsp");
 	}
 
 	/**

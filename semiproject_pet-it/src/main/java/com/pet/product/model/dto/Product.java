@@ -1,22 +1,25 @@
 package com.pet.product.model.dto;
 
+import java.sql.Date;
+
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
 public class Product {
-	/*
-	 * PRODUCT_NO VARCHAR2(20) PRIMARY KEY, CATEGORY_NO VARCHAR2(10) NOT NULL
-	 * CONSTRAINT FK_PRODUCT_CATEGORY_NO REFERENCES CATEGORY(CATEGORY_NO), TYPE_NO
-	 * VARCHAR2(10) NOT NULL CONSTRAINT FK_TYPE_NO REFERENCES TYPE(TYPE_NO),
-	 * PRODUCT_NAME VARCHAR2(100) NOT NULL, PRODUCT_PRICE NUMBER NOT NULL CONSTRAINT
-	 * CK_PRICE CHECK (PRODUCT_PRICE>=0), PRODUCT_STOCK NUMBER NOT NULL CONSTRAINT
-	 * CK_SOTCK CHECK (PRODUCT_STOCK>=0), PRODUCT_TOTAL_SALES NUMBER DEFAULT 0
-	 * CONSTRAINT CK_TOTAL_SALES CHECK(PRODUCT_TOTAL_SALES>=0), PRODUCT_INFO
-	 * VARCHAR2(200) NOT NULL, PRODUCT_ENROLL_DATE DATE DEFAULT SYSDATE,
-	 * PRODUCT_ENROLL_STATUS VARCHAR2(3) DEFAULT 'Y' CHECK (PRODUCT_ENROLL_STATUS IN
-	 * ('Y', 'N')), PRODUCT_OPTION_STATUS VARCHAR2(3) DEFAULT 'N', PRODUCT_DISCOUNT
-	 * VARCHAR2(10), PRODUCT_POINT NUMBER
-	 */
+   private String productNo;
+   private String cateogryNo; // 대분류
+   private String typeNo; //상품타입
+   private String productName;
+   private int productPrice;
+   private int productStock;
+   private int productTotalSales;
+   private String productInfo;
+   private Date productEnrollDate;
+   private String productEnrollStatus;
+   private String productOptionStatus;
+   private String productDiscount;
+   private int prouctPoint;
+   private String productContent;
 }

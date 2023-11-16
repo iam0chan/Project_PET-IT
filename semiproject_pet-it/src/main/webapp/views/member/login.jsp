@@ -4,22 +4,51 @@
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+	* {
+	font-family: 'Noto Sans KR', sans-serif;
+	}
+	#container{
+		margin-top:50px;
+	}
+	
+	.login-container{
+	
+		margin-top:20px;
+	}
 	body {
         box-sizing: border-box;
+        line-height:40px;
     }
     
 	section {
         text-align:center;
         width: 350px;
 	    max-width: 1000px;
-	    height: 600px;
-	    padding: 20px;
+	    height: 550px;
+	    padding: 0 20px;
 	    margin: 0px auto;
 	    background: white;
+	    /* border:1px solid lightgray; */
     }
+    
+    /* section>*{
+  	width: 50px;
+ 	 height: 50px;
+  	background-color: red;
+  /* 상하좌우 정중앙 정렬하기 */
+  	position: absolute;
+  	top: 50%;
+ 	 left: 50%;
+  	margin: -25px 0 0 -25px; /* 자식 요소 전체를 중앙 정렬하기 위해, 상단 및 왼쪽 margin을 마이너스 값으로 적용하기 */	
+	} */
+
     .form-group {
-        margin-bottom: 10px;
+        margin-top: 20px;
+        
     }
 
     .input-field {
@@ -30,50 +59,79 @@
     .btn {
         width: 100%;
         height: 35px;
+        margin-bottom : 10px;
     }
 
     .find-member {
-        margin-top:0px;
+        margin-bottom:0px;
+        display:flex;
+		justify-content: end;       
     }
 
     .find-member a {
-        margin-right: 15px;
+        font-size: 14px;
+        margin: auto;
+        padding:0px 5px;
+		color:black;    
+        
+    }
+	.find-member .find-memberId>a{
+		border-right:1px solid lightgray
+	}
+	
+    .find-member .find-memberId,.find-member .find-memberPw{
+    	
     }
     
+    .sns-login * {
+    	margin-bottom : 10px;
+    	border-radius: 0.25rem;
+    	width:300px;
+    	height:43px;
+    }
+    
+    .sns-login div {
+    	padding:0px;
+    }
     
     hr{
+    	background-color:lightgray;
     	margin-bottom : 20px;
     }
 </style>
 
+<%if(loginMember==null){ %>
 <section id=container>
 		<div class="login-container">
-        <h2>로그인</h2>
+        <h5 style="font-weight: bold; margin-bottom:30px;">로그인</h5>
         <form id="loginFrm" action="<%=request.getContextPath()%>/login.do" method="post">
             <div class="form-group">
-                <input type="text" name="userId" placeholder="아이디" class="form-control" style="width:300px;">
+                <input type="text" name="memberId" placeholder="아이디" class="form-control" style="width:300px;">
             </div>
             <div class="form-group">
-                <input type="password" name="password" placeholder="비밀번호" class="form-control" style="width:300px;">
+                <input type="password" name="memberPw" placeholder="비밀번호" class="form-control" style="width:300px;">
             </div>
-            <input type="submit" class="btn btn-primary btn-sm" style="width:300px; height:35px;" value="로그인">
+           	<div class="find-member">
+		        <div class="find-memberId">
+		            <a class="forgot-id" href="<%=request.getContextPath()%>/find/id.do">아이디 찾기</a>
+		        </div>
+		        <div class="find-memberPw">
+		            <a class="forgot-pw" href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a>
+	            </div>
+	        </div>
+            <input type="submit" class="btn btn-primary btn-sm" style="width:300px; height:43px;" value="로그인">
         </form>
-        <input type="button" class="btn btn-outline-primary" style="width:300px; height:35px" onclick="location.assign('<%=request.getContextPath()%>/enrollView.do');"
+        <input type="button" class="btn btn-outline-primary" style="width:300px; height:43px" onclick="location.assign('<%=request.getContextPath()%>/enrollView.do');"
         	value="회원가입">
-        <div class="find-member">
-            <a class="forgot-id" href="<%=request.getContextPath()%>/find/id.do">아이디 찾기</a>
-            <a class="forgot-pw" href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a>
-        </div>
-        <hr>
+        <hr>	
         <div class="sns-login">
-            <h4 style="font-size:18px">SNS간편 로그인</h4>
-            <a href="javascript:kakaoLogin()"><img src="<%=request.getContextPath()%>/img/kakao_login.png" style="width: 300px"></a>
-            <div id="naver_id_login"><img src="<%=request.getContextPath()%>/img/naver_login.png" style="width: 300px; height:45px"></div>
+            <div class="btn kakao_id_login"><a href="javascript:kakaoLogin()"><img src="<%=request.getContextPath()%>/img/kakao_login.png"></a></div>
+            <div class="btn naver_id_login"><a><img src="<%=request.getContextPath()%>/img/naver_login.png"></a></div>
             <!-- <span class="btn btn-success" style="width:300px; height:45px">네이버 로그인</span> -->
         </div>
     </div>
 </section>
-
+<%} %>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 /* 카카오 로그인 */
@@ -106,4 +164,5 @@ function kakaoLogin() {
 	naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
 </script>
+
 <%@ include file="/views/footer.jsp"%>
