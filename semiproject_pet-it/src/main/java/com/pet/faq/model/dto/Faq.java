@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.pet.faq.model.dto;
 
 import lombok.Builder;
@@ -32,4 +31,4 @@ public class Faq {
 	private String faqContent;
 
 }
->>>>>>> branch 'dev' of https://github.com/iam0chan/project_PET-IT.git
+

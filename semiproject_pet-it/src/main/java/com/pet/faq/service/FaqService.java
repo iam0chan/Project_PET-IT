@@ -75,4 +75,4 @@ public class FaqService {
 		
 		
 }
->>>>>>> branch 'dev' of https://github.com/iam0chan/project_PET-IT.git
+
