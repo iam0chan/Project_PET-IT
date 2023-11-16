@@ -27,3 +27,5 @@ replay_pid*
 /.settings/
 /src/main/resources/
 /src/main/webapp/WEB-INF/classes/
+
+/bin/

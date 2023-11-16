@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product"%>
 <%@ include file="/views/header.jsp" %>
+<%
+	Product p = (Product)request.getAttribute("product");
+	int discountPrice = (int)(request.getAttribute("discountPrice"));
+%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productview.css"/>
     <div class="wrapper">
         <div class="item-info-container">
@@ -14,17 +18,22 @@
                 </div> -->
             </div>
             <div class="item-info">
-                <div class="info item-title">
-                    <h1>노을이가 좋아하는 간식</h1>
-                    <p>구름이가 질투할만한 노을이 간식</p>
+                <div class="info item-tit2le">
+                    <h1><%=p.getProductName() %></h1>
+                    <p><%=p.getProductInfo() %></p>
                 </div>
                 <div class="info item-price-info">
-                    <h3>10,900원(할인가 9,900원)</h3>
+                	<%if(p.getProductDiscount()!=null){ %>
+                		<input class="price" id=<%=discountPrice%> style="display:none;">
+                		<h3><%=p.getProductPrice()%>원 (할인가<%=discountPrice%>원)</h3>
+                	<%}else{ %>
+                    	<input class="price" id=<%=p.getProductPrice()%> style="display:none;">
+                    	<h3><%=p.getProductPrice()%>원</h3>
+                    <%} %>
                 </div>
                 <div class="info item-simple-description">
                     <sapn>
-                    	어찌합니까~~~
-                    	어떻게할까요~~~
+                    	<%=p.getProductInfo()%>
                     </sapn>
                 </div>
               
@@ -42,7 +51,8 @@
                         <button id="btn-r" style="width: 20px;">+</button>
                     </div>
                 </div>
-                <div class="info total-price"><span>총 금액 <strong>10900</strong>원</span></div>
+                <div class="info total-price"><span>총 금액 <%if(p.getProductDiscount()==null){%><strong><%=p.getProductPrice()%></strong>원<%} else{
+                %><strong><%=discountPrice%></strong>원<%} %></span></div>
                 <input id="price" type="hidden" value="10900">
                 <div class="info button-container">
                     <button class="btn btn-outline-success">구매하기</button>
@@ -73,7 +83,7 @@
             <div class="description-header">
                 <div>
                     <ul>
-                        <a href="#check1" class=""><li>상품상세정보</li></a>
+                        <a href="#check1" class=""><li style="background-color:#ccc; color:white;">상품상세정보</li></a>
                         <a href="#check2" class=""><li>상품구매안내</li></a>
                         <a href="#check3" class=""><li>구매후기</li></a>
                     </ul>
@@ -86,9 +96,7 @@
             	</style>
             <a id="check1"></a>
             <div class="item-description">
-            	
-                <!-- <img src="https://naturalcore.co.kr/detail/dog/feed/mystew_dv.jpg" alt=""> -->
-                <p><img src="/semiproject_pet-it/upload/pxfuel.jpg" alt="사진 대체 텍스트 입력" contenteditable="false"><img src="/semiproject_pet-it/upload/pxfuel1.jpg" alt="사진 대체 텍스트 입력" contenteditable="false"><br></p>
+            	<%=p.getProductContent()%>
             </div>
         </div>
         <div class="item-instruction">
@@ -96,7 +104,7 @@
                 <div>
                    <ul>
                         <a href="#check1" class=""><li>상품상세정보</li></a>
-                        <a href="#check2" class=""><li>상품구매안내</li></a>
+                        <a href="#check2" class=""><li style="background-color:#ccc; color:white;">상품구매안내</li></a>
                         <a href="#check3" class=""><li>구매후기</li></a>
                     </ul>
                 </div>
@@ -185,7 +193,7 @@
                     <ul>
                         <a href="#check1" class=""><li>상품상세정보</li></a>
                         <a href="#check2" class=""><li>상품구매안내</li></a>
-                        <a href="#check3" class=""><li>구매후기</li></a>
+                        <a href="#check3" class=""><li style="background-color:#ccc; color:white;">구매후기</li></a>
                     </ul>
                 </div>
             </div>
@@ -269,7 +277,7 @@
        	
        	const value = $("#product-order-amount");
        	const price = $(".total-price>span>strong"); 
-       	const oriPrice = $('#price').val();
+       	const oriPrice = $('.price').prop("id");
        	var num = Number(value.val());
        	$("#btn-r").click(function(){
        		if(num<=99){
