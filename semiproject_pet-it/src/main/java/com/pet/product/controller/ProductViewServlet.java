@@ -29,7 +29,7 @@ public class ProductViewServlet extends HttpServlet {
 				int discountPrice = (int)(product.getProductPrice()-(product.getProductPrice()*Double.parseDouble(product.getProductDiscount())));
 				request.setAttribute("discountPrice", discountPrice);
 			}
-			request.getRequestDispatcher("/product/productView.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/product/productView.jsp").forward(request, response);
 		}else {
 			System.out.println("조회실패!!");
 		}
