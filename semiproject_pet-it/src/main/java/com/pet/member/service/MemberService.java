@@ -17,7 +17,8 @@ private MemberDao dao = new MemberDao();
 		Member m = dao.selectMemberByIdAndPw(conn, memberId, memberPw);
 		close(conn);
 		return m;
-}
+	}
+
 	public int insertMember(Member m) {
 		Connection conn = getConnection();
 		int result=dao.insertMember(conn, m);

@@ -43,8 +43,8 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("/").forward(request, response);
 		}else {
 			request.setAttribute("msg", "아이디, 패스워드를 확인해주세요.");
-			request.setAttribute("loc", "/member/login.jsp");
-			request.getRequestDispatcher("/member/loginErr.jsp").forward(request, response);
+			request.setAttribute("loc", "/views/member/login.jsp");
+			request.getRequestDispatcher("/views/member/loginErr.jsp").forward(request, response);
 		}
 	}
 

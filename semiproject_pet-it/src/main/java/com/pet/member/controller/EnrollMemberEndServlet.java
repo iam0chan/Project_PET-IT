@@ -79,7 +79,7 @@ public class EnrollMemberEndServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 	
-		request.getRequestDispatcher("/member/loginErr.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/loginErr.jsp").forward(request, response);
 	}
 
 	/**

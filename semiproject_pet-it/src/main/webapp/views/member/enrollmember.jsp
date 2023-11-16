@@ -78,9 +78,10 @@
 					<input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" >
 				</span>
 				<div>
-					<button type="button">
+					<button type="button" id="id_du">
 						<span>중복확인</span>
 					</button>
+					<span id="id_du_span"></span>
 				</div>
 			</div>
 			<div class="field_pw">
@@ -154,6 +155,26 @@
             $('.checkbox-group input[type="checkbox"]').prop('checked', isChecked);
         });
     });
+    var id_ck = 0;
+    $("#id_du").click(e=>{
+    	
+    	var memberId=$("userid").val();
+    	
+    	$.ajax({
+    		url:"<%=request.getContextPath()%>/ajax/enrollmember.do",
+    		type:"post",
+    		success:data=>{
+    			function(data){
+    				if(data.cnt)
+    			}
+    		},
+    		error:(r,e)=>{
+    			console.log(r);
+    			console.log(r.status);
+    			console.log(e);
+    		}
+    	})
+    });
     </script>
 </form>
 </div>
@@ -223,5 +244,3 @@
     }
 </script>
 <%@ include file="/views/footer.jsp" %>
-
-    	

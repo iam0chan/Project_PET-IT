@@ -164,4 +164,5 @@ function kakaoLogin() {
 	naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
 </script>
+
 <%@ include file="/views/footer.jsp"%>
