@@ -29,7 +29,7 @@ public class ProductListServlet extends HttpServlet {
 		 * System.out.println(names); response.getWriter().append('o');
 		 */
 		int cPage;
-		response.sendRedirect(request.getContextPath()+"/product/productlist.jsp");
+		
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -92,7 +92,7 @@ public class ProductListServlet extends HttpServlet {
 			request.setAttribute("files", files);
 		}
 		
-		request.getRequestDispatcher("/product/productlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productlist.jsp").forward(request, response);
 		
 		
 	}
