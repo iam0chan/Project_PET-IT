@@ -1,82 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<!-- header -->
 <%@ include file="/views/header.jsp"%>
 
+<!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<!-- PortOne SDK -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- Sweet alert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- daum address api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/orderPay/orderPay.css"/>
 
-<style>
-	#content-container {
-		margin : 0 auto;
-		font-family:'G마켓 산스';
-		align-items:center;
-		width :55%;
-
-	
-	#title-container {
-        display: flex;
-        align-items: center;
-        margin-top : 80px;
-        margin-bottom: 20px;
-        /* background-color : #F0FFF0; */
-        height : 100px;
-    }
-        
-    #title-text {
-    	display : flex;
-    	text-align : center;
-    	align-items : center;
-    	/* border : 1px solid red; */
-    	margin : 0 auto;
-    	font-size : 1.5rem;
-    }
-    .btn-text{
-    	font-size:1.5rem; 
-    	color:black;
-    	
-    }
-    
-    
-    .accordion-body{
-    	
-    	background-color : #F2F2F2;
-	    
-    }
- 
-	#product-info>li{
-		 list-style-type : none
-	}
-
-    .productDiv{
-    	
-    	display:flex;
-    	align-items : center;
-    }
-    .couponDiv,.discountDiv{
-    	
-    	display:flex;
-    	align-items : center;
-    }
-    
-	.modal{ 
-	  position:absolute; 
-	  width:100%; 
-	  height:100%;
-	  background: rgba(0,0,0,0.8); 
-	  top:0; left:0; 
-	  display:none;
-	}
-	
-	.coupon_modal{
-	  width:400px; height:300px;
-	  background:#fff; border-radius:10px;
-	  position:relative; top:50%; left:50%;
-	  margin-top:-100px; margin-left:-200px;
-	  text-align:center;
-	  box-sizing:border-box; padding:74px 0;
-	  line-height:23px; cursor:pointer;
-	}
-    
-</style>
 
 <div id="content-container">
 	<section id="header-section">
@@ -89,7 +30,8 @@
 	
 	<section id="body-section">
 	
-		<form action="<%=request.getContextPath()%>/" id="formData">
+	<!-- -----------------주문자정보 입력폼 start--------------- -->
+		<form action="<%=request.getContextPath()%>/payment.do" id="formData">
 			
 			<div class="accordion" id="accordion-container">
 			  <div class="accordion-item">
@@ -101,7 +43,7 @@
 			    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
 			      
 			      <div class="accordion-body">
-		      		<table id="addr-form" style="width:100%">
+		      		<table id="addr-form">
 			      		<tr>
 				      		<td style="font-size:1.15rem; text-align:center;">받는 사람 <strong>*</strong></td>
 				      		<td>
@@ -180,6 +122,10 @@
 			      </div>
 			    </div>
 			  </div>
+		  
+		<!-- -----------------주문자정보 입력폼 end--------------- -->
+		
+		<!-- ----------------상품정보 start -------------------- -->	  
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingTwo">
 			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -215,6 +161,9 @@
 			      </div>
 			    </div>
 			  </div>
+		<!-- ----------------상품정보 end -------------------- -->
+		
+		<!-- ----------------쿠폰/적립금 start -------------------- -->
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingThree">
 			      <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -224,7 +173,7 @@
 			    <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
 			      <div class="accordion-body">
 			      	<div class="couponDiv">
-				         <div style="width:20%; text-align:center;">
+				         <div class="couponTitle"style="width:20%; text-align:center;">
 				       		<span style="font-size:1.1rem"><b>쿠폰 할인</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
@@ -242,7 +191,7 @@
 				       		<span style="font-size:1.1rem;"><b>적립금 적용</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
-						 	<input type="text" class="form-control" placeholder="사용금액 입력">
+						 	<input type="text" class="form-control" name="pointUse" placeholder="사용금액 입력">
 						 	<button class="btn btn-outline-success" id="pointBtn" type="button">적립금 사용</button>
 						 </div>
 				      	 <div style="width:5%; text-align:left"></div>
@@ -258,6 +207,9 @@
 			      	</div>
 			    </div>
 			  </div>
+		  <!-- ----------------쿠폰/적립금 end -------------------- -->
+			  
+		<!-- ----------------total price start -------------------- -->
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingFour">
 			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
@@ -270,6 +222,7 @@
 			        	<tr>
 				        	<td style="width:5%"></td>
 				        	<td style="width:70%"><p><b>총 상품 금액</b></p></td>
+				        	
 				        	<td style="width:15%; text-align:right"><p><span id="allProductPrice">0</span>원</p></td>
 				        </tr>
 				        <tr>
@@ -290,11 +243,15 @@
 			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>최종결제금액</b></span>
 			      	</div>
 			      	<div style="margin-left:60px; width:20%; text-align:center;">
+			      		<input type="hidden" name="finalPrice" value="">
 			      		<p style="line-height:50px; vertical-align:middle; font-size:1.3rem; font-weight:bolder"><span id="allPayCost"></span>원</p>
 			      	</div>
 			      </div>
 			    </div>
 			  </div>
+		  <!-- ----------------total price end -------------------- -->
+		  
+		  <!-- ----------------payment choice start -------------------- -->
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingFive">
 			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
@@ -328,6 +285,9 @@
 			        </div>  		        
 			      </div>
 			    </div>
+			<!-- ----------------payment choice end -------------------- -->
+			
+			<!-- ----------------point start -------------------- -->        
 				    <div class="accordion-item">
 					    <h2 class="accordion-header" id="headingSix">
 					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
@@ -347,21 +307,21 @@
 				          </div>  		        
 				      	</div>
 			    	</div>
+				</form>
+	    	<!-- ----------------point end -------------------- -->
+	    	
 			      <br>
 			      	<div class="d-grid gap-2">
 					  <input id="paymentBtn" class="btn btn-primary btn-lg btn-success" type="button" value="결제하기">
 					</div>
 			  </div>
 			</div>
-		</form>
 	</section>
 </div>
 
-<!-- js 묶음 -->
-<%@ include file="/js/orderPayJs.jsp" %>
 
+<!-- js -->
+<script src="<%=request.getContextPath()%>/js/orderPay.js"></script>
 
-   
-
-
+<!-- footer -->
 <%@ include file="/views/footer.jsp"%>
