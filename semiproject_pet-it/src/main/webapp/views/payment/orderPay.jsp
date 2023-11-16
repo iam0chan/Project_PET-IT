@@ -221,7 +221,6 @@
 			        	<tr>
 				        	<td style="width:5%"></td>
 				        	<td style="width:70%"><p><b>총 상품 금액</b></p></td>
-				        	
 				        	<td style="width:15%; text-align:right"><p><span id="allProductPrice">0</span>원</p></td>
 				        </tr>
 				        <tr>
