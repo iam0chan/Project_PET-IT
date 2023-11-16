@@ -6,7 +6,7 @@
 <!-- TUI 에디터 CSS CDN -->
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productenroll.css"/>
-<!-- <script	src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script> -->
+<!-- <script   src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script> -->
 <style>
 	#image-box{
 		border: 1px solid #04aa6d;
@@ -231,69 +231,70 @@ $("#main-image").change(e=>{
         
         $("input[type=button]").on("click",function(){
           	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px, height=500px, top=50, left=300");
+
         })
         let count = 0;
-     	$("#option-btn").on("click",(e)=>{
-        	if(count<2){
-        	const optionBox = $(".detail-container-r");
-        	const test = $("<div class='enroll-content-container '></div>");
-        	const test2 = $("<div class='enrollpage-title'></div>");
-        	const test3 = $("<div class='enrollpage-content new-option'></div>");
-        	$(test).append(test2);
-        	$(test).append(test3);
-        	const inputName = $('<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" />');
-        	$(test3).append(inputName);
-        	const inputPrice = $('<input type="number" name="optionPrice" id="optionPrice" placeholder="가격" />');
-        	$(test3).append(inputPrice);
-        	$(optionBox).append(test);
-        	++count;
-     		}
+        $("#option-btn").on("click",(e)=>{
+           if(count<2){
+           const optionBox = $(".detail-container-r");
+           const test = $("<div class='enroll-content-container '></div>");
+           const test2 = $("<div class='enrollpage-title'></div>");
+           const test3 = $("<div class='enrollpage-content new-option'></div>");
+           $(test).append(test2);
+           $(test).append(test3);
+           const inputName = $('<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" />');
+           $(test3).append(inputName);
+           const inputPrice = $('<input type="number" name="optionPrice" id="optionPrice" placeholder="가격" />');
+           $(test3).append(inputPrice);
+           $(optionBox).append(test);
+           ++count;
+           }
         });
       
-        $("#enroll-itemcontent-btn").on("click",function(){ 	
-        	$(".modal").css("display","block").css("top","230px");
-           	           	
-           	$(".modal-footer>.btn:nth-child(1)").click(function(){
-           		console.log("이벤트발생");
-           		$(".modal").css("display","none");
-           	})
-           	
-           	$(".modal-footer>.btn:nth-child(2)").click(function(){
-           		console.log("이벤트발생");
-           		const editorData = editor.getHTML();
-           		$(".modal").css("display","none");
-           	 	$("#product-content").val(editorData);
-           		const formdata = $(".product-enroll-container").serialize();
-            	$(".product-enroll-container>form").submit();
+        $("#enroll-itemcontent-btn").on("click",function(){    
+           $(".modal").css("display","block").css("top","230px");
+                            
+              $(".modal-footer>.btn:nth-child(1)").click(function(){
+                 console.log("이벤트발생");
+                 $(".modal").css("display","none");
+              })
+              
+              $(".modal-footer>.btn:nth-child(2)").click(function(){
+                 console.log("이벤트발생");
+                 const editorData = editor.getHTML();
+                 $(".modal").css("display","none");
+                  $("#product-content").val(editorData);
+                 const formdata = $(".product-enroll-container").serialize();
+               $(".product-enroll-container>form").submit();
          
-              	
-           		<%-- location.href='<%=request.getContextPath()%>/product/productlist.jsp'; --%>
-           		/* ajax or get-> queryString방식으로 product# 넘기기 ,  */
-           	})
-        	
-           	
-        	/* console.log(formdata); */
-        	/* alert("asd"); */
-        	const optionArr = [];
-        	$.each($(".option>input[name=optionName]"),(i,e)=>{
-        		/* console.log($(e).val()); */
-        		optionArr.push($(e).val());
-        		console.log(optionArr);
-        	})
-        	/* header, body로 나눠서 보낸다. real!!! */
-        	<%-- $.ajax({
-        		url:'<%=request.getContextPath()%>/productListServlet.do',
-        		type:"get",
-        		data:formdata, /* json은 아님 */
-        		/* contentType: 'application/json; charset=utf-8', */
-        		success:data=>{
-        			console.log(data);
-        		},
-        		error:(r,e)=>{
-        			console.log(r);
-        			console.log(e);
-        		}
-        	}); --%>
+                 
+                 <%-- location.href='<%=request.getContextPath()%>/product/productlist.jsp'; --%>
+                 /* ajax or get-> queryString방식으로 product# 넘기기 ,  */
+              })
+           
+              
+           /* console.log(formdata); */
+           /* alert("asd"); */
+           const optionArr = [];
+           $.each($(".option>input[name=optionName]"),(i,e)=>{
+              /* console.log($(e).val()); */
+              optionArr.push($(e).val());
+              console.log(optionArr);
+           })
+           /* header, body로 나눠서 보낸다. real!!! */
+           <%-- $.ajax({
+              url:'<%=request.getContextPath()%>/productListServlet.do',
+              type:"get",
+              data:formdata, /* json은 아님 */
+              /* contentType: 'application/json; charset=utf-8', */
+              success:data=>{
+                 console.log(data);
+              },
+              error:(r,e)=>{
+                 console.log(r);
+                 console.log(e);
+              }
+           }); --%>
         })
    
   
