@@ -77,7 +77,7 @@ public class PaymentServlet extends HttpServlet {
 	    
 	    request.setAttribute("payment", p);
 	    request.setAttribute("order", o);
-	    request.getRequestDispatcher("/payment/orderPayComplete.jsp").forward(request, response);
+	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp").forward(request, response);
 		
 	}
 
