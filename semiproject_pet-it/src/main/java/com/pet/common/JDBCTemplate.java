@@ -30,18 +30,11 @@ public class JDBCTemplate {
 	public static void close(Object conn) {
 		try {
 			if(conn!=null) {
-<<<<<<< HEAD
-				if(conn instanceof Connection) {
-					((Connection)conn).close();
-				}else if(conn instanceof Statement) {
-=======
-
 				if(conn instanceof Connection&&!((Connection) conn).isClosed()) {
 					((Connection)conn).close();
 				}else if(conn instanceof Statement && !((Statement) conn).isClosed()) {
->>>>>>> branch 'dev' of https://github.com/iam0chan/project_PET-IT.git
 					((Statement)conn).close();
-				}else if(conn instanceof ResultSet) {
+				}else if(conn instanceof ResultSet && !((ResultSet) conn).isClosed()) {
 					((ResultSet)conn).close();
 				}
 			}	

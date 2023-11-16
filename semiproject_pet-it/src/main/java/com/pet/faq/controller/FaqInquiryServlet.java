@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.pet.faq.controller;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-ackage com.pet.faq.controller;
+package com.pet.faq.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
