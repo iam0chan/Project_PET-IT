@@ -4,7 +4,6 @@ import static com.pet.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.channels.SelectableChannel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,13 +70,34 @@ public class FaqDao {
     	
     }
     
-    
+    //전체출력 페이징처리 전체 데이터 수 
     public int selectFaqCount(Connection conn) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         int result = 0;
         try {
             pstmt = conn.prepareStatement(sql.getProperty("selectFaqCount"));
+            rs = pstmt.executeQuery();
+            if (rs.next()) result = rs.getInt(1);
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return result;
+    }
+
+    
+    //카테고리별 전체 데이터수 =페이징처리
+    public int selectFaqCountByCategory(Connection conn, String category) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            pstmt = conn.prepareStatement(sql.getProperty("selectFaqCountByCategory"));
+            pstmt.setString(1, category);
             rs = pstmt.executeQuery();
             if (rs.next()) result = rs.getInt(1);
         } catch (SQLException e) {
@@ -90,6 +110,9 @@ public class FaqDao {
         return result;
     }
     
+    
+    
+    
     public List<Faq> selectFaqCategory(Connection conn, int cPage, int numPerpage, String category){
     	PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -97,9 +120,9 @@ public class FaqDao {
 
         try {
             pstmt = conn.prepareCall(sql.getProperty("selectFaqCategory"));
-            pstmt.setInt(1, (cPage - 1) * numPerpage + 1);
-            pstmt.setInt(2, cPage * numPerpage);
-            pstmt.setString(3, category);
+            pstmt.setString(1, category);
+            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+            pstmt.setInt(3, cPage * numPerpage);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 result.add(getFaq(rs));
@@ -114,12 +137,43 @@ public class FaqDao {
         return result;
     }
    
-    
-    
-    
-    
-    
+    public List<Faq> searchFaqByMenu(Connection conn, String subject, String content, int cPage, int numPerPage) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Faq> result = new ArrayList<>();
+        String query = sql.getProperty("searchFaqByMenu");
+        query = query.replace("#COL", subject); //title -> subject 변경해야함
 
+        try {
+            pstmt = conn.prepareStatement(query);
+           // pstmt.setString(1, title); // 필요없고
+            pstmt.setString(2, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
+            pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
+            pstmt.setInt(4, cPage * numPerPage);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(searchFaq(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+
+        return result;
+    }
+
+    private Faq searchFaq(ResultSet rs) throws SQLException {
+        return Faq.builder()
+                .faqTitle(rs.getString("FAQ_TITLE"))
+                .faqContent(rs.getString("FAQ_CONTENT"))
+                .build();
+    }
+    
+  
     private Faq getFaq(ResultSet rs) throws SQLException {
         return Faq.builder()
                 .faqNo(rs.getString("FAQ_NO"))

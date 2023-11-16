@@ -11,15 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pet.product.model.dto.Product;
+import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.service.ProductService;
 
-
-@WebServlet("/productList.do")
+@WebServlet("/productListServlet.do")
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		/* String names = request.getParameter("imageId"); */
+		/*
+		 * for(String n : names) { System.out.println(n); }
+		 */
+		/*
+		 * System.out.println(names); response.getWriter().append('o');
+		 */
 		int cPage;
 		
 		try {
@@ -36,6 +44,10 @@ public class ProductListServlet extends HttpServlet {
 		
 		List<Product> products = new ArrayList<>();
 		products = new ProductService().selectProductListAll(cPage,numPerpage);
+		List<ProductImageFile> files = new ProductService().selectMainImageFileAll();
+		for(ProductImageFile f : files) {
+			System.out.println(f);
+		}
 		
 		StringBuilder pageBar = new StringBuilder();
 		
@@ -77,9 +89,10 @@ public class ProductListServlet extends HttpServlet {
 		if(!products.isEmpty()) {
 			request.setAttribute("products", products);
 			request.setAttribute("pageBar", pageBar);	
+			request.setAttribute("files", files);
 		}
 		
-		request.getRequestDispatcher("/product/productlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productlist.jsp").forward(request, response);
 		
 		
 	}

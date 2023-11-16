@@ -40,8 +40,16 @@ public class FaqInquiryServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		List<Faq> faqs=new FaqService().selectFaqCategory(cPage, numPerpage,category);
-		int totalData=new FaqService().selectFaqCount();  
+		List<Faq> faqs;
+		int totalData;
+		if(category.equals("전체")) {
+			faqs=new FaqService().selectFaq(cPage, numPerpage);
+			totalData=new FaqService().selectFaqCount();  
+		}else {
+			faqs=new FaqService().selectFaqCategory(cPage, numPerpage,category);
+			totalData=new FaqService().selectFaqCountByCategory(category);  
+		}
+		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1; 
@@ -93,3 +101,4 @@ public class FaqInquiryServlet extends HttpServlet {
 	}
 
 }
+
