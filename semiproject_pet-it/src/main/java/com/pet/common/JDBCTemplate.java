@@ -30,11 +30,11 @@ public class JDBCTemplate {
 	public static void close(Object conn) {
 		try {
 			if(conn!=null) {
-				if(conn instanceof Connection) {
+				if(conn instanceof Connection && !((Connection) conn).isClosed()) {
 					((Connection)conn).close();
-				}else if(conn instanceof Statement) {
+				}else if(conn instanceof Statement && !((Statement) conn).isClosed()) {
 					((Statement)conn).close();
-				}else if(conn instanceof ResultSet) {
+				}else if(conn instanceof ResultSet && !((ResultSet) conn).isClosed()) {
 					((ResultSet)conn).close();
 				}
 			}	

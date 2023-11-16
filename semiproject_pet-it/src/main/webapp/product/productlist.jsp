@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, java.util.List"%>
+    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, java.util.List, com.pet.product.model.dto.ProductImageFile"%>
 <%@ include file="/views/header.jsp"%>
 <%  List<Product> products = (List<Product>)request.getAttribute("products"); 
     StringBuilder pageBar = (StringBuilder)request.getAttribute("pageBar");
+    List<ProductImageFile> files = (List<ProductImageFile>)request.getAttribute("files");
+    String productNo = "";
+    String no="";
 %>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productlist.css"/>
     <script>
@@ -34,30 +37,47 @@
             </div>
         </div>
         <div class="item-container">
-            <div class="sort-list">
+            <!-- <div class="sort-list">
                 <p>인기상품</p>
                 <p>조회순</p>
                 <p>신상품</p>
                 <p>금액오름차순</p>
                 <p>금액내림차순</p>
-            </div>
+            </div> -->
             <div class="container">
+            <%if(products!=null && !products.isEmpty()){ %>
 	            <%for(Product p : products){ %>
-	                <div class="card">
+	                <div class="card" id=<%=p.getProductNo()%>>
 	                    <div class="item-img">
-	                    	<img src="https://images.chosun.com/resizer/lGyzt5Hi0efXfaeVhy5gXwXHilc=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/52PNRX6QMNCRDD3QBAFB6XJJ6M.jpg"/>
+	                    <%if(files!=null && !files.isEmpty()){ %>
+	                    	<%for(ProductImageFile f : files){ %>
+	                    		<%if(p.getProductNo().equals(f.getProductNo())){ %>
+	                    		<img src="<%=request.getContextPath()%>/upload/<%=f.getProductFileRename()%>"/>
+	                    		<%} %>
+	                    	<%} %>
+	                    <%} %>
 	                    </div>
 	                    <div class="item-content">
-	                    	<p><%= p.getProductName()%></p>
-	                    	<p><%= p.getProductInfo() %></p>
+	                    	<p style="font-size:1.1rem; font-weight: bold; margin-bottom:10px;"><%= p.getProductName()%></p>
+	                    	<p style="font-size:0.8rem;"><%= p.getProductInfo() %></p>
 	                    	<p><%= p.getProductPrice() %>원</p>
+	                    	<%-- <input id="productNo" style="display:none" value="<%=p.getProductNo()%>"> --%>
 	                    </div>
 	                </div>
+	                </a>
 	    		<%} %>
+	    	<%}else{  %>
+	    	<div style="width:100%; text-align:center;">
+	    		<h3>조회된 상품 결과가 존재하지 않습니다.</h3>
+	    	</div>
+	    	<%} %>
             </div>
-            <div style="margin-bottom:25px;"> 
+            <%if(products!=null && !products.isEmpty()){ %> 
+            <div style="margin-bottom:25px;">
+            
             	<%=pageBar%>
             </div>
+           	<%} %>
             <div class="bottom-container">
                 <div class="search-bar">
                     <form class="d-flex">
@@ -88,11 +108,17 @@
  
 	$(".card").mouseenter(function(){
 		$(this).css("cursor","pointer");
+		$(this).css("border","1px solid #28A745")
 		$(this).click(function(){
-			location.href='<%=request.getContextPath()%>/product/productview.jsp';	
+			const productNo = $(this).prop("id");
+			console.log(productNo);
+			location.href='<%=request.getContextPath()%>/product/productview.do?productNo='+productNo;	
 		})
 	})
 	
+	$(".card").mouseout(function(){
+		$(this).css("border","none");
+	});    
     </script>
     
 <%@ include file="/views/footer.jsp"%>
