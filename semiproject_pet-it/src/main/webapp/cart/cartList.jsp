@@ -251,7 +251,7 @@ background-color: green;
 								style="width: 100px;"> <span class="inc qtybtn">+</span>
 						</div>
 					</td>
-					<td class="total">12,500원</td>
+					<td class="total">10,000원</td>
 
 					<td class="button"><a href="javascript:;" class="btnNormal"
 						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
@@ -274,7 +274,7 @@ background-color: green;
 								style="width: 100px;"> <span class="inc qtybtn">+</span>
 						</div>
 					</td>
-					<td class="total">12,500원</td>
+					<td class="total">10,000원</td>
 
 					<td class="button"><a href="javascript:;" class="btnNormal"
 						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
@@ -297,7 +297,7 @@ background-color: green;
 								style="width: 100px;"> <span class="inc qtybtn">+</span>
 						</div>
 					</td>
-					<td class="total">12,500원</td>
+					<td class="total">10,000원</td>
 
 					<td class="button"><a href="javascript:;" class="btnNormal"
 						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>

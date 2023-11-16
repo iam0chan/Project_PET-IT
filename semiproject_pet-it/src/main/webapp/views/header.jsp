@@ -131,7 +131,7 @@
                       </ul>
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link" href="blog.html">마이페이지</a>
+                      <a class="nav-link" href="<%=request.getContextPath() %>/myPage/mypageView.jsp">마이페이지</a>
                       <!-- <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
@@ -157,7 +157,7 @@
                     <i class="fa-solid fa-dog"></i>
                     <span>Login</span>
                   </a>
-                  <a href="">
+                  <a href="<%=request.getContextPath() %>/cart/cartList.jsp">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>장바구니</span>
                   </a>
