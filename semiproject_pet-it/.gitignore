@@ -24,10 +24,8 @@ hs_err_pid*
 replay_pid*
 
 *.properties
-.settings/
+/.settings/
 /src/main/resources/
 /src/main/webapp/WEB-INF/classes/
-.classpath
-.settings/org.eclipse.wst.common.component
-.settings/org.eclipse.wst.common.project.facet.core.xml 
+
 /bin/
