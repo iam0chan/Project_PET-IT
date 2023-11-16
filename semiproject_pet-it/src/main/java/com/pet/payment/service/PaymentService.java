@@ -15,9 +15,8 @@ public class PaymentService {
 	
 	private PaymentDao dao = new PaymentDao();
 	
-	public int insertPaymentResult(Payment p, Order o) {
+	public int insertPaymentResult(Payment p) {
 		Connection conn = getConnection();
-		int insert = dao.insertOrderResult(conn,o);
 		int result = dao.insertPaymentResult(conn,p);
 		if(result>0)commit(conn);
 		else rollback(conn);

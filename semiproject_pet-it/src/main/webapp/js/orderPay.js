@@ -110,12 +110,12 @@
 		/*$("#formData").submit();*/
 		
 		if($("#card-payment").is(":checked")){
-			payment_card1();	
+			payment_card();	
 		}else{
-			payment_kakao1();
+			payment_kakao();
 		}
 	});
-	function payment_kakao1(){
+	function payment_kakao(){
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
@@ -131,7 +131,7 @@
 			if(rsp.success){
 				
 				$.ajax({
-					url : "<%=request.getContextPath()%>/payment.do",
+					url : "/payment.do",
 					type : "POST",
 					dataType : "json",
 					data : {
@@ -163,11 +163,11 @@
 		});
 	}
 	
-	function payment_card1(){
+	function payment_card(){
 		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 			pg : "kcp.AO09C",					//결제사명.PG상점아이디
 			pay_method : "card",				//지불방법
-			merchant_uid: "1834567",  			//주문번호가 들어가야함.
+			merchant_uid: "2134567",  			//주문번호가 들어가야함.
 			name : "강아지간식",					//결제창에 노출될 상품명
 			amount:	100,						//결제 금액
 			buyer_email : "mkty0328@gmail.com", //주문자 email
@@ -179,7 +179,7 @@
 			if(rsp.success){
 				
 				$.ajax({
-					url : "<%=request.getContextPath()%>/payment.do",
+					url : "/payment.do",
 					type : "POST",
 					dataType : "json",
 					data : {
@@ -191,14 +191,14 @@
 	                    paid_at : rsp.paid_at
 					},
 					success : function(data){
-						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
-						Swal.fire({
-						  title: "결제 완료",
-						  text: "결제에 성공했습니다",
-						  icon: "success"
-						});
-					}
-				});
+							/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
+							Swal.fire({
+								  title: "결제 완료",
+								  text: "주문번호 : "+merchant_uid,
+								  icon: "success"
+							});
+						}
+					});
 				
 			}else{
 				Swal.fire({
