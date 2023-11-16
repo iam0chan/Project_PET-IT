@@ -1,6 +1,6 @@
 package com.pet.member.dao;
 
-import static com.pet.common.JDBCTemplate.close;
+import static com.pet.common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.pet.member.dao.MemberDao;
 import com.pet.member.dto.Member;
 
 public class MemberDao {
@@ -44,6 +43,32 @@ public class MemberDao {
 		}return m;
 	}
 	
+	public int insertMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertMember"));
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPw());
+			pstmt.setString(3, m.getMemberName());
+			pstmt.setString(4, m.getMemberEmail());
+			pstmt.setString(5, m.getMemberPhone());
+			pstmt.setString(6, m.getMemberZipCode());
+			pstmt.setString(7, m.getMemberAddr());
+			pstmt.setString(8, m.getMemberDetailAddr());
+			pstmt.setString(9, m.getMemberTersm());
+			pstmt.setString(10, m.getMemberAccept());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	private Member getMember(ResultSet rs) throws SQLException{
 		return Member.builder()
 				.memberId(rs.getString("member_id"))
@@ -56,7 +81,7 @@ public class MemberDao {
 				.memberDetailAddr(rs.getString("member_detail_addr"))
 				.memberDate(rs.getDate("member_date"))
 				.memberStatus(rs.getString("member_status"))
-				.memberErmsid(rs.getString("member_terms"))
+				.memberTersm(rs.getString("member_terms"))
 				.memberAccept(rs.getString("member_accept"))
 				.build();
 	}

@@ -8,7 +8,7 @@
     String productNo = "";
     String no="";
 %>
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productlist.css"/>
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productlist.css"/>
     <script>
     /*     const searchButton = document.getElementById('search-button');
         const searchInput = document.getElementById('search-input');
@@ -18,9 +18,9 @@
         }); */
         
         $(".btn").mouseenter(function(){
-        	console.log($(".btn"));
-			$(this).css("background-color","#04aa6d");
-		})
+           console.log($(".btn"));
+         $(this).css("background-color","#04aa6d");
+      })
     </script>
 <div class="product-wrapper">
         <div class="header-container">
@@ -47,38 +47,38 @@
             </div> -->
             <div class="container">
             <%if(products!=null && !products.isEmpty()){ %>
-	            <%for(Product p : products){ %>
-	                <div class="card" id=<%=p.getProductNo()%>>
-	                    <div class="item-img">
-	                    <%if(files!=null && !files.isEmpty()){ %>
-	                    	<%for(ProductImageFile f : files){ %>
-	                    		<%if(p.getProductNo().equals(f.getProductNo())){ %>
-	                    		<img src="<%=request.getContextPath()%>/upload/<%=f.getProductFileRename()%>"/>
-	                    		<%} %>
-	                    	<%} %>
-	                    <%} %>
-	                    </div>
-	                    <div class="item-content">
-	                    	<p style="font-size:1.1rem; font-weight: bold; margin-bottom:10px;"><%= p.getProductName()%></p>
-	                    	<p style="font-size:0.8rem;"><%= p.getProductInfo() %></p>
-	                    	<p><%= p.getProductPrice() %>원</p>
-	                    	<%-- <input id="productNo" style="display:none" value="<%=p.getProductNo()%>"> --%>
-	                    </div>
-	                </div>
-	                </a>
-	    		<%} %>
-	    	<%}else{  %>
-	    	<div style="width:100%; text-align:center;">
-	    		<h3>조회된 상품 결과가 존재하지 않습니다.</h3>
-	    	</div>
-	    	<%} %>
+               <%for(Product p : products){ %>
+                   <div class="card" id=<%=p.getProductNo()%>>
+                       <div class="item-img">
+                       <%if(files!=null && !files.isEmpty()){ %>
+                          <%for(ProductImageFile f : files){ %>
+                             <%if(p.getProductNo().equals(f.getProductNo())){ %>
+                             <img src="<%=request.getContextPath()%>/upload/<%=f.getProductFileRename()%>"/>
+                             <%} %>
+                          <%} %>
+                       <%} %>
+                       </div>
+                       <div class="item-content">
+                          <p style="font-size:1.1rem; font-weight: bold; margin-bottom:10px;"><%= p.getProductName()%></p>
+                          <p style="font-size:0.8rem;"><%= p.getProductInfo() %></p>
+                          <p><%= p.getProductPrice() %>원</p>
+                          <%-- <input id="productNo" style="display:none" value="<%=p.getProductNo()%>"> --%>
+                       </div>
+                   </div>
+                   </a>
+             <%} %>
+          <%}else{  %>
+          <div style="width:100%; text-align:center;">
+             <h3>조회된 상품 결과가 존재하지 않습니다.</h3>
+          </div>
+          <%} %>
             </div>
             <%if(products!=null && !products.isEmpty()){ %> 
             <div style="margin-bottom:25px;">
             
-            	<%=pageBar%>
+               <%=pageBar%>
             </div>
-           	<%} %>
+              <%} %>
             <div class="bottom-container">
                 <div class="search-bar">
                     <form class="d-flex">
@@ -89,11 +89,11 @@
                 <div class="btn-bottom-container">
                 <a class="admin-btn"href="<%=request.getContextPath()%>/product/productEnroll.do" style="color:#28A745;">
                     <button type="button" class="btn btn-outline-success button-bottom">
-                    	등록
+                       등록
                     </button></a>
                     <a class="admin-btn"href="#" style="color:#28A745;">
                     <button type="button" class="btn btn-outline-success button-bottom">
-                    	삭제
+                       삭제
                     </button></a>
                 </div>
             </div>
@@ -101,25 +101,25 @@
     </div>
     <script>
     $(".admin-btn").mouseenter(function(){
-		$(this).css("color","white");
-	})   
-	$(".admin-btn").mouseleave(function(){
-		$(this).css("color","#28A745");
-	})   
+      $(this).css("color","white");
+   })   
+   $(".admin-btn").mouseleave(function(){
+      $(this).css("color","#28A745");
+   })   
  
-	$(".card").mouseenter(function(){
-		$(this).css("cursor","pointer");
-		$(this).css("border","1px solid #28A745")
-		$(this).click(function(){
-			const productNo = $(this).prop("id");
-			console.log(productNo);
-			location.href='<%=request.getContextPath()%>/product/productview.do?productNo='+productNo;	
-		})
-	})
-	
-	$(".card").mouseout(function(){
-		$(this).css("border","none");
-	});    
+   $(".card").mouseenter(function(){
+      $(this).css("cursor","pointer");
+      $(this).css("border","1px solid #28A745")
+      $(this).click(function(){
+         const productNo = $(this).prop("id");
+         console.log(productNo);
+         location.href='<%=request.getContextPath()%>/product/productview.do?productNo='+productNo;   
+      })
+   })
+   
+   $(".card").mouseout(function(){
+      $(this).css("border","none");
+   });    
     </script>
     
 <%@ include file="/views/footer.jsp"%>
