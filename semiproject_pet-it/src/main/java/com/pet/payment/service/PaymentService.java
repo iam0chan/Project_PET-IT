@@ -8,7 +8,6 @@ import static com.pet.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import com.pet.payment.model.dao.PaymentDao;
-import com.pet.payment.model.dto.Order;
 import com.pet.payment.model.dto.Payment;
 
 public class PaymentService {

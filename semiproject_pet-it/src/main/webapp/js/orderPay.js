@@ -197,8 +197,8 @@
 								  text: "주문번호 : "+merchant_uid,
 								  icon: "success"
 							});
-						}
-					});
+					}
+				});
 				
 			}else{
 				Swal.fire({
