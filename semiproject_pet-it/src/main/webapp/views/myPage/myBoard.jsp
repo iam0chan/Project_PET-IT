@@ -8,10 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section>
-		<h3>회원 정보 수정</h3>
+	<section>
+
+		<h3>게시물 관리</h3>
 		<hr />
-		</section>
+	</section>
 
 </body>
 </html>

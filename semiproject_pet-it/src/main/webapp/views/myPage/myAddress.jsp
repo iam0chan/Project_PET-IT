@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section>
-		<h3>쿠폰</h3>
+	<section>
+		<h3>배송 주소록 관리</h3>
 		<hr />
-		</section>
+	</section>
 
 </body>
 </html>

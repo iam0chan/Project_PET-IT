@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -8,10 +8,10 @@
 <title>주문내역 조회</title>
 </head>
 <body>
-<section>
+	<section>
 		<h3>주문내역 조회</h3>
 		<hr />
-		</section>
+	</section>
 
 </body>
 </html>

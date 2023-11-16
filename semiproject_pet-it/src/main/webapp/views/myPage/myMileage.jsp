@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section>
+	<section>
 		<h3>적립금</h3>
 		<hr />
-		</section>
+	</section>
 
 </body>
 </html>

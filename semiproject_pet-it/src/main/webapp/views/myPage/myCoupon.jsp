@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section>
-		<h3>관심 상품</h3>
+	<section>
+		<h3>쿠폰</h3>
 		<hr />
-		</section>
+	</section>
 
 </body>
 </html>
