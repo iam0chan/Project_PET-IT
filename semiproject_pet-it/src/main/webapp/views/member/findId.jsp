@@ -9,6 +9,7 @@
 	}
 	body {
     box-sizing: border-box;
+    line-height:40px;
     	}
     .findId{
     text-align:center;
@@ -16,6 +17,7 @@
     border: 1px solid #000;
     margin: auto; /*중앙 정렬*/
     padding: 0 20px;
+    margin-bottom: 20px;
     height:500px;
     }
 /*     .findId .title{
@@ -25,6 +27,7 @@
     	display:flex;
     	justify-content:space-evenly;
 		list-style-position: outside;
+		margin-bottom:50px;
 		padding:0;
     }
     .title>li{
@@ -39,7 +42,8 @@
    		border-right:1px solid lightgray;
    }
    .field input{
-   		height:40px;
+   		
+   		height: 30px;
    }
    
    
@@ -47,10 +51,10 @@
 <div class="findId">
 	<ul class="title">
 		<li>
-			<a href="">아이디 찾기</a>
+			<a href="<%=request.getContextPath()%>/find/id.do">아이디 찾기</a>
 		</li>
 		<li>
-			<a href="">비밀번호 찾기</a	>
+			<a href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a	>
 		</li>
 	</ul>
 	<form action="<%=request.getContextPath()%>/member/enrollMember.do" method="post" onsubmit="">								
@@ -64,6 +68,7 @@
 					<input type="text" placeholder="이메일을 입력해주세요" name="memberId" id="memberId_" >
 				</span>
 			</div>
+			<br><br>
 			<div class="field">
 				<b style="font-size: 14px">정보보호를위해 아래 자동입력방지 문자를 입력해주세요</b>
 			</div>  
@@ -71,7 +76,7 @@
 					<input type="text" style="height:80px; border:1px solid" value="(자동입력방지문구)">
 			</div>
 	</form>
-		<input type="text" style="height:40px;" placeholder="위에 보이는 문자를 입력해주세요">
-		<input type="submit" style="height:60px;" value="인증번호 받기" >
+		<input type="text" style="height: 30px;" placeholder="위에 보이는 문자를 입력해주세요">
+		<input type="submit" style="height:40px;" value="인증번호 받기" >
 </div>
 <%@ include file ="/views/footer.jsp" %>
