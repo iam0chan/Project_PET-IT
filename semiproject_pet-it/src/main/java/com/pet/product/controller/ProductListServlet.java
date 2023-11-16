@@ -85,7 +85,7 @@ public class ProductListServlet extends HttpServlet {
 			request.setAttribute("files", files);
 		}
 		
-		request.getRequestDispatcher("/product/productlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productlist.jsp").forward(request, response);
 		
 		
 	}
