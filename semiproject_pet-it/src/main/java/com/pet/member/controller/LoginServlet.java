@@ -33,14 +33,19 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId=request.getParameter("memberId");
 		String memberPw=request.getParameter("memberPw");
-		 
+		 		
 		Member m = new MemberService().selectMemberByIdAndPw(memberId, memberPw);
 		
-		//로그인성공
+		if(m!=null) {
 		HttpSession session = request.getSession();
 		session.setAttribute("loginMember", m);
 		
-		response.sendRedirect(request.getContextPath());
+		request.getRequestDispatcher("/").forward(request, response);
+		}else {
+			request.setAttribute("msg", "아이디, 패스워드를 확인해주세요.");
+			request.setAttribute("loc", "/views/member/login.jsp");
+			request.getRequestDispatcher("/views/member/loginErr.jsp").forward(request, response);
+		}
 	}
 
 	/**

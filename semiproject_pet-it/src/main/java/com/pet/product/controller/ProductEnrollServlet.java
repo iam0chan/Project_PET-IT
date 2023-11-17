@@ -13,7 +13,7 @@ public class ProductEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath()+"/product/productEnroll.jsp");
+		response.sendRedirect(request.getContextPath()+"/views/product/productEnroll.jsp");
 	}
 
 

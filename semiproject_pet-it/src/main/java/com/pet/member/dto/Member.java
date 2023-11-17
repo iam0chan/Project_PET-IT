@@ -18,6 +18,7 @@ public class Member {
 	private String memberDetailAddr;
 	private Date memberDate;
 	private String memberStatus;
-	private String memberErmsid;
+	private String memberTersm;
 	private String memberAccept;
+	private String memberGrade;
 }

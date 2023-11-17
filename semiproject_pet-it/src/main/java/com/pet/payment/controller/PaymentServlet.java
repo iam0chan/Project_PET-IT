@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pet.payment.model.dto.Order;
 import com.pet.payment.model.dto.Payment;
 import com.pet.payment.service.PaymentService;
 
@@ -32,18 +33,20 @@ public class PaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String imp_uid = request.getParameter("imp_uid");
-	    String merchant_uid = request.getParameter("merchant_uid");
+	    int merchant_uid = Integer.parseInt(request.getParameter("merchant_uid"));
 	    int paid_amount = Integer.parseInt(request.getParameter("paid_amount"));
-	    String apply_num = request.getParameter("apply_num");
+	    int apply_num = Integer.parseInt(request.getParameter("apply_num"));
 	    String pay_method = request.getParameter("pay_method");
 	    
-	    System.out.println("imp_uid: " + imp_uid);
-	    System.out.println("merchant_uid: " + merchant_uid);
-	    System.out.println("paid_amount: " + paid_amount);
-	    System.out.println("apply_num: " + apply_num);
-	    System.out.println("pay_method: " + pay_method);
+	    String orderName = request.getParameter("orderName");
+	    String orderZipcode = request.getParameter("orderZipCode");
+	    String orderAddr = request.getParameter("orderAddr");
+	    String orderDefAddr = request.getParameter("orderDefAddr");
+	    String orderPhone = request.getParameter("orderPhone");
+	    String orderEmail = request.getParameter("emailHead")+"@"+request.getParameter("emailTail");
+	    int orderTotalPrice = Integer.parseInt(request.getParameter("productTotalPrice"));
+	    String textDelivery = request.getParameter("textDelivery");
 	    
-
 	    Payment p = Payment.builder()
 	    		.imp_uid(imp_uid)
 	    		.merchant_uid(merchant_uid)
@@ -52,12 +55,29 @@ public class PaymentServlet extends HttpServlet {
 	    		.pay_method(pay_method)
 	    		.build();
 	    
-	    int result = new PaymentService().insertPaymentResult(p);
+	    Order o = Order.builder()
+	    		.orderName(orderName)
+	    		.orderZipcode(orderZipcode)
+	    		.orderAddr(orderAddr)
+	    		.orderDefAddr(orderDefAddr)
+	    		.orderPhone(orderPhone)
+	    		.orderEmail(orderEmail)
+	    		.orderTotalPrice(orderTotalPrice)
+	    		.textDelivery(textDelivery)
+	    		.build();
 	    
-	    if(result>0) System.out.println("결제+DB저장 성공");
-	    else System.out.println("실패");
+	    int result = new PaymentService().insertPaymentResult(p,o);
+	    
+	    if(result>0) System.out.println("DB저장 성공");
+	    else System.out.println("DB저장 실패");
+	    
+	    
+	    System.out.println(p);
+	    System.out.println(o);
+	    
 	    request.setAttribute("payment", p);
-	    request.getRequestDispatcher("/payment/orderPayComplete.jsp").forward(request, response);
+	    request.setAttribute("order", o);
+	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp").forward(request, response);
 		
 	}
 
@@ -70,3 +90,4 @@ public class PaymentServlet extends HttpServlet {
 	}
 
 }
+
