@@ -54,7 +54,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			System.out.println("상품 재고 : " + productStock);
 			System.out.println("대표이미지 : " + oriname);
 			System.out.println("대표이미지 수정이름 : "+rename);
-			System.out.println("1차 카테고리 : " + type);
+			System.out.println("1차 카테고리 : " + type)                    ;
 			System.out.println("2차 카테고리 : " + category);
 			System.out.println("내용 : " + productContent);
 			Product item = Product.builder()

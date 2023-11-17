@@ -147,9 +147,9 @@ public class FaqDao {
         try {
             pstmt = conn.prepareStatement(query);
            // pstmt.setString(1, title); // 필요없고
-            pstmt.setString(2, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
-            pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
-            pstmt.setInt(4, cPage * numPerPage);
+            pstmt.setString(1, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
+            pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
+            pstmt.setInt(3, cPage * numPerPage);
 
             rs = pstmt.executeQuery();
 
