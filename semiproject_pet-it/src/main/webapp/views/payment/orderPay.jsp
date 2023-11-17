@@ -328,7 +328,8 @@ var IMP = window.IMP;
 IMP.init("imp58177585");
 $("#paymentBtn").on("click",function(){
 	
-	
+	const addr = $("#addr").val()+", "+$("#detailAddr").val();
+	console.log(addr);
 	
 	if($("#card-payment").is(":checked")){
 		payment_card();	
@@ -346,7 +347,7 @@ function payment_kakao(){
 		buyer_email : "mkty0328@gmail.com", //주문자 email
 		buyer_name : "홍길동",				//주문자 이름
 		buyer_tel : "01064269887",			//주문자 전화번호
-		buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
+		buyer_addr : addr, 					//주문자 주소
 		buyer_postcode : "139-91",			//주문자 우편번호
 	}, function(rsp){						//callback함수
 		if(rsp.success){
