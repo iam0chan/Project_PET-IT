@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file ="/views/header.jsp" %>
  <!-- slider section -->
           <section class="slider_section long_section">

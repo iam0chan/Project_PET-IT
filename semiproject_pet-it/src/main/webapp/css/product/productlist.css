@@ -16,12 +16,6 @@
         .item-container {
             width: 1200px;
         }
-        
-        .item-container{
-			border: 1px solid #04aa6d;
-    		height: auto;
-    		padding: 20px;
-		}
 
         .header-title {
             margin-bottom: 30px;
@@ -43,6 +37,7 @@
             width: 1200px;
             /* background-color: yellow; */
             flex-wrap: wrap;
+            justify-content: space-evenly;
             margin-bottom: 20px;
         }
         
@@ -52,8 +47,13 @@
             width: 331px;
             height: 430px;
             /* border: 1px solid red; */
+<<<<<<< HEAD
+            margin-bottom : 42px;
+            boder-radius: 5px;
+=======
             margin: 0px 20px 46px 20px;
             border-radius: 5px;
+>>>>>>> refs/heads/dev
         }
 
         .product-wrapper .sort-list {
@@ -111,9 +111,8 @@
             width: 60px;
         }
         
-        .item-content{
-        	padding-top:10px;
-        	padding-left: 10px;
+        .item-img, item-content{
+        	/* border: 1px solid red; */
         }
         
         .item-img{
