@@ -90,10 +90,10 @@
       <body>
       	
         <div class="hero_area">
-          <!-- header section strats -->
-          <header class="header_section long_section px-0">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
-              <a class="navbar-brand" href="index.html">
+          <!-- header section strats // 11/16 헤더 그림자 추가 - YC -->
+          <header class="header_section long_section px-0" style="margin:0px;">
+            <nav class="navbar navbar-expand-lg custom_nav-container" style="padding:0px 40px; box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;">
+              <a class="navbar-brand" href="<%=request.getContextPath()%>/">
                 <span>
                   <img src="<%=request.getContextPath()%>/img/petit_logo_bk.png" width="185" height="65">
                 </span>
@@ -106,7 +106,7 @@
                 <div class="d-flex mx-auto flex-column flex-lg-row align-items-center" style="font-size: 15pt; font-family: G마켓 산스;">
                   <ul class="navbar-nav  ">
                     <li class="nav-item active header-menu-item">
-                      <a class="nav-link " href="<%=request.getContextPath() %>/brandInfo/brandInfoPage.jsp">Pet-It <span class="sr-only">(current)</span></a>
+                      <a class="nav-link " href="<%=request.getContextPath() %>/views/brandInfo/brandInfoPage.jsp">Pet-It <span class="sr-only">(current)</span></a>
                       <!-- <ul class="sub-nav">
                       	<a href="#"><li class = "sub-item">신상품</li></a>
                       	<li class = "sub-item">베스트</li>
@@ -136,7 +136,7 @@
                       </ul>
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link" href="blog.html">마이페이지</a>
+                      <a class="nav-link" href="<%=request.getContextPath() %>/views/myPage/mypageView.jsp">마이페이지</a>
                       <!-- <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
@@ -165,6 +165,7 @@
                     <i class="fa-solid fa-dog"></i>
                     <span>Login</span>
                   </a>
+                  <a href="<%=request.getContextPath() %>/views/cart/cartList.jsp">
                   <%}else{ %>
                   	<i class="fa-solid fa-dog"></i>
                   	<span id="memberName"><%=loginMember.getMemberName() %>님</span><br>

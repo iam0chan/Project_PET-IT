@@ -88,11 +88,7 @@
                 <div class="btn-bottom-container">
                 <a class="admin-btn"href="<%=request.getContextPath()%>/product/productEnroll.do" style="color:#28A745;">
                     <button type="button" class="btn btn-outline-success button-bottom">
-                       등록
-                    </button></a>
-                    <a class="admin-btn"href="#" style="color:#28A745;">
-                    <button type="button" class="btn btn-outline-success button-bottom">
-                       삭제
+                       상품등록
                     </button></a>
                 </div>
             </div>
@@ -108,7 +104,7 @@
  
    $(".card").mouseenter(function(){
       $(this).css("cursor","pointer");
-      $(this).css("border","1px solid #28A745")
+      $(this).css("border","2px solid #28A745")
       $(this).click(function(){
          const productNo = $(this).prop("id");
          console.log(productNo);
@@ -117,7 +113,7 @@
    })
    
    $(".card").mouseout(function(){
-      $(this).css("border","none");
+      $(this).css("border","1px solid #dbdbd9");
    });    
     </script>
     

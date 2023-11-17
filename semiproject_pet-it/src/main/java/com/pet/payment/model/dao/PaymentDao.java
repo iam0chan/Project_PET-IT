@@ -23,6 +23,7 @@ private Properties sql = new Properties();
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	
 	public int insertOrderResult(Connection conn, Order o) {
 		int result=0;
@@ -47,6 +48,8 @@ private Properties sql = new Properties();
 		return result;
 	}
 	
+=======
+>>>>>>> refs/heads/dev
 	
 	public int insertPaymentResult(Connection conn, Payment p) {
 		int result = 0;
@@ -56,9 +59,10 @@ private Properties sql = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("insertPaymentResult"));
 			pstmt.setString(1, p.getImp_uid());
-			pstmt.setInt(2, p.getPaid_amount());
-			pstmt.setString(3, p.getPay_method());
-			pstmt.setInt(4, p.getApply_num());
+			pstmt.setInt(2, 78910);
+			pstmt.setInt(3, p.getPaid_amount());
+			pstmt.setString(4, p.getPay_method());
+			pstmt.setInt(5, p.getApply_num());
 			
 			result = pstmt.executeUpdate();
 			

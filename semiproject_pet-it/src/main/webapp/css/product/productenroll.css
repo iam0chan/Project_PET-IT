@@ -1,7 +1,7 @@
 *{
 		margin: 0px;
 		padding: 0px;
-		border: 1px solid red;
+		/*border: 1px solid red;*/
 	}
 	.wrapper{
 		width:100%;
@@ -48,8 +48,8 @@
 	}
 	
 	.detail-container-l img{
-		width:230px;
-		height:260px;
+		width:328px;
+		height:329px;
 		margin-bottom:2px;
 	}
 	
@@ -121,6 +121,23 @@
 		margin-top:30px;
 	}
 	
+	.editor-botton-container > button{
+		margin:0px 5px;
+	}
+	
 	.editor-container input, button, select, optgroup, textarea{
 		line-height:1.0 !important;
 	}
+	
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+  		-webkit-appearance: none;
+  		margin: 0;
+	}
+	.btn-success{
+		width: 20px;
+		height: 20px;
+		padding: 0;
+		margin-left: 5px;
+	}
+	
