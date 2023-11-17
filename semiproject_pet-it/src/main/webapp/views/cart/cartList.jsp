@@ -330,6 +330,7 @@ background-color: green;
 						<span>0원</span>
 					</p>
 				</div>
+				<!-- 주문하기 누르면 주문페이지로 이동 -->
 				<p>
 					<a href="#" class="btn btn-primary py-3 px-4">주문하기</a>
 				</p>

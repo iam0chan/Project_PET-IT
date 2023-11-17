@@ -27,10 +27,10 @@
                 <th>휴대폰</th>
                 <td><input type="tel" placeholder="(-없이)01012345678" value="<%=m.getMemberPhone()%>" name="memberPhone" id="memberPhone_" maxlength="11"><br></td>
             </tr>
-            <tr>
+            <%-- <tr> 주소 수정중
                 <th>주소</th>
                 <td><input type="text" placeholder="" value="<%=m.getMemberAddress()%>" name="memberAddress" id="memberAddress_"><br></td>
-            </tr>
+            </tr> --%>
         </table>
         <input type="submit" value="정보수정" />
     </form>
