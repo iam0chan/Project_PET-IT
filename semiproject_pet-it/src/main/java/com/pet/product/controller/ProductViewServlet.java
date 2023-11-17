@@ -25,7 +25,10 @@ public class ProductViewServlet extends HttpServlet {
 		System.out.println(productNo);
 		Product product = new ProductService().selectProductByNo(productNo);
 		ProductImageFile file = new ProductService().selectMainImageFile(product.getProductNo());
-		System.out.println(file.toString());
+		
+		System.out.println(product.toString()); //product 정보체크
+		System.out.println(file.toString()); //파일 정보 체크
+		
 		if(product!=null && file!=null) {
 			request.setAttribute("product", product);
 			request.setAttribute("file", file);

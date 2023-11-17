@@ -127,6 +127,23 @@
 		margin-top:30px;
 	}
 	
+	.editor-botton-container > button{
+		margin:0px 5px;
+	}
+	
 	.editor-container input, button, select, optgroup, textarea{
 		line-height:1.0 !important;
 	}
+	
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+  		-webkit-appearance: none;
+  		margin: 0;
+	}
+	.btn-success{
+		width: 20px;
+		height: 20px;
+		padding: 0;
+		margin-left: 5px;
+	}
+	

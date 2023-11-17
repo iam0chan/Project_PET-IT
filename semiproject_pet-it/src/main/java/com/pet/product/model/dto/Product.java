@@ -1,6 +1,7 @@
 package com.pet.product.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -22,4 +23,5 @@ public class Product {
 	private String productDiscount;
 	private int prouctPoint;
 	private String productContent;
+	private List<ProductOption> productOption;
 }

@@ -6,7 +6,6 @@
 <!-- TUI 에디터 CSS CDN -->
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productenroll.css"/>
-<!-- <script   src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script> -->
 <style>
 	#image-box{
 		border: 1px solid #04aa6d;
@@ -21,16 +20,16 @@
 		align-items:center;
 	}
 	div.option-fix{
-		width: 550px;
-    	padding-left: 25px;
+		width: 501px;
+    	/* padding-left: 36px; */
 	}
 	input#optionName{
-		width:247px;
+		width:230px;
 		padding: 0px 5px;
 	}
 	
 	input#optionPrice{
-		width:247px;
+		width:230px;
 	}
 
 </style>
@@ -79,8 +78,11 @@ $("#main-image").change(e=>{
 							<h4>상품명 : </h4>
 						</div>
 						<div class="enrollpage-content">
-							<input type="text" name="productName" placeholder="상품명을 입력하세요" required/>
+							<input type="text" name="productName" placeholder="상품명을 입력하세요 (30자)" maxlength="30" required/>
 						</div>
+						<script>
+							$(
+						</script>
 					</div>
 					<div class='enroll-content-container'>
 						<div class="enrollpage-title">
@@ -95,7 +97,7 @@ $("#main-image").change(e=>{
 							<h4>한줄설명 : </h4>
 						</div>
 						<div class="enrollpage-content">
-							<input type="text" name="productSummary" placeholder="상품소개 간단히 한줄 요약" required/>
+							<input type="text" name="productSummary" placeholder="상품 한줄 소개 (40자)" maxlength="40" required/>
 						</div>
 					</div>
 					<div class='enroll-content-container'>
@@ -131,7 +133,7 @@ $("#main-image").change(e=>{
 						<div class="enrollpage-content option-fix">
 							<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" />
 							<input type="number" name="optionPrice" id="optionPrice" placeholder="가격" />
-							<button type="button" id="option-btn">+</button>						
+							<button type="button" id="option-btn" class="btn btn-success">+</button>						
 						</div>
 						<div id="option-btn"style="line-height:3.0">
 						</div>					
@@ -147,7 +149,6 @@ $("#main-image").change(e=>{
 		    <div id="editor-container"></div>
 		    <div class="editor-botton-container">
 		    	<button id="enroll-itemcontent-btn" class="btn btn-outline-success">등록완료</button>
-		    	
 		    </div>
 	    </div>
 		
@@ -242,7 +243,7 @@ $("#main-image").change(e=>{
            const test3 = $("<div class='enrollpage-content new-option'></div>");
            $(test).append(test2);
            $(test).append(test3);
-           const inputName = $('<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" />');
+           const inputName = $('<input type="text" name="optionName" id="optionName"+ placeholder="가격옵션명" />');
            $(test3).append(inputName);
            const inputPrice = $('<input type="number" name="optionPrice" id="optionPrice" placeholder="가격" />');
            $(test3).append(inputPrice);

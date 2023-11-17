@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, com.pet.product.model.dto.ProductImageFile"%>
+    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, com.pet.product.model.dto.ProductImageFile, com.pet.product.model.dto.ProductOption"%>
 <%@ include file="/views/header.jsp" %>
 <%
 	Product p = (Product)request.getAttribute("product");
@@ -8,6 +8,10 @@
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productview.css"/>
     <div class="wrapper">
+    	<div class="update-delete-btn-container">
+    	<button id="update-itemcontent-btn" type="button" class="btn btn-outline-success button-bottom">수정</button>
+    	<button id="delete-itemcontent-btn" type="button" class="btn btn-outline-success button-bottom">삭제</button>
+    	</div>
         <div class="item-info-container">
             <div class="item-image">
                 <div>
@@ -42,10 +46,22 @@
               
                 <div class="info item-option">
                     <div class="option" style="width: 300px;">
-                        <select name="priceOption" id="option" style="width:280px;">
-                            <option value="1">간식 500g</option>
-                            <option value="2">간식 200g(-2000원)</option>
-                            <option value="3">간식 800g(+2000원)</option>
+                        <select name="priceOption" id="option-select" style="width:280px;" style="text-align:center;">
+                        	<option value="<%=p.getProductPrice()%>"><%=p.getProductPrice()%>원</option>
+                        	<%if(p.getProductOptionStatus().equals("Y")){ %>
+                        		<%for(int i=0; i<p.getProductOption().size(); i++){ %>
+                        			<option value="<%=p.getProductOption().get(i).getProductOptionPrice()%>">
+                        			<%=p.getProductOption().get(i).getProductOptionName()%>
+                        			(<%=p.getProductOption().get(i).getProductOptionPrice() %>원)
+                        			<%if(p.getProductPrice()>p.getProductOption().get(i).getProductOptionPrice()){ %>
+                        				- <%=p.getProductPrice()-(p.getProductOption().get(i).getProductOptionPrice())%>
+                        			<%}else{ %>
+                        				+ <%=(p.getProductOption().get(i).getProductOptionPrice())- p.getProductPrice()%>
+                        			<%} %>
+                        			
+                        			</option>
+                        		<%} %>
+                        	<%} %>
                         </select>
                     </div>
                     <div class="amountbtn">
@@ -321,6 +337,17 @@
        		/* ajax or get-> queryString방식으로 product# 넘기기 ,  */
        	})
        	
-       	
+       	// 23/11/17 02:00 수정 필요
+	       	<%-- const select = $("#option-select");
+       		const option = $("<option></option>");
+       	<%if(p.getProductOptionStatus().equals("Y")){%>
+       		console.log("<%=p.getProductOptionStatus()%>");
+	       	<%for(int i=0; i<p.getProductOption().size(); i++){ %>
+	       		console.log(<%=p.getProductOption().get(i).getProductOptionPrice()%>)
+	       		option.val(<%=p.getProductOption().get(i).getProductOptionPrice()%>);
+	       		option.html("<%=p.getProductOption().get(i).getProductOptionName()%>(<%=p.getProductOption().get(i).getProductOptionPrice()%>원)");
+	       		$(select).append(option);
+	      	<%} %>    	
+      	<%} %> --%>
     </script>
 <%@ include file="/views/footer.jsp" %>
