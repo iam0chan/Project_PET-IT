@@ -3,6 +3,9 @@ package com.pet.product.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,6 +50,21 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			String[] optionNames = mr.getParameterValues("optionName");
 			String[] optionPrice = (mr.getParameterValues("optionPrice"));
 			
+			Map<String,String> options = new HashMap<>(); //옵션맵핑 Map
+			String optionStatus = "N"; //옵션입력여부체크변수
+			
+			//입력된 옵션을 key:value 형식으로 맵핑
+			if(optionNames.length!=0 && optionPrice.length!=0) {
+				for(int i=0; i<optionNames.length; i++) {
+					options.put(optionNames[i], optionPrice[i]);
+				}
+				optionStatus = "Y"; //입력된값이 존재할 경우 optionStatus = Y;
+			}
+			
+			for(Map.Entry<String, String> entry : options.entrySet()) {
+				System.out.println("key: "+entry.getKey()+" "+"value: "+entry.getValue());
+			}
+			
 			System.out.println("상품 이름 : " + productName);
 			System.out.println("상품 가격 : " + productPrice);
 			System.out.println("상품 설명 : " + productSummary);
@@ -63,12 +81,13 @@ public class ProductEnrollEndServlet extends HttpServlet {
 					.productStock(productStock)
 					.cateogryNo(category)
 					.typeNo(type)
+					.productOptionStatus(optionStatus)
 					.productDiscount("0.1")
 					.prouctPoint(500)
 					.productContent(productContent)
 					.build();
 			
-			int result = new ProductService().insertProduct(item, oriname, rename);
+			int result = new ProductService().insertProduct(item, oriname, rename, options);
 			if(result>0) {
 				//int fileUploadResult = new ProductService().insertMainImageFile(oriname, rename);
 				System.out.println("입력성공");
@@ -90,7 +109,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			 */
 			PrintWriter out = response.getWriter();
 			out.print(productContent);
-			response.sendRedirect(request.getContextPath()+"/views/product/productlist.jsp");
+			response.sendRedirect(request.getContextPath()+"/productListServlet.do");
 		}
 
 	}
