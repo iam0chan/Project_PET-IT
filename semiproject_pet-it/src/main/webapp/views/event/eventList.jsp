@@ -84,7 +84,8 @@
             text-align: center;
         }
         
-        .productImg{
+<<<<<<< HEAD
+        .eventImg{
         	width:320px;
         	height:340px;
         }
@@ -135,7 +136,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -147,7 +148,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -159,7 +160,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -171,7 +172,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -183,7 +184,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -195,7 +196,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -207,7 +208,7 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
                     </a>
                     </div>
                     <div class="item-content">
@@ -219,54 +220,8 @@
                 <div class="card">
                      <div class="item-img">
                     	<a href="#">
-                    	<img class="productImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
-                    </a>
-                    </div>
-                    <div class="item-content">
-                    	<p>캔 1000원 이벤트</p>
-                        <br>
-                    	<p>2023-06-11</p>
-                    </div>
-                </div>
-            </div>
-            <div class="pageingBar">
-                <h2>페이징바 영역</h2>
-                </div>
-                
-                <div class="boardsearchAll">
-		<fieldset class="boardSearch">
-			<p>
-				<select id="searchKey" name="searchKey">
-					<option value="subject">제목</option>
-					<option value="subject">내용</option>
-				</select> <input id="search" name="search" placeholder="입력하세요">
-				<button class="btn btn-primary btn-sm">
-					<a href="#none">SEARCH</a>
-				</button>
-			</p>
-		</fieldset>
-	</div>
-                
+                    	<img class="eventImg" src="<%=request.getContextPath()%>/img/shushu.jpg">
 
-                
-
-                
-            </div>
-        </div>
-    </div>
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 <%@ include file="/views/footer.jsp"%>

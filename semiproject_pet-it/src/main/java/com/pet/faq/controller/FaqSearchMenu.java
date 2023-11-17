@@ -80,6 +80,7 @@ public class FaqSearchMenu extends HttpServlet {
 		request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
 		
 		
+		
 	}
 
 	/**
