@@ -22,10 +22,10 @@ private Properties sql = new Properties();
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+	
 	public int insertPaymentResult(Connection conn, Payment p) {
 		int result = 0;
-
 		PreparedStatement pstmt = null;
 		
 		try {

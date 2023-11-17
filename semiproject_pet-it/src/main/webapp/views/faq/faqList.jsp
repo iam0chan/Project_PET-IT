@@ -153,8 +153,8 @@ tr.item:hover {
 				<option value="subject">제목</option>
 				<option value="subject">내용</option>
 			</select>
-		<input type="search" id="searchMenu" >
-			<input type="submit" name="selectSearch" value="검색">
+		<input type="search" id="searchMenu">
+			<button>Search</button>
 		
 		</form>
 
@@ -169,9 +169,6 @@ tr.item:hover {
 				</button>
 			</form>
 		</fieldset> -->
-		
-		
-		
 	</div>
 	<br>
 
@@ -231,5 +228,4 @@ tr.item:hover {
 
 </body>
 </html>
-
 <%@ include file="/views/footer.jsp"%>

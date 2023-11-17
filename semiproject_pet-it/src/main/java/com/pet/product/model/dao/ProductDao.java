@@ -19,6 +19,7 @@ import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.model.dto.ProductOption;
 
 public class ProductDao {
+
 	private Properties sql = new Properties();
 	{
 		String path = ProductDao.class.getResource("/sql/product/product_sql.properties").getPath(); 
@@ -296,5 +297,6 @@ public class ProductDao {
 				
 		
 	}
+	
 
 }

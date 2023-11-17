@@ -21,7 +21,6 @@ import com.pet.product.model.dto.Product;
 import com.pet.product.service.ProductService;
 
 
-
 @WebServlet("/product/productEnrollEnd.do")
 public class ProductEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -72,7 +71,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			System.out.println("상품 재고 : " + productStock);
 			System.out.println("대표이미지 : " + oriname);
 			System.out.println("대표이미지 수정이름 : "+rename);
-			System.out.println("1차 카테고리 : " + type)                    ;
+			System.out.println("1차 카테고리 : " + type);
 			System.out.println("2차 카테고리 : " + category);
 			System.out.println("내용 : " + productContent);
 			Product item = Product.builder()
@@ -112,7 +111,8 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			out.print(productContent);
 			response.sendRedirect(request.getContextPath()+"/productListServlet.do");
 		}
-	}	
+
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

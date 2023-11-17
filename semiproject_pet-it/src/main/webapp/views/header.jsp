@@ -107,13 +107,13 @@
                   <ul class="navbar-nav  ">
                     <li class="nav-item active header-menu-item">
                       <a class="nav-link " href="<%=request.getContextPath() %>/views/brandInfo/brandInfoPage.jsp">Pet-It <span class="sr-only">(current)</span></a>
-                      <ul class="sub-nav">
-                      	<a href="#"><li class = "sub-item">브랜드소개</li></a>
-                      	<a href="#"><li class = "sub-item">공지사항</li></a>
-                      	<a href="#"><li class = "sub-item">1:1문의</li></a>
+                      <!-- <ul class="sub-nav">
+                      	<a href="#"><li class = "sub-item">신상품</li></a>
+                      	<li class = "sub-item">베스트</li>
+                      	<li class = "sub-item">사료</li>
                       	<li class = "sub-item">간식</li>
                       	<li class = "sub-item">용품</li>  	
-                      </ul>
+                      </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
                       <a class="nav-link " href="about.html">이벤트</a>

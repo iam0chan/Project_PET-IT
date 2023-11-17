@@ -27,35 +27,19 @@ public class TestServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ori ="";
-		Gson gson = new Gson();
-		Map<String,Object> map = new HashMap<>();
-		if(!ServletFileUpload.isMultipartContent(request)) {
-			throw new IllegalArgumentException("안돼!");
-		}else {
-			String path = getServletContext().getRealPath("/upload/");
-			MultipartRequest mr = new MultipartRequest(request,path,1024*1024*100,"UTF-8",new DefaultFileRenamePolicy());
-			System.out.println(path);
-			Enumeration<String> names = mr.getFileNames();
-			List<Map<String,String>> files=new ArrayList<>();
-			while(names.hasMoreElements()) {
-				String name = names.nextElement();
-				System.out.println(name);
-				String re = mr.getFilesystemName(name);
-				ori = mr.getOriginalFileName(name)+"||";
-				files.add(Map.of("rename",re,"oriName",ori));
-			}
-			files.forEach(e->{System.out.println(e);});
-			/*
-			 * request.getRequestDispatcher("/product/productFileUploadEnd.do").forward(
-			 * request, response);
-			 */
-		response.setHeader("Content-Type", "application/json");
+		String productNo = request.getParameter("productNo");
+		int purchasePrice = Integer.parseInt(request.getParameter("purchasePrice"));
+		String purchaseAmount = request.getParameter("purchaseAmount");
+		String purchaseProductName = request.getParameter("purchaseProductName");
+		
+		System.out.println("상품 번호 : "+ productNo);
+		System.out.println("최종구매가격 : "+ purchasePrice);
+		System.out.println("최종구매수량 : "+ purchaseAmount);
+		System.out.println("구매옵션이름 : "+ purchaseProductName);
+		
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-        map.put("uploaded", true);
-        gson.toJson(map);
-        out.print(map);
-		}
+		out.write("전달성공");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
