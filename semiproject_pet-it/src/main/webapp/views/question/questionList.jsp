@@ -172,4 +172,5 @@ tr.item:hover {
 
 </body>
 </html>
+
 <%@ include file="/views/footer.jsp"%>
