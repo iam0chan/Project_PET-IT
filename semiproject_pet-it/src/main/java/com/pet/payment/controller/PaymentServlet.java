@@ -48,21 +48,30 @@ public class PaymentServlet extends HttpServlet {
 	    		.apply_num(apply_num)
 	    		.pay_method(pay_method)
 	    		.build();
+
+//	    private String orderName;
+//		private String orderZipcode;
+//		private String orderAddr;
+//		private String orderDefAddr;
+//		private String orderPhone;
+//		private String orderEmail;
+//		private int orderTotalPrice;
+//		private String textDelivery;
 	    
 	    int result = new PaymentService().insertPaymentResult(p);
 	    
 	    if(result>0) System.out.println("DB저장 성공");
 	    else System.out.println("DB저장 실패");
 	    System.out.println(p);
-	    request.setAttribute("payment", p);
-	    response.setContentType("application/json;charset=utf-8");
-		Gson gson = new Gson();
+
+	    Gson gson = new Gson();
+		String data = gson.toJson(p);
+		response.setContentType("application/json;charset=utf-8");
 		gson.toJson(p,response.getWriter());
 		System.out.println(gson.toJson(p));
 	    
-//		String data = gson.toJson(p);
-
-	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp");
+//		request.setAttribute("payment", p);
+//	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp");
 	}
 
 	/**

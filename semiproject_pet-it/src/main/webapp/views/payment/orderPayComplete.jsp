@@ -33,16 +33,7 @@
     }
       
 </style>	
-<script>
-//SessionStorage에서 데이터를 가져옴
-var jsonString = sessionStorage.getItem('data');
 
-// 데이터를 JSON 객체로 변환
-var data = JSON.parse(jsonString);
-
-$("#orderNo").text(data.merchant_uid);
-
-</script>
 	
 	<div class="title-container">
 		<div class="title-text">
@@ -90,8 +81,8 @@ $("#orderNo").text(data.merchant_uid);
 				총 결제금액
 			</div>
 			<div style="width:50%"></div>
-			<div style="width:30%; text-align:center;">
-				<span> # </span><span>원</span>
+			<div id="paid-amount" style="width:30%; text-align:center;">
+				
 			</div>
 		</div>	
 	</div>
@@ -101,8 +92,8 @@ $("#orderNo").text(data.merchant_uid);
 			결제수단
 		</div>
 		<div style="width:50%"></div>
-		<div style="width:30%; text-align:center;">
-			<span id="payMethod"> # </span>
+		<div id="pay-method" style="width:30%; text-align:center;">
+			
 		</div>
 	</div>	
 	
@@ -111,8 +102,8 @@ $("#orderNo").text(data.merchant_uid);
 			승인번호
 		</div>
 		<div style="width:50%"></div>
-		<div style="width:30%; text-align:center;">
-			<span id="acceptNo"> # </span>
+		<div id="apply-num" style="width:30%; text-align:center;">
+			
 		</div>
 	</div>
 </section>
@@ -122,11 +113,29 @@ $("#orderNo").text(data.merchant_uid);
 		<button class="btn btn-outline-success mypageBtn">마이 페이지</button>	
 	</div>
 	
+<script>
+/* SessionStorage에서 데이터를 가져옴
+var jsonString = sessionStorage.getItem('data');
+console.log(jsonString); */
+
+var data= JSON.parse(sessionStorage.getItem("data"));
+console.log(data);
+console.log(data.merchant_uid);
+$("#orderNo").append($('<span>').text(data.merchant_uid));
+$('#paid-amount').append($('<span>').text(data.paid_amount)).append($('<span>').text('원'));
+$('#pay-method').append($('<span>').text(data.pay_method));
+$('#apply-num').append($('<span>').text(data.apply_num));
+</script>
+
 
 <script>
 	$(".continueBtn").click(function(){
 		$(window).prop("location","<%=request.getContextPath()%>/views/product/productlist.jsp")
-	})
+	});
+	
+	$(".mypageBtn").click(function(){
+		$(window).prop("location","<%=request.getContextPath()%>/views/mypage/mypage.jsp")
+	});
 </script>
 
 
