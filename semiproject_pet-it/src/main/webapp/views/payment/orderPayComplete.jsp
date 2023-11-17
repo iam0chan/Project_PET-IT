@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<%@ page import="com.pet.payment.model.dto.Payment" %>
-<% Payment p = (Payment) request.getAttribute("payment"); %>
+
 <style>
 	section {
 		margin : 0 auto;
@@ -32,8 +31,9 @@
     section{
     	background-color:#F0FFF0;
     }
-   
+      
 </style>	
+
 	
 	<div class="title-container">
 		<div class="title-text">
@@ -49,8 +49,8 @@
 				주문 번호
 			</div>
 			<div style="width:50%"></div>
-			<div style="width:30%; text-align:center;">
-				<%=p.getMerchant_uid() %>
+			<div id="orderNo" style="width:30%; text-align:center;">
+				
 			</div>
 		</div>
 		<p></p>
@@ -71,9 +71,9 @@
 					<span>0000</span><span>원</span>
 				</div>
 			</div>
-			<div style="width:30%; text-align:center;">
+			<!-- <div style="width:30%; text-align:center;">
 				<button class="btn btn-outline-success">상품 상세페이지</button>
-			</div>
+			</div> -->
 		</div>
 		
 		<div  style="display:flex; font-size:1.2rem; font-weight:bolder">
@@ -81,8 +81,8 @@
 				총 결제금액
 			</div>
 			<div style="width:50%"></div>
-			<div style="width:30%; text-align:center;">
-				<span><%=p.getPaid_amount() %></span><span>원</span>
+			<div id="paid-amount" style="width:30%; text-align:center;">
+				
 			</div>
 		</div>	
 	</div>
@@ -92,8 +92,8 @@
 			결제수단
 		</div>
 		<div style="width:50%"></div>
-		<div style="width:30%; text-align:center;">
-			<span id="payMethod"><%=p.getPay_method() %></span>
+		<div id="pay-method" style="width:30%; text-align:center;">
+			
 		</div>
 	</div>	
 	
@@ -102,8 +102,8 @@
 			승인번호
 		</div>
 		<div style="width:50%"></div>
-		<div style="width:30%; text-align:center;">
-			<span id="acceptNo"><%=p.getApply_num() %></span>
+		<div id="apply-num" style="width:30%; text-align:center;">
+			
 		</div>
 	</div>
 </section>
@@ -113,11 +113,29 @@
 		<button class="btn btn-outline-success mypageBtn">마이 페이지</button>	
 	</div>
 	
+<script>
+/* SessionStorage에서 데이터를 가져옴
+var jsonString = sessionStorage.getItem('data');
+console.log(jsonString); */
+
+var data= JSON.parse(sessionStorage.getItem("data"));
+console.log(data);
+console.log(data.merchant_uid);
+$("#orderNo").append($('<span>').text(data.merchant_uid));
+$('#paid-amount').append($('<span>').text(data.paid_amount)).append($('<span>').text('원'));
+$('#pay-method').append($('<span>').text(data.pay_method));
+$('#apply-num').append($('<span>').text(data.apply_num));
+</script>
+
 
 <script>
 	$(".continueBtn").click(function(){
-		$(window).prop("location","<%=request.getContextPath()%>/product/productlist.jsp")
-	})
+		$(window).prop("location","<%=request.getContextPath()%>/views/product/productlist.jsp")
+	});
+	
+	$(".mypageBtn").click(function(){
+		$(window).prop("location","<%=request.getContextPath()%>/views/mypage/mypage.jsp")
+	});
 </script>
 
 

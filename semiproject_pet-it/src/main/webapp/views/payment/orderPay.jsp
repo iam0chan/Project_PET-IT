@@ -30,7 +30,7 @@
 	<section id="body-section">
 	
 	<!-- -----------------주문자정보 입력폼 start--------------- -->
-		<form action="<%=request.getContextPath()%>/payment.do" id="formData">
+		<form action="#" id="formData">
 			
 			<div class="accordion" id="accordion-container">
 			  <div class="accordion-item">
@@ -89,7 +89,7 @@
 								  	<input type="text" class="form-control" name="emailTail" id="textEmail" placeholder="이메일 선택">
 									<select class="form-select" id="selectEmail">
 									  	 <option disabled selected>이메일 선택</option>
-									 	 <option value="naver.com" id="naver.com" selected>naver.com</option>
+									 	 <option value="naver.com" id="naver.com">naver.com</option>
 										 <option value="hanmail.net" id="hanmail.net">hanmail.net</option>
 										 <option value="hotmail.com" id="hotmail.com">hotmail.com</option>
 										 <option value="nate.com" id="nate.com">nate.com</option>
@@ -107,7 +107,7 @@
 			      					<input type="text" class="form-control" name="textDelivery" id="textDelivery" placeholder="배송요청사항 선택">
 				      				<select class="form-select" id="selectAddr">
 									  	 <option disabled selected>배송요청사항 선택</option>
-									 	 <option value="문앞에 놔주세요" selected>문앞에 놔주세요</option>
+									 	 <option value="문앞에 놔주세요">문앞에 놔주세요</option>
 										 <option value="경비실에 보관해주세요">경비실에 보관해주세요</option>
 										 <option value="배송 전 연락바랍니다">배송 전 연락바랍니다</option>
 										 <option value="directly" id="textDelivery">직접 입력하기</option>
@@ -221,7 +221,6 @@
 			        	<tr>
 				        	<td style="width:5%"></td>
 				        	<td style="width:70%"><p><b>총 상품 금액</b></p></td>
-				        	
 				        	<td style="width:15%; text-align:right"><p><span id="allProductPrice">0</span>원</p></td>
 				        </tr>
 				        <tr>
@@ -321,6 +320,125 @@
 
 <!-- js -->
 <script src="<%=request.getContextPath()%>/js/orderPay.js"></script>
+
+<!-- 결제하기 버튼 클릭 js -->
+<script>
+
+var IMP = window.IMP;
+IMP.init("imp58177585");
+$("#paymentBtn").on("click",function(){
+	
+	/*$("#formData").submit();*/
+	
+	if($("#card-payment").is(":checked")){
+		payment_card();	
+	}else{
+		payment_kakao();
+	}
+});
+function payment_kakao(){
+	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
+		pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
+		pay_method : "card",				//지불방법
+		merchant_uid: "2434157",  			//주문번호가 들어가야함.
+		name : "강아지간식",					//결제창에 노출될 상품명
+		amount:	100,						//결제 금액
+		buyer_email : "mkty0328@gmail.com", //주문자 email
+		buyer_name : "홍길동",				//주문자 이름
+		buyer_tel : "01064269887",			//주문자 전화번호
+		buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
+		buyer_postcode : "139-91",			//주문자 우편번호
+	}, function(rsp){						//callback함수
+		if(rsp.success){
+			
+			$.ajax({
+				url : "<%=request.getContextPath()%>/payment.do",
+				type : "POST",
+				dataType : "json",
+				data : {
+					imp_uid : rsp.imp_uid,
+                    merchant_uid : rsp.merchant_uid,
+                    paid_amount : rsp.paid_amount,
+                    apply_num : rsp.apply_num,
+                    pay_method : rsp.pay_method,
+                    paid_at : rsp.paid_at
+				}
+			}).done(function(data){
+				window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
+				
+			}).fail(function(data){
+					Swal.fire({
+				  		title: "카카오페이 실패",
+				  		text: "다시 시도하세요😢"+rsp.error_msg,
+				  		icon: "error"
+					});
+			});
+			
+		}else{
+			Swal.fire({
+		  		title: "카카오페이 실패",
+		  		text: "다시 시도하세요😢"+rsp.error_msg,
+		  		icon: "error"
+			});
+		}
+	});
+}
+
+function payment_card(){
+	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
+		pg : "kcp.AO09C",					//결제사명.PG상점아이디
+		pay_method : "card",				//지불방법
+		merchant_uid: "5734571",  			//주문번호가 들어가야함.
+		name : "강아지간식",					//결제창에 노출될 상품명
+		amount:	100,						//결제 금액
+		buyer_email : "mkty0328@gmail.com", //주문자 email
+		buyer_name : "홍길동",				//주문자 이름
+		buyer_tel : "01064269887",			//주문자 전화번호
+		buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
+		buyer_postcode : "139-91",			//주문자 우편번호
+	}, function(rsp){						//callback함수
+		if(rsp.success){
+			
+			$.ajax({
+				url : "<%=request.getContextPath()%>/payment.do",
+				type : "POST",
+				dataType : "json",
+				data : {
+					imp_uid : rsp.imp_uid,
+                    merchant_uid : rsp.merchant_uid,
+                    paid_amount : rsp.paid_amount,
+                    apply_num : rsp.apply_num,
+                    pay_method : rsp.pay_method,
+                    paid_at : rsp.paid_at
+				}
+			}).done(function(data){
+					Swal.fire({
+				  		title: "카드 결제 성공!",
+				  		text: "잠시 후 결제완료페이지로 이동합니다",
+				  		icon: "success"
+					});
+				    // SessionStorage에 데이터를 저장
+				    sessionStorage.setItem('data', JSON.stringify(data));
+				    window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
+					
+			}).fail(function(data){
+					Swal.fire({
+				  		title: "카드 결제 실패",
+				  		text: "다시 시도하거나 관리자에게 문의하세요😢",
+				  		icon: "error"
+					});
+			});
+			
+		}else{
+			Swal.fire({
+		  		title: "카드 결제 실패",
+		  		text: rsp.error_msg,
+		  		icon: "error"
+			});
+		}
+	});
+}
+</script>
 
 <!-- footer -->
 <%@ include file="/views/footer.jsp"%>
