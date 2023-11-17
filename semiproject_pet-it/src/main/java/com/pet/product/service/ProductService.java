@@ -16,56 +16,6 @@ import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.model.dto.ProductOption;
 
 public class ProductService {
-<<<<<<< HEAD
-   private ProductDao dao = new ProductDao();
-   public int insertProduct(Product item, String oriname, String rename) {
-      Connection conn = getConnection();
-      int result = dao.insertProduct(conn,item);
-      int fileUploadResult = 0;
-      if(result>0) {
-          fileUploadResult= dao.insertMainImageFile(conn, oriname, rename);
-          if(fileUploadResult>0) {
-             commit(conn);
-          }
-      }else {
-         rollback(conn);
-      }
-      close(conn);
-      return result;
-   }
-   
-   public List<Product> selectProductListAll(int cPage, int numPerpage){
-      Connection conn = getConnection();
-      List<Product> result = dao.selectProductListAll(conn, cPage, numPerpage);
-      close(conn);
-      
-      return result;
-   }
-   
-   public int getProductCount() {
-      Connection conn = getConnection();
-      int count = dao.getProductCount(conn);
-      
-      return count;
-   }
-   
-   public Product selectProductByNo(String productNo) {
-      Connection conn = getConnection();
-      Product product = dao.selectProductByNo(conn,productNo);
-      close(conn);
-      
-      return product;
-   }
-   
-   public List<ProductImageFile> selectMainImageFileAll(){
-      Connection conn = getConnection();
-      List<ProductImageFile> files = dao.selectMainImageFileAll(conn);
-      close(conn);
-      
-      return files;
-   }
-}
-=======
 	private ProductDao dao = new ProductDao();
 	public int insertProduct(Product item, String oriname, String rename, Map<String,String> options) {
 		Connection conn = getConnection();
@@ -131,4 +81,3 @@ public class ProductService {
 		return file;
 	}
 }
->>>>>>> refs/heads/dev
