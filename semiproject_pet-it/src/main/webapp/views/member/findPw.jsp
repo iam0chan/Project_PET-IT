@@ -73,6 +73,5 @@
 		<input type="submit" style="height:40px;" value="인증번호 받기" >
 			</div>
 	</form>
-
 </div>
 <%@ include file="/views/footer.jsp" %>
