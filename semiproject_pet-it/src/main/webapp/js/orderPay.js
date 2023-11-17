@@ -1,3 +1,24 @@
+//모달창 jquery
+
+
+$(document).ready(function(){
+	$(function() {
+	$(".modal").modal("show")
+	});
+});
+	
+	// 새로 입력 버튼 클릭하면 모달 창 close
+	/*$(".newInput").click(function(){
+		$("#myModal").css("display","none");
+	});*/
+
+	// 모달 창 외부를 클릭하면 모달 창 close
+	/*$(window).click(function(event){
+		if (event.target.id == "myModal") {
+			$("#myModal").css("display", "none");
+		}
+	});*/
+
 
 //배송요청 select에 따른 값 변화주기 jquery
     $(function() {
@@ -87,9 +108,9 @@
 
 
 
-//주문상품이 모두 삭제되면 화면 전환 jquery
+//주문상품이 모두 삭제되면 화면 전환 jquery -> 보류
 
-	$("div#productAll > div#productDiv").each(function(){
+/*	$("div#productAll > div#productDiv").each(function(){
 		if($(this).is(':hidden')){
 			var hiddenDivs = $(this).parent().children('div:hidden').length;
 			var totalDivs = $(this).parent().children('div').length;
@@ -98,118 +119,7 @@
 				window.location.href="<%=request.getContextPath()%>/cart/cartList.jsp"
 			}
 		}
-	});
-
-
-//결제창 버튼
-
-	var IMP = window.IMP;
-	IMP.init("imp58177585");
-	$("#paymentBtn").on("click",function(){
-		
-		$("#formData").submit();
-		
-		if($("#card-payment").is(":checked")){
-			payment_card1();	
-		}else{
-			payment_kakao1();
-		}
-	});
-	function payment_kakao1(){
-		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
-			pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
-			pay_method : "card",				//지불방법
-			merchant_uid: "2334156",  			//주문번호가 들어가야함.
-			name : "강아지간식",					//결제창에 노출될 상품명
-			amount:	100,						//결제 금액
-			buyer_email : "mkty0328@gmail.com", //주문자 email
-			buyer_name : "홍길동",				//주문자 이름
-			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
-			buyer_postcode : "139-91",			//주문자 우편번호
-		}, function(rsp){						//callback함수
-			if(rsp.success){
-				
-				$.ajax({
-					url : "<%=request.getContextPath()%>/payment.do",
-					type : "POST",
-					dataType : "json",
-					data : {
-						imp_uid : rsp.imp_uid,
-	                    merchant_uid : rsp.merchant_uid,
-	                    paid_amount : rsp.paid_amount,
-	                    apply_num : rsp.apply_num,
-	                    pay_method : rsp.pay_method,
-	                    paid_at : rsp.paid_at
-					},
-					success : function(data){
-						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
-						Swal.fire({
-							  title: "결제 완료",
-							  text: "주문번호 : "+merchant_uid,
-							  icon: "success"
-						});
-					}
-				});
-				
-			}else{
-				Swal.fire({
-					  title: "결제 실패",
-					  text: rsp.error_msg,
-					  icon: "error"
-					});
-				/* alert("실패 : 코드("+rsp.error_code+") / 메시지("+rsp.error_msg+")"); */
-			}
-		});
-	}
-	
-	function payment_card1(){
-		IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
-			pg : "kcp.AO09C",					//결제사명.PG상점아이디
-			pay_method : "card",				//지불방법
-			merchant_uid: "1834567",  			//주문번호가 들어가야함.
-			name : "강아지간식",					//결제창에 노출될 상품명
-			amount:	100,						//결제 금액
-			buyer_email : "mkty0328@gmail.com", //주문자 email
-			buyer_name : "홍길동",				//주문자 이름
-			buyer_tel : "01064269887",			//주문자 전화번호
-			buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
-			buyer_postcode : "139-91",			//주문자 우편번호
-		}, function(rsp){						//callback함수
-			if(rsp.success){
-				
-				$.ajax({
-					url : "<%=request.getContextPath()%>/payment.do",
-					type : "POST",
-					dataType : "json",
-					data : {
-						imp_uid : rsp.imp_uid,
-	                    merchant_uid : rsp.merchant_uid,
-	                    paid_amount : rsp.paid_amount,
-	                    apply_num : rsp.apply_num,
-	                    pay_method : rsp.pay_method,
-	                    paid_at : rsp.paid_at
-					},
-					success : function(data){
-						/* alert("완료 imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : "+rsp.merchant_uid); */
-						Swal.fire({
-						  title: "결제 완료",
-						  text: "결제에 성공했습니다",
-						  icon: "success"
-						});
-					}
-				});
-				
-			}else{
-				Swal.fire({
-					  title: "결제 실패",
-					  text: rsp.error_msg,
-					  icon: "error"
-				});
-				/* alert("실패 : 코드("+rsp.error_code+") / 메시지("+rsp.error_msg+")"); */
-			}
-		});
-	}
+	});*/
 
 
 //주소입력창 daum지도주소 api 적용 js
