@@ -11,13 +11,13 @@ import com.pet.member.dto.Member;
 public class MemberService {
 
 private MemberDao dao = new MemberDao();
-   
-   public Member selectMemberByIdAndPw(String memberId, String memberPw) {
-      Connection conn = getConnection();
-      Member m = dao.selectMemberByIdAndPw(conn, memberId, memberPw);
-      close(conn);
-      return m;
-   }
+	
+	public Member selectMemberByIdAndPw(String memberId, String memberPw) {
+		Connection conn = getConnection();
+		Member m = dao.selectMemberByIdAndPw(conn, memberId, memberPw);
+		close(conn);
+		return m;
+	}
 
    public int insertMember(Member m) {
       Connection conn = getConnection();

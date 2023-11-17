@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>장바구니</title>
+<title>관심상품</title>
 <style>
 body {
 	text-align: center;
@@ -210,15 +210,7 @@ background-color: green;
 </head>
 <body>
 	<section>
-		<h3>장바구니</h3>
-		<h6>
-			회원님은 <strong>[silver]</strong>등급입니다.
-		</h6>
-		<hr />
-		<div class="info">
-			<div class="mileage">가용 적립금</div>
-			<div class="coupon">쿠폰</div>
-		</div>
+		<h3>관심상품</h3>
 		<hr />
 		<table>
 			<thead>
@@ -233,16 +225,6 @@ background-color: green;
 				</tr>
 			</thead>
 			<tbody>
-			<%
-			if(lsit==null || list.size() <1){%>
-			<tr>
-			<td>
-			<td colspan="6">장바구니가 비었습니다.</td>
-			</tr>
-			<% %>
-			
-			
-			
 				<tr>
 					<td><input type="checkbox"></td>
 					<td><img
@@ -264,7 +246,7 @@ background-color: green;
 					<td class="total">10,000원</td>
 
 					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
+						onclick="BasketNew.moveCart(0);">장바구니 추가</a></td>
 				</tr>
 				<tr>
 					<td><input type="checkbox"></td>
@@ -287,7 +269,7 @@ background-color: green;
 					<td class="total">10,000원</td>
 
 					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
+						onclick="BasketNew.moveCart(0);">장바구니 추가</a></td>
 				</tr>
 				<tr>
 					<td><input type="checkbox"></td>
@@ -310,7 +292,7 @@ background-color: green;
 					<td class="total">10,000원</td>
 
 					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
+						onclick="BasketNew.moveCart(0);">장바구니 추가</a></td>
 				</tr>
 				<!-- 상품 추후에 추가하자 -->
 			</tbody>
@@ -321,7 +303,7 @@ background-color: green;
 			<button onclick="continueShopping()">쇼핑 계속하기</button>
 		</div>
 
-		<div class="row justify-content-end" align="right">
+		<!-- <div class="row justify-content-end" align="right">
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 				<div class="cart-total mb-3">
 					<h3>장바구니 총 결제 금액</h3>
@@ -330,12 +312,11 @@ background-color: green;
 						<span>0원</span>
 					</p>
 				</div>
-				<!-- 주문하기 누르면 주문페이지로 이동 -->
 				<p>
 					<a href="#" class="btn btn-primary py-3 px-4">주문하기</a>
 				</p>
 			</div>
-		</div>
+		</div> -->
 
 	</section>
 
@@ -343,7 +324,7 @@ background-color: green;
 function deleteSelectedProduct() {
 	alert("선택한 상품이 삭제되었습니다.");
 }
-$(document).ready(function () {
+/* $(document).ready(function () {
     $('.qtybtn').click(function (e) {
         e.preventDefault();
         var inputField = $(this).siblings('.cartQty');
@@ -381,7 +362,7 @@ $(document).ready(function () {
 
         $(".total-price>span:last-child").text(addCommas(totalAcount) + '원');
     }
-});
+}); */
 
 </script>
 
