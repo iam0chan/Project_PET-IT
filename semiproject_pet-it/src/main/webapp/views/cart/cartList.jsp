@@ -233,6 +233,16 @@ background-color: green;
 				</tr>
 			</thead>
 			<tbody>
+			<%
+			if(lsit==null || list.size() <1){%>
+			<tr>
+			<td>
+			<td colspan="6">장바구니가 비었습니다.</td>
+			</tr>
+			<% %>
+			
+			
+			
 				<tr>
 					<td><input type="checkbox"></td>
 					<td><img
