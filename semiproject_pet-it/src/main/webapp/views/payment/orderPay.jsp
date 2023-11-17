@@ -18,10 +18,6 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/orderPay/orderPay.css"/>
 
 
-
-
-
-
 <div id="content-container">
 <!-- modal -->
 <div class="modal" id="modal" tabindex="-1">
