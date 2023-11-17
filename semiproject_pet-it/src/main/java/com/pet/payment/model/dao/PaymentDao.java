@@ -24,30 +24,6 @@ private Properties sql = new Properties();
 		}
 	}
 	
-	public int insertOrderResult(Connection conn, Order o) {
-		int result=0;
-		PreparedStatement pstmt = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sql.getProperty("insertOrderResult"));
-			pstmt.setString(1, "taeyoons");
-			pstmt.setString(2, o.getOrderName());
-			pstmt.setString(3, o.getOrderPhone());
-			pstmt.setString(4, o.getOrderZipcode());
-			pstmt.setString(5, o.getOrderAddr());
-			pstmt.setString(6, o.getOrderDefAddr());
-			pstmt.setString(7, o.getOrderEmail());
-			pstmt.setInt(8, o.getOrderTotalPrice());
-			pstmt.setString(9, o.getTextDelivery());
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	
 	public int insertPaymentResult(Connection conn, Payment p) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -55,9 +31,10 @@ private Properties sql = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("insertPaymentResult"));
 			pstmt.setString(1, p.getImp_uid());
-			pstmt.setInt(2, p.getPaid_amount());
-			pstmt.setString(3, p.getPay_method());
-			pstmt.setInt(4, p.getApply_num());
+			pstmt.setInt(2, 78910);
+			pstmt.setInt(3, p.getPaid_amount());
+			pstmt.setString(4, p.getPay_method());
+			pstmt.setInt(5, p.getApply_num());
 			
 			result = pstmt.executeUpdate();
 			
