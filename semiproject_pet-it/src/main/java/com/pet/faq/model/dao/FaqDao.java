@@ -16,6 +16,7 @@ import com.pet.faq.model.dto.Faq;
 
 
 
+
 public class FaqDao {
 
     private Properties sql = new Properties();
@@ -51,6 +52,47 @@ public class FaqDao {
         }
         return result;
     }
+    
+    //조회수
+    public Faq selectFaqByNo(Connection conn, int No) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Faq f=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFaqByNo"));
+			pstmt.setInt(1, f.getFaqHits()); 
+			rs=pstmt.executeQuery();
+			if(rs.next()) f=getFaq(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return f;
+		
+	}
+    
+    //조회수 
+    public int updateFaqReadCount(Connection conn, int no) {
+    	PreparedStatement pstmt = null;
+    	int result=0; 
+    	try {
+    		pstmt = conn.prepareStatement(sql.getProperty("updateFaqReadCount"));
+    		pstmt.setInt(1,no);
+    		result=pstmt.executeUpdate();
+    	}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+    }
+    
+    
+    
+    
+    
+    
     
     public int insertFaq (Connection conn, Faq f){
     	PreparedStatement pstmt = null;
@@ -147,15 +189,9 @@ public class FaqDao {
         try {
             pstmt = conn.prepareStatement(query);
            // pstmt.setString(1, title); // 필요없고
-<<<<<<< HEAD
             pstmt.setString(1, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
             pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
             pstmt.setInt(3, cPage * numPerPage);
-=======
-            pstmt.setString(2, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
-            pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
-            pstmt.setInt(4, cPage * numPerPage);
->>>>>>> refs/heads/dev
 
             rs = pstmt.executeQuery();
 

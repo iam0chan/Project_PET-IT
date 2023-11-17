@@ -54,7 +54,7 @@ div.col-md-8 {
 
 .recruit .show {
 	display: table-row /* !important */;
-} /** 애니메이션효과 추가하기(01-20 pm 04:23) */
+} 
 .boardsearchAll {
 	text-align: center;
 }
@@ -64,19 +64,23 @@ div.col-md-8 {
 }
 
 #search {
+	
+}
+
+tr.item {
+	color: #000; 
+	background-color: #fff; 
+}
+
+tr.item:hover {
+	color: #000; 
+	background-color: #04aa6d;
+}
+.Pet-it-adminBtn{
 	text-align: center;
 	height: 25px;
 }
 
-tr.item {
-	color: #000; /* 텍스트 색상 */
-	background-color: #fff; /* 기본 배경 색상 */
-}
-
-tr.item:hover {
-	color: #000; /* 마우스를 올렸을 때 텍스트 색상 */
-	background-color: #04aa6d;
-}
 </style>
 
 <body>
@@ -98,7 +102,6 @@ tr.item:hover {
 					<option value="취소/반품/교환" <%=request.getParameter("faqs")!=null&&request.getParameter("faqs").equals("취소/반품/교환")?"selected":"" %>>취소/반품/교환</option>
 					
 			</select>
-
 			</span>
 		</div>
 		<br>
@@ -153,7 +156,7 @@ tr.item:hover {
 				<option value="subject">제목</option>
 				<option value="subject">내용</option>
 			</select>
-		<input type="search" id="searchMenu" >
+		<input type="search" id="searchMenu" placeholder="입력하세요">
 			<input type="submit" name="selectSearch" value="검색">
 		
 		</form>
@@ -174,8 +177,18 @@ tr.item:hover {
 		
 	</div>
 	<br>
-
-
+	<div>
+		<%if(loginMember!=null
+			&&loginMember.getMemberId().equals("jihyes")){ %>
+			<%--  <div>
+			 	<a href="<%=request.getContextPath() %>/faq/faqList.do"></a>
+			 </div> --%>
+			 <div class="Pet-it-adminBtn">
+			 	<button onclick="faqWriterMove();">글쓰기</button>
+			 </div>
+			 
+	</div>
+	<%} %>
 
 
 
@@ -187,6 +200,8 @@ tr.item:hover {
 		crossorigin="anonymous"></script>
 
 	<script>
+	
+	
 	<!-- show와 hide 클래스를 추가한 아코디언 효과 jquey -->
 		$(function() {
 

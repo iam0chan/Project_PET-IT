@@ -95,7 +95,7 @@
 	                	</div>
 	                    <!-- <input class="Btn" type="submit" value="작성완료" /> -->
 	                    <div class="col-1">
-	                    	<input class="Btn" type="reset"  value="작성취소" />
+	                    	<button type="button" class="Btn" onclick="test();" >작성취소</button>
 	                    </div>
 	                    <div class="col-5"></div>
 		            </div>
