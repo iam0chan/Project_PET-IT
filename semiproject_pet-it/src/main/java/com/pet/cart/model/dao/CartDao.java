@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pet.cart.model.dto.Cart;
-import com.pet.util.DBUtil;
 
 public class CartDao {
 
 	// 장바구니에 db정보 추가
-	public void insertCart(Cart cart) {
-		try (Connection connection = DBUtil.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(
+	public int insertCart(Connection conn,Cart cart) {
+		int result=0;
+		try (PreparedStatement preparedStatement = conn.prepareStatement(
 						"INSERT INTO cart (member_id, product_no, cart_product_count, cart_no, enroll_date) "
 								+ "VALUES (?, ?, ?, ?, ?)")) {
 
@@ -25,20 +24,19 @@ public class CartDao {
 			preparedStatement.setString(4, cart.getCartNo());
 			preparedStatement.setDate(5, cart.getEnrollDate());
 
-			preparedStatement.executeUpdate();
+			result=preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace(); 
-		}
+		}return result;
 	}
 
 	// 상품 리스트
-	public List<Cart> getAllCartsByMemberId(String memberId) {
+	public List<Cart> getAllCartsByMemberId(Connection conn,String memberId) {
 		List<Cart> carts = new ArrayList<>();
-
-		try (Connection connection = DBUtil.getConnection();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM cart WHERE member_id = ?")) {
+		String sql="SELECT * FROM cart WHERE member_id = ?";
+		try (PreparedStatement preparedStatement = conn
+						.prepareStatement(sql)) {
 
 			preparedStatement.setString(1, memberId);
 

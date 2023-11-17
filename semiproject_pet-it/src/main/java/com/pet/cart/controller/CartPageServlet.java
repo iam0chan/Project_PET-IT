@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pet.cart.model.dao.CartDao;
 import com.pet.cart.model.dto.Cart;
+import com.pet.cart.service.CartService;
 
 /**
  * Servlet implementation class CartPageServlet
@@ -28,7 +29,7 @@ public class CartPageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 멤버아이디
 		String memberId = "MemberId";
-		List<Cart> cartItems = new CartDao().getAllCartsByMemberId(memberId);
+		List<Cart> cartItems = new CartService().getAllCartsByMemberId(memberId);
 		request.setAttribute("cartItems", cartItems);
 
 		request.getRequestDispatcher("/cart/cartList.jsp").forward(request, response);
