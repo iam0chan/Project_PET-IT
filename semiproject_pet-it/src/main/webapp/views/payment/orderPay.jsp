@@ -19,17 +19,28 @@
 
 
 
-<!-- 모달 창의 내용 -->
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>모달 창 내용</p>
-  </div>
-</div>
 
 
 
 <div id="content-container">
+<!-- modal -->
+<div class="modal" id="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<section id="header-section">
 		<div id="title-container">
 			<div id="title-text">
@@ -373,6 +384,7 @@ function payment_kakao(){
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at
+                
 				}
 			}).done(function(data){
 				window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
