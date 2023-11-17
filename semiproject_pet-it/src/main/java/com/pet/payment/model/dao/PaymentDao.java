@@ -35,7 +35,8 @@ private Properties sql = new Properties();
 			pstmt.setInt(2, 78910);
 			pstmt.setInt(3, p.getPaid_amount());
 			pstmt.setString(4, p.getPay_method());
-			pstmt.setInt(5, p.getApply_num());
+			pstmt.setDate(5, p.getPaid_at());
+			pstmt.setInt(6, p.getApply_num());
 			
 			result = pstmt.executeUpdate();
 			

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-
+<%@ page import="com.pet.payment.model.dto.Payment" %>
+<% 
+	Payment p = (Payment) request.getAttribute("payment");
+%>
 <style>
 	section {
 		margin : 0 auto;
@@ -50,7 +53,7 @@
 			</div>
 			<div style="width:50%"></div>
 			<div id="orderNo" style="width:30%; text-align:center;">
-				
+				<%=p.getMerchant_uid()%>
 			</div>
 		</div>
 		<p></p>
@@ -82,7 +85,7 @@
 			</div>
 			<div style="width:50%"></div>
 			<div id="paid-amount" style="width:30%; text-align:center;">
-				
+				<%=p.getPaid_amount()%>
 			</div>
 		</div>	
 	</div>
@@ -93,7 +96,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div id="pay-method" style="width:30%; text-align:center;">
-			
+			<%=p.getPay_method() %>
 		</div>
 	</div>	
 	
@@ -103,7 +106,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div id="apply-num" style="width:30%; text-align:center;">
-			
+			<%=p.getApply_num() %>
 		</div>
 	</div>
 </section>
@@ -113,7 +116,7 @@
 		<button class="btn btn-outline-success mypageBtn">마이 페이지</button>	
 	</div>
 	
-<script>
+<!-- <script>
 /* SessionStorage에서 데이터를 가져옴
 var jsonString = sessionStorage.getItem('data');
 console.log(jsonString); */
@@ -125,7 +128,7 @@ $("#orderNo").append($('<span>').text(data.merchant_uid));
 $('#paid-amount').append($('<span>').text(data.paid_amount)).append($('<span>').text('원'));
 $('#pay-method').append($('<span>').text(data.pay_method));
 $('#apply-num').append($('<span>').text(data.apply_num));
-</script>
+</script> -->
 
 
 <script>

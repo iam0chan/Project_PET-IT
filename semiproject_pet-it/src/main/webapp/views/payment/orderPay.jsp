@@ -259,21 +259,21 @@
 			    </h2>
 			    <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
 			      <div class="accordion-body">
-				      	<div style="margin-left:50px">
+				      	<div style="margin-left:50px; margin-right:50px; display:flex; justify-align:space-between;">
 			        		<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="card-payment" value="card" checked>
 							  <label class="form-check-label" for="card-payment">
 							    <img alt="" src="<%=request.getContextPath()%>/img/card_payment.png">&nbsp&nbsp신용카드 결제
 							  </label>
 							</div>
-							<br>
+							
  							<%--<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
 							  <label class="form-check-label" for="Npay">
 							    <img alt="" src="<%=request.getContextPath()%>/img/Npay_badge.png">&nbsp&nbsp네이버페이
 							  </label>
 							</div> --%>
-							<br>
+							
 							<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="kakaopay" value="kakaopay">
 							  <label class="form-check-label" for="kakaopay">
@@ -328,7 +328,7 @@ var IMP = window.IMP;
 IMP.init("imp58177585");
 $("#paymentBtn").on("click",function(){
 	
-	/*$("#formData").submit();*/
+	
 	
 	if($("#card-payment").is(":checked")){
 		payment_card();	
@@ -339,7 +339,7 @@ $("#paymentBtn").on("click",function(){
 function payment_kakao(){
 	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 		pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
-		pay_method : "card",				//지불방법
+		pay_method : "KakaoPay",			//지불방법
 		merchant_uid: "2434157",  			//주문번호가 들어가야함.
 		name : "강아지간식",					//결제창에 노출될 상품명
 		amount:	100,						//결제 금액
@@ -362,15 +362,19 @@ function payment_kakao(){
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at
-                
 				}
 			}).done(function(data){
+				Swal.fire({
+			  		title: "카카오페이 결제 성공!",
+			  		text: "잠시 후 결제완료페이지로 이동합니다",
+			  		icon: "success"
+				});
 				window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
 				
 			}).fail(function(data){
 					Swal.fire({
 				  		title: "카카오페이 실패",
-				  		text: "다시 시도하세요😢"+rsp.error_msg,
+				  		text: rsp.error_msg+"😢",
 				  		icon: "error"
 					});
 			});
@@ -389,7 +393,7 @@ function payment_card(){
 	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 		pg : "kcp.AO09C",					//결제사명.PG상점아이디
 		pay_method : "card",				//지불방법
-		merchant_uid: "5734571",  			//주문번호가 들어가야함.
+		merchant_uid: "7934571",  			//주문번호가 들어가야함.
 		name : "강아지간식",					//결제창에 노출될 상품명
 		amount:	100,						//결제 금액
 		buyer_email : "mkty0328@gmail.com", //주문자 email
@@ -412,15 +416,14 @@ function payment_card(){
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at
 				}
-			}).done(function(data){
+			})
+				.done(function(data){
 					Swal.fire({
 				  		title: "카드 결제 성공!",
 				  		text: "잠시 후 결제완료페이지로 이동합니다",
 				  		icon: "success"
 					});
-				    // SessionStorage에 데이터를 저장
-				    sessionStorage.setItem('data', JSON.stringify(data));
-				    window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
+				    window.location.replace("<%=request.getContextPath()%>/paymentEnd.do");
 					
 			}).fail(function(data){
 					Swal.fire({
@@ -433,7 +436,7 @@ function payment_card(){
 		}else{
 			Swal.fire({
 		  		title: "카드 결제 실패",
-		  		text: rsp.error_msg,
+		  		text: rsp.error_msg+"😢",
 		  		icon: "error"
 			});
 		}
