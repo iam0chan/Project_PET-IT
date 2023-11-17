@@ -1,3 +1,20 @@
+//모달창 jquery
+$(document).ready(function(){
+  // 페이지가 로드되면 모달 창 open
+  $("#myModal").css("display", "block");
+
+  // 닫기 버튼을 클릭하면 모달 창 close
+  $(".close").click(function(){
+    $("#myModal").css("display", "none");
+  });
+
+  // 모달 창 외부를 클릭하면 모달 창 close
+  $(window).click(function(event){
+    if (event.target.id == "myModal") {
+      $("#myModal").css("display", "none");
+    }
+  });
+});
 
 //배송요청 select에 따른 값 변화주기 jquery
     $(function() {

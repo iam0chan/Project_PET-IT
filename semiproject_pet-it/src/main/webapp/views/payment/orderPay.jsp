@@ -18,6 +18,17 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/orderPay/orderPay.css"/>
 
 
+
+<!-- 모달 창의 내용 -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>모달 창 내용</p>
+  </div>
+</div>
+
+
+
 <div id="content-container">
 	<section id="header-section">
 		<div id="title-container">
