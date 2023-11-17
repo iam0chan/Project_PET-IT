@@ -46,7 +46,7 @@
               
                 <div class="info item-option">
                     <div class="option" style="width: 300px;">
-                        <select name="priceOption" id="option-select" style="width:280px;" style="text-align:center;">
+                        <select name="priceOption" id="option-select" style="width:280px;" onchange="chageOption();" style="text-align:center;">
                         	<option value="<%=p.getProductPrice()%>"><%=p.getProductPrice()%>원</option>
                         	<%if(p.getProductOptionStatus().equals("Y")){ %>
                         		<%for(int i=0; i<p.getProductOption().size(); i++){ %>
@@ -63,6 +63,13 @@
                         		<%} %>
                         	<%} %>
                         </select>
+                        <script>
+                        	function chageOption(){
+		                        const select = $("option-select");
+                        		alert(price);
+                        	}
+                        	
+                        </script>
                     </div>
                     <div class="amountbtn">
                         <button id="btn-l" style="width: 20px;">-</button>
