@@ -48,7 +48,9 @@
     .field_addr input[type="text"]{
     	width: 300px;
     }
-    
+    .field_id{
+    	display:flex;
+    }
     
     .field input {
     	width: 300px;
@@ -65,6 +67,20 @@
     	width: 300px;
     	align-self: center;
     }
+    
+    .modal {
+    	width:360px;
+   	    height:178px;
+    	margin-bottom:0px;
+    	position: fixed;
+	  	top: 50%;
+  		left: 50%;
+    }
+    
+    .modal *{
+     	width:100%;
+     	height:100%;
+    }
 </style>
 <div class="enroll_title"><h2>회원가입</h2></div>
 <br>
@@ -72,18 +88,30 @@
 	<form action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" onsubmit="return fn_membervalidate();">								
 			<div class="field_id">	
 				<div>
-					<label>아이디</label>
+					<b>아이디</b>
 				</div>
 				<span>
 					<input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" >
 				</span>
 				<div>
-					<button type="button" id="id_du">
-						<span>중복확인</span>
-					</button>
-					<span id="id_du_span"></span>
+					<button type="button" id="id_du"><span id="id_du_span">중복확인</span></button>
 				</div>
 			</div>
+				<!-- 아이디 중복확인 -->
+				<div class="modal fade">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- body -->
+					<div class="modal-body">
+					이 아이디는 사용가능해용ㅋ
+					</div>
+					<!-- Footer -->
+					<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					</div>	
+			 	</div>
+				</div>
+				</div>
 			<div class="field_pw">
 				<b>패스워드</b>
 				<span>
@@ -156,16 +184,18 @@
         });
     });
     var id_ck = 0;
-    $("#id_du").click(e=>{
-    	
-    	var memberId=$("userid").val();
-    	
+	var memberId=$("memberId").val();
+    
+	<%-- $("#id_du").click(e=>{
+		if($('[name="memberId"]').val() == 0){
+			alert("아이디를 입력해주세요.");
+		}else{
     	$.ajax({
     		url:"<%=request.getContextPath()%>/ajax/enrollmember.do",
-    		type:"post",
+    		type:"GET",
     		success:data=>{
     			function(data){
-    				if(data.cnt)
+    				console.log("")
     			}
     		},
     		error:(r,e)=>{
@@ -174,7 +204,15 @@
     			console.log(e);
     		}
     	})
-    });
+   	 });
+	} --%>
+	/* 모달창 스크립트 */
+	$(function(){
+		$("#id_du").click(function(){
+			$('div.modal').modal({remote : 'modalLayer.jsp'
+				});
+			})
+		})
     </script>
 </form>
 </div>
