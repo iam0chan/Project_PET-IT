@@ -54,15 +54,15 @@ public class PaymentServlet extends HttpServlet {
 	    if(result>0) System.out.println("DB저장 성공");
 	    else System.out.println("DB저장 실패");
 	    System.out.println(p);
-	   
+	    request.setAttribute("payment", p);
 	    response.setContentType("application/json;charset=utf-8");
 		Gson gson = new Gson();
 		gson.toJson(p,response.getWriter());
 		System.out.println(gson.toJson(p));
 	    
 //		String data = gson.toJson(p);
-//	    request.setAttribute("data", data);
-//	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp");
+
+	    request.getRequestDispatcher("/views/payment/orderPayComplete.jsp");
 	}
 
 	/**

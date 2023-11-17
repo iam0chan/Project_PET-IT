@@ -388,7 +388,7 @@ function payment_card(){
 	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
 		pg : "kcp.AO09C",					//결제사명.PG상점아이디
 		pay_method : "card",				//지불방법
-		merchant_uid: "4534571",  			//주문번호가 들어가야함.
+		merchant_uid: "4634571",  			//주문번호가 들어가야함.
 		name : "강아지간식",					//결제창에 노출될 상품명
 		amount:	100,						//결제 금액
 		buyer_email : "mkty0328@gmail.com", //주문자 email
@@ -413,10 +413,10 @@ function payment_card(){
 				}
 			}).done(function(data){
 				// 데이터를 문자열로 변환
-			    var jsonString = JSON.stringify(data);
+			    // var jsonString = JSON.stringify(data);
 			    // SessionStorage에 데이터를 저장
-			    sessionStorage.setItem('data', jsonString);
-			    window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
+			    // sessionStorage.setItem('data', jsonString);
+			    // window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
 					
 			}).fail(function(data){
 					Swal.fire({
