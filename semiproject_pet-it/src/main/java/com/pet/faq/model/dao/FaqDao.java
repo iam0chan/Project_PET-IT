@@ -53,21 +53,21 @@ public class FaqDao {
     }
     
     public int insertFaq (Connection conn, Faq f){
-    	PreparedStatement pstmt = null;
-    	int result=0;
-    	try {
-    		pstmt=conn.prepareStatement(sql.getProperty("insertFaq"));
-    		pstmt.setString(1,f.getFaqCategory());
-    		pstmt.setString(2,f.getFaqTitle());
-    		pstmt.setString(3,f.getFaqContent());
-    		result=pstmt.executeUpdate();
-    	}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-    	
-    	
+       PreparedStatement pstmt = null;
+       int result=0;
+       try {
+          pstmt=conn.prepareStatement(sql.getProperty("insertFaq"));
+          pstmt.setString(1,f.getFaqCategory());
+          pstmt.setString(2,f.getFaqTitle());
+          pstmt.setString(3,f.getFaqContent());
+          result=pstmt.executeUpdate();
+       }catch (SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }return result;
+       
+       
     }
     
     //전체출력 페이징처리 전체 데이터 수 
@@ -114,7 +114,7 @@ public class FaqDao {
     
     
     public List<Faq> selectFaqCategory(Connection conn, int cPage, int numPerpage, String category){
-    	PreparedStatement pstmt = null;
+       PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Faq> result = new ArrayList<>();
 
@@ -147,7 +147,6 @@ public class FaqDao {
         try {
             pstmt = conn.prepareStatement(query);
            // pstmt.setString(1, title); // 필요없고
-
             pstmt.setString(1, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
             pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
             pstmt.setInt(3, cPage * numPerPage);
