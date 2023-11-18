@@ -420,7 +420,7 @@ function payment_api(){
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at,
-                    orders : orders   //주문객체배열 보내기
+                    orders : JSON.stringify(orders)   //주문객체배열 보내기
 				}
 			})
 				.done(function(data){
