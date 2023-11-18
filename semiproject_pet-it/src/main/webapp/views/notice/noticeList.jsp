@@ -130,9 +130,9 @@ tr.item:hover {
 				<tr class="item">
 					<td><%=n.getNoticeNo() %></td>
 					<td><%=n.getNoticeCategory() %></td>
-					<a href="<%=request.getContextPath()%>/noticeView.do?no=<%=n.getNoticeNo()%>">
-					<td><%=n.getNoticeTitle() %></td>
-					</a>
+					<td><a href="<%=request.getContextPath()%>/noticeView.do?no=<%=n.getNoticeNo()%>">
+					<%=n.getNoticeTitle() %>
+					</a></td>
 					<td><%=n.getNoticeDate() %></td>
 					<td><%=n.getNoticeHits() %></td>
 				</tr>
