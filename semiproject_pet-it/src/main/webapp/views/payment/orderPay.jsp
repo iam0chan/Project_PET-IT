@@ -331,6 +331,9 @@ let email="";
 let buyer_name="";
 let tell="";
 let postcode ="";
+let orderNo = createOrderNum();
+let order ={};		//주문 객체
+let orders = [];	//주문 객체 배열
 
 //결제 IMP 초기화
 var IMP = window.IMP;
@@ -338,7 +341,8 @@ IMP.init("imp58177585");
 
 //결제 버튼 클릭 이벤트
 $("#paymentBtn").on("click",function(e){
-	product_name = $("#productName").val();
+	//변수값 세팅
+	product_name = $("#productName").text();
 	amount = parseInt($("#allPayCost").text());
 	email = $("#emailHead").val()+"@"+$("#textEmail").val();
 	buyer_name = $("#orderName").val();
@@ -346,8 +350,21 @@ $("#paymentBtn").on("click",function(e){
 	addr = $("#addr").val()+", "+$("#detailAddr").val();
 	postcode = $("#zipcode").val();
 	
+	//주문 객체 생성
+	order.orderNo = orderNo;
+	order.orderName = buyer_name;
+	order.orderZipcode = postcode;
+	order.orderAddr = $("#addr").text();
+	order.orderDefAddr= $("#detailAddr").text();
+	order.orderPhone = tell;
+	order.orderEmail = email;
+	order.orderTotalPrice = amount;
+	order.deliveryReq = $("#textDelivery").text();
+	//주문 객체 배열 
+	orders.push(order);
+	
 	//필수입력항목 체크
-	var isEmpty = false;
+	/* var isEmpty = false;
     $("input[type=text]").not(".optional").each(function() {
         if (!$(this).val()) {
             e.preventDefault();
@@ -364,7 +381,7 @@ $("#paymentBtn").on("click",function(e){
 
     if(isEmpty) {
         return; // 빈 필드가 있다면 여기서 함수 종료
-    }
+    } */
 
     // 빈 필드가 없다면 결제 방식 선택
     if($("#card-payment").is(":checked")){
@@ -376,11 +393,12 @@ $("#paymentBtn").on("click",function(e){
 
 });
 
+//결제 api function
 function payment_api(){
 	IMP.request_pay({							//결제창 호출 함수 IMP.request_pat({});
 		pg : pg,								//결제사명.PG상점아이디
 		pay_method : "card",					//지불방법
-		merchant_uid: "8034571",  				//주문번호가 들어가야함.
+		merchant_uid: orderNo,  				//주문번호가 들어가야함.
 		name : product_name,					//결제창에 노출될 상품명
 		amount:	amount,							//결제 금액
 		buyer_email : email, 					//주문자 email
@@ -401,7 +419,8 @@ function payment_api(){
                     paid_amount : rsp.paid_amount,
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
-                    paid_at : rsp.paid_at
+                    paid_at : rsp.paid_at,
+                    orders : orders   //주문객체배열 보내기
 				}
 			})
 				.done(function(data){

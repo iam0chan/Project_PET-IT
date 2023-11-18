@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Order {
-
+	private int orderNo;
 	private String orderName;
 	private String orderZipcode;
 	private String orderAddr;
@@ -14,5 +14,5 @@ public class Order {
 	private String orderPhone;
 	private String orderEmail;
 	private int orderTotalPrice;
-	private String textDelivery;
+	private String deliveryReq;
 }
