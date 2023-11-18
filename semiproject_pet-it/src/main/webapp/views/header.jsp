@@ -146,7 +146,7 @@
                       </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/faqList.do">FaQ</a>
+                      <a class="nav-link" href="contact.html">Q&A</a>
                       <!-- <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
