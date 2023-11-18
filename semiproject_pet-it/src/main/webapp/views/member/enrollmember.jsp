@@ -85,8 +85,8 @@
 <div class="enroll_title"><h2>회원가입</h2></div>
 <br>
 <div class="enroll">
-	<form action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" onsubmit="return fn_membervalidate();">								
-			<div class="field_id">	
+	<form action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post"><!-- onsubmit="return fn_membervalidate();" -->							
+			<div class="field_id">
 				<div>
 					<b>아이디</b>
 				</div>
@@ -102,9 +102,7 @@
 				<div class="modal-dialog">
 				<div class="modal-content">
 					<!-- body -->
-					<div class="modal-body">
-					이 아이디는 사용가능해용ㅋ
-					</div>
+					<div class="modal-body"></div>
 					<!-- Footer -->
 					<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
@@ -133,7 +131,7 @@
 			<div class="field_email">
 				<b>이메일</b>
 				<span>	
-					<input type="email" placeholder="abc@xyz.com" name="memberEmail" id="memberEmail">
+					<input type="email" placeholder="pet@it.com" name="memberEmail" id="memberEmail">
 				</span>
 			</div>
 			<div class="field_phone">
@@ -207,12 +205,30 @@
    	 });
 	} --%>
 	/* 모달창 스크립트 */
-	$(function(){
+	$(document).ready(function() {
 		$("#id_du").click(function(){
-			$('div.modal').modal({remote : 'modalLayer.jsp'
-				});
+			const memberId = $('#memberId').val();
+			console.log(memberId);
+			$.ajax({
+				type:"POST",
+				url: "<%=request.getContextPath()%>/memberCheck.do",
+				data:{memberId:memberId},
+				success:function(result){
+					console.log(result);
+					if(result=='0'){  // id가 checkMessage인 것에 아래 텍스트 출력
+						$('.modal-body').html('중복된 아이디입니다');
+					} else if(result=='-1'){
+						$('.modal-body').html('아이디가 입력되지않았습니다');
+					}else if(result=='-2'){
+						$('.modal-body').html('아이디는 6~10글자이내로 입력해주세요');
+					} else if(result=='1'){
+						$('.modal-body').html('사용가능한 아이디입니다');
+					}
+				$('div.modal').modal("show");
+				}
 			})
-		})
+			})
+		});
     </script>
 </form>
 </div>
@@ -221,15 +237,13 @@
 		$.post('<%=request.getContextPath()%>/member/enrollMemberEnd.do')		
 	});
 	
-    const fn_membervalidate=()=>{
+    /* const fn_membervalidate=()=>{
     	const memberId=$("#memberId").val().trim();
     	if(memberId.length<6 || memberId.length>10){
     		alert("아이디는 영어,숫자포함 6~10글자 이내로 입력하세요");
  	 	  	return false;
-    	}
-    	
-    	
-    }
+    	} */
+    /* } */
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

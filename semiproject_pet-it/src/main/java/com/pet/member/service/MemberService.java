@@ -1,7 +1,9 @@
 package com.pet.member.service;
 
-import static com.pet.common.JDBCTemplate.*;
+import static com.pet.common.JDBCTemplate.close;
+import static com.pet.common.JDBCTemplate.commit;
 import static com.pet.common.JDBCTemplate.getConnection;
+import static com.pet.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
@@ -27,5 +29,15 @@ private MemberDao dao = new MemberDao();
       close(conn);
       
       return result;
+   }
+   
+   public int memberIdCheck(String memberId) {
+	   Connection conn = getConnection();
+	   int result = dao.memberIdCheck(conn, memberId);
+	   if(result>0) commit(conn);
+	   else rollback(conn);
+	   close(conn);
+	   
+	   return result;
    }
 }
