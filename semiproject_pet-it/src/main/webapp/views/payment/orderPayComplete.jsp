@@ -85,7 +85,7 @@
 			</div>
 			<div style="width:50%"></div>
 			<div id="paid-amount" style="width:30%; text-align:center;">
-				<%=p.getPaid_amount()%>
+				<%=p.getPaid_amount()%><span>원</span>
 			</div>
 		</div>	
 	</div>
