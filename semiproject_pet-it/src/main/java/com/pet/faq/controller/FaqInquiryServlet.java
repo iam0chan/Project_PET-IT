@@ -101,4 +101,3 @@ public class FaqInquiryServlet extends HttpServlet {
 	}
 
 }
-

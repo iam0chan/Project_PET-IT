@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,20 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
-@WebServlet("/test")
-public class TestServlet extends HttpServlet {
+@WebServlet("/product/productFileUpload.do")
+public class ProductFileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ori ="";
-		Gson gson = new Gson();
-		Map<String,Object> map = new HashMap<>();
+		String re = "";
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException("안돼!");
 		}else {
@@ -41,26 +37,23 @@ public class TestServlet extends HttpServlet {
 			while(names.hasMoreElements()) {
 				String name = names.nextElement();
 				System.out.println(name);
-				String re = mr.getFilesystemName(name);
-				ori = mr.getOriginalFileName(name)+"||";
+				re = mr.getFilesystemName(name);
+				ori = mr.getOriginalFileName(name);
 				files.add(Map.of("rename",re,"oriName",ori));
 			}
 			files.forEach(e->{System.out.println(e);});
-			/*
-			 * request.getRequestDispatcher("/product/productFileUploadEnd.do").forward(
-			 * request, response);
-			 */
-		response.setHeader("Content-Type", "application/json");
-		PrintWriter out = response.getWriter();
-        map.put("uploaded", true);
-        gson.toJson(map);
-        out.print(map);
+			 
+			response.setHeader("Content-Type", "application/x-wwww-form-urlencoded");
+			PrintWriter out = response.getWriter();
+	        out.print(re);
 		}
+    	
+
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		doGet(request,response);
 	}
-
 }
+

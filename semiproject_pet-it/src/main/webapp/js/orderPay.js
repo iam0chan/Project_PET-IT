@@ -1,24 +1,3 @@
-//모달창 jquery
-
-
-$(document).ready(function(){
-	$(function() {
-	$(".modal").modal("show")
-	});
-});
-	
-	// 새로 입력 버튼 클릭하면 모달 창 close
-	/*$(".newInput").click(function(){
-		$("#myModal").css("display","none");
-	});*/
-
-	// 모달 창 외부를 클릭하면 모달 창 close
-	/*$(window).click(function(event){
-		if (event.target.id == "myModal") {
-			$("#myModal").css("display", "none");
-		}
-	});*/
-
 
 //배송요청 select에 따른 값 변화주기 jquery
     $(function() {

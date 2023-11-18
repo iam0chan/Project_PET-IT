@@ -14,4 +14,7 @@ public class Faq {
 	private String faqContent;
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev

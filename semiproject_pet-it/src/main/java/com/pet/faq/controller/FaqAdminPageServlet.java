@@ -67,4 +67,3 @@ public class FaqAdminPageServlet extends HttpServlet {
 	}
 
 }
-
