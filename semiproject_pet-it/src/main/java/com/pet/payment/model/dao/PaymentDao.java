@@ -26,7 +26,6 @@ private Properties sql = new Properties();
 	
 	public int insertPaymentResult(Connection conn, Payment p) {
 		int result = 0;
-
 		PreparedStatement pstmt = null;
 		
 		try {

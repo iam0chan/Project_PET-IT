@@ -13,4 +13,6 @@ public class Faq {
    private int faqHits;
    private String faqContent;
 
+
 }
+

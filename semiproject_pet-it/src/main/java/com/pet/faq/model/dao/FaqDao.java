@@ -53,24 +53,22 @@ public class FaqDao {
     }
     
     public int insertFaq (Connection conn, Faq f){
-       PreparedStatement pstmt = null;
-       int result=0;
-       try {
-          pstmt=conn.prepareStatement(sql.getProperty("insertFaq"));
-          pstmt.setString(1,f.getFaqCategory());
-          pstmt.setString(2,f.getFaqTitle());
-          pstmt.setString(3,f.getFaqContent());
-          result=pstmt.executeUpdate();
-       }catch (SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(pstmt);
-      }return result;
-       
-       
+    	PreparedStatement pstmt = null;
+    	int result=0;
+    	try {
+    		pstmt=conn.prepareStatement(sql.getProperty("insertFaq"));
+    		pstmt.setString(1,f.getFaqCategory());
+    		pstmt.setString(2,f.getFaqTitle());
+    		pstmt.setString(3,f.getFaqContent());
+    		result=pstmt.executeUpdate();
+    	}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+    	
+    	
     }
-    
-    //전체출력 페이징처리 전체 데이터 수 
     public int selectFaqCount(Connection conn) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -90,7 +88,6 @@ public class FaqDao {
     }
 
     
-    //카테고리별 전체 데이터수 =페이징처리
     public int selectFaqCountByCategory(Connection conn, String category) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -110,11 +107,8 @@ public class FaqDao {
         return result;
     }
     
-    
-    
-    
     public List<Faq> selectFaqCategory(Connection conn, int cPage, int numPerpage, String category){
-       PreparedStatement pstmt = null;
+    	PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Faq> result = new ArrayList<>();
 
@@ -137,19 +131,19 @@ public class FaqDao {
         return result;
     }
    
-    public List<Faq> searchFaqByMenu(Connection conn, String subject, String content, int cPage, int numPerPage) {
+    public List<Faq> searchFaqByMenu(Connection conn, String title, String content, int cPage, int numPerPage) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Faq> result = new ArrayList<>();
         String query = sql.getProperty("searchFaqByMenu");
-        query = query.replace("#COL", subject); //title -> subject 변경해야함
+        query = query.replace("#COL", title);
 
         try {
             pstmt = conn.prepareStatement(query);
-           // pstmt.setString(1, title); // 필요없고
-            pstmt.setString(1, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
-            pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
-            pstmt.setInt(3, cPage * numPerPage);
+            pstmt.setString(1, title);
+            pstmt.setString(2, content);
+            pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
+            pstmt.setInt(4, cPage * numPerPage);
 
             rs = pstmt.executeQuery();
 

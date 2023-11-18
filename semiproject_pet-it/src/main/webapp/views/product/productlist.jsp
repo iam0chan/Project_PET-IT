@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, java.util.List, com.pet.product.model.dto.ProductImageFile"%>
+    
 <%@ include file="/views/header.jsp"%>
 <%  List<Product> products = (List<Product>)request.getAttribute("products"); 
     StringBuilder pageBar = (StringBuilder)request.getAttribute("pageBar");

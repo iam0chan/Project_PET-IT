@@ -64,7 +64,7 @@
             <br>
         </p>
     </div>
-    <img src="<%=request.getContextPath()%>/img/sena.jpg" width="300" height="300" class="brandInfoPohto">
+    <img src="<%=request.getContextPath()%>/sena.jpg" width="300" height="300" class="brandInfoPohto">
     &nbsp;
     <div class="Content"> <!-- 메인내용제목2-->
         <h3 class=mainContentTitle> Pet-it 의 약속</h3>
