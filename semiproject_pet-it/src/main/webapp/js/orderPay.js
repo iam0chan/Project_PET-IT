@@ -50,50 +50,26 @@
 
 //상품수량에 따라 총 가격 변화
 	$(document).ready(function(){
-	    function calculateTotalPrice() {
+	    function calculatePrice() {
 	        var price = parseInt($('.price').text());
-	        var count = $('#count').val();
-	        var totalPrice = price * count;
-	        $('#totalPrice').text(totalPrice);
+	        var count = parseInt($('#count').val());
+	        var deliveryCost = parseInt($("#delivery-cost").text());
+	        var discountPrice = parseInt($("#discountPrice").text());
+	        var productPrice = price * count;
+	        
+	        $('#totalPrice').text(productPrice);
+	    	$('#allProductPrice').text(productPrice);
+	    	$('#allPayCost').text((productPrice+deliveryCost-discountPrice));
 	    }
 	    
-	    $('#count').on('input', calculateTotalPrice);
+	    $('#count').on('input', calculatePrice);
 	
 	    // 페이지 로드 시 총 금액 계산
-	    calculateTotalPrice();
-	});
-
-//결제정보 자동으로 변화되어 표시되게
-	$(document).ready(function(){
-	    function calculateTotalPrice() {
-	        var price = parseInt($('.price').text());
-	        var count = $('#count').val();
-	        var totalPrice = price * count;
-	        $('#allProductPrice').text(totalPrice);
-	    }
-	    
-	    $('#count').on('input', calculateTotalPrice);
-	
-	    // 페이지 로드 시 총 금액 계산
-	    calculateTotalPrice();
+	    calculatePrice();
 	});
 
 //결제정보에 따른 최종결제금액 계산
-	$(document).ready(function(){ 
-	    function calculateTotalCost() {
-	        var productPrice = parseInt($('#allProductPrice').text());
-	        var deliveryCost = parseInt($('#delivery-cost').text());
-	        var discountPrice = parseInt($('#discountPrice').text());
-	        var totalCost = productPrice + deliveryCost - discountPrice;
-	        $('#allPayCost').text(totalCost.toLocaleString('ko-KR'));
-	    }
 	
-	    // 해당 값들이 변경되면 자동으로 총 금액을 다시 계산
-	    $('#allProductPrice, #delivery-cost, #discountPrice').change(calculateTotalCost);
-	
-	    // 페이지가 로드될 때 총 금액을 계산
-	    calculateTotalCost();
-	});
 
 
 //주문상품 삭제버튼 jquery
