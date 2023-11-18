@@ -16,6 +16,7 @@ import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.model.dto.ProductOption;
 
 public class ProductService {
+
 	private ProductDao dao = new ProductDao();
 	public int insertProduct(Product item, String oriname, String rename, Map<String,String> options) {
 		Connection conn = getConnection();
@@ -81,3 +82,4 @@ public class ProductService {
 		return file;
 	}
 }
+

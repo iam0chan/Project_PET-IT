@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!-- header -->
 <%@ include file="/views/header.jsp"%>
 <!-- bootstrap -->
@@ -47,7 +48,7 @@
 				      		<td style="font-size:1.15rem; text-align:center;">받는 사람 <strong>*</strong></td>
 				      		<td>
 					      		<div class="input-group input-group col-lg-3">
-								  <input type="text" name="orderName" class="form-control" placeholder="받는 사람">
+								  <input type="text" id="orderName" class="form-control" placeholder="받는 사람">
 								</div>
 							</td>
 						</tr>
@@ -57,16 +58,16 @@
 							<td>	
 								<div class="input-group input-group col-lg-5">
 								  <input id="zipcode" name="orderZipcode" type="text" class="form-control" placeholder="우편 번호" >
-								  <input id="addrBtn" class="btn btn-outline-success" type="button" onclick="addrBtnAction()" value="주소 검색">
+								  <input id="addrBtn" class="btn btn-outline-success optional" type="button" onclick="addrBtnAction()" value="주소 검색">
 								</div>
 							
 			      				<div class="input-group input-group col-lg-10">
-								  <input id="addr" name="orderAddr" type="text" class="form-control" placeholder="기본 주소" >
+								  <input id="addr" id="orderAddr" type="text" class="form-control" placeholder="기본 주소" >
 								</div>
 			      			
 			      				<div class="input-group input-group col-lg-10">
 								  <input id="detailAddr" name="orderDefAddr" type="text" class="form-control" placeholder="상세 주소">
-								  <input id="extraAddr" type="text" class="form-control" placeholder="참조 주소">
+								  <input id="extraAddr" type="text" class="form-control optional" placeholder="참조 주소">
 								</div>
 			      			</td>
 						</tr>
@@ -75,7 +76,7 @@
 			      			<td style="font-size:1.15rem; text-align:center;">휴대 전화 <strong>*</strong></td>
 			      			<td>
 			      				<div class="input-group input-group col-lg-7">
-								  <input type="text" name="orderPhone" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
+								  <input type="text" id="orderPhone" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
 								</div>
 			      			</td>
 			      		</tr>
@@ -84,9 +85,9 @@
 			      			<td style="font-size:1.15rem; text-align:center;">이메일</td>
 			      			<td>
 			      				<div class="input-group col-lg-9">
-		   						    <input type="text" class="form-control" name="emailHead" placeholder="이메일" aria-label="Username">
+		   						    <input type="text" class="form-control optional" id="emailHead" placeholder="이메일" aria-label="Username">
 								  	<span class="input-group-text">@</span>
-								  	<input type="text" class="form-control" name="emailTail" id="textEmail" placeholder="이메일 선택">
+								  	<input type="text" class="form-control optional" name="emailTail" id="textEmail" placeholder="이메일 선택">
 									<select class="form-select" id="selectEmail">
 									  	 <option disabled selected>이메일 선택</option>
 									 	 <option value="naver.com" id="naver.com">naver.com</option>
@@ -104,7 +105,7 @@
 			      			<td style="font-size:1.15rem; text-align:center;">배송요청사항</td>
 			      			<td>
 			      				<div class="input-group input-group col-lg-10">
-			      					<input type="text" class="form-control" name="textDelivery" id="textDelivery" placeholder="배송요청사항 선택">
+			      					<input type="text" class="form-control optional" name="textDelivery" id="textDelivery" placeholder="배송요청사항 선택">
 				      				<select class="form-select" id="selectAddr">
 									  	 <option disabled selected>배송요청사항 선택</option>
 									 	 <option value="문앞에 놔주세요">문앞에 놔주세요</option>
@@ -139,18 +140,16 @@
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
-						       		<li style="font-size:1.1rem; font-weight:bolder">사나운 벌꿀오소리</li>
-						       		<input type='hidden' id='productName' name='productName' value=''>
+						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder">사나운 벌꿀오소리</li>
+						       		<input type='hidden' name='productName' value=''>
 						       		<li><p><p></li>
-						       		<input type='hidden' id='productName' name='productPrice' value=''>
 								    <li><p><span>상품 가격 :&nbsp</span><span class="price">2500</span>원<p></li>
 						       		<li style="display:flex; text-align:center;">
 									    <p>상품수량 : &nbsp</p>
 							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value=1 style="font-size:13px; width:60px; height:25px;">
-								    	<span>개</span>
+								    	<span></span><span>개</span>
 								    </li>
 						       		<li><p><span>합계 가격 :&nbsp</span><span id="totalPrice">0</span>원</p></li>
-						       		<input type='hidden' id='productPrice' name='productTotalPrice' value=''>
 					       		</ul>
 					       </div>
 					       <div style="width:15%; text-align:center">
@@ -190,7 +189,7 @@
 				       		<span style="font-size:1.1rem;"><b>적립금 적용</b></span>
 				      	 </div>
 				      	 <div style="width:85%;" class="input-group mb-3">
-						 	<input type="text" class="form-control" name="pointUse" placeholder="사용금액 입력">
+						 	<input type="text" class="form-control optional" name="pointUse" placeholder="사용금액 입력">
 						 	<button class="btn btn-outline-success" id="pointBtn" type="button">적립금 사용</button>
 						 </div>
 				      	 <div style="width:5%; text-align:left"></div>
@@ -240,9 +239,9 @@
 			      	<div style="margin-left:60px; width:70%">
 			      		<span style="line-height:50px; vertical-align:middle; font-size:1.3rem"><b>최종결제금액</b></span>
 			      	</div>
-			      	<div style="margin-left:60px; width:20%; text-align:center;">
+			      	<div style="width:20%; text-align:center;">
 			      		<input type="hidden" name="finalPrice" value="">
-			      		<p style="line-height:50px; vertical-align:middle; font-size:1.3rem; font-weight:bolder"><span id="allPayCost"></span>원</p>
+			      		<p style="line-height:50px; vertical-align:middle; font-size:1.3rem; font-weight:bolder"><span id="allPayCost"></span><span>원</span></p>
 			      	</div>
 			      </div>
 			    </div>
@@ -258,21 +257,21 @@
 			    </h2>
 			    <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
 			      <div class="accordion-body">
-				      	<div style="margin-left:50px">
+				      	<div style="margin-left:50px; margin-right:50px;">
 			        		<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="card-payment" value="card" checked>
 							  <label class="form-check-label" for="card-payment">
 							    <img alt="" src="<%=request.getContextPath()%>/img/card_payment.png">&nbsp&nbsp신용카드 결제
 							  </label>
 							</div>
-							<br>
- 							<%--<div class="form-check">
-							  <input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
+							
+ 							<div class="form-check">
+							  <%-- input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
 							  <label class="form-check-label" for="Npay">
 							    <img alt="" src="<%=request.getContextPath()%>/img/Npay_badge.png">&nbsp&nbsp네이버페이
-							  </label>
-							</div> --%>
-							<br>
+							  </label> --%>
+							</div>
+							
 							<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="kakaopay" value="kakaopay">
 							  <label class="form-check-label" for="kakaopay">
@@ -314,89 +313,102 @@
 					</div>
 			  </div>
 			</div>
+
 	</section>
+
 </div>
 
 
 <!-- js -->
 <script src="<%=request.getContextPath()%>/js/orderPay.js"></script>
 
-<!-- 결제하기 버튼 클릭 js -->
+<!-- ----------결제하기 버튼 클릭 js----------------- -->
 <script>
+// 결제정보관련 변수 설정
+let pg="";
+let product_name="";
+let amount= "";
+let addr="";
+let email="";
+let buyer_name="";
+let tell="";
+let postcode ="";
+let orderNo = createOrderNum();
+let order ={};		//주문 객체
+let orders = [];	//주문 객체 배열
 
+//결제 IMP 초기화
 var IMP = window.IMP;
 IMP.init("imp58177585");
-$("#paymentBtn").on("click",function(){
-	
-	/*$("#formData").submit();*/
-	
-	if($("#card-payment").is(":checked")){
-		payment_card();	
-	}else{
-		payment_kakao();
-	}
-});
-function payment_kakao(){
-	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
-		pg : "kakaopay.TC0ONETIME",			//결제사명.PG상점아이디
-		pay_method : "card",				//지불방법
-		merchant_uid: "2434157",  			//주문번호가 들어가야함.
-		name : "강아지간식",					//결제창에 노출될 상품명
-		amount:	100,						//결제 금액
-		buyer_email : "mkty0328@gmail.com", //주문자 email
-		buyer_name : "홍길동",				//주문자 이름
-		buyer_tel : "01064269887",			//주문자 전화번호
-		buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
-		buyer_postcode : "139-91",			//주문자 우편번호
-	}, function(rsp){						//callback함수
-		if(rsp.success){
-			
-			$.ajax({
-				url : "<%=request.getContextPath()%>/payment.do",
-				type : "POST",
-				dataType : "json",
-				data : {
-					imp_uid : rsp.imp_uid,
-                    merchant_uid : rsp.merchant_uid,
-                    paid_amount : rsp.paid_amount,
-                    apply_num : rsp.apply_num,
-                    pay_method : rsp.pay_method,
-                    paid_at : rsp.paid_at
-				}
-			}).done(function(data){
-				window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
-				
-			}).fail(function(data){
-					Swal.fire({
-				  		title: "카카오페이 실패",
-				  		text: "다시 시도하세요😢"+rsp.error_msg,
-				  		icon: "error"
-					});
-			});
-			
-		}else{
-			Swal.fire({
-		  		title: "카카오페이 실패",
-		  		text: "다시 시도하세요😢"+rsp.error_msg,
-		  		icon: "error"
-			});
-		}
-	});
-}
 
-function payment_card(){
-	IMP.request_pay({						//결제창 호출 함수 IMP.request_pat({});
-		pg : "kcp.AO09C",					//결제사명.PG상점아이디
-		pay_method : "card",				//지불방법
-		merchant_uid: "5734571",  			//주문번호가 들어가야함.
-		name : "강아지간식",					//결제창에 노출될 상품명
-		amount:	100,						//결제 금액
-		buyer_email : "mkty0328@gmail.com", //주문자 email
-		buyer_name : "홍길동",				//주문자 이름
-		buyer_tel : "01064269887",			//주문자 전화번호
-		buyer_addr : "경기도 안양시 만안구", 		//주문자 주소
-		buyer_postcode : "139-91",			//주문자 우편번호
-	}, function(rsp){						//callback함수
+//결제 버튼 클릭 이벤트
+$("#paymentBtn").on("click",function(e){
+	//변수값 세팅
+	product_name = $("#productName").text();
+	amount = parseInt($("#allPayCost").text());
+	email = $("#emailHead").val()+"@"+$("#textEmail").val();
+	buyer_name = $("#orderName").val();
+	tell = $("#orderPhone").val();
+	addr = $("#addr").val()+", "+$("#detailAddr").val();
+	postcode = $("#zipcode").val();
+	
+	//주문 객체 생성
+	order.orderNo = orderNo;
+	order.orderName = buyer_name;
+	order.orderZipcode = postcode;
+	order.orderAddr = $("#addr").text();
+	order.orderDefAddr= $("#detailAddr").text();
+	order.orderPhone = tell;
+	order.orderEmail = email;
+	order.orderTotalPrice = amount;
+	order.deliveryReq = $("#textDelivery").text();
+	//주문 객체 배열 
+	orders.push(order);
+	
+	//필수입력항목 체크
+	/* var isEmpty = false;
+    $("input[type=text]").not(".optional").each(function() {
+        if (!$(this).val()) {
+            e.preventDefault();
+            alert("필수입력 항목을 입력하세요!");
+        	var that = this;
+            setTimeout(function() {
+                $(that).focus();
+            }, 1);
+            
+            isEmpty = true;
+            return false; // 루프 중단
+        }
+    });
+
+    if(isEmpty) {
+        return; // 빈 필드가 있다면 여기서 함수 종료
+    } */
+
+    // 빈 필드가 없다면 결제 방식 선택
+    if($("#card-payment").is(":checked")){
+        pg = "kcp.AO09C";	
+    } else {
+        pg = "kakaopay.TC0ONETIME";
+    }
+    payment_api();
+
+});
+
+//결제 api function
+function payment_api(){
+	IMP.request_pay({							//결제창 호출 함수 IMP.request_pat({});
+		pg : pg,								//결제사명.PG상점아이디
+		pay_method : "card",					//지불방법
+		merchant_uid: orderNo,  				//주문번호가 들어가야함.
+		name : product_name,					//결제창에 노출될 상품명
+		amount:	amount,							//결제 금액
+		buyer_email : email, 					//주문자 email
+		buyer_name : buyer_name, 				//주문자 이름
+		buyer_tel : tell,						//주문자 전화번호
+		buyer_addr : addr, 						//주문자 주소
+		buyer_postcode : postcode,				//주문자 우편번호
+	}, function(rsp){							//callback함수
 		if(rsp.success){
 			
 			$.ajax({
@@ -409,21 +421,21 @@ function payment_card(){
                     paid_amount : rsp.paid_amount,
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
-                    paid_at : rsp.paid_at
+                    paid_at : rsp.paid_at,
+                    orders : JSON.stringify(orders)   //주문객체배열 보내기
 				}
-			}).done(function(data){
+			})
+				.done(function(data){
 					Swal.fire({
-				  		title: "카드 결제 성공!",
+				  		title: "결제 성공!",
 				  		text: "잠시 후 결제완료페이지로 이동합니다",
 				  		icon: "success"
 					});
-				    // SessionStorage에 데이터를 저장
-				    sessionStorage.setItem('data', JSON.stringify(data));
-				    window.location.replace("<%=request.getContextPath()%>/views/payment/orderPayComplete.jsp");
+				    window.location.replace("<%=request.getContextPath()%>/paymentEnd.do");
 					
 			}).fail(function(data){
 					Swal.fire({
-				  		title: "카드 결제 실패",
+				  		title: "결제 실패",
 				  		text: "다시 시도하거나 관리자에게 문의하세요😢",
 				  		icon: "error"
 					});
@@ -431,8 +443,8 @@ function payment_card(){
 			
 		}else{
 			Swal.fire({
-		  		title: "카드 결제 실패",
-		  		text: rsp.error_msg,
+		  		title: "결제 실패",
+		  		text: "😢"+rsp.error_msg,
 		  		icon: "error"
 			});
 		}

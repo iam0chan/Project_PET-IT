@@ -1,3 +1,25 @@
+//모달창 jquery
+	$(document).ready(function(){
+		Swal.fire({
+		  title: "주소지 입력",
+		  text: "기존에 등록된 주소지를 그대로 적용할까요?",
+		  icon: "question",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "Yes"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire({
+		      title: "주소지 적용",
+		      text: "회원정보의 주소지를 불러왔어요!😊",
+		      icon: "success"
+		    });
+		    
+		    
+		  }
+		});	
+	});
 
 //배송요청 select에 따른 값 변화주기 jquery
     $(function() {
@@ -28,50 +50,38 @@
 
 //상품수량에 따라 총 가격 변화
 	$(document).ready(function(){
-	    function calculateTotalPrice() {
+	    function calculatePrice() {
 	        var price = parseInt($('.price').text());
-	        var count = $('#count').val();
-	        var totalPrice = price * count;
-	        $('#totalPrice').text(totalPrice);
+	        var count = parseInt($('#count').val());
+	        var deliveryCost = parseInt($("#delivery-cost").text());
+	        var discountPrice = parseInt($("#discountPrice").text());
+	        var productPrice = price * count;
+	        
+	        $('#totalPrice').text(productPrice);
+	    	$('#allProductPrice').text(productPrice);
+	    	$('#allPayCost').text((productPrice+deliveryCost-discountPrice));
 	    }
 	    
-	    $('#count').on('input', calculateTotalPrice);
+	    $('#count').on('input', calculatePrice);
 	
 	    // 페이지 로드 시 총 금액 계산
-	    calculateTotalPrice();
+	    calculatePrice();
 	});
 
-//결제정보 자동으로 변화되어 표시되게
-	$(document).ready(function(){
-	    function calculateTotalPrice() {
-	        var price = parseInt($('.price').text());
-	        var count = $('#count').val();
-	        var totalPrice = price * count;
-	        $('#allProductPrice').text(totalPrice);
-	    }
-	    
-	    $('#count').on('input', calculateTotalPrice);
+// 주문번호 생성 함수
+function createOrderNum() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+ 
+    let orderNum = year + month + day;
+    for (let i = 0; i < 5; i++) {
+        orderNum += Math.floor(Math.random() * 8);
+    }
+    return parseInt(orderNum);
+}
 	
-	    // 페이지 로드 시 총 금액 계산
-	    calculateTotalPrice();
-	});
-
-//결제정보에 따른 최종결제금액 계산
-	$(document).ready(function(){ 
-	    function calculateTotalCost() {
-	        var productPrice = parseInt($('#allProductPrice').text());
-	        var deliveryCost = parseInt($('#delivery-cost').text());
-	        var discountPrice = parseInt($('#discountPrice').text());
-	        var totalCost = productPrice + deliveryCost - discountPrice;
-	        $('#allPayCost').text(totalCost.toLocaleString('ko-KR'));
-	    }
-	
-	    // 해당 값들이 변경되면 자동으로 총 금액을 다시 계산
-	    $('#allProductPrice, #delivery-cost, #discountPrice').change(calculateTotalCost);
-	
-	    // 페이지가 로드될 때 총 금액을 계산
-	    calculateTotalCost();
-	});
 
 
 //주문상품 삭제버튼 jquery
