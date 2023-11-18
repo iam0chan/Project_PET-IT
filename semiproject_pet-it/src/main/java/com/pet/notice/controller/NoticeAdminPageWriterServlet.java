@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NoticeListEndServlet
+ * Servlet implementation class NoticeAdminPageServlet
  */
-@WebServlet("/noticeEnrollEnd.do")
-public class NoticeListEndServlet extends HttpServlet {
+@WebServlet("/noticewriter.do")
+public class NoticeAdminPageWriterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListEndServlet() {
+    public NoticeAdminPageWriterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +26,10 @@ public class NoticeListEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
+		//notice 글쓰기 화면으로 전환해주는 서블릿 
+//		String nowdate = request.getParameter("nowdate"); 
+//		System.out.println(nowdate);
+		response.sendRedirect(request.getContextPath()+"/views/notice/noticeAdminPage.jsp");
 		
 		
 		

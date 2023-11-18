@@ -1,3 +1,4 @@
+<%@page import="javax.print.attribute.HashPrintRequestAttributeSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.pet.notice.model.dto.Notice" %>	
@@ -9,11 +10,11 @@
 
 <%@ include file="/views/header.jsp"%>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <title>공지사항 메인화면</title>
 
 
@@ -78,6 +79,11 @@ tr.item:hover {
 .pageBar {
 	text-align: center;
 }
+.Pet-it-adminBtn{
+	text-align: center;
+	height: 25px;
+	line-height : 20px;
+}
 
 
 
@@ -98,7 +104,7 @@ tr.item:hover {
 			<span class="categoryBar"> 
 			<select id="selectCategory" name="selectCategory">
 					
-					<option value="전체" <%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("전체")?"selected":"" %>>전체</option>
+					<option value="전체"<%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("전체")?"selected":"" %>>전체</option>
 					<option value="공지사항" <%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("공지사항")?"selected":"" %>>공지사항</option>
 					<option value="이용안내" <%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("이용안내")?"selected":"" %>>이용안내</option>
 			</select>
@@ -149,9 +155,19 @@ tr.item:hover {
 				<option value="subject">내용</option>
 			</select>
 		<input type="search" id="searchMenu" placeholder="입력하세요">
-			<input type="submit" name="selectSearch" value="검색" style="line-height:1.0;">
+			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
 		</form>
 	</div> 
+	
+	<div>
+		<%if(loginMember!=null
+			&&loginMember.getMemberId().equals("jihyes")){ %>
+			 <div class="Pet-it-adminBtn">
+			 	<button onclick="location.assign('<%=request.getContextPath()%>/noticewriter.do')" class="btn btn-outline-success">글쓰기</button>
+			 </div>
+			 
+	</div>
+	<%} %>
 	
 
 

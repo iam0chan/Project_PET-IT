@@ -180,11 +180,10 @@ tr.item:hover {
 	<div>
 		<%if(loginMember!=null
 			&&loginMember.getMemberId().equals("jihyes")){ %>
-			<%--  <div>
-			 	<a href="<%=request.getContextPath() %>/faq/faqList.do"></a>
-			 </div> --%>
 			 <div class="Pet-it-adminBtn">
-			 	<button onclick="faqWriterMove();">글쓰기</button>
+			 
+			 <button onclick="location.assign('<%=request.getContextPath()%>/faqwriter.do')" class="btn btn-outline-success">글쓰기</button>
+			 	
 			 </div>
 			 
 	</div>
@@ -234,6 +233,9 @@ tr.item:hover {
 		selectCategory.addEventListener("change",function(e){
 		location.replace("<%=request.getContextPath()%>/faqinquiry.do?faqs="+ e.target.value);
 		});
+		
+		
+		
 
 			
 		

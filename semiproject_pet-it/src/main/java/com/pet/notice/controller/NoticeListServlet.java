@@ -33,12 +33,16 @@ public class NoticeListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//noticeList 메인 서블릿 
 		//DB에 저장된 전체 notice데이터 가져오기 -> 전체 데이터 가져오려면 페이징 처리를 해야함 
-		  int cPage,numPerpage=10; try {
+		  int cPage,numPerpage=10; 
+		  try {
 		  cPage=Integer.parseInt(request.getParameter("cPage"));
 		  }catch (NumberFormatException e) {
 			  cPage=1; 			  
 		  }
 		 List <Notice> notices = new NoticeService().selectNotice(cPage,numPerpage);
+		 for (Notice notice : notices) {
+			 System.out.println(notice);
+		}
 		 int totalData=new NoticeService().selectNoticeCount();
 		 int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		 int pageBarSize=5;

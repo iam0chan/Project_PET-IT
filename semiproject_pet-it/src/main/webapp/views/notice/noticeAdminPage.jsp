@@ -65,12 +65,10 @@
 				<h2>공지사항 작성</h2>
 			</div>
 			<div class="container mt-3">
+				<form id="noticeform" action="<%=request.getContextPath()%>/noticeList.do"method="post" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-lg-2"></div>
 					<div class="col-lg-8">
-
-						<form action="<%=request.getContextPath()%>/noticeEnrollEnd.do"
-							method="post" enctype="multipart/form-data">
 							<table class="table table-bordered">
 								<thead>
 									<tr>
@@ -83,76 +81,29 @@
 										</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td style="text-align: center; background-color: #F2F2F2;">작성자</td>
-										<td>Pet-it</td>
-									</tr>
-
-								</tbody>
 							</table>
 					</div>
 					<div class="col-lg-2"></div>
 				</div>
 				<div id="editor"></div>
 				<br>
+				<div id="submitBtn" class="row">
+		           <div class="col-5"></div>
+		               <div class="col-1">
+		                	<input class="btn btn-outline-success" type="submit" value="write" />
+		                </div>
+		                    <div class="col-1">
+		                    	<button class="btn btn-outline-success" type="reset" id="resetBtn">cancell</button>
+		                    </div>
+			            </div>
 				</form>
 			</div>
-
-			<div class="container mt-3">
-				<div class="row">
-					<div class="col-lg-2"></div>
-					<div class="col-lg-8">
-						<form action="#">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th
-											style="text-align: center; width: 80px; background-color: #F2F2F2;">첨부파일</th>
-										<th><input class="fileBtn" type="file" name="file"
-										 value="첨부파일" /></th>
-									</tr>
-								</thead>
-							</table>
-						</form>
-						
-						<div id="submitBtn" class="row">
-	                	<div class="col-5"></div>
-	                	<div class="col-1">
-	                		<input class="submit-Btn" type="submit"  value="작성완료" />
-	                	</div>
-	     
-	                    <div class="col-1">
-	                    	<input class="Btn" type="reset"  value="작성취소" />
-	                    </div>
-	                    <div class="col-5"></div>
-		            </div>
-
-
-
-
-
-
-
-
-	<script>
-	<%-- $(".submit-Btn").click(function(){
-		const formdata = new formData();
-		formdata.append($(".fileBtn").val());
-		$.ajax{
-			url:"<%=request.getContextPath()%>/notice/test.do",
-			type:"post",
-			enctype:"multipart/form-data",
-			processData:false,
-			contentType:false,
-			success:function(data){
 				
-			},
-			error:function(e){
-				alert("ajax이미지 업로드 실패");
-			}
-		}
-	}); --%>
+	<script>
+	$("#resetBtn").on("click",function(){
+		location.href="<%=request.getContextPath()%>/views/notice/noticeList.jsp";
+	})
+	
 	
 	var editor;
 	ClassicEditor
@@ -169,12 +120,12 @@
 		console.error(error);
 	});
 	
-	function test(){	
-	    const editorData = editor.getData();
-	    /* console.log(editorData); */
-	    $("#upload").attr("value",editorData);
-	    console.log($("#upload").val());
-	}
+	function test(){    
+        const editorData = editor.getData();
+        $("#content").attr("value", editorData);
+        console.log($("#content").val());
+        $("#noticeform").submit();
+    }
 	
 	</script>
 </body>
