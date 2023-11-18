@@ -48,7 +48,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			String type = mr.getParameter("2nd_category");
 			String productContent = mr.getParameter("content");
 			String[] optionNames = mr.getParameterValues("optionName");
-			String[] optionPrice = (mr.getParameterValues("optionPrice"));
+			String[] optionPrice = mr.getParameterValues("optionPrice");
 			
 			Map<String,String> options = new HashMap<>(); //옵션맵핑 Map
 			String optionStatus = "N"; //옵션입력여부체크변수

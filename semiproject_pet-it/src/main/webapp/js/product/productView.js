@@ -177,27 +177,3 @@
               console.log(optionArr);
            })
       
-          function purchase(){
-			  const productNo = $.trim($("#productNo").val());
-			  const purchasePrice = $.trim($(".total-price>span>strong").text());
-			  const purchaseAmount = $.trim($("#product-order-amount").val());
-			  /*const purchaseProductOptionName = $("#option-select>option").text();*/
-			 alert("구매하기창으로 데이터 전달");
-	         $.ajax({
-	              url:"<%=request.getContextPath()%>/test",
-	              type:"get",
-	              data:{productNo:productNo,
-					  	purchasePrice:purchasePrice,
-	              		purchaseAmount:purchaseAmount
-	              		/*purchaseProductName:purchaseProductOptionName*/
-	              		}, 
-	              contentType:"application/json; charset=UTF-8",
-	              success:data=>{
-	                 console.log(data);
-	              },
-	              error:(r,e)=>{
-	                 console.log(r);
-	                 console.log(e);
-	              }
-	           });
-		   };

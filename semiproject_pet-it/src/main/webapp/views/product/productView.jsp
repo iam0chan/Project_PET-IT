@@ -324,4 +324,30 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 	</div>
 </div>
 <script src="<%=request.getContextPath()%>/js/product/productView.js"></script>
+<script>
+function purchase(){
+	  const productNo = $.trim($("#productNo").val());
+	  const purchasePrice = $.trim($(".total-price>span>strong").text());
+	  const purchaseAmount = $.trim($("#product-order-amount").val()); 
+	  console.log(productNo+" "+purchasePrice+" "+purchaseAmount);
+	  /*const purchaseProductOptionName = $("#option-select>option").text();*/
+	  alert("구매하기창으로 데이터 전달");
+	  $.ajax({
+	        url: '<%= request.getContextPath()%>/productInfoSubmit.do',
+	        type:"get",
+	        data:{
+			  pNo : productNo,
+			  pPrice : purchasePrice,
+			  pAmount : purchaseAmount, 
+		  	  },
+	        success:data=>{
+	           console.log(data);
+	        },
+	        error:(r,e)=>{
+	           console.log(r);
+	           console.log(e);
+	        }
+	   });
+ };
+</script>
 <%@ include file="/views/footer.jsp"%>
