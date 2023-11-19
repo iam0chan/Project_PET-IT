@@ -335,6 +335,7 @@ let tell="";
 let postcode ="";
 let orderNo = createOrderNum();
 let order ={};		//주문 객체
+let orderDetail = {}; //주문 상세 객체
 
 //결제 IMP 초기화
 var IMP = window.IMP;
