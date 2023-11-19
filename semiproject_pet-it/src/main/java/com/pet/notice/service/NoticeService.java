@@ -16,61 +16,64 @@ import com.pet.notice.model.dto.Notice;
 public class NoticeService {
 
 	private NoticeDao dao = new NoticeDao();
-	
-	public List<Notice> selectNotice(int cPage,int numPerpage){
-		Connection conn=getConnection();
-		List<Notice> result=dao.selectNotice(conn,cPage,numPerpage);
+
+	public List<Notice> selectNotice(int cPage, int numPerpage) {
+		Connection conn = getConnection();
+		List<Notice> result = dao.selectNotice(conn, cPage, numPerpage);
 		close(conn);
 		return result;
 	}
+
 	public int selectNoticeCount() {
-		Connection conn=getConnection();
-		int result=dao.selectNoticeCount(conn);
+		Connection conn = getConnection();
+		int result = dao.selectNoticeCount(conn);
 		close(conn);
 		return result;
 	}
-	
-	public Notice selectNoticeByNo(String noticeNo) {
-		Connection conn=getConnection();
-		Notice n = dao.selectNoticeByNo(conn,noticeNo);
+
+	public Notice selectNoticeByNo(String noticeNo, boolean readResult) {
+		Connection conn = getConnection();
+		Notice n = dao.selectNoticeByNo(conn, noticeNo);
+		if (n != null && !readResult) {
+			int result = dao.updateNoticeReadCount(conn, noticeNo); // 조회수
+			if (result > 0) {
+				commit(conn);
+				n.setNoticeHits(n.getNoticeHits() + 1);
+			} else
+				rollback(conn);
+		}
 		close(conn);
 		return n;
+
 	}
-	
-	public int insertNotice (Notice n) {
+
+	public int insertNotice(Notice n) {
 		Connection conn = getConnection();
-		int result=dao.insertNotice(conn, n);
-		if(result>0) commit(conn);
-		else rollback(conn);
+		int result = dao.insertNotice(conn, n);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
 		close(conn);
 		return result;
 	}
-	
+
 	public int selectNoticeCountByCategory(String category) {
-		Connection conn=getConnection();
-		int result=dao.selectNoticeCountByCategory(conn, category);
-		if(result>0)commit(conn);
-		else rollback(conn);
+		Connection conn = getConnection();
+		int result = dao.selectNoticeCountByCategory(conn, category);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
 		close(conn);
 		return result;
 	}
-	
-	public List<Notice> selectNoticeCategory(int cPage,int numPerpage, String category){
-		Connection conn=getConnection();
-		List<Notice> result=dao.selectNoticeCategory(conn, cPage, numPerpage, category);
+
+	public List<Notice> selectNoticeCategory(int cPage, int numPerpage, String category) {
+		Connection conn = getConnection();
+		List<Notice> result = dao.selectNoticeCategory(conn, cPage, numPerpage, category);
 		close(conn);
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

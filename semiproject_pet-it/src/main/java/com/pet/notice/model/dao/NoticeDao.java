@@ -2,7 +2,6 @@ package com.pet.notice.model.dao;
 
 import static com.pet.common.JDBCTemplate.close;
 
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,7 +13,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.pet.faq.model.dao.FaqDao;
-import com.pet.faq.model.dto.Faq;
 import com.pet.notice.model.dto.Notice;
 
 public class NoticeDao {
@@ -144,7 +142,21 @@ public class NoticeDao {
 	    }
 		
 		
-		
+		//조회수 업데이트 메소드 
+	    public int updateNoticeReadCount(Connection conn, String noticeNo) {
+	    	PreparedStatement pstmt = null;
+	    	int result=0;
+	    	try {
+	    		pstmt=conn.prepareStatement(sql.getProperty("updateNoticeReadcount"));
+	    		pstmt.setString(1, noticeNo);
+	    		result=pstmt.executeUpdate();
+	    	}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+	    	
+	    }
 		
 		
 		
