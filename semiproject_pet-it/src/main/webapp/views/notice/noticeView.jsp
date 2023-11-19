@@ -66,25 +66,19 @@
 	<div class="container mt-3">
 		<div class="row">
 			<table class="table table-bordered">
-				<thead>
 					<tr>
 						<th style="text-align: center; background-color: #F2F2F2;">제목</th>
-
+						<th><%=n.getNoticeTitle()%></th>
 					</tr>
-				</thead>
-				<tbody>
 					<tr>
 						<td style="text-align: center; background-color: #F2F2F2;">작성일</td>
-						<td>2023-11-18</td>
+						<td><%=n.getNoticeDate()%></td>
 					</tr>
-				</tbody>
 			</table>
-
 			<table class="table table-bordered" style="text-align:center;">
 				<thead>
 					<tr>
 						<th style="text-align: center; background-color: #F2F2F2;">내용</th>
-
 					</tr>
 				</thead>
 				<tbody>
