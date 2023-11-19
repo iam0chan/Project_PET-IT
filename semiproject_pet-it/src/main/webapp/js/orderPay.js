@@ -1,25 +1,3 @@
-//모달창 jquery
-	$(document).ready(function(){
-		Swal.fire({
-		  title: "주소지 입력",
-		  text: "기존에 등록된 주소지를 그대로 적용할까요?",
-		  icon: "question",
-		  showCancelButton: true,
-		  confirmButtonColor: "#3085d6",
-		  cancelButtonColor: "#d33",
-		  confirmButtonText: "Yes"
-		}).then((result) => {
-		  if (result.isConfirmed) {
-		    Swal.fire({
-		      title: "주소지 적용",
-		      text: "회원정보의 주소지를 불러왔어요!😊",
-		      icon: "success"
-		    });
-		    
-		    
-		  }
-		});	
-	});
 
 //배송요청 select에 따른 값 변화주기 jquery
     $(function() {

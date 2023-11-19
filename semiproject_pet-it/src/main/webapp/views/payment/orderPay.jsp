@@ -335,7 +335,7 @@ let tell="";
 let postcode ="";
 let orderNo = createOrderNum();
 let order ={};		//주문 객체
-let orders = [];	//주문 객체 배열
+let orderDetail = {}; //주문 상세 객체
 
 //결제 IMP 초기화
 var IMP = window.IMP;
@@ -353,17 +353,16 @@ $("#paymentBtn").on("click",function(e){
 	postcode = $("#zipcode").val();
 	
 	//주문 객체 생성
-	order.orderNo = orderNo;
+	order.orderNo = Number(orderNo);
 	order.orderName = buyer_name;
 	order.orderZipcode = postcode;
-	order.orderAddr = $("#addr").text();
-	order.orderDefAddr= $("#detailAddr").text();
+	order.orderAddr = $("#addr").val();
+	order.orderDefAddr= $("#detailAddr").val();
 	order.orderPhone = tell;
 	order.orderEmail = email;
 	order.orderTotalPrice = amount;
-	order.deliveryReq = $("#textDelivery").text();
-	//주문 객체 배열 
-	orders.push(order);
+	order.deliveryReq = $("#textDelivery").val();
+
 	
 	//필수입력항목 체크
 	/* var isEmpty = false;
@@ -422,10 +421,9 @@ function payment_api(){
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at,
-                    orders : JSON.stringify(orders)   //주문객체배열 보내기
+                    order : JSON.stringify(order)   //주문객체 보내기
 				}
-			})
-				.done(function(data){
+			}).done(function(data){
 					Swal.fire({
 				  		title: "결제 성공!",
 				  		text: "잠시 후 결제완료페이지로 이동합니다",
@@ -451,6 +449,29 @@ function payment_api(){
 	});
 }
 </script>
+<script>
 
+//모달창 jquery
+	$(document).ready(function(){
+		Swal.fire({
+		  title: "주소지 입력",
+		  text: "기존에 등록된 주소지를 그대로 적용할까요?",
+		  icon: "question",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "Yes"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire({
+		      title: "주소지 적용",
+		      text: "회원정보의 주소지를 불러왔어요!😊",
+		      icon: "success"
+		    });
+		  }
+		});	
+	});
+</script>
+	
 <!-- footer -->
 <%@ include file="/views/footer.jsp"%>
