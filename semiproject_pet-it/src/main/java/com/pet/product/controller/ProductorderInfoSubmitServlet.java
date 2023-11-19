@@ -1,8 +1,6 @@
 package com.pet.product.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
-import com.google.gson.Gson;
 import com.pet.product.model.dto.Product;
-import com.pet.product.model.dto.ProductImageFile;
+import com.pet.product.model.dto.ProductOption;
 import com.pet.product.service.ProductService;
 
 
@@ -24,11 +19,23 @@ public class ProductorderInfoSubmitServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		String productNo = request.getParameter("productNo");
 		String orderPrice = request.getParameter("orderPrice");
 		String orderAmount = request.getParameter("orderAmount");
+		String optionName = request.getParameter("optionName");
+		String optionPrice = request.getParameter("optionPrice");
 		
-		System.out.println(productNo+" "+orderPrice+" "+orderAmount);
+		/*
+		 * ProductOption po = new ProductService().getOptionName(productNo,
+		 * optionPrice);
+		 */
+		
+		/* Product product = new ProductService().selectProductByNo(productNo); */
+		
+				
+		System.out.println("orderPay 전달 : "+productNo+" "+orderPrice+" "+orderAmount+" "+optionName+" "+optionPrice);
 		//가격정보 전달 확인
 		
 		
