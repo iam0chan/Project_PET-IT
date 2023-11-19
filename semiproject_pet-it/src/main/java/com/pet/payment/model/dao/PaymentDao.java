@@ -32,7 +32,7 @@ private Properties sql = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("insertOrderResult"));
 			pstmt.setLong(1, o.getOrderNo());
-			pstmt.setString(2, "taeyoons");
+			pstmt.setString(2, o.getOrderId());
 			pstmt.setString(3, o.getOrderName());
 			pstmt.setString(4, o.getOrderPhone());
 			pstmt.setString(5, o.getOrderZipcode());

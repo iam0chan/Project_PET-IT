@@ -14,9 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <!-- Site Metas -->
         <link rel="icon" href="<%=request.getContextPath()%>/img/favicon-16x16.png" type="image/png" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <!-- 11/19 21:47 ty  안쓰는 메타태그 삭제//  -->
       
         <title>Pet-It</title>
       
