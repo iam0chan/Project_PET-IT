@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.pet.payment.model.dto.OrderDetail" %>
+<% OrderDetail od = (OrderDetail)request.getAttribute("orderDetail");%>
 <!-- header -->
 <%@ include file="/views/header.jsp"%>
 <!-- bootstrap -->
@@ -136,17 +137,16 @@
 			      <div class="accordion-body" id="productAll">
 				      <div class="productDiv" id="productDiv">
 					       <div style="width:15%; text-align:center">
-					       		<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="120px" height="120px">
+					       		<img src="<%=request.getContextPath()%>/upload/<%=od.getProductImg()%>" width="120px" height="120px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
-						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder">사나운 벌꿀오소리</li>
-						       		<input type='hidden' name='productName' value=''>
-						       		<li><p><p></li>
-								    <li><p><span>상품 가격 :&nbsp</span><span class="price">2500</span>원<p></li>
+						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder"><%=od.getProductName() %></li>
+						       		<li><p><span>옵션명 : &nbsp</span><span><%=od.getProductOption() %></span></span></li>
+								    <li><p><span>상품 가격 :&nbsp</span><span class="price"><%=od.getDetailPrice() %></span>원<p></li>
 						       		<li style="display:flex; text-align:center;">
 									    <p>상품수량 : &nbsp</p>
-							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value=1 style="font-size:13px; width:60px; height:25px;">
+							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value="<%=od.getDetailCount() %>" style="font-size:13px; width:60px; height:25px;">
 								    	<span></span><span>개</span>
 								    </li>
 						       		<li><p><span>합계 가격 :&nbsp</span><span id="totalPrice">0</span>원</p></li>
@@ -333,9 +333,10 @@ let email="";
 let buyer_name="";
 let tell="";
 let postcode ="";
+let productImg = "";
 let orderNo = createOrderNum();
 let order ={};		//주문 객체
-let orderDetail = {}; //주문 상세 객체
+let orderDetail = {};  //주문 상세 객체
 
 //결제 IMP 초기화
 var IMP = window.IMP;
@@ -344,13 +345,14 @@ IMP.init("imp58177585");
 //결제 버튼 클릭 이벤트
 $("#paymentBtn").on("click",function(e){
 	//변수값 세팅
-	product_name = $("#productName").text();
+	product_name = "<%=od.getProductName()%>";
 	amount = parseInt($("#allPayCost").text());
 	email = $("#emailHead").val()+"@"+$("#textEmail").val();
 	buyer_name = $("#orderName").val();
 	tell = $("#orderPhone").val();
 	addr = $("#addr").val()+", "+$("#detailAddr").val();
 	postcode = $("#zipcode").val();
+	productImg = "<%=request.getContextPath()%>/upload/<%=od.getProductImg()%>"
 	
 	//주문 객체 생성
 	order.orderNo = Number(orderNo);
@@ -362,7 +364,15 @@ $("#paymentBtn").on("click",function(e){
 	order.orderEmail = email;
 	order.orderTotalPrice = amount;
 	order.deliveryReq = $("#textDelivery").val();
-
+	
+	//주문 상세 객체 생성
+	orderDetail.orderNo = Number(orderNo);
+	orderDetail.productNo = "<%=od.getProductNo()%>";
+	orderDetail.productName = "<%=od.getProductName()%>";
+	orderDetail.productOption = "<%=od.getProductOption()%>";
+	orderDetail.detailPrice = <%=od.getDetailPrice()%>;
+	orderDetail.detailCount = <%=od.getDetailCount()%>;
+	orderDetail.productImg = productImg;
 	
 	//필수입력항목 체크
 	/* var isEmpty = false;
@@ -417,11 +427,13 @@ function payment_api(){
 				data : {
 					imp_uid : rsp.imp_uid,
                     merchant_uid : rsp.merchant_uid,
+                    name : rsp.name,
                     paid_amount : rsp.paid_amount,
                     apply_num : rsp.apply_num,
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at,
-                    order : JSON.stringify(order)   //주문객체 보내기
+                    order : JSON.stringify(order),				   	//주문 객체 보내기
+                    orderDetail : JSON.stringify(orderDetail)		//주문 상세 객체 보내기
 				}
 			}).done(function(data){
 					Swal.fire({
