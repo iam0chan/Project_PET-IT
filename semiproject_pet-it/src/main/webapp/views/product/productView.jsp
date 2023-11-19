@@ -70,9 +70,10 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 
 			<div class="info item-option">
 				<div class="option" style="width: 300px;">
+				 <input type="hidden" id="option-name" name="optionName" value="" />
 					<select name="priceOption" id="option-select" style="width: 280px;"
 						 style="text-align:center;">
-						<option value="<%=p.getProductPrice()%>">기본 (<%=p.getProductPrice()%>)원
+						<option value="<%=p.getProductPrice()%>" id="기본">기본 (<%=p.getProductPrice()%>)원
 						</option>
 						<%
 						if (p.getProductOptionStatus().equals("Y")) {
@@ -81,7 +82,7 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 						for (int i = 0; i < p.getProductOption().size(); i++) {
 						%>
 						<option
-							value="<%=p.getProductOption().get(i).getProductOptionPrice()%>">
+							value="<%=p.getProductOption().get(i).getProductOptionPrice()%>" id="<%=p.getProductOption().get(i).getProductOptionName()%>">
 							<%=p.getProductOption().get(i).getProductOptionName()%> (<%=p.getProductOption().get(i).getProductOptionPrice()%>원)
 							<%
 							if (p.getProductPrice() > p.getProductOption().get(i).getProductOptionPrice()) {
@@ -329,18 +330,26 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 	<input type="hidden" id="productNo" name="productNo" value=""/>
 	<input type="hidden" id="orderPrice" name="orderPrice" value=""/>
 	<input type="hidden" id="orderAmount" name="orderAmount" value=""/>
+	<input type="hidden" id="optionPrice" name="optionPrice" value=""/>
+	<input type="hidden" id="optionName" name="optionName" value=""/>
 </form>
 <script src="<%=request.getContextPath()%>/js/product/productView.js"></script>
 <script>
 function purchase(){
-	  const productNo = $.trim($("#pNo").val());
-	  const orderPrice = $.trim($(".total-price>span>strong").text());
-	  const orderAmount = $.trim($("#product-order-amount").val()); 
-	
+	  const productNo = $.trim($("#pNo").val()); // 상품번호
+	  const orderPrice = $.trim($(".total-price>span>strong").text()); //주문가격
+	  const orderAmount = $.trim($("#product-order-amount").val()); //주문수량
+	  const optionPrice = $.trim($("#option-select").val()); //옵션가격
+ 	  const optionName = $.trim($("#option-select option:selected").attr("id")); //옵션명
+	  console.log(optionName); //옵션명 체크 console
+	  
+	  //paymentStart.do로 submit할 데이터가공
 	  $("#productNo").val(productNo);
 	  $("#orderPrice").val(orderPrice);
 	  $("#orderAmount").val(orderAmount);
-	  $("#orderInfo").submit();
+	  $("#optionPrice").val(optionPrice);
+	  $("#optionName").val(optionName);
+ 	  $("#orderInfo").submit();
 	  
 
  };

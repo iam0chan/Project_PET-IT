@@ -249,6 +249,16 @@ public class ProductDao {
 		return options;
 	}
 	
+	/*
+	 * public ProductOption getOptionName(Connection conn, String productNo, String
+	 * optionPrice) { PreparedStatement pstmt = null; ResultSet rs = null;
+	 * 
+	 * try { pstmt = conn.prepareStatement(sql.getProperty("getOptionName"));
+	 * 
+	 * }catch(SQLException e) { e.printStackTrace(); }
+	 * 
+	 * }
+	 */
 	
 	/* Product-Table
 	 * PRODUCT_NO, CATEGORY_NO, TYPE_NO, PRODUCT_NAME, 
