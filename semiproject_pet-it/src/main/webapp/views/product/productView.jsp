@@ -326,7 +326,7 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 		</div>
 	</div>
 </div>
-<form action="<%=request.getContextPath()%>/productorderInfoSubmit.do" method="post" id="orderInfo">
+<form action="<%=request.getContextPath()%>/paymentStart.do" method="post" id="orderInfo">
 	<input type="hidden" id="productNo" name="productNo" value=""/>
 	<input type="hidden" id="orderPrice" name="orderPrice" value=""/>
 	<input type="hidden" id="orderAmount" name="orderAmount" value=""/>
