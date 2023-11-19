@@ -142,7 +142,7 @@
 					       <div style="width:70%">
 					       		<ul id="product-info">
 						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder"><%=od.getProductName() %></li>
-						       		<li><p><p></li>
+						       		<li><p><span>옵션명 : &nbsp</span><span><%=od.getProductOption() %></span></span></li>
 								    <li><p><span>상품 가격 :&nbsp</span><span class="price"><%=od.getDetailPrice() %></span>원<p></li>
 						       		<li style="display:flex; text-align:center;">
 									    <p>상품수량 : &nbsp</p>
@@ -369,6 +369,7 @@ $("#paymentBtn").on("click",function(e){
 	orderDetail.orderNo = Number(orderNo);
 	orderDetail.productNo = "<%=od.getProductNo()%>";
 	orderDetail.productName = "<%=od.getProductName()%>";
+	orderDetail.productOption = "<%=od.getProductOption()%>";
 	orderDetail.detailPrice = <%=od.getDetailPrice()%>;
 	orderDetail.detailCount = <%=od.getDetailCount()%>;
 	orderDetail.productImg = productImg;

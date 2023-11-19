@@ -63,18 +63,22 @@
 			<div style="width:20%; text-align:center;">
 				주문 상품
 			</div>
-			<div style="width:50%; display:flex; line-height:1.0; margin-left:20px;">
+			<div style="width:60%; display:flex; line-height:1.0; margin-left:20px;">
 				<div>
 					<img src="<%=od.getProductImg() %>" width="100px" height="100px">
 				</div>
-				<div style="width:80%; margin-left:10px">
+				<div style="width:75%; margin-left:20px">
 					<p><b><%=od.getProductName() %></b></p>
-					<p>몹시 사나우니까 조심</p>
+					<p><%=od.getProductOption() %></p>
 					<span><%=od.getDetailCount() %></span><span>개</span>
 					<br><br>
 					<span><%=od.getDetailPrice() %></span><span>원</span>
 				</div>
 			</div>
+				<div style="width:20%; text-align:center; margin-right:40px;">
+					<span>배송비</span>
+					<span>2500원</span>
+				</div>
 			<!-- <div style="width:30%; text-align:center;">
 				<button class="btn btn-outline-success">상품 상세페이지</button>
 			</div> -->

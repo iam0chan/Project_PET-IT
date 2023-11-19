@@ -32,6 +32,8 @@ public class PaymentStartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		//productView에서 넘어온 데이터에서 orderPay로 넘겨줄 정보 꺼내기
 		String productNo = request.getParameter("productNo");
 		
@@ -41,6 +43,7 @@ public class PaymentStartServlet extends HttpServlet {
 		int detailPrice = p.getProductPrice();
 		String productImg = img.getProductFileRename();
 		String productName = p.getProductName();
+		String optionName = request.getParameter("optionName");
 		System.out.println("start서블릿: "+p);
 		//상품 갯수 가져오기
 		int detailCount = Integer.parseInt(request.getParameter("orderAmount"));
@@ -52,6 +55,7 @@ public class PaymentStartServlet extends HttpServlet {
 				.detailCount(detailCount)
 				.productImg(productImg)
 				.productName(productName)
+				.productOption(optionName)
 				.build();
 		
 		request.setAttribute("orderDetail", od);

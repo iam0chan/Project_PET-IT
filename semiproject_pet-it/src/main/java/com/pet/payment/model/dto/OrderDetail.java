@@ -9,6 +9,7 @@ public class OrderDetail {
 	private long orderNo;
 	private String productNo;
 	private String productName;
+	private String productOption;
 	private int detailPrice;
 	private int detailCount;
 	private String productImg;

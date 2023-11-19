@@ -9,6 +9,7 @@ import java.sql.Connection;
 
 import com.pet.payment.model.dao.PaymentDao;
 import com.pet.payment.model.dto.Order;
+import com.pet.payment.model.dto.OrderDetail;
 import com.pet.payment.model.dto.Payment;
 
 public class PaymentService {
@@ -29,6 +30,14 @@ public class PaymentService {
 		}else { 
 			rollback(conn);
 		}
+		return result;
+	}
+	
+	public int insertOrderDetail(OrderDetail od) {
+		Connection conn = getConnection();
+		int result = dao.insertOrderDetail(conn,od);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		return result;
 	}
 }

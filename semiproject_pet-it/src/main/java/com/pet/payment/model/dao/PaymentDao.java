@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.pet.payment.model.dto.Order;
+import com.pet.payment.model.dto.OrderDetail;
 import com.pet.payment.model.dto.Payment;
 public class PaymentDao {
 	
@@ -63,6 +64,27 @@ private Properties sql = new Properties();
 			pstmt.setString(4, p.getPay_method());
 			pstmt.setDate(5, p.getPaid_at());
 			pstmt.setInt(6, p.getApply_num());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertOrderDetail(Connection conn, OrderDetail od) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("insertOrderDetail"));
+			pstmt.setLong(1, od.getOrderNo());
+			pstmt.setString(2, od.getProductNo());
+			pstmt.setInt(3, od.getDetailPrice());
+			pstmt.setInt(4, od.getDetailCount());
 			
 			result = pstmt.executeUpdate();
 			
