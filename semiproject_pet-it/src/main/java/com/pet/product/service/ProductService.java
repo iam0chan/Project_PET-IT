@@ -81,5 +81,13 @@ public class ProductService {
 		
 		return file;
 	}
+	
+	/*
+	 * public ProductOption getOptionName(String productNo, String optionPrice) {
+	 * Connection conn = getConnection(); ProductOption po = dao.getOptionName(conn,
+	 * productNo, optionPrice); close(conn);
+	 * 
+	 * return po; }
+	 */
 }
 
