@@ -336,12 +336,14 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 <script src="<%=request.getContextPath()%>/js/product/productView.js"></script>
 <script>
 function purchase(){
-	  const productNo = $.trim($("#pNo").val());
-	  const orderPrice = $.trim($(".total-price>span>strong").text());
-	  const orderAmount = $.trim($("#product-order-amount").val());
-	  const optionPrice = $.trim($("#option-select").val());
- 	  const optionName = $.trim($("#option-select option:selected").attr("id"));
-	  console.log(optionName); 
+	  const productNo = $.trim($("#pNo").val()); // 상품번호
+	  const orderPrice = $.trim($(".total-price>span>strong").text()); //주문가격
+	  const orderAmount = $.trim($("#product-order-amount").val()); //주문수량
+	  const optionPrice = $.trim($("#option-select").val()); //옵션가격
+ 	  const optionName = $.trim($("#option-select option:selected").attr("id")); //옵션명
+	  console.log(optionName); //옵션명 체크 console
+	  
+	  //paymentStart.do로 submit할 데이터가공
 	  $("#productNo").val(productNo);
 	  $("#orderPrice").val(orderPrice);
 	  $("#orderAmount").val(orderAmount);
