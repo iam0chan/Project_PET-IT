@@ -3,9 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.pet.notice.model.dto.Notice" %>	
 <%
-
 	List<Notice> notices=(List<Notice>)request.getAttribute("notices");
-
 %>
 
 <%@ include file="/views/header.jsp"%>
@@ -161,6 +159,10 @@ tr.item:hover {
 		</form>
 	</div> 
 	
+	
+	
+	
+	
 	<div>
 		<%if(loginMember!=null
 			&&loginMember.getMemberId().equals("jihyes")){ %>
@@ -171,7 +173,15 @@ tr.item:hover {
 	</div>
 	<%} %>
 	
-
+	<!--카테고리별 조회 script-->
+	<script>
+	const selectCategory = document.getElementById("selectCategory");
+	console.log(selectCategory)
+	selectCategory.addEventListener("change",function(e){
+	location.replace("<%=request.getContextPath()%>/noticeinquiry.do?notices="+ e.target.value);
+	});
+	
+	</script>
 
 
 </body>

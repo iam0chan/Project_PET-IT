@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List,com.pet.notice.model.dto.Notice" %>	
+<%
+	Notice n = (Notice) request.getAttribute("notice");
+%>
 <%@ include file="/views/header.jsp"%>
 
 <style>
@@ -22,12 +26,13 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 50%;
+	width: 1000px !important;
+	padding: 0px !important;
 }
 
 .row {
-	width: 800px;
-	margin: 0 auto;
+	width: 900px;
+/* 	margin: 0 auto; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -37,19 +42,27 @@
 	width: 900px;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+/* 	align-items: center; */
 	margin: 0px auto;
 }
 }
+
+
 </style>
 <div class="space">
 	<div class="titleArea">
 		<h2>공지사항</h2>
 	</div>
-	<div id="list-btn" class="btn-container" style="width: 107px;">
-
-		<button id="list-btn" class="btn btn-outline-success ">수정</button>
+	
+	<div id="list-btn" class="btn-container" style="width: 107px;" >
+		<%if(loginMember!=null
+			&&loginMember.getMemberId().equals("jihyes")){ %>
+			 <div class="Pet-it-adminBtn">
+			 <button onclick="location.assign('<%=request.getContextPath()%>/noticewriter.do')" class="btn btn-outline-success">수정</button>
+			 </div>
 	</div>
+	<%} %>
+	
 	<div class="container mt-3">
 		<div class="row">
 			<table class="table table-bordered">
@@ -67,7 +80,7 @@
 				</tbody>
 			</table>
 
-			<table class="table table-bordered">
+			<table class="table table-bordered" style="text-align:center;">
 				<thead>
 					<tr>
 						<th style="text-align: center; background-color: #F2F2F2;">내용</th>
@@ -76,7 +89,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>good</td>
+						<td><%=n.getNoticeContent()%></td>
 					</tr>
 				</tbody>
 			</table>
@@ -89,10 +102,11 @@
 </div>
 
 <script>
-	
+	//목록버튼 눌렀을 때 noticeList로 페이지이동 
 	const listBtn = ()=> {
-		alert("발생");
 		location.replace("<%=request.getContextPath()%>/noticeList.do");
 	}
+	
+	
 </script>
 <%@ include file="/views/footer.jsp"%>

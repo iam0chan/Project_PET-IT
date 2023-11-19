@@ -88,12 +88,7 @@ public class FaqDao {
 		}return result;
     }
     
-    
-    
-    
-    
-    
-    
+
     public int insertFaq (Connection conn, Faq f){
     	PreparedStatement pstmt = null;
     	int result=0;
@@ -143,7 +138,6 @@ public class FaqDao {
             rs = pstmt.executeQuery();
             if (rs.next()) result = rs.getInt(1);
         } catch (SQLException e) {
-            // 적절한 예외 처리를 추가할 수 있습니다.
             e.printStackTrace();
         } finally {
             close(rs);

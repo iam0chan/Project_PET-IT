@@ -181,16 +181,10 @@ tr.item:hover {
 		<%if(loginMember!=null
 			&&loginMember.getMemberId().equals("jihyes")){ %>
 			 <div class="Pet-it-adminBtn">
-			 
 			 <button onclick="location.assign('<%=request.getContextPath()%>/faqwriter.do')" class="btn btn-outline-success">글쓰기</button>
-			 	
 			 </div>
-			 
 	</div>
 	<%} %>
-
-
-
 
 	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script

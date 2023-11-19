@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.pet.faq.model.dao.FaqDao;
+import com.pet.faq.model.dto.Faq;
 import com.pet.notice.model.dto.Notice;
 
 public class NoticeDao {
@@ -57,9 +58,7 @@ public class NoticeDao {
 				pstmt=conn.prepareStatement(sql.getProperty("insertNotice"));
 				pstmt.setString(1, n.getNoticeCategory());
 				pstmt.setString(2, n.getNoticeTitle());
-				pstmt.setDate(3, n.getNoticeDate());
-				pstmt.setString(4, n.getNoticeFileOriName());
-				pstmt.setString(5,n.getNoticeFileReName());
+				pstmt.setString(3, n.getNoticeContent());
 				result = pstmt.executeUpdate();
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -100,10 +99,54 @@ public class NoticeDao {
 				close(rs);
 				close(pstmt);
 			}return result;
-			
-			
-			
 		}
+		
+		public int selectNoticeCountByCategory(Connection conn, String category) {
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        int result = 0;
+	        try {
+	            pstmt = conn.prepareStatement(sql.getProperty("selectNoticeCountByCategory"));
+	            pstmt.setString(1, category);
+	            rs = pstmt.executeQuery();
+	            if (rs.next()) result = rs.getInt(1);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return result;
+	    }
+	    
+	    public List<Notice> selectNoticeCategory(Connection conn, int cPage, int numPerpage, String category){
+	    	PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        List<Notice> result = new ArrayList<>();
+
+	        try {
+	            pstmt = conn.prepareCall(sql.getProperty("selectNoticeCategory"));
+	            pstmt.setString(1, category);
+	            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+	            pstmt.setInt(3, cPage * numPerpage);
+	            rs = pstmt.executeQuery();
+	            while (rs.next()) {
+	                result.add(getNotice(rs));
+	            }
+	        } catch (SQLException e) {
+	            // 적절한 예외 처리를 추가할 수 있습니다.
+	            e.printStackTrace();
+	        } finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return result;
+	    }
+		
+		
+		
+		
+		
 		
 		
 		private Notice getNotice (ResultSet rs) throws SQLException{

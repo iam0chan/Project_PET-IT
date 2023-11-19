@@ -46,6 +46,27 @@ public class NoticeService {
 		return result;
 	}
 	
+	public int selectNoticeCountByCategory(String category) {
+		Connection conn=getConnection();
+		int result=dao.selectNoticeCountByCategory(conn, category);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<Notice> selectNoticeCategory(int cPage,int numPerpage, String category){
+		Connection conn=getConnection();
+		List<Notice> result=dao.selectNoticeCategory(conn, cPage, numPerpage, category);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -65,7 +65,7 @@
 				<h2>공지사항 작성</h2>
 			</div>
 			<div class="container mt-3">
-				<form id="noticeform" action="<%=request.getContextPath()%>/noticeList.do"method="post" enctype="multipart/form-data">
+				<form id="noticeform" action="<%=request.getContextPath()%>/noticeadminpage.do"method="post">
 				<div class="row">
 					<div class="col-lg-2"></div>
 					<div class="col-lg-8">
@@ -74,10 +74,11 @@
 									<tr>
 										<th style="text-align: center; background-color: #F2F2F2;">제목</th>
 										<th><select id="selectCategory" name="selectCategory">
-												<option value selected="selected">전체</option>
+												<!-- <option value="전체" selected>전체</option> -->
 												<option value="공지사항">공지사항</option>
 												<option value="이용안내">이용안내</option>
-										</select> <input id="notice-title" style="width: 400px;" type="text">
+										</select> 
+										<input id="notice-title" name="title" style="width: 400px;" type="text">
 										</th>
 									</tr>
 								</thead>
@@ -90,12 +91,16 @@
 				<div id="submitBtn" class="row">
 		           <div class="col-5"></div>
 		               <div class="col-1">
-		                	<input class="btn btn-outline-success" type="submit" value="write" />
+			            	<input type="hidden" id="content" name="content" value="">
+		                	<input class="btn btn-outline-success" onclick="test();" type="submit" value="write" />
 		                </div>
 		                    <div class="col-1">
 		                    	<button class="btn btn-outline-success" type="reset" id="resetBtn">cancell</button>
 		                    </div>
 			            </div>
+			            
+			            
+			            
 				</form>
 			</div>
 				
