@@ -182,7 +182,7 @@ public class ProductDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(product.toString());
+		//System.out.println(product.toString());
 		return product;
 	}
 	

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<%@ page import="com.pet.payment.model.dto.Payment" %>
+<%@ page import="com.pet.payment.model.dto.Payment, com.pet.payment.model.dto.Order, com.pet.payment.model.dto.OrderDetail" %>
 <% 
 	Payment p = (Payment) request.getAttribute("payment");
+	OrderDetail od = (OrderDetail) request.getAttribute("orderDetail");
 %>
 <style>
 	section {
@@ -64,14 +65,14 @@
 			</div>
 			<div style="width:50%; display:flex; line-height:1.0; margin-left:20px;">
 				<div>
-					<img src="<%=request.getContextPath()%>/img/testimg.jpg" width="100px" height="100px">
+					<img src="<%=od.getProductImg() %>" width="100px" height="100px">
 				</div>
 				<div style="width:80%; margin-left:10px">
-					<p><b>사나운 오소리</b></p>
+					<p><b><%=od.getProductName() %></b></p>
 					<p>몹시 사나우니까 조심</p>
-					<span>00</span><span>개</span>
+					<span><%=od.getDetailCount() %></span><span>개</span>
 					<br><br>
-					<span>0000</span><span>원</span>
+					<span><%=od.getDetailPrice() %></span><span>원</span>
 				</div>
 			</div>
 			<!-- <div style="width:30%; text-align:center;">

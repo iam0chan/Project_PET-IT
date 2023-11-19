@@ -1,6 +1,5 @@
 package com.pet.payment.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Map;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.pet.payment.model.dto.Order;
+import com.pet.payment.model.dto.OrderDetail;
 import com.pet.payment.model.dto.Payment;
 import com.pet.payment.service.PaymentService;
 
@@ -39,6 +39,11 @@ public class PaymentServlet extends HttpServlet {
 		//주문테이블에 넣을 정보 가져오기
 		String o = request.getParameter("order");
 		Order order = gson.fromJson(o, Order.class);
+		
+		//주문상세 정보 가져오기
+		String od = request.getParameter("orderDetail");
+		OrderDetail orderDetail = gson.fromJson(od, OrderDetail.class);
+		
 		
 		//결제테이블에 넣을 정보 가져오기
 		String imp_uid = request.getParameter("imp_uid");
@@ -67,6 +72,7 @@ public class PaymentServlet extends HttpServlet {
 	    System.out.println("결제DB저장값: "+ payment);
 
 		response.setContentType("application/json;charset=utf-8");
+		request.getSession().setAttribute("orderDetail", orderDetail);
 		request.getSession().setAttribute("payment", payment);
 	    gson.toJson(Map.of("result",true),response.getWriter());
 	}
