@@ -101,7 +101,6 @@ tr.item:hover {
 			<p class="boardSort"></p>
 			<span class="categoryBar"> 
 			<select id="selectCategory" name="selectCategory">
-					
 					<option value="전체"<%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("전체")?"selected":"" %>>전체</option>
 					<option value="공지사항" <%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("공지사항")?"selected":"" %>>공지사항</option>
 					<option value="이용안내" <%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("이용안내")?"selected":"" %>>이용안내</option>
@@ -149,19 +148,16 @@ tr.item:hover {
 	</div>
 	
 	<div class="boardsearchAll">
-		<form action='<%=request.getContextPath()%>/noticeSearchMenu.do' method="post" > 
+		<form action='<%=request.getContextPath()%>/noticeSearchMenu.do' method="post" >
 			<select id="searchKey" name="searchKey">
-				<option value="subject">제목</option>
-				<option value="subject">내용</option>
+				<option value="notice_title">제목</option>
+				<option value="notice_content">내용</option>
 			</select>
-		<input type="search" id="searchMenu" placeholder="입력하세요">
+			
+		<input type="search" id="searchMenu" neme="searchKeyword" placeholder="입력하세요">
 			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
-		</form>
+		</form> 
 	</div> 
-	
-	
-	
-	
 	
 	<div>
 		<%if(loginMember!=null
@@ -180,6 +176,8 @@ tr.item:hover {
 	selectCategory.addEventListener("change",function(e){
 	location.replace("<%=request.getContextPath()%>/noticeinquiry.do?notices="+ e.target.value);
 	});
+	
+	
 	
 	</script>
 

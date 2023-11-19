@@ -75,5 +75,17 @@ public class NoticeService {
 		close(conn);
 		return result;
 	}
+	
+	public List<Notice> searchNotice(int cPage, int numPerpage, String key, String keyword){
+		Connection conn = getConnection();
+		List<Notice> resultList = null;
+		if(key.equals("notice_title")) {
+			resultList = dao.noticeSearchTitle(conn, cPage, numPerpage, keyword);
+		}else {
+			resultList = dao.noticeSearchContent(conn, cPage, numPerpage, keyword);
+		}
+		close(conn);
+		return resultList;
+	}
 
 }

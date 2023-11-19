@@ -140,6 +140,7 @@ public class NoticeDao {
 	        }
 	        return result;
 	    }
+	    //검색창 참고해서 만들기
 		
 		
 		//조회수 업데이트 메소드 
