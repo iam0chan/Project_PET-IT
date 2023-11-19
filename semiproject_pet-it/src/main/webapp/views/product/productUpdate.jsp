@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.pet.product.model.dto.*"%>
 <%@ include file="/views/header.jsp"%>
+<%
+	Product product = (Product)request.getAttribute("product");
+	ProductImageFile mainImg = (ProductImageFile)request.getAttribute("productFileImage");
+%>
 <!-- TUI 에디터 JS CDN -->
 <script
 	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
@@ -73,7 +77,7 @@ $("#main-image").change(e=>{
 					<div class="detail-container-l">
 						<div class="img-container">
 							<img id="image-box"
-								src="<%=request.getContextPath()%>/img/Image-Size.jpg" /> <input
+								src="<%=request.getContextPath()%>/upload/<%=mainImg.getProductFileRename()%>" /> <input
 								type="file" class="btn btn-outline-success" name="mainImage"
 								id="main-image" />
 						</div>
@@ -88,7 +92,7 @@ $("#main-image").change(e=>{
 							</div>
 							<div class="enrollpage-content">
 								<input type="text" name="productName"
-									placeholder="상품명을 입력하세요 (30자)" maxlength="30" required />
+									placeholder="상품명을 입력하세요 (30자)" maxlength="30" value="<%=product.getProductName()%>" readOnly/>
 							</div>
 						</div>
 						<div class='enroll-content-container'>
@@ -98,20 +102,20 @@ $("#main-image").change(e=>{
 							<div class="enrollpage-content">
 								<div class="price-container">
 								<input type="number" name="productPrice"
-									placeholder="상품가격을 입력하세요" min="0" step="1000" required />
+									placeholder="상품가격을 입력하세요" min="0" step="1000" value="<%=product.getProductPrice()%>" required />
 								</div>
 								<div class="discount-radio">
 								<label for="discount">
-								<input class="discount" type="radio" id="discount" name="discount" value="0">
+								<input class="discount" type="radio" id="discount" name="discount" value="0" <%=product.getProductDiscount().equals("0")?"checked":"" %>>
 								없음</label>
 								<label for="discount1">
-								<input class="discount" type="radio" id="discount1" name="discount" value="0.1">
+								<input class="discount" type="radio" id="discount1" name="discount" value="0.1" <%= product.getProductDiscount().equals("0.1")?"checked":"" %>>
 								10%</label>
 								<label for="discount2">
-								<input class="discount" type="radio" id="discount2" name="discount" value="0.2">
+								<input class="discount" type="radio" id="discount2" name="discount" value="0.2" <%= product.getProductDiscount().equals("0.2")?"checked":"" %>>
 								20%</label>
 								<label for="discount3">
-								<input class="discount" type="radio" id="discount3" name="discount" value="0.3">
+								<input class="discount" type="radio" id="discount3" name="discount" value="0.3" <%= product.getProductDiscount().equals("0.3")?"checked":"" %>>
 								30%</label>
 								</div>
 							</div>
@@ -122,7 +126,7 @@ $("#main-image").change(e=>{
 							</div>
 							<div class="enrollpage-content">
 								<input type="text" name="productSummary"
-									placeholder="상품 한줄 소개 (40자)" maxlength="40" required />
+									placeholder="상품 한줄 소개 (40자)" maxlength="40" value="<%=product.getProductInfo() %>" required/>
 							</div>
 						</div>
 						<div class='enroll-content-container'>
@@ -131,7 +135,7 @@ $("#main-image").change(e=>{
 							</div>
 							<div class="enrollpage-content">
 								<input type="number" name="productStock"
-									placeholder="판매 재고 개수 입력" min="0" required />
+									placeholder="판매 재고 개수 입력" min="0" value="<%=product.getProductStock()%>" required />
 							</div>
 						</div>
 						<div class='enroll-content-container'>
@@ -152,20 +156,29 @@ $("#main-image").change(e=>{
 								</select>
 							</div>
 						</div>
-						<div class='enroll-content-container'>
+						<% int count=0;
+						for(ProductOption op : product.getProductOption()){ %>
+						<div class='enroll-content-container option'>
 							<div class="enrollpage-title option-title">
 								<div style="padding-bottom: 14px;">
-									<button type="button" id="option-btn" class="btn btn-success">+</button>
+								<%if(count==0){ %>
+									<button type="button" id="option-btn-add" class="btn btn-success">+</button>
+									<button type="button" id="option-btn-remove" class="btn btn-success">-</button>
+								<%} %>
 								</div>
+								<%if(count==0){ %>
 								<h4 style="width: 135px;">옵션 :</h4>
+								<%} %>
 							</div>
+						<%count++; %>
 							<div class="enrollpage-content option-fix">
-								<input type="text" name="optionName" id="optionName"
-									placeholder="가격옵션명" /> <input type="number" name="optionPrice"
-									id="optionPrice" placeholder="가격" />
+								<input type="hidden" name="optionNo" id="optionNo" value="<%=op.getProductOptionNo()%>"/>
+								<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" value="<%=op.getProductOptionName()%>" /> 
+								<input type="number" name="optionPrice"	id="optionPrice" placeholder="가격" value="<%=op.getProductOptionPrice()%>"/>
 							</div>
 							<div id="option-btn" style="line-height: 3.0"></div>
 						</div>
+						<%} %>
 					</div>
 				</div>
 			</form>
@@ -264,22 +277,29 @@ $("#main-image").change(e=>{
 
         })
         let count = 0;
-        $("#option-btn").on("click",(e)=>{
-           if(count<2){
+        $("div.ProseMirror").html("<%=product.getProductContent()%>");
+        $("#option-btn-add").on("click",(e)=>{
+           console.log($(".option").length);
+           if($(".option").length<3){
            const optionBox = $(".detail-container-r");
-           const test = $("<div class='enroll-content-container '></div>");
-           const test2 = $("<div class='enrollpage-title'></div>");
-           const test3 = $("<div class='enrollpage-content new-option'></div>");
-           $(test).append(test2);
-           $(test).append(test3);
+           const div1 = $("<div class='enroll-content-container option'></div>");
+           const div2 = $("<div class='enrollpage-title'></div>");
+           const div3 = $("<div class='enrollpage-content option-new'></div>");
+           $(div1).append(div2);
+           $(div1).append(div3);
            const inputName = $('<input type="text" name="optionName" id="optionName"+ placeholder="가격옵션명" />');
-           $(test3).append(inputName);
+           $(div3).append(inputName);
            const inputPrice = $('<input type="number" name="optionPrice" id="optionPrice" placeholder="가격" />');
-           $(test3).append(inputPrice);
-           $(optionBox).append(test);
+           $(div3).append(inputPrice);
+           $(optionBox).append(div1);
            ++count;
            }
         });
+        $("#option-btn-remove").on("click",function(){
+        	const target = $(".detail-container-r").last();
+        	target.remove("");
+        	/* const target2 = $(".option:last-child()").remove(); */
+        })
       
         /* 모달 컨트롤 스크립트  */
         $("#enroll-itemcontent-btn").on("click",function(){    
