@@ -13,7 +13,7 @@ import com.pet.faq.model.dao.FaqDao;
 import com.pet.faq.model.dto.Faq;
 
 public class FaqService {
-	
+
 		private FaqDao dao = new FaqDao(); 
 		
 		public List<Faq> selectFaq(int cPage,int numPerpage){
@@ -75,3 +75,4 @@ public class FaqService {
 		
 		
 }
+
