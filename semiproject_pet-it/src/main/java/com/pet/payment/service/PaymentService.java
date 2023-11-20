@@ -36,7 +36,9 @@ public class PaymentService {
 	
 	public boolean insertOrderDetail(List<OrderDetail> ol, OrderDetail od) {
 		Connection conn = getConnection();
+		
 		boolean resultOl = false;
+		
 		if(ol.size()<2) {
 			int result = dao.insertOrderDetail(conn,od);
 			if(result>0) {
@@ -45,6 +47,7 @@ public class PaymentService {
 			}else {
 				rollback(conn);
 			}
+			
 		}else {
 			resultOl = (boolean) dao.insertOrderList(conn,ol);
 			if(resultOl) commit(conn);
