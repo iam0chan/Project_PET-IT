@@ -82,6 +82,19 @@ public class ProductService {
 		return file;
 	}
 	
+	public int deleteProductByProductNo(String productNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteProductByProductNo(conn, productNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+				
+	}
+	
 	/*
 	 * public ProductOption getOptionName(String productNo, String optionPrice) {
 	 * Connection conn = getConnection(); ProductOption po = dao.getOptionName(conn,

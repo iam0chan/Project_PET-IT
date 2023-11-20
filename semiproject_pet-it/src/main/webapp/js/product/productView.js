@@ -1,4 +1,4 @@
-   		const review = document.querySelector("#review-btn");
+  		const review = document.querySelector("#review-btn");
        	
        	review.addEventListener('click',()=>{
        		open("<%=request.getContextPath()%>/product/review_write.jsp","_blank","width=800px,height=500px")
