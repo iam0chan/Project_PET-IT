@@ -110,7 +110,7 @@
                        <ul class="sub-nav">
                          <a href="<%=request.getContextPath() %>/views/brandInfo/brandInfoPage.jsp"><li class = "sub-item">브랜드소개</li></a>
                          <a href="<%=request.getContextPath() %>/noticeList.do"><li class = "sub-item">공지사항</li></a>
-                         <a href="<%=request.getContextPath() %>/questionList.do"><li class = "sub-item">1:1문의</li></a>
+                         <a href="#"><li class = "sub-item">1:1문의</li></a>
                       </ul> 
                     </li>
                     <li class="nav-item header-menu-item">
@@ -205,4 +205,3 @@
             </nav>
           </header>
           <!-- end header section -->
-

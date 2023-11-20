@@ -41,4 +41,15 @@ private MemberDao dao = new MemberDao();
 	   
 	   return result;
    }
+   
+   public int findIdEmail(String memberName, String memberEmail) {
+	   Connection conn = getConnection();
+	   int result = dao.findIdEmail(conn, memberName, memberEmail);
+	   if(result>0) commit(conn);
+	   else rollback(conn);
+	   close(conn);
+	   
+	   return result;
+	   
+   }
 }
