@@ -172,9 +172,6 @@
                   	<span id="logoutbtn" style="display:none;"
                   		onclick="location.assign('<%=request.getContextPath()%>/logout.do');">로그아웃</span>
                   <%} %>
-                  <style>
-                  	
-                  </style>
                   <script>
 				  document.getElementById('memberName').addEventListener('click', function() {
 				    var logoutbtn = document.getElementById('logoutbtn');
@@ -185,11 +182,11 @@
 				      logoutbtn.style.display = 'none';
 				    }
 				  });
-				  
-				  /* document.getElementById('logoutbtn').addEventListener('click', function(){
+				  document.getElementById('logoutbtn').addEventListener('click', function(){
 					 location.replace
 					  
-				  }); */
+				  });
+				  
 				  </script>
                   <a href="">
                     <i class="fa-solid fa-cart-shopping"></i>
