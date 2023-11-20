@@ -1,6 +1,7 @@
 package com.pet.member.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -15,8 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pet.member.dao.MemberDao;
+import com.pet.member.service.MemberService;
 
 
 /**
@@ -38,40 +41,66 @@ public class MailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			MemberDao dao = new MemberDao();
-			String authenCode = null;
-			
-			Properties props = new Properties();
-			props.put("mail.smtp.host", "smtp.gmail.com");
-			props.put("mail.smtp.port", "587");
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.enable", "true");
-			props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-			
-			Session session = Session.getInstance(props, new Authenticator() {
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("petittttttt1@gmail.com", "yrdq fhre xkwc zulq");
-				}
-			});
-			String receiver = request.getParameter("memberEmail"); // 메일 받을 주소
-			String title = "pet-it 인증코드";
-//			String content = "인증코드 : "+authenCode;
-			Message message = new MimeMessage(session);
-			try {				
-				authenCode = "인증번호는 : "+dao.makeAuthenticationCode();
-				message.setFrom(new InternetAddress("petittttttt1@gmail.com", "pet-it", "utf-8"));
-				message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-				message.setSubject(title);
-				message.setContent(authenCode, "text/html; charset=utf-8");
-				
-				Transport.send(message);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			response.sendRedirect(request.getContextPath()+"/views/member/findId.jsp");
-			
+	    MemberDao dao = new MemberDao();
+	    String emailCode = null;
+
+	    Properties props = new Properties();
+	    props.put("mail.smtp.host", "smtp.gmail.com");
+	    props.put("mail.smtp.port", "587");
+	    props.put("mail.smtp.auth", "true");
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+	    Session session = Session.getInstance(props, new Authenticator() {
+	        @Override
+	        protected PasswordAuthentication getPasswordAuthentication() {
+	            return new PasswordAuthentication("petittttttt1@gmail.com", "yrdq fhre xkwc zulq");
+	        }
+	    });
+
+	    String memberEmail = request.getParameter("memberEmail"); // 메일 받을 주소
+	    String memberName = request.getParameter("memberName");
+	    int result=0;
+	    
+	    try {
+	        // 이름과 이메일이 데이터베이스에 일치하는지 확인
+	    	result=new MemberService().findIdEmail(memberName, memberEmail);
+	        if (result==1) {
+	            // 일치하면 인증 코드 생성
+	            emailCode = dao.makeAuthenticationCode();
+	            
+	            // 세션에 저장
+	            HttpSession httpSession = request.getSession();
+	            httpSession.setAttribute("authenCode", emailCode);
+	            httpSession.setAttribute("authenName", memberName);
+	            httpSession.setAttribute("authenEmail", memberEmail);
+	            
+	            httpSession.setAttribute("emailCode", emailCode);
+	            
+	            // 데이터베이스에 인증 코드 저장 (이 메서드는 데이터베이스 구조와 요구 사항에 맞게 구현 필요)
+	            dao.saveAuthenticationCode(memberName, memberEmail, emailCode);
+
+	            // 이메일 전송
+	            String title = "pet-it 인증코드";
+	            Message message = new MimeMessage(session);
+	            message.setFrom(new InternetAddress("petittttttt1@gmail.com", "pet-it", "utf-8"));
+	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail));
+	            message.setSubject(title);
+	            message.setContent(emailCode, "text/html; charset=utf-8");
+
+	            Transport.send(message);
+
+	            // 이메일 전송 후 페이지 이동
+	            response.sendRedirect(request.getContextPath() + "/views/member/findIdEmail.jsp");
+	        } else {
+	            // 이름과 이메일이 일치하지 않을 경우 처리
+//	            response.sendRedirect(request.getContextPath() + "/views/member/findIdFail.jsp");
+	            response.getWriter().write("fail");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // 예외 처리에 따른 로직 추가
+	    }
 	}
 	
 
