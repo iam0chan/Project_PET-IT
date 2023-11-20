@@ -55,7 +55,6 @@ $("#main-image").change(e=>{
 			"width":"328",
 			"height":"329"
 		});
-		$("#prevImg").append(img);
 	}
 	})
 });
@@ -72,10 +71,8 @@ $("#main-image").change(e=>{
 				<div class="product-detail-container">
 					<div class="detail-container-l">
 						<div class="img-container">
-							<img id="image-box"
-								src="<%=request.getContextPath()%>/img/Image-Size.jpg" /> <input
-								type="file" class="btn btn-outline-success" name="mainImage"
-								id="main-image" />
+							<img id="image-box"	src="<%=request.getContextPath()%>/img/Image-Size.jpg" /> 
+								<input type="file" class="btn btn-outline-success" name="mainImage"	id="main-image" />
 						</div>
 					</div>
 					<div class="detail-container-r">
