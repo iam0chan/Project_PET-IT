@@ -172,9 +172,6 @@
                   	<span id="logoutbtn" style="display:none;"
                   		onclick="location.assign('<%=request.getContextPath()%>/logout.do');">로그아웃</span>
                   <%} %>
-                  <style>
-                  	
-                  </style>
                   <script>
 				  document.getElementById('memberName').addEventListener('click', function() {
 				    var logoutbtn = document.getElementById('logoutbtn');
@@ -191,7 +188,7 @@
 					  
 				  }); */
 				  </script>
-                  <a href="">
+                  <a href="<%=request.getContextPath()%>/cart.do">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>장바구니</span>
                   </a>

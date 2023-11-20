@@ -1,12 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
+<%@ page import="java.util.List, com.pet.cart.model.dto.Cart" %>
+<%
+List<Cart> cart = (List<Cart>) request.getAttribute("cartList");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <title>장바구니</title>
 <style>
 body {
@@ -232,18 +237,68 @@ background-color: green;
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>
-			<%
-			if(lsit==null || list.size() <1){%>
+	<%-- 		<tbody>
+				<tr>
+					<td><input type="checkbox"></td>
+					<td><img
+						src="<%=request.getContextPath()%>/images/default_product_image.jpg"
+						alt="상품 이미지"></td>
+					<td class="product-name">
+						<h5>상품명</h5>
+						<p>상품 설명</p>
+					</td>
+					<td class="price">100원</td>
+					<td class="qua-col first-row">
+						<div class="pro-qty">
+							<span class="dec qtybtn">-</span> <input name="cartCnt"
+								class="cartQty" id="cartQty"
+								value="" type="text"
+								style="width: 100px;"> <span class="inc qtybtn">+</span>
+						</div>
+					</td>
+					<td class="total">200원</td>
+					<td class="button">
+						<button onclick="deleteProduct('1')">삭제</button>
+					</td>
+	<%
+		}
+		}
+		%> --%>
+			</tbody>
+
 			<tr>
-			<td>
-			<td colspan="6">장바구니가 비었습니다.</td>
+			<td></td>
+			<%if(cart.isEmpty()){ %>
+				<td colspan="6">장바구니가 비었습니다.</td>
 			</tr>
-			<% %>
-			
-			
-			
-				<tr>
+			<%}else{ %>
+				<%for(Cart c : cart){ %>
+			<tr>
+					<td><input type="checkbox"></td>
+					<td><img
+						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
+					<td class="product-name">
+						<h5><%=c.getProductName() %></h5>
+						<p><%=c.getProductInfo() %></p>
+					</td>
+
+					<td class="price"><%=c.getProductPrice() %>원</td>
+
+					<td class="qua-col first-row">
+						<div class="pro-qty">
+							<span class="dec qtybtn">-</span> <input name="cartCnt"
+								class="cartQty" id="cartQty" value="1" type="text"
+								style="width: 100px;"> <span class="inc qtybtn">+</span>
+						</div>
+					</td>
+					<td class="total"><%=c.getProductPrice() %></td>
+
+					<td class="button"><a href="javascript:;" class="btnNormal"
+						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
+				</tr>
+					<%} %>
+				<%} %>
+				<%-- <tr>
 					<td><input type="checkbox"></td>
 					<td><img
 						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
@@ -268,8 +323,7 @@ background-color: green;
 				</tr>
 				<tr>
 					<td><input type="checkbox"></td>
-					<td><img
-						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
+					<td><img src="request.getContextPath()>/images/cat_chu.jpg"></td>
 					<td class="product-name">
 						<h5>냥이 츄르 스푼</h5>
 						<p>츄르 먹이기가 쉬워지는 magic~</p>
@@ -288,55 +342,31 @@ background-color: green;
 
 					<td class="button"><a href="javascript:;" class="btnNormal"
 						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><img
-						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
-					<td class="product-name">
-						<h5>냥이 츄르 스푼</h5>
-						<p>츄르 먹이기가 쉬워지는 magic~</p>
-					</td>
-
-					<td class="price">10,000원</td>
-
-					<td class="qua-col first-row">
-						<div class="pro-qty">
-							<span class="dec qtybtn">-</span> <input name="cartCnt"
-								class="cartQty" id="cartQty" value="1" type="text"
-								style="width: 100px;"> <span class="inc qtybtn">+</span>
-						</div>
-					</td>
-					<td class="total">10,000원</td>
-
-					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-				</tr>
+				</tr> --%>
 				<!-- 상품 추후에 추가하자 -->
 			</tbody>
-		</table>
+		</table> 
 
-		<div>
-			<button onclick="deleteSelectedProduct()">선택 상품 삭제</button>
-			<button onclick="continueShopping()">쇼핑 계속하기</button>
-		</div>
+			<div>
+				<button onclick="deleteSelectedProduct()">선택 상품 삭제</button>
+				<button onclick="continueShopping()">쇼핑 계속하기</button>
+			</div>
 
-		<div class="row justify-content-end" align="right">
-			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-				<div class="cart-total mb-3">
-					<h3>장바구니 총 결제 금액</h3>
-					<hr>
-					<p class="d-flex total-price" style="font-size: 30px;">
-						<span>0원</span>
+			<div class="row justify-content-end" align="right">
+				<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+					<div class="cart-total mb-3">
+						<h3>장바구니 총 결제 금액</h3>
+						<hr>
+						<p class="d-flex total-price" style="font-size: 30px;">
+							<span>0원</span>
+						</p>
+					</div>
+					<!-- 주문하기 누르면 주문페이지로 이동 -->
+					<p>
+						<a href="#" class="btn btn-primary py-3 px-4">주문하기</a>
 					</p>
 				</div>
-				<!-- 주문하기 누르면 주문페이지로 이동 -->
-				<p>
-					<a href="#" class="btn btn-primary py-3 px-4">주문하기</a>
-				</p>
 			</div>
-		</div>
-
 	</section>
 
 	<script>
@@ -381,6 +411,7 @@ $(document).ready(function () {
 
         $(".total-price>span:last-child").text(addCommas(totalAcount) + '원');
     }
+    
 });
 
 </script>
