@@ -49,7 +49,7 @@
 				      		<td style="font-size:1.15rem; text-align:center;">받는 사람 <strong>*</strong></td>
 				      		<td>
 					      		<div class="input-group input-group col-lg-3">
-								  <input type="text" id="orderName" class="form-control" placeholder="받는 사람">
+								  <input type="text" id="orderName" class="form-control" placeholder="받는 사람" value="">
 								</div>
 							</td>
 						</tr>
@@ -58,16 +58,16 @@
 							<td style="font-size:1.15rem; text-align:center; width:20%">주소 <strong>*</strong></td>
 							<td>	
 								<div class="input-group input-group col-lg-5">
-								  <input id="zipcode" name="orderZipcode" type="text" class="form-control" placeholder="우편 번호" >
+								  <input id="zipcode" name="orderZipcode" type="text" class="form-control" placeholder="우편 번호" value="">
 								  <input id="addrBtn" class="btn btn-outline-success optional" type="button" onclick="addrBtnAction()" value="주소 검색">
 								</div>
 							
 			      				<div class="input-group input-group col-lg-10">
-								  <input id="addr" id="orderAddr" type="text" class="form-control" placeholder="기본 주소" >
+								  <input id="addr" id="orderAddr" type="text" class="form-control" placeholder="기본 주소" value="">
 								</div>
 			      			
 			      				<div class="input-group input-group col-lg-10">
-								  <input id="detailAddr" name="orderDefAddr" type="text" class="form-control" placeholder="상세 주소">
+								  <input id="detailAddr" name="orderDefAddr" type="text" class="form-control" placeholder="상세 주소" value="">
 								  <input id="extraAddr" type="text" class="form-control optional" placeholder="참조 주소">
 								</div>
 			      			</td>
@@ -77,18 +77,18 @@
 			      			<td style="font-size:1.15rem; text-align:center;">휴대 전화 <strong>*</strong></td>
 			      			<td>
 			      				<div class="input-group input-group col-lg-7">
-								  <input type="text" id="orderPhone" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
+								  <input type="text" id="orderPhone" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력" value="">
 								</div>
 			      			</td>
 			      		</tr>
 			      		<tr style="height:10px"></tr>
 			      		<tr>
-			      			<td style="font-size:1.15rem; text-align:center;">이메일</td>
+			      			<td style="font-size:1.15rem; text-align:center;">이메일 <strong>*</strong></td>
 			      			<td>
 			      				<div class="input-group col-lg-9">
-		   						    <input type="text" class="form-control optional" id="emailHead" placeholder="이메일" aria-label="Username">
+		   						    <input type="text" class="form-control" id="emailHead" placeholder="이메일" aria-label="Username">
 								  	<span class="input-group-text">@</span>
-								  	<input type="text" class="form-control optional" name="emailTail" id="textEmail" placeholder="이메일 선택">
+								  	<input type="text" class="form-control" name="emailTail" id="textEmail" placeholder="이메일 선택">
 									<select class="form-select" id="selectEmail">
 									  	 <option disabled selected>이메일 선택</option>
 									 	 <option value="naver.com" id="naver.com">naver.com</option>
@@ -325,6 +325,7 @@
 <!-- ----------결제하기 버튼 클릭 js----------------- -->
 <script>
 // 결제정보관련 변수 설정
+let id="<%=loginMember.getMemberId()%>"
 let pg="";
 let product_name="";
 let amount= "";
@@ -356,6 +357,7 @@ $("#paymentBtn").on("click",function(e){
 	
 	//주문 객체 생성
 	order.orderNo = Number(orderNo);
+	order.orderId = id;
 	order.orderName = buyer_name;
 	order.orderZipcode = postcode;
 	order.orderAddr = $("#addr").val();
@@ -466,8 +468,8 @@ function payment_api(){
 //모달창 jquery
 	$(document).ready(function(){
 		Swal.fire({
-		  title: "주소지 입력",
-		  text: "기존에 등록된 주소지를 그대로 적용할까요?",
+		  title: "회원 정보 반영",
+		  text: "회원 정보에 등록된 내용을 그대로 적용할까요?",
 		  icon: "question",
 		  showCancelButton: true,
 		  confirmButtonColor: "#3085d6",
@@ -475,12 +477,31 @@ function payment_api(){
 		  confirmButtonText: "Yes"
 		}).then((result) => {
 		  if (result.isConfirmed) {
-		    Swal.fire({
-		      title: "주소지 적용",
-		      text: "회원정보의 주소지를 불러왔어요!😊",
-		      icon: "success"
-		    });
-		  }
+			    Swal.fire({
+			      title: "회원정보 적용!",
+			      text: "회원정보의 내용들을 적용했어요!😊",
+			      icon: "success"
+			    });
+			    
+			    // input태그에 session에서 가져온 회원정보 반영
+			    $("#orderName").val("<%=loginMember.getMemberName()%>");
+			    $("#zipcode").val("<%=loginMember.getMemberZipCode()%>");
+			    $("#addr").val("<%=loginMember.getMemberAddr()%>");
+			    $("#detailAddr").val("<%=loginMember.getMemberDetailAddr()%>"); 
+			    $("#orderPhone").val("<%=loginMember.getMemberPhone()%>"); 
+			     
+			 	// email parsing입력
+			    var email = "<%=loginMember.getMemberEmail()%>";		      
+			    var index = email.indexOf("@");
+			    
+			    if (index !== -1) {
+				    var beforeText = email.substring(0, index);
+				    var afterText = email.substring(index + 1);
+				    
+				    $("#emailHead").val(beforeText);
+				    $("#textEmail").val(afterText);
+			    }
+		  	}
 		});	
 	});
 </script>

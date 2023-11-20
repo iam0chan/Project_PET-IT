@@ -42,38 +42,13 @@ input#optionPrice {
 	width: 230px;
 }
 </style>
-<script>
-$(function(){
-$("#main-image").change(e=>{
-	$.each(e.target.files,(i,f)=>{
-		
-	//fileReader 클래스를 이용해서 inputfile에 저장된 데이터를 가져와 출력할 수 있다.
-	const filereader=new FileReader();
-	filereader.readAsDataURL(e.target.files[0]);
-	filereader.readAsDataURL(f);
-	filereader.onload=(e)=>{
-		/* 파일 가상 주소 */
-		const path=e.target.result;
-		console.log(path);
-		const img=$("#image-box").attr({
-			"src":path,
-			"width":"328",
-			"height":"329"
-		});
-		/* $("#prevImg").append(img); */
-	}
-	})
-});
-}) 
-</script>
+
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
 			<h2>상품등록</h2>
 			<div class="line"></div>
-			<form
-				action="<%=request.getContextPath()%>/product/productEnrollEnd.do"
-				method="post" enctype="multipart/form-data">
+			<form action="<%=request.getContextPath()%>/product/productUpdateEnd.do" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<div class="product-detail-container">
 					<div class="detail-container-l">
 						<div class="img-container">
@@ -84,6 +59,7 @@ $("#main-image").change(e=>{
 					<div class="detail-container-r">
 						<!-- 입력데이터 DB 저장 후 저장된 정보를 가지고 product List에서 해당 컬럼데이터에 맞게 출력 -->
 						<!-- 				<input type="file" name="mainImage" id="main-image" style="display:none"/> -->
+						<input type="hidden" name="productNo" value="<%=product.getProductNo()%>"/>
 						<input type="hidden" name="content" id="product-content" />
 						<div class='enroll-content-container'>
 							<div class="enrollpage-title">
@@ -155,12 +131,31 @@ $("#main-image").change(e=>{
 								</select>
 							</div>
 						</div>
-						<% int count=0;
-						for(ProductOption op : product.getProductOption()){ %>
+						<%if(product.getProductOption().isEmpty()){ %>
+						<!-- 옵션 수정 창 (case : 옵션X) -->						
 						<div class='enroll-content-container option'>
 							<div class="enrollpage-title option-title">
 								<div style="padding-bottom: 14px;">
-								<%if(count==0){ %>
+									<button type="button" id="option-btn-add" class="btn btn-success">+</button>
+									<button type="button" id="option-btn-remove" class="btn btn-success">-</button>
+								</div>
+								<h4 style="width: 135px;">옵션 :</h4>
+							</div>
+							<div class="enrollpage-content option-fix">
+								<input type="hidden" name="optionNo" id="optionNo" value=""/>
+								<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" value="" /> 
+								<input type="number" name="optionPrice"	id="optionPrice" placeholder="가격" value=""/>
+							</div>
+							<div id="option-btn" style="line-height: 3.0"></div>
+						</div>
+						<%} else{%>
+						<%for(ProductOption op : product.getProductOption()){ %>
+						<% int count = 0;%>
+						<!-- 옵션 수정 창 (case : 옵션O) -->
+						<div class='enroll-content-container option<%=product.getProductOption().size()-1==count?"-new-contaier":"" %>'>
+							<div class="enrollpage-title option-title">
+								<div style="padding-bottom: 14px;">
+									<%if(count==0){ %>
 									<button type="button" id="option-btn-add" class="btn btn-success">+</button>
 									<button type="button" id="option-btn-remove" class="btn btn-success">-</button>
 								<%} %>
@@ -169,7 +164,7 @@ $("#main-image").change(e=>{
 								<h4 style="width: 135px;">옵션 :</h4>
 								<%} %>
 							</div>
-						<%count++; %>
+							<% count++; %>
 							<div class="enrollpage-content option-fix">
 								<input type="hidden" name="optionNo" id="optionNo" value="<%=op.getProductOptionNo()%>"/>
 								<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" value="<%=op.getProductOptionName()%>" /> 
@@ -178,6 +173,7 @@ $("#main-image").change(e=>{
 							<div id="option-btn" style="line-height: 3.0"></div>
 						</div>
 						<%} %>
+						<%} %>	
 					</div>
 				</div>
 			</form>
@@ -187,7 +183,7 @@ $("#main-image").change(e=>{
 	<div class="editor-wrapper">
 		<div id="editor-container" style="width: 1050px;"></div>
 		<div class="editor-botton-container">
-			<button id="enroll-itemcontent-btn" class="btn btn-outline-success">등록완료</button>
+			<button id="enroll-itemcontent-btn" class="btn btn-outline-success">수정완료</button>
 		</div>
 	</div>
 
@@ -196,17 +192,17 @@ $("#main-image").change(e=>{
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">상품등록</h5>
+					<h5 class="modal-title">상품정보 수정</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body" style="text-align: center;">
-					<p>상품을 등록하시겠습니까?</p>
+					<p>상품 수정을 완료하시겠습니까?</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary">등록</button>
+					<button type="button" class="btn btn-primary">수정</button>
 					<input type="hidden" id="content-file-enroll" value="" />
 				</div>
 			</div>
@@ -278,9 +274,9 @@ $("#main-image").change(e=>{
         let count = 0;
         $("#option-btn-add").on("click",(e)=>{
            console.log($(".option").length);
-           if($(".option").length<3){
+           if($(".option-new-container").length<2){
            const optionBox = $(".detail-container-r");
-           const div1 = $("<div class='enroll-content-container option'></div>");
+           const div1 = $("<div class='enroll-content-container option-new-container'></div>");
            const div2 = $("<div class='enrollpage-title'></div>");
            const div3 = $("<div class='enrollpage-content option-new'></div>");
            $(div1).append(div2);
@@ -294,7 +290,8 @@ $("#main-image").change(e=>{
            }
         });
         $("#option-btn-remove").on("click",function(){
-        	const target = $(".detail-container-r").last();
+        	const target = $(".option-new-container").last();
+        	console.log(target);
         	target.remove("");
         	/* const target2 = $(".option:last-child()").remove(); */
         })
@@ -313,7 +310,6 @@ $("#main-image").change(e=>{
                  const editorData = editor.getHTML();
                  $(".modal").css("display","none");
                   $("#product-content").val(editorData);
-                 const formdata = $(".product-enroll-container").serialize();
                $(".product-enroll-container>form").submit();
          
                  
@@ -345,6 +341,27 @@ $("#main-image").change(e=>{
               }
            }); --%>
         })
+       
+	$(function(){
+	$("#main-image").change(e=>{
+		$.each(e.target.files,(i,f)=>{
+		var filereader=new FileReader();
+		//fileReader 클래스를 이용해서 inputfile에 저장된 데이터를 가져와 출력할 수 있다.
+		/* filereader.readAsDataURL(e.target.files[0]); */
+		filereader.readAsDataURL(f);
+		filereader.onload=(e)=>{
+			/* 파일 가상 주소 */
+			const path=e.target.result;
+			console.log(path);
+			const img=$("#image-box").attr({
+				"src":path,
+				"width":"328",
+				"height":"329"
+			});
+		}
+		})
+	});
+	}) 
    
   
     </script>

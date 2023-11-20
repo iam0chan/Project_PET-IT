@@ -1,9 +1,9 @@
 package com.pet.mypage.service;
-import com.pet.common.JDBCTemplate;
 import static com.pet.common.JDBCTemplate.close;
 import static com.pet.common.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
-import com.pet.common.*;
+
 import com.pet.member.dto.Member;
 import com.pet.mypage.model.dao.MyPageDao;
 
