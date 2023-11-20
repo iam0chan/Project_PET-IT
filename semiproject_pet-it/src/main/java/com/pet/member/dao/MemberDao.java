@@ -90,6 +90,40 @@ public class MemberDao {
 		}
 		return bf.toString();
     }
+
+	//메일인증번호 저장
+	public void saveAuthenticationCode(String memberName, String memberEmail, String authenCode) {
+		
+	}
+	
+	//아이디찾기
+	public int findIdEmail(Connection conn, String memberName, String memberEmail) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("findIdEmail"));
+			pstmt.setString(1, memberName);
+			pstmt.setString(2, memberEmail);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+			    result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+            close(rs);
+            close(pstmt);
+        }return result;
+	}
+	
+//	//비밀번호재설정
+//	public int findPw(String memberId) {
+//		
+//	}
+	
 	
 	//회원가입 아이디중복체크
 	public int memberIdCheck(Connection conn, String memberId) {
