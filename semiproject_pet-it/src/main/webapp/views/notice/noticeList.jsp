@@ -172,7 +172,7 @@ tr.item:hover {
 	<!--카테고리별 조회 script-->
 	<script>
 	const selectCategory = document.getElementById("selectCategory");
-	console.log(selectCategory)
+	console.log(selectCategory)ㅑ
 	selectCategory.addEventListener("change",function(e){
 	location.replace("<%=request.getContextPath()%>/noticeinquiry.do?notices="+ e.target.value);
 	});
