@@ -10,6 +10,7 @@ import com.pet.member.dto.Member;
 
 public class MemberService {
 
+
 private MemberDao dao = new MemberDao();
 	
 	public Member selectMemberByIdAndPw(String memberId, String memberPw) {
@@ -18,6 +19,7 @@ private MemberDao dao = new MemberDao();
 		close(conn);
 		return m;
 	}
+
 
    public int insertMember(Member m) {
       Connection conn = getConnection();

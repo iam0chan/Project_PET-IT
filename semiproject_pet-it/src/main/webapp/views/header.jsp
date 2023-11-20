@@ -90,10 +90,10 @@
       <body>
       	
         <div class="hero_area">
-          <!-- header section strats -->
-          <header class="header_section long_section px-0">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
-              <a class="navbar-brand" href="index.html">
+          <!-- header section strats // 11/16 헤더 그림자 추가 - YC -->
+          <header class="header_section long_section px-0" style="margin:0px;">
+            <nav class="navbar navbar-expand-lg custom_nav-container" style="padding:0px 40px; box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;">
+              <a class="navbar-brand" href="<%=request.getContextPath()%>/">
                 <span>
                   <img src="<%=request.getContextPath()%>/img/petit_logo_bk.png" width="185" height="65">
                 </span>

@@ -1,6 +1,7 @@
 package com.pet.product.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Product {
+
 	private String productNo;
 	private String cateogryNo; // 대분류
 	private String typeNo; //상품타입
@@ -22,4 +24,6 @@ public class Product {
 	private String productDiscount;
 	private int prouctPoint;
 	private String productContent;
+	private List<ProductOption> productOption;
 }
+

@@ -28,4 +28,8 @@ replay_pid*
 /src/main/resources/
 /src/main/webapp/WEB-INF/classes/
 
+<<<<<<< HEAD
 /bin/
+=======
+/bin/
+>>>>>>> branch 'dev' of https://github.com/iam0chan/project_PET-IT.git
