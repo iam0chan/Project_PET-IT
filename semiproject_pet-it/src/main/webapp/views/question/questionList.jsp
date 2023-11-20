@@ -153,8 +153,8 @@ tr.item:hover {
 					</button>
 				</div>
 	</div>
-	<div class="pageingBar">
-		<h2>페이징바 영역</h2>
+	<div id="pageBar">
+		<%=request.getAttribute("pageBar") %>
 	</div>
 	<div class="boardsearchAll">
 		<fieldset class="boardSearch">
@@ -169,6 +169,10 @@ tr.item:hover {
 			</p>
 		</fieldset>
 	</div>
+
+
+	
+
 
 </body>
 </html>
