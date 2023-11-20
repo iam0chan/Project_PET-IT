@@ -129,7 +129,6 @@
                       <a class="nav-link " href="<%=request.getContextPath()%>/productListServlet.do">주요상품</a>
                       <ul class="sub-nav">
                       	<a href="#"><li class = "sub-item">신상품</li></a>
-                      	<a href="#"><li class = "sub-item">베스트</li></a>
                       	<a href="#"><li class = "sub-item">사료</li></a>
                       	<a href="#"><li class = "sub-item">간식</li></a>
                       	<a href="#"><li class = "sub-item">용품</li></a>
