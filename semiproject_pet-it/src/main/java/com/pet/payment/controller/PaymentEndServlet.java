@@ -1,6 +1,8 @@
 package com.pet.payment.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,17 +38,17 @@ public class PaymentEndServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Payment payment = (Payment) session.getAttribute("payment");
 		OrderDetail od = (OrderDetail) session.getAttribute("orderDetail");
-		
-		int result = new PaymentService().insertOrderDetail(od);
-		
+		List<OrderDetail>orderList = (List<OrderDetail>)session.getAttribute("orderList");
+
+		boolean resultOl = new PaymentService().insertOrderDetail(orderList,od);
+		if(resultOl) System.out.println("OderList 저장성공!");
+		else System.out.println("OderList 저장실패ㅠㅠㅠㅠ");
+
 		System.out.println("End서블릿 payment : "+ payment);
-		System.out.println("End서블릿 orderDetail : "+ od);
-		
-		if(result>0) System.out.println("od저장 성공!");
-		else System.out.println("od저장 실패 ㅠㅠ");
+		System.out.println("End서블릿 orderlist : "+ orderList);
 		
 		request.setAttribute("payment", payment);
-		request.setAttribute("orderDetail", od);
+		request.setAttribute("orderList", orderList);
 		request.getRequestDispatcher("/views/payment/orderPayComplete.jsp").forward(request, response);
 
 	}

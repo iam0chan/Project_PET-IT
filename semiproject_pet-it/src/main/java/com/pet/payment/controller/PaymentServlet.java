@@ -1,8 +1,13 @@
 package com.pet.payment.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,17 +28,12 @@ import com.pet.payment.service.PaymentService;
 public class PaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public PaymentServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Gson gson = new Gson();
 		//주문테이블에 넣을 정보 가져오기
@@ -44,11 +44,22 @@ public class PaymentServlet extends HttpServlet {
 		String od = request.getParameter("orderDetail");
 		OrderDetail orderDetail = gson.fromJson(od, OrderDetail.class);
 		
+		//주문상세객체배열 가져오기
+		String orderArr = request.getParameter("orderArr");
+        List<OrderDetail>orderList = null;
+        if(orderArr!=null) {
+			OrderDetail[] orderArray = gson.fromJson(orderArr, OrderDetail[].class);
+			orderList = Arrays.asList(orderArray);
+        }
+        
 		//결제테이블에 넣을 정보 가져오기
 		String imp_uid = request.getParameter("imp_uid");
 	    long merchant_uid = Long.parseLong(request.getParameter("merchant_uid"));
 	    int paid_amount = Integer.parseInt(request.getParameter("paid_amount"));
-	    int apply_num = Integer.parseInt(request.getParameter("apply_num"));
+	    int apply_num = 0;
+	    if(request.getParameter("apply_num")!="") {
+	    	apply_num = Integer.parseInt(request.getParameter("apply_num"));
+	    }
 	    String pay_method = request.getParameter("pay_method");
 	    long timestamp = Long.parseLong(request.getParameter("paid_at")); // UNIX 타임스탬프 값으로 되어있음.
 	    Date paid_at = new Date(timestamp * 1000); // UNIX 타임스탬프를 date에 맞게 변환
@@ -69,20 +80,22 @@ public class PaymentServlet extends HttpServlet {
 	    else System.out.println("결제DB저장 실패");
 	    System.out.println("주문DB저장값: "+ order);
 	    System.out.println("결제DB저장값: "+ payment);
+	    System.out.println("주문리스트: "+ orderList);
 	    
-		response.setContentType("application/json;charset=utf-8");
-//		request.getSession().setAttribute("isSaved", false);
-		
+	    response.setContentType("application/json;charset=utf-8");
 		request.getSession().setAttribute("orderDetail", orderDetail);
 		request.getSession().setAttribute("payment", payment);
+		
+		if(!orderList.isEmpty()) {
+			request.getSession().setAttribute("orderList", orderList);
+		}
+		
 	    gson.toJson(Map.of("result",true),response.getWriter());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
