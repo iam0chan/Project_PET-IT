@@ -62,7 +62,7 @@ public class FaqInquiryServlet extends HttpServlet {
 			pageBar.append("<span>[이전]</span>"); 
 											
 		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>");
+			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&faqs="+(category)+"'>");
 			pageBar.append("[이전]</a>"); 
 		}
 		
@@ -70,7 +70,7 @@ public class FaqInquiryServlet extends HttpServlet {
 			if(cPage==pageNo) {
 				pageBar.append("<span>"+pageNo+"</span>"); 
 			}else {
-				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
+				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"&faqs="+(category)+"'>");
 				pageBar.append(pageNo);
 				pageBar.append("</a>"); 
 			}
@@ -80,14 +80,14 @@ public class FaqInquiryServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar.append("<span>[다음]</span>"); 
 		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
+			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"&faqs"+(category)+"'>");
 			pageBar.append("[다음]");
 			pageBar.append("</a>"); 
 		}
 		
 		request.setAttribute("faqs", faqs); 
 		request.setAttribute("pageBar", pageBar); 
-		request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
+		request.getRequestDispatcher("/views/faq/faqList.jsp").forward(request, response); 
 		
 	}
 		

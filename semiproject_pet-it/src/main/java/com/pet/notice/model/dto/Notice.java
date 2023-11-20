@@ -12,7 +12,7 @@ public class Notice {
 	private String noticeTitle;
 	private Date noticeDate;
 	private String noticeContent;
-	private int noticeHits;
+	private int noticeHits; //조회수 
 	//파일 테이블에 선언할것
 	private String noticeFileOriName;
 	private String noticeFileReName;
