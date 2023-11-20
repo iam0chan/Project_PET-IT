@@ -44,7 +44,6 @@ public class PaymentServlet extends HttpServlet {
 		String od = request.getParameter("orderDetail");
 		OrderDetail orderDetail = gson.fromJson(od, OrderDetail.class);
 		
-		
 		//결제테이블에 넣을 정보 가져오기
 		String imp_uid = request.getParameter("imp_uid");
 	    long merchant_uid = Long.parseLong(request.getParameter("merchant_uid"));
@@ -70,8 +69,10 @@ public class PaymentServlet extends HttpServlet {
 	    else System.out.println("결제DB저장 실패");
 	    System.out.println("주문DB저장값: "+ order);
 	    System.out.println("결제DB저장값: "+ payment);
-
+	    
 		response.setContentType("application/json;charset=utf-8");
+//		request.getSession().setAttribute("isSaved", false);
+		
 		request.getSession().setAttribute("orderDetail", orderDetail);
 		request.getSession().setAttribute("payment", payment);
 	    gson.toJson(Map.of("result",true),response.getWriter());
