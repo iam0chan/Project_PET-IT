@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pet.member.dto.Member;
+import com.pet.member.security.PasswordEncoder;
 import com.pet.member.service.MemberService;
 
 /**
  * Servlet implementation class EnrollMemberEndServlet
  */
-@WebServlet("/member/enrollMemberEnd.do")
+@WebServlet(name="EnrollMemberEndServlet",
+			urlPatterns="/member/enrollMemberEnd.do")
 public class EnrollMemberEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,7 +55,8 @@ public class EnrollMemberEndServlet extends HttpServlet {
 		String memberDetailAddr=request.getParameter("memberDetailAddr");
 		String memberTersm=request.getParameter("memberTersm");
 		String memberAccept=request.getParameter("memberAccept");
-
+		
+		
 		Member m = Member.builder()
 						 .memberId(memberId)
 						 .memberPw(memberPw)
@@ -66,6 +69,8 @@ public class EnrollMemberEndServlet extends HttpServlet {
 						 .memberTersm(memberTersm)
 						 .memberAccept(memberAccept)
 						 .build();
+		
+		System.out.println(m);
 		
 		int result = new MemberService().insertMember(m);
 		String msg, loc;
