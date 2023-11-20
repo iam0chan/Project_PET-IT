@@ -159,6 +159,7 @@
                 <div class="quote_btn-container">
 
                   <%if(loginMember==null) {%>
+
                   <a href="<%=request.getContextPath()%>/views/member/login.jsp"> <!--11.13 12:07 jm 연결주소 추가-->
 
                     <i class="fa-solid fa-dog"></i>
@@ -181,11 +182,11 @@
 				      logoutbtn.style.display = 'none';
 				    }
 				  });
-				  
-				  /* document.getElementById('logoutbtn').addEventListener('click', function(){
+				  document.getElementById('logoutbtn').addEventListener('click', function(){
 					 location.replace
 					  
-				  }); */
+				  });
+				  
 				  </script>
                   <a href="<%=request.getContextPath()%>/cart.do">
                     <i class="fa-solid fa-cart-shopping"></i>

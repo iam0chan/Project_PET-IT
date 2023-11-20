@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp" %>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 	* {
@@ -47,7 +48,9 @@
     .field_addr input[type="text"]{
     	width: 300px;
     }
-    
+    .field_id{
+    	display:flex;
+    }
     
     .field input {
     	width: 300px;
@@ -64,29 +67,97 @@
     	width: 300px;
     	align-self: center;
     }
+    
+    .modal {
+    	width:360px;
+   	    height:178px;
+    	margin-bottom:0px;
+    	position: fixed;
+	  	top: 50%;
+  		left: 50%;
+    }
+    
+    .modal *{
+     	width:100%;
+     	height:100%;
+    }
 </style>
 <div class="enroll_title"><h2>회원가입</h2></div>
 <br>
 <div class="enroll">
-	<form action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" onsubmit="return fn_membervalidate();">								
-			<div class="field_id">	
+	<form id="enroll_form" action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" >							
+			<div class="field_id">
 				<div>
-					<label>아이디</label>
+					<b>아이디</b>
 				</div>
 				<span>
-					<input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" >
+					<input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" oninput="validateId()">
 				</span>
 				<div>
-					<button type="button" id="id_du">
-						<span>중복확인</span>
-					</button>
-					<span id="id_du_span"></span>
+					<button type="button" id="id_du" class="modal_open"><span id="id_du_span">중복확인</span></button>
 				</div>
 			</div>
+			
+				<!-- 아이디 중복확인 모달-->
+				<div class="modal fade" id="idcheck_modal">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- body -->
+					<div class="modal-body"></div>
+					<!-- Footer -->
+					<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					</div>	
+			 	</div>
+				</div>
+				</div>
+				
+				<!-- 이용약관 동의(필수) 약관보기 -->
+				<div class="modal fade" id="terms_modal">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- body -->
+					<div class="modal-body"></div>
+					<!-- Footer -->
+					<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					</div>
+				</div>	
+				</div>
+				</div>
+				
+				<!-- 이용약관 동의(필수) 약관보기 -->
+				<div class="modal fade" id="terms_modal2">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- body -->
+					<div class="modal-body"></div>
+					<!-- Footer -->
+					<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					</div>
+				</div>	
+				</div>
+				</div>
+				
+				<!-- 이용약관 동의(필수) 약관보기 -->
+				<div class="modal fade" id="terms_modal3">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- body -->
+					<div class="modal-body"></div>
+					<!-- Footer -->
+					<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					</div>
+				</div>	
+				</div>
+				</div>
+				
 			<div class="field_pw">
 				<b>패스워드</b>
 				<span>
-					<input type="password" placeholder="비밀번호를 입력해주세요" name="memberPw" id="memberPw" >
+					<input type="password" placeholder="비밀번호를 입력해주세요" name="memberPw" id="memberPw" oninput="validatePw()">
 				</span>
 			</div>
 			<div class="field_pw2">
@@ -104,7 +175,7 @@
 			<div class="field_email">
 				<b>이메일</b>
 				<span>	
-					<input type="email" placeholder="abc@xyz.com" name="memberEmail" id="memberEmail">
+					<input type="email" placeholder="pet@it.com" name="memberEmail" id="memberEmail">
 				</span>
 			</div>
 			<div class="field_phone">
@@ -126,54 +197,113 @@
     <div class="checkbox-item">
         <label for="TermsAgreeAll">
             <input id="TermsAgreeAll" type="checkbox" class="checkbox-input" value="Y" name="memberTersm">
-            <span>전체 동의합니다.</span>
+            <span>전체 동의합니다.</span>        
         </label>
-        <span class="description" style="font-size:12px">(선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.)</span>
+        <p class="description" style="font-size:12px">(선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.)</p>
     </div>
 	<div>
-		<input type="checkbox" value="Y">
+		<input id="terms1" type="checkbox" value="Y">
 		<span>이용약관 동의(필수)</span>
-		<a>약관보기</a>
+		<a href="#" id=te1>
+			약관보기 >
+		</a>
 	</div>
     <div>
-		<input type="checkbox" value="Y">
+		<input type="checkbox" id="terms2" value="Y">
 		<span>개인정보 수집,이용 동의(필수)</span>
-		<a>약관보기</a>
+		<a href="#" id=te2>
+			약관보기 >
+		</a>
 	</div>
 	<div>
 		<input name="memberAccept" type="checkbox" value="Y">
 		<span>개인정보 수집,이용 동의(선택)</span>
-		<a>약관보기</a>
+		<a href="#" id=te3>
+			약관보기 >
+		</a>
 	</div>
     </div>
 	<input class="submit" type="submit" value="가입하기">
     <script>
+    //약관동의 전체동의 스크립트
     $(document).ready(function() {
         $('#TermsAgreeAll').change(function() {
             var isChecked = $(this).prop('checked');
             $('.checkbox-group input[type="checkbox"]').prop('checked', isChecked);
         });
     });
-    var id_ck = 0;
-    $("#id_du").click(e=>{
-    	
-    	var memberId=$("userid").val();
-    	
-    	$.ajax({
-    		url:"<%=request.getContextPath()%>/ajax/enrollmember.do",
-    		type:"post",
-    		success:data=>{
-    			function(data){
-    				if(data.cnt)
-    			}
-    		},
-    		error:(r,e)=>{
-    			console.log(r);
-    			console.log(r.status);
-    			console.log(e);
-    		}
-    	})
-    });
+   /*  var id_ck = 0;
+	var memberId=$("memberId").val(); */
+	
+	
+	//필수약관 동의체크 스크립트
+	$(document).ready(function(){
+          $(".submit").click(function(){    
+              if($("#terms1").is(":checked") == false){
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return;
+              }else if($("#terms2").is(":checked") == false){
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다..");
+                  return;
+              }else{
+                  $("#enroll_form").submit();
+              }
+          });    
+      });
+		
+	
+	/* memberId중복확인 모달창 스크립트 */
+	$(document).ready(function() {
+		$("#id_du").click(function(){
+			const memberId = $('#memberId').val();
+			console.log(memberId);
+			$.ajax({
+				type:"POST",
+				url: "<%=request.getContextPath()%>/memberCheck.do",
+				data:{memberId:memberId},
+				success:function(result){
+					console.log(result);
+					if(result=='0'){  // id가 checkMessage인 것에 아래 텍스트 출력
+						$('.modal-body').html('중복된 아이디입니다');
+					} else if(result=='-1'){
+						$('.modal-body').html('아이디가 입력되지않았습니다');
+					}else if(result=='-2'){
+						$('.modal-body').html('아이디는 6~10글자이내로 입력해주세요');
+					} else if(result=='1'){
+						$('.modal-body').html('사용가능한 아이디입니다');
+					}
+				$("#idcheck_modal").modal("show");
+				}
+			})
+			})
+		});
+	
+	//약관동의 모달창 스크립트
+	 $(document).ready(function() {
+       $("#te1").click(function() {
+    	   //이용약관 동의(필수)
+           // 선언된 텍스트를 가져와서 모달 창의 body에 넣음
+           $('.modal-body').html('이용약관 동의(필수)');
+           // 모달 창을 띄움
+           $("#terms_modal").modal("show");
+       });
+       
+       $("#te2").click(function() {
+   			// 개인정보 수집,이용 동의(필수)
+           // 선언된 텍스트를 가져와서 모달 창의 body에 넣음
+           $('.modal-body').html('개인정보 수집,이용 동의(필수)');
+           // 모달 창을 띄움
+           $("#terms_modal2").modal("show");
+       });
+       
+       $("#te3").click(function() {
+		   // 개인정보 수집,이용 동의(선택)
+           // 선언된 텍스트를 가져와서 모달 창의 body에 넣음
+           $('.modal-body').html('개인정보 수집,이용 동의(선택)');
+           // 모달 창을 띄움
+           $("#terms_modal3").modal("show");
+       });
+   });
     </script>
 </form>
 </div>
@@ -182,15 +312,49 @@
 		$.post('<%=request.getContextPath()%>/member/enrollMemberEnd.do')		
 	});
 	
-    const fn_membervalidate=()=>{
+	/* function validateInput(){
+		const inputElement = $('#memberId');
+		const 
+		
+	} */
+	
+	/* var allowedRegex = /^[0-9a-zA-Z!@#$%^&*()-_+=<>?/,.:;{}[\] ]*$/; */
+	
+	//memberId 정규식
+	function validateId() {
+	    var inputElement = document.getElementById("memberId");
+
+	    // 정규표현식: 숫자, 영어소문자 허용
+	    var allowedRegex = /^[0-9a-z ]*$/;
+
+	    if (!allowedRegex.test(inputElement.value)) {
+	        // 입력이 허용된 문자가 아닌 경우 입력을 막음
+	        inputElement.value = inputElement.value.replace(/[^0-9a-z ]/g, '');
+	    }
+	}
+	
+	//memberPw 정규식
+	function validatePw() {
+	    var inputElement = document.getElementById("memberPw");
+
+	    // 정규표현식: 숫자, 영문, 특수문자 허용
+//	    var allowedRegex = /^[0-9a-zA-Z!@#$%^&*()-_+=<>?/,.:;{}[\] ]*$/;
+	    var allowedRegex = /^[0-9a-z ]*$/;
+	    if (!allowedRegex.test(inputElement.value)) {
+	        // 입력이 허용된 문자가 아닌 경우 입력을 막음
+//	        inputElement.value = inputElement.value.replace(/^[0-9a-zA-Z!@#$%^&*()-_+=<>?/,.:;{}[\]/g, '');
+	    	inputElement.value = inputElement.value.replace(/[^0-9a-z ]/g, '');
+	    }
+	}
+	
+	
+    /* const fn_membervalidate=()=>{
     	const memberId=$("#memberId").val().trim();
     	if(memberId.length<6 || memberId.length>10){
     		alert("아이디는 영어,숫자포함 6~10글자 이내로 입력하세요");
  	 	  	return false;
-    	}
-    	
-    	
-    }
+    	} */
+    /* } */
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file ="/views/header.jsp" %>
+<%@ include file="/views/header.jsp"%>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
@@ -65,20 +65,26 @@
    		border-bottom: 1px solid lightgray;
    }
    
-   .field_name{
-   		margin-bottom: 20px;
+   .field_name #memberName{
+   		border-width: 1px 1px 0px 1px;
    }
    
+   .field_email #memberEmail{
+   		border-width: 1px 1px 1px 1px;
+   }
    
-   .field_info input{
+   .field_info {
    		width:460px;
-   		height:60px;
+   		height:200px;
+   		border:1px solid;
+   		display: inline-block;
+   	 	align-items: center; /* 가로 중앙 정렬 */
+    	justify-content: center; /* 세로 중앙 정렬 */
    }
-   
-   .id_btn{
-   		width:460px;
-   		height:60px;
-   }
+  	.field_idnav {
+    
+    
+	}
    
    .google_recaptcha {
    		width:460px;
@@ -102,23 +108,10 @@
 	</ul>
 	<form action="<%=request.getContextPath()%>/mail.do" method="get" onsubmit="">								
 			<div class="field_info">
-				<div class="field_name">	
-					<span>
-						<input type="text" placeholder="아이디를 입력해주세요" name="memberName" id="memberName">
-					</span>
-				</div>
-				<div>
-					<button type="button" class="id_btn btn btn-outline-primary"><span>확인</span></button>
-				</div>
+					<div class="field_idnav"><span>회원님의 아이디는[__________]입니다.</span></div>
 			</div>
-			<br>
-			<div class="field">
-				<p style="font-size: 14px; margin:0;">정보보호를위해 '로봇이 아닙니다.'를 눌러 진행해주세요</p>
-			</div>  
-			<div class="google_recaptcha">
-				<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
-				<script src='https://www.google.com/recaptcha/api.js'></script>
-			</div>
+			<br><br>
+  		  <button type="button" id="clsoe" class="btn btn-outline-primary" style="width:460px; height:40px;"><span>로그인</span></button>
 		</form>
 </div>
 <script>
