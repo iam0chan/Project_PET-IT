@@ -35,7 +35,7 @@ public class NoticeSearchMenu extends HttpServlet {
 		//넘겨준 값 갖고오기 name값 2개 가져오기 
 		String key = request.getParameter("searchKey");
 		String keyword = request.getParameter("searchKeyword");
-		
+		System.out.println(key +", "+ keyword);
 		//서비스->dao->쿼리문까지 가져가서 select문에 넣어서 선택해서 가져오기 
 		int cPage,numPerpage=10; 
 		try {
@@ -43,15 +43,9 @@ public class NoticeSearchMenu extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		List<Notice> notices;
-		int totalData;
-		if(keyword.equals("searchKeyword")) {
-			notices=new NoticeService().selectNotice(cPage, numPerpage);
-			totalData=new NoticeService().selectNoticeCount();  
-		}else {
-			notices=new NoticeService().selectNoticeCategory(cPage, numPerpage,keyword);
-			totalData=new NoticeService().selectNoticeCountByCategory(keyword);  
-		}
+		
+		int totalData = new NoticeService().selectNoticeCount();
+		List<Notice> serachResult = new NoticeService().searchNotice(cPage, numPerpage, key, keyword);
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
@@ -88,7 +82,7 @@ public class NoticeSearchMenu extends HttpServlet {
 			pageBar.append("</a>"); 
 		}
 		
-		request.setAttribute("notices", notices); 
+		request.setAttribute("notices", serachResult); 
 		request.setAttribute("pageBar", pageBar); 
 		request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response); 
 		

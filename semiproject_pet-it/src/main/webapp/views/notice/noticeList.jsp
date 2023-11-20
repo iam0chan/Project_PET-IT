@@ -148,13 +148,13 @@ tr.item:hover {
 	</div>
 	
 	<div class="boardsearchAll">
-		<form action='<%=request.getContextPath()%>/noticeSearchMenu.do' method="post" >
+		<form action='<%=request.getContextPath()%>/noticeSearchMenu.do' method="get" >
 			<select id="searchKey" name="searchKey">
 				<option value="notice_title">제목</option>
 				<option value="notice_content">내용</option>
 			</select>
 			
-		<input type="search" id="searchMenu" neme="searchKeyword" placeholder="입력하세요">
+		<input type="search" id="searchMenu" name="searchKeyword" placeholder="입력하세요">
 			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
 		</form> 
 	</div> 
