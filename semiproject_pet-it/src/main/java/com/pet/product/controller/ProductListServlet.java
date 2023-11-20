@@ -21,13 +21,7 @@ public class ProductListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		/* String names = request.getParameter("imageId"); */
-		/*
-		 * for(String n : names) { System.out.println(n); }
-		 */
-		/*
-		 * System.out.println(names); response.getWriter().append('o');
-		 */
+		String type = request.getParameter("type");
 		int cPage;
 		
 		try {
@@ -37,16 +31,16 @@ public class ProductListServlet extends HttpServlet {
 		}
 		int pageBarSize = 5;
 		int numPerpage = 9;
-		int totalData = new ProductService().getProductCount();
+		int totalData = new ProductService().getProductCountByType(type); 
 		int totalPage = (int)Math.ceil((double)totalData/numPerpage);
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd = pageNo+pageBarSize-1;
-		
+
 		System.out.println("전체 데이터 수 : "+ totalData);
 		
 		
 		List<Product> products = new ArrayList<>();
-		products = new ProductService().selectProductListAll(cPage,numPerpage);
+		products = new ProductService().selectProductListAll(cPage,numPerpage,type);
 		List<ProductImageFile> files = new ProductService().selectMainImageFileAll();
 		int check = 0;
 		for(Product p : products) {
@@ -62,14 +56,14 @@ public class ProductListServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar.append("<li class='page-item disabled'><a class='page-link' href='#'>이전</a></li>");
 		}else {
-			pageBar.append("<li calss = 'page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>이전</a></li>");
+			pageBar.append("<li calss = 'page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&type="+type+"'>이전</a></li>");
 		}
 		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar.append("<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>");
 			}else {
-				pageBar.append("<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"'>"+pageNo+"</a></li>");
+				pageBar.append("<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"&type="+type+"'>"+pageNo+"</a></li>");
 			}
 			pageNo++;
 		}
@@ -77,7 +71,7 @@ public class ProductListServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar.append("<li class='page-item disabled'><a class='page-link' href='#'>다음</a></li>");
 		}else {
-			pageBar.append("<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"'>다음</a></li>");
+			pageBar.append("<li class='page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+pageNo+"&type="+type+"'>다음</a></li>");
 		}
 		
 		pageBar.append("</ul>");
