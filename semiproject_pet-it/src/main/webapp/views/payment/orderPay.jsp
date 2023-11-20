@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.pet.payment.model.dto.OrderDetail" %>
+
+<%@ page import="com.pet.payment.model.dto.OrderDetail, 
+				com.pet.cart.model.dto.Cart, 
+				java.util.List, 
+				java.util.ArrayList" 
+%>
+
 <% OrderDetail od = (OrderDetail)request.getAttribute("orderDetail");%>
+<% List<OrderDetail> cl = (List<OrderDetail>)request.getAttribute("cartList"); %>
+
 <!-- header -->
 <%@ include file="/views/header.jsp"%>
 <!-- bootstrap -->
@@ -135,6 +143,7 @@
 			    </h2>
 			    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
 			      <div class="accordion-body" id="productAll">
+			      		
 				      <div class="productDiv" id="productDiv">
 					       <div style="width:15%; text-align:center">
 					       		<img src="<%=request.getContextPath()%>/upload/<%=od.getProductImg()%>" width="120px" height="120px">
@@ -156,6 +165,7 @@
 					       		<a href="#" id="deleteProduct"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
+				       
 			      </div>
 			    </div>
 			  </div>
