@@ -159,9 +159,55 @@ public class NoticeDao {
 	    	
 	    }
 		
-		
-		
-		
+	    public List<Notice> noticeSearchTitle(Connection conn, int cPage, int numPerpage, String keyword){
+	    	PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        List<Notice> result = new ArrayList<>();
+
+	        try {
+	            pstmt = conn.prepareCall(sql.getProperty("noticeSearchTitle"));
+	            pstmt.setString(1, keyword);
+	            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+	            pstmt.setInt(3, cPage * numPerpage);
+	            rs = pstmt.executeQuery();
+	            while (rs.next()) {
+	                result.add(getNotice(rs));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return result;
+	    }
+	    
+	    public List<Notice> noticeSearchContent(Connection conn, int cPage, int numPerpage, String keyword){
+	    	PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        List<Notice> result = new ArrayList<>();
+
+	        try {
+	            pstmt = conn.prepareCall(sql.getProperty("noticeSearchContent"));
+	            pstmt.setString(1, keyword);
+	            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+	            pstmt.setInt(3, cPage * numPerpage);
+	            rs = pstmt.executeQuery();
+	            while (rs.next()) {
+	                result.add(getNotice(rs));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return result;
+	    }
+	   
+	    
+	    
+	
 		private Notice getNotice (ResultSet rs) throws SQLException{
 			return Notice.builder()
 					.noticeNo(rs.getString("NOTICE_NO"))

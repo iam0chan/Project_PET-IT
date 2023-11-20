@@ -54,7 +54,7 @@ public class FaqDao {
     }
     
     //조회수
-    public Faq selectFaqByNo(Connection conn, int No) {
+    public Faq selectFaqByNo(Connection conn, String faqNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Faq f=null;
@@ -74,12 +74,12 @@ public class FaqDao {
 	}
     
     //조회수 
-    public int updateFaqReadCount(Connection conn, int no) {
+    public int updateFaqReadCount(Connection conn, String FaqNo) {
     	PreparedStatement pstmt = null;
     	int result=0; 
     	try {
     		pstmt = conn.prepareStatement(sql.getProperty("updateFaqReadCount"));
-    		pstmt.setInt(1,no);
+    		pstmt.setString(1,FaqNo);
     		result=pstmt.executeUpdate();
     	}catch (SQLException e) {
 			e.printStackTrace();
@@ -164,7 +164,6 @@ public class FaqDao {
                 result.add(getFaq(rs));
             }
         } catch (SQLException e) {
-            // 적절한 예외 처리를 추가할 수 있습니다.
             e.printStackTrace();
         } finally {
             close(rs);
@@ -178,11 +177,10 @@ public class FaqDao {
         ResultSet rs = null;
         List<Faq> result = new ArrayList<>();
         String query = sql.getProperty("searchFaqByMenu");
-        query = query.replace("#COL", subject); //title -> subject 변경해야함
+        query = query.replace("#COL", subject); 
 
         try {
             pstmt = conn.prepareStatement(query);
-           // pstmt.setString(1, title); // 필요없고
             pstmt.setString(1, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
             pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
             pstmt.setInt(3, cPage * numPerPage);

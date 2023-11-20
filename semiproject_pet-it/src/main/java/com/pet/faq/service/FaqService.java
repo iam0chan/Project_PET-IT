@@ -44,23 +44,23 @@ public class FaqService {
 		}
 		
 		//조회수증가 메소드 
-		public Faq selectFaqByNo (int no) {
+		public Faq selectFaqByNo (String faqNo, boolean readResult) {
 			Connection conn = getConnection();
-			Faq f = dao.selectFaqByNo(conn, no);
-				if(f!=null) {
-					int result = dao.updateFaqReadCount(conn,no);
-					if(result>0) commit(conn);
-					else rollback(conn);
+			Faq f = dao.selectFaqByNo(conn, faqNo);
+				if(f!=null && !readResult) {
+					int result = dao.updateFaqReadCount(conn,faqNo);
+					if (result > 0) {
+						commit(conn);
+						f.setFaqHits(f.getFaqHits() + 1);
+					} else
+						rollback(conn);
 				}
 				close(conn);
 				return f;
+
 			}
 		
-		
-		
-		
-		
-		
+	
 		public int insertFaq(Faq f) {
 			Connection conn=getConnection();
 			int result=dao.insertFaq(conn, f);
