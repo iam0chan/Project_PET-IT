@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import com.pet.payment.model.dto.Order;
@@ -85,6 +87,7 @@ private Properties sql = new Properties();
          pstmt.setString(2, od.getProductNo());
          pstmt.setInt(3, od.getDetailPrice());
          pstmt.setInt(4, od.getDetailCount());
+         pstmt.setString(5, od.getProductOption());
          
          result = pstmt.executeUpdate();
          
@@ -95,4 +98,28 @@ private Properties sql = new Properties();
       }
       return result;
    }
+	
+	public boolean insertOrderList(Connection conn, List<OrderDetail>orderList) {
+		int[] result = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("insertOrderList"));
+			for (OrderDetail od : orderList) {
+			    pstmt.setLong(1, od.getOrderNo());
+			    pstmt.setString(2, od.getProductNo());
+			    pstmt.setInt(3, od.getDetailPrice());
+			    pstmt.setInt(4, od.getDetailCount());
+			    pstmt.setString(5, od.getProductOption());
+				pstmt.addBatch();
+			}
+		    result = pstmt.executeBatch();
+		     
+		}catch(SQLException e) {
+		    e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return Arrays.stream(result).allMatch(count -> count > 0);
+	}
 }

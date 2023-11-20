@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<%@ page import="com.pet.payment.model.dto.Payment, com.pet.payment.model.dto.Order, com.pet.payment.model.dto.OrderDetail" %>
+<%@ page import="com.pet.payment.model.dto.Payment, 
+				com.pet.payment.model.dto.Order, 
+				com.pet.payment.model.dto.OrderDetail,
+				java.util.List" 
+%>
 <% 
 	Payment p = (Payment) request.getAttribute("payment");
 	OrderDetail od = (OrderDetail) request.getAttribute("orderDetail");
+	List<OrderDetail> ol = (List<OrderDetail>) request.getAttribute("orderList");
 %>
 <style>
 	section {
@@ -59,31 +64,35 @@
 		</div>
 		<p></p>
 		
+<%if(!ol.isEmpty()){ %>
+		<%for(OrderDetail odl : ol){ %>
 		<div style="display:flex;">
 			<div style="width:20%; text-align:center;">
 				주문 상품
 			</div>
 			<div style="width:60%; display:flex; line-height:1.0; margin-left:20px;">
 				<div>
-					<img src="<%=od.getProductImg() %>" width="100px" height="100px">
+					<img src="<%=odl.getProductImg() %>" width="100px" height="100px">
 				</div>
 				<div style="width:75%; margin-left:20px">
-					<p><b><%=od.getProductName() %></b></p>
-					<p><%=od.getProductOption() %></p>
-					<span><%=od.getDetailCount() %></span><span>개</span>
+					<p><b><%=odl.getProductName() %></b></p>
+					<p><%=odl.getProductOption() %></p>
+					<span><%=odl.getDetailCount() %></span><span>개</span>
 					<br><br>
-					<span><%=od.getDetailPrice() %></span><span>원</span>
+					<span><%=odl.getDetailPrice() %></span><span>원</span>
 				</div>
 			</div>
 				<div style="width:20%; text-align:center; margin-right:40px;">
 					<span>배송비</span>
 					<span>2500원</span>
 				</div>
-			<!-- <div style="width:30%; text-align:center;">
-				<button class="btn btn-outline-success">상품 상세페이지</button>
-			</div> -->
 		</div>
+		<br>
 		
+	<%} %>
+				
+<%} %>
+
 		<div  style="display:flex; font-size:1.2rem; font-weight:bolder">
 			<div style="width:20%; text-align:center;">
 				총 결제금액
@@ -142,7 +151,7 @@ $('#apply-num').append($('<span>').text(data.apply_num));
 	});
 	
 	$(".mypageBtn").click(function(){
-		$(window).prop("location","<%=request.getContextPath()%>/views/mypage/mypage.jsp")
+		$(window).prop("location","<%=request.getContextPath()%>/views/myPage/mypageView.jsp")
 	});
 </script>
 
