@@ -20,7 +20,7 @@ public class NoticeDao {
 		private Properties sql = new Properties();
 		
 		{
-	        String path = FaqDao.class.getResource("/sql/notice_sql.properties").getPath();
+	        String path = FaqDao.class.getResource("/sql/notice/notice_sql.properties").getPath();
 	        System.out.println(path);
 	        try (FileReader fr = new FileReader(path)) {
 	            sql.load(fr);
