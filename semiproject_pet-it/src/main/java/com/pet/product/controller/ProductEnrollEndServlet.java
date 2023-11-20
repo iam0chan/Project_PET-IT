@@ -47,6 +47,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			String category = mr.getParameter("1st_category");
 			String type = mr.getParameter("2nd_category");
 			String productContent = mr.getParameter("content");
+			String discount = mr.getParameter("discount");
 			String[] optionNames = mr.getParameterValues("optionName");
 			String[] optionPrice = mr.getParameterValues("optionPrice");
 			
@@ -82,7 +83,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 					.cateogryNo(category)
 					.typeNo(type)
 					.productOptionStatus(optionStatus)
-					.productDiscount("0.1")
+					.productDiscount(discount)
 					.prouctPoint(500)
 					.productContent(productContent)
 					.build();

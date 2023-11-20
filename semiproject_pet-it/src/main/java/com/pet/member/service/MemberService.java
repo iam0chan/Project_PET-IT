@@ -19,6 +19,7 @@ private MemberDao dao = new MemberDao();
       return m;
    }
 
+
    public int insertMember(Member m) {
       Connection conn = getConnection();
       int result=dao.insertMember(conn, m);

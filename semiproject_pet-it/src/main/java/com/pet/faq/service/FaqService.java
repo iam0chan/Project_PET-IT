@@ -15,7 +15,7 @@ import com.pet.notice.model.dto.Notice;
 
 
 public class FaqService {
-	
+
 		private FaqDao dao = new FaqDao(); 
 		
 		public List<Faq> selectFaq(int cPage,int numPerpage){
@@ -95,3 +95,4 @@ public class FaqService {
 		
 		
 }
+

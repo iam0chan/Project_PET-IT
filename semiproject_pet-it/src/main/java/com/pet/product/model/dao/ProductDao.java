@@ -249,6 +249,32 @@ public class ProductDao {
       return options;
    }
    
+   public int deleteProductByProductNo(Connection conn, String productNo) {
+      PreparedStatement pstmt = null;
+      int result = 0;
+      try {
+         pstmt = conn.prepareStatement(sql.getProperty("deleteProductStatus"));
+         pstmt.setString(1, productNo);
+         result = pstmt.executeUpdate();
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
+      
+      return result;
+   }
+   
+   /*
+    * public ProductOption getOptionName(Connection conn, String productNo, String
+    * optionPrice) { PreparedStatement pstmt = null; ResultSet rs = null;
+    * 
+    * try { pstmt = conn.prepareStatement(sql.getProperty("getOptionName"));
+    * 
+    * }catch(SQLException e) { e.printStackTrace(); }
+    * 
+    * }
+    */
    
    /* Product-Table
     * PRODUCT_NO, CATEGORY_NO, TYPE_NO, PRODUCT_NAME, 
@@ -298,5 +324,7 @@ public class ProductDao {
       
    }
    
+
+
 
 }

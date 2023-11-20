@@ -39,8 +39,8 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
                 </div> -->
 		</div>
 		<div class="item-info">
-			<div class="info item-tit2le">
-				<input id="productNo" type="hidden" value="<%=p.getProductNo()%>">
+			<div class="info item-title">
+				<input id="pNo" type="hidden" value="<%=p.getProductNo()%>">
 				<h1><%=p.getProductName()%></h1>
 				<p><%=p.getProductInfo()%></p>
 			</div>
@@ -49,7 +49,7 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 				if (p.getProductDiscount() != null) {
 				%>
 				<input class="price" id=<%=discountPrice%> style="display: none;">
-				<h3><%=p.getProductPrice()%>원 (할인가<%=discountPrice%>원)
+				<h3><%=p.getProductPrice()%>원 <%if(discountPrice!=p.getProductPrice()){ %>(할인가<%=discountPrice%>원)<%} %>
 				</h3>
 				<%
 				} else {
@@ -63,14 +63,17 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 				%>
 			</div>
 			<div class="info item-simple-description">
-				<sapn> <%=p.getProductInfo()%> </sapn>
+				<%for(ProductOption op : p.getProductOption()){ %>
+				<span> <%=op.getProductOptionName()%> </span>
+				<%} %>
 			</div>
 
 			<div class="info item-option">
 				<div class="option" style="width: 300px;">
+				 <input type="hidden" id="option-name" name="optionName" value="" />
 					<select name="priceOption" id="option-select" style="width: 280px;"
 						 style="text-align:center;">
-						<option value="<%=p.getProductPrice()%>"><%=p.getProductPrice()%>원
+						<option value="<%=p.getProductPrice()%>" id="기본">기본 (<%=p.getProductPrice()%>)원
 						</option>
 						<%
 						if (p.getProductOptionStatus().equals("Y")) {
@@ -79,7 +82,7 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 						for (int i = 0; i < p.getProductOption().size(); i++) {
 						%>
 						<option
-							value="<%=p.getProductOption().get(i).getProductOptionPrice()%>">
+							value="<%=p.getProductOption().get(i).getProductOptionPrice()%>" id="<%=p.getProductOption().get(i).getProductOptionName()%>">
 							<%=p.getProductOption().get(i).getProductOptionName()%> (<%=p.getProductOption().get(i).getProductOptionPrice()%>원)
 							<%
 							if (p.getProductPrice() > p.getProductOption().get(i).getProductOptionPrice()) {
@@ -104,14 +107,14 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 					</select>
 				</div>
 				<div class="amountbtn">
-					<button id="btn-l" style="width: 20px;">-</button>
+					<button id="btn-l" class="btn btn-outline-secondary" style="width: 20px;">-</button>
 					<input id="product-order-amount" type="text" value="1" min="0"
 						style="text-align: right; width: 30px;" max="99">
-					<button id="btn-r" style="width: 20px;">+</button>
+					<button id="btn-r" class="btn btn-outline-secondary" style="width: 20px;">+</button>
 				</div>
 			</div>
 			<div class="info total-price">
-				총 금액 <span><strong>
+				총 상품금액: <span><strong>
 					<%
 					if (p.getProductDiscount() == null) {
 					%><%=p.getProductPrice()%><%
@@ -199,7 +202,7 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 					<ul>
 						<li>배송 방법 : 택배</li>
 						<li>배송 지역 : 전국지역</li>
-						<!--                         <li>배송 비용 : 3,000원</li> -->
+						<li>배송 비용 : 3,000원</li>
 						<li>배송 기간 : 3일 ~ 7일</li>
 						<li>배송 안내 : 고객님께서 주문하신 상품은 입금 확인후 배송해 드립니다.
 							<div>
@@ -323,31 +326,36 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 		</div>
 	</div>
 </div>
+<form action="<%=request.getContextPath()%>/paymentStart.do" method="post" id="orderInfo">
+	<input type="hidden" id="productNo" name="productNo" value=""/>
+	<input type="hidden" id="orderPrice" name="orderPrice" value=""/>
+	<input type="hidden" id="orderAmount" name="orderAmount" value=""/>
+	<input type="hidden" id="optionPrice" name="optionPrice" value=""/>
+	<input type="hidden" id="optionName" name="optionName" value=""/>
+</form>
 <script src="<%=request.getContextPath()%>/js/product/productView.js"></script>
 <script>
 function purchase(){
-	  const productNo = $.trim($("#productNo").val());
-	  const purchasePrice = $.trim($(".total-price>span>strong").text());
-	  const purchaseAmount = $.trim($("#product-order-amount").val()); 
-	  console.log(productNo+" "+purchasePrice+" "+purchaseAmount);
-	  /*const purchaseProductOptionName = $("#option-select>option").text();*/
-	  alert("구매하기창으로 데이터 전달");
-	  $.ajax({
-	        url: '<%= request.getContextPath()%>/productInfoSubmit.do',
-	        type:"get",
-	        data:{
-			  pNo : productNo,
-			  pPrice : purchasePrice,
-			  pAmount : purchaseAmount, 
-		  	  },
-	        success:data=>{
-	           console.log(data);
-	        },
-	        error:(r,e)=>{
-	           console.log(r);
-	           console.log(e);
-	        }
-	   });
+	  const productNo = $.trim($("#pNo").val()); // 상품번호
+	  const orderPrice = $.trim($(".total-price>span>strong").text()); //주문가격
+	  const orderAmount = $.trim($("#product-order-amount").val()); //주문수량
+	  const optionPrice = $.trim($("#option-select").val()); //옵션가격
+ 	  const optionName = $.trim($("#option-select option:selected").attr("id")); //옵션명
+	  console.log(optionName); //옵션명 체크 console
+	  
+	  //paymentStart.do로 submit할 데이터가공
+	  $("#productNo").val(productNo);
+	  $("#orderPrice").val(orderPrice);
+	  $("#orderAmount").val(orderAmount);
+	  $("#optionPrice").val(optionPrice);
+	  $("#optionName").val(optionName);
+ 	  $("#orderInfo").submit();
+	  
+
  };
+ $("#update-itemcontent-btn").on("click",function(){
+		const productNo = $("#pNo").val();
+		location.href="<%=request.getContextPath()%>/product/productUpdate.do?productNo="+productNo;
+	})
 </script>
 <%@ include file="/views/footer.jsp"%>

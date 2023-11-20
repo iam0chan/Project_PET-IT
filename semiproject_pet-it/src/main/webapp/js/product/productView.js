@@ -71,7 +71,7 @@
        	
        	
        	/*===========================================================================*/
-       	const editor = new toastui.Editor({
+       /*	const editor = new toastui.Editor({
             el: document.querySelector('#editor-container'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
@@ -92,7 +92,7 @@
        		           		enctype: 'multipart/form-data',
        		           		url: '<%=request.getContextPath()%>/product/productFileUpload.do',
        		           		data: formData,
-       		           		/* dataType: 'json', */
+       		           		 dataType: 'json', 
        		           		processData: false,
        		           		contentType: false,
        		           		cache: false,
@@ -114,7 +114,7 @@
        		           	});
        		    	}
         		}
-        });
+        });*/
         
       /*  $("#enroll-itemcontent-btn").on("click",function(){
         	document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());

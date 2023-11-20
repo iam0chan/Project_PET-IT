@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Product {
+
    private String productNo;
    private String cateogryNo; // 대분류
    private String typeNo; //상품타입
