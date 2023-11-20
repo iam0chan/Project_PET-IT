@@ -1,7 +1,9 @@
 package com.pet.question.service;
 
-import static com.pet.common.JDBCTemplate.*;
-
+import static com.pet.common.JDBCTemplate.close;
+import static com.pet.common.JDBCTemplate.getConnection;
+import static com.pet.common.JDBCTemplate.commit;
+import static com.pet.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
@@ -20,9 +22,29 @@ public class QuestionService {
 		return result;
 	}
 	
+	public int selectQuestionCount() {
+		Connection conn = getConnection();
+		int result=dao.selectQuestionCount(conn);
+		close(conn);
+		return result;
+		
+	}
 	
+	public Question selectQuestionByNo(String questionNo) {
+		Connection conn = getConnection();
+		Question q = dao.selectQuestionByNo(conn, questionNo);
+		close(conn);
+		return q;
+	}
 	
-	
+	public int insertQuestion(Question q) {
+		Connection conn = getConnection();
+		int result = dao.insertQuestion(conn, q);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 	
 	
