@@ -352,10 +352,16 @@ function purchase(){
  	  $("#orderInfo").submit();
 	  
 
- };
- $("#update-itemcontent-btn").on("click",function(){
+	};
+	$("#update-itemcontent-btn").on("click",function(){
 		const productNo = $("#pNo").val();
 		location.href="<%=request.getContextPath()%>/product/productUpdate.do?productNo="+productNo;
 	})
+	
+	$("#delete-itemcontent-btn").on("click",function(){
+		alert("삭제이벤트발생");
+		const productNo = $("#pNo").val();
+		location.href="<%=request.getContextPath()%>/product/productDelete.do?productNo="+productNo;	   
+	});
 </script>
 <%@ include file="/views/footer.jsp"%>

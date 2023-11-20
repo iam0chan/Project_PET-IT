@@ -30,7 +30,6 @@
             <div class="button">
                 <div class="btn-container">
                     <button type="button" class="btn btn-outline-success" style="width:auto;"><a>신상품</a></button>
-                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 베스트</a></button>
                     <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 사료</a></button>
                     <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 간식</a></button>
                     <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 용품</a></button>
@@ -48,6 +47,7 @@
             <div class="container">
             <%if(products!=null && !products.isEmpty()){ %>
                <%for(Product p : products){ %>
+               <%if(p.getProductEnrollStatus().equals("Y")){ %>
                    <div class="card" id=<%=p.getProductNo()%>>
                        <div class="item-img">
                        <%if(files!=null && !files.isEmpty()){ %>
@@ -66,6 +66,7 @@
                        </div>
                    </div>
                    </a>
+                   <%} %>
              <%} %>
           <%}else{  %>
           <div style="width:100%; text-align:center;">
