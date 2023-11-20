@@ -49,6 +49,8 @@
         #submitBtn {
             text-align: center;
         }
+        
+       
     </style>
 
 </head>
@@ -91,11 +93,10 @@
 	                <div id="submitBtn" class="row">
 	                	<div class="col-5"></div>
 	                	<div class="col-1">
-	                		<button type="button" class="Btn" onclick="test();" >작성완료</button>
+	                		<button type="button" class="btn btn-outline-success" onclick="test();">write</button>
 	                	</div>
-	                    <!-- <input class="Btn" type="submit" value="작성완료" /> -->
 	                    <div class="col-1">
-	                    	<input class="Btn" type="reset"  value="작성취소" />
+	                    	<input class="btn btn-outline-success" type="reset"  value="cancell" />
 	                    </div>
 	                    <div class="col-5"></div>
 		            </div>
@@ -129,3 +130,4 @@
         </script>
     </html>
     <%@ include file="/views/footer.jsp"%>
+

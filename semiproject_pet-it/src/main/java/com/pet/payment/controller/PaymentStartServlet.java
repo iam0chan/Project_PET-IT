@@ -35,7 +35,7 @@ public class PaymentStartServlet extends HttpServlet {
 		
 		if(cartList!=null) {
 			for(String value : cartList) {
-			
+				OrderDetail od = new OrderDetail(value);
 			}
 		}
 		

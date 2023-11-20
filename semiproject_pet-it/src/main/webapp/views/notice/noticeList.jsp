@@ -1,12 +1,18 @@
+<%@page import="javax.print.attribute.HashPrintRequestAttributeSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List,com.pet.notice.model.dto.Notice" %>	
+<%
+	List<Notice> notices=(List<Notice>)request.getAttribute("notices");
+%>
+
 <%@ include file="/views/header.jsp"%>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <title>공지사항 메인화면</title>
 
 
@@ -44,10 +50,14 @@
 	text-align: center;
 }
 
-#search{
+#searchMenu {
 	text-align: center;
 	height : 25px;
-	
+}
+
+#selectSearch{
+	text-align: center;
+	height : 25px;
 }
 
 table#tbl-notice td,table#tbl-notice th{
@@ -64,6 +74,14 @@ tr.item:hover {
   background-color: #04aa6d; 
 }
 
+.pageBar {
+	text-align: center;
+}
+.Pet-it-adminBtn{
+	text-align: center;
+	height: 25px;
+	line-height : 20px;
+}
 
 
 
@@ -71,172 +89,97 @@ tr.item:hover {
 
 </head>
 <body>
-	<!-- 전체화면 div -->
 	<div class="space">
-		<!-- 공지사항 header div -->
 		<div class="titleArea">
 			<h2>공지사항</h2>
 			<p>Pet-it에서 안내드립니다.</p>
 		</div>
 	</div>
-
 	<div id="content-container">
 
 		<div class="boardSort">
 			<p class="boardSort"></p>
-			<span class="categoryBar"> <!-- 카테고리 선택 메뉴바 --> <select
-				id="selectCategory" name="selectCategory">
-					<option value selected="selected">전체</option>
-					<option value="1">공지사항</option>
-					<option value="2">이용안내</option>
+			<span class="categoryBar"> 
+			<select id="selectCategory" name="selectCategory">
+					<option value="전체"<%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("전체")?"selected":"" %>>전체</option>
+					<option value="공지사항" <%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("공지사항")?"selected":"" %>>공지사항</option>
+					<option value="이용안내" <%=request.getParameter("notices")!=null&&request.getParameter("notices").equals("이용안내")?"selected":"" %>>이용안내</option>
 			</select>
 			</span>
-
 		</div>
-
-		<div class="boardTable">
-
-			<table id="tbl-notice" class="table table-sm">
-				<colgroup>
-					<col style="width: 60px";>
-					<col style="width: 120px";>
-					<col style="width: 550px";>
-					<col style="width: 150px";>
-					<col style="width: 60px";>
-
-				</colgroup>
+				<table id="tbl-notice" class="table table-sm">
 				<thead class="listHeard">
-					<tr>
-						<th scope="col">번호</th>
-						<th scope="col">카테고리</th>
-						<th scope="col">제목</th>
-						<th scope="col">작성일</th>
-						<th scope="col">조회수</th>
+					<tr class="noticeTitle">
+					<th scope="col" class="active text-center" style="width: 80px;">번호</th>
+					<th scope="col" class="active text-center" style="width: 120px;">카테고리</th>
+					<th scope="col" class="active text-center" style="width: 480px;">제목</th>
+					<th scope="col" class="active text-center" style="width: 100px;">작성일</th>
+					<th scope="col" class="active text-center" style="width: 80px;">조회수</th>
+				
 					</tr>
 				</thead>
-				<tbody>
-					<tr class="item">
-						<td>20</td>
-						<td>공지사항</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-						<td>2023-11-11</td>
-						<td>56</td>
-
-					</tr>
-
-					<tr class="item">
-						<td>19</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>18</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>17</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>16</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>15</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>14</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>13</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>12</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
-					<tr class="item">
-						<td>11</td>
-						<td>이용안내</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">추석배송안내</a></td>
-
-						<td>2023-11-11</td>
-						<td>74</td>
-
-					</tr>
 				
+				<tbody class="text-center">
+				<%
+				if (notices!= null && !notices.isEmpty()) {
+					for (Notice n : notices) {
+				%>
+				<tr class="item">
+					<td><%=n.getNoticeNo() %></td>
+					<td><%=n.getNoticeCategory() %></td>
+					<td><a href="<%=request.getContextPath()%>/noticeView.do?no=<%=n.getNoticeNo()%>">
+					<%=n.getNoticeTitle() %>
+					</a></td>
+					<td><%=n.getNoticeDate() %></td>
+					<td><%=n.getNoticeHits() %></td>
+				</tr>
+				<%
+				}
+				}
+				%>
 				</tbody>
 
 			</table>
 		</div>
+
+
+	<div class="pageBar">
+		<div><%=request.getAttribute("pageBar") %></div>
 	</div>
-
-	<div class="pageingBar">
-	<h2>페이징바 영역</h2>
-	</div>
-
-
-<div class="boardsearchAll">
-		<fieldset class="boardSearch">
-			<p>
-				<select id="searchKey" name="searchKey">
-					<option value="subject">제목</option>
-					<option value="subject">내용</option>
-				</select> 
-				<input id="search" name="search" 
-					placeholder="입력하세요">
-				<button class="btn btn-primary btn-sm">
-					<span id="searchbtn">SEARCH</span>
-				</button>
-				<%-- <%if(){ %> --%>  <!--관리자로 로그인 했을 때 보이는 버튼 구현하기, 로그인 구현되면 가능  -->
-				<!-- <button>글쓰기</button> -->
-				<%-- <%} %> --%>
-			</p>
-		</fieldset>
+	
+	<div class="boardsearchAll">
+		<form action='<%=request.getContextPath()%>/noticeSearchMenu.do' method="get" >
+			<select id="searchKey" name="searchKey">
+				<option value="notice_title">제목</option>
+				<option value="notice_content">내용</option>
+			</select>
+			
+		<input type="search" id="searchMenu" name="searchKeyword" placeholder="입력하세요">
+			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
+		</form> 
 	</div> 
 	
-
+	<div>
+		<%if(loginMember!=null
+			&&loginMember.getMemberId().equals("jihyes")){ %>
+			 <div class="Pet-it-adminBtn">
+			 	<button onclick="location.assign('<%=request.getContextPath()%>/noticewriter.do')" class="btn btn-outline-success">글쓰기</button>
+			 </div>
+			 
+	</div>
+	<%} %>
+	
+	<!--카테고리별 조회 script-->
+	<script>
+	const selectCategory = document.getElementById("selectCategory");
+	console.log(selectCategory)ㅑ
+	selectCategory.addEventListener("change",function(e){
+	location.replace("<%=request.getContextPath()%>/noticeinquiry.do?notices="+ e.target.value);
+	});
+	
+	
+	
+	</script>
 
 
 </body>

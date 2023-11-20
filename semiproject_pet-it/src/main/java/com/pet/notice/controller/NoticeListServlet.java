@@ -33,25 +33,50 @@ public class NoticeListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//noticeList 메인 서블릿 
 		//DB에 저장된 전체 notice데이터 가져오기 -> 전체 데이터 가져오려면 페이징 처리를 해야함 
-		
-		/*
-		 * int cPage,numPerpage=10; try {
-		 * cPage=Integer.parseInt(request.getParameter("cPage")); }catch
-		 * (NumberFormatException e) { cPage=1; }
-		 * 
-		 * //다수의 객체 저장 List <Notice> notices = new
-		 * NoticeService().selectNotice(cPage,numPerpage); int totalData=new
-		 * NoticeSevice().selectNoticeCount(); //전체데이터 가져오기
-		 */		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		  int cPage,numPerpage=10; 
+		  try {
+		  cPage=Integer.parseInt(request.getParameter("cPage"));
+		  }catch (NumberFormatException e) {
+			  cPage=1; 			  
+		  }
+		 List <Notice> notices = new NoticeService().selectNotice(cPage,numPerpage);
+		 for (Notice notice : notices) {
+			 System.out.println(notice);
+		}
+		 int totalData=new NoticeService().selectNoticeCount();
+		 int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		 int pageBarSize=5;
+			int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+			int pageEnd=pageNo+pageBarSize-1;
+			
+			String pageBar="";
+			if(pageNo==1) {
+				pageBar+="<span>[이전]</span>";
+			}else {
+				pageBar+="<a href='"+request.getRequestURI()
+							+"?cPage="+(pageNo-1)+"'>[이전]</a>";
+			}
+			while(!(pageNo>pageEnd||pageNo>totalPage)) {
+				if(pageNo==cPage) {
+					pageBar+="<span>"+pageNo+"</span>";
+				}else {
+					pageBar+="<a href='"+request.getRequestURI()
+							+"?cPage="+pageNo+"'>"+pageNo+"</a>";
+				}
+				pageNo++;
+			}
+			if(pageNo>totalPage) {
+				pageBar+="<span>[다음]</span>";
+			}else {
+				pageBar+="<a href='"+request.getRequestURI()
+						+"?cPage="+pageNo+"'>[다음]</a>";
+			}
+			
+			request.setAttribute("notices",notices);
+			request.setAttribute("pageBar", pageBar);
+			
+			request.getRequestDispatcher("/views/notice/noticeList.jsp")
+			.forward(request, response);
 		
 	}
 

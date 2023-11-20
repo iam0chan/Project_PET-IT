@@ -32,6 +32,7 @@ public class FaqListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int cPage,numPerpage=10; 
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -77,7 +78,7 @@ public class FaqListServlet extends HttpServlet {
 		
 		request.setAttribute("faqs", faqs); 
 		request.setAttribute("pageBar", pageBar); 
-		request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
+		request.getRequestDispatcher("/views/faq/faqList.jsp").forward(request, response); 
 		
 	}
 

@@ -13,7 +13,7 @@ import com.pet.payment.model.dto.Order;
 import com.pet.payment.model.dto.OrderDetail;
 import com.pet.payment.model.dto.Payment;
 public class PaymentDao {
-	
+   
 private Properties sql = new Properties();
 	
 	{
@@ -79,20 +79,20 @@ private Properties sql = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		try {
-			pstmt = conn.prepareStatement(sql.getProperty("insertOrderDetail"));
-			pstmt.setLong(1, od.getOrderNo());
-			pstmt.setString(2, od.getProductNo());
-			pstmt.setInt(3, od.getDetailPrice());
-			pstmt.setInt(4, od.getDetailCount());
-			
-			result = pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
+      try {
+         pstmt = conn.prepareStatement(sql.getProperty("insertOrderDetail"));
+         pstmt.setLong(1, od.getOrderNo());
+         pstmt.setString(2, od.getProductNo());
+         pstmt.setInt(3, od.getDetailPrice());
+         pstmt.setInt(4, od.getDetailCount());
+         
+         result = pstmt.executeUpdate();
+         
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
+      return result;
+   }
 }

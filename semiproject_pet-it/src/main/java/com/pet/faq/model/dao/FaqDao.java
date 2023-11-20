@@ -16,6 +16,7 @@ import com.pet.faq.model.dto.Faq;
 
 
 
+
 public class FaqDao {
 
     private Properties sql = new Properties();
@@ -52,6 +53,42 @@ public class FaqDao {
         return result;
     }
     
+    //조회수
+    public Faq selectFaqByNo(Connection conn, String faqNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Faq f=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFaqByNo"));
+			pstmt.setInt(1, f.getFaqHits()); 
+			rs=pstmt.executeQuery();
+			if(rs.next()) f=getFaq(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return f;
+		
+	}
+    
+    //조회수 
+    public int updateFaqReadCount(Connection conn, String FaqNo) {
+    	PreparedStatement pstmt = null;
+    	int result=0; 
+    	try {
+    		pstmt = conn.prepareStatement(sql.getProperty("updateFaqReadCount"));
+    		pstmt.setString(1,FaqNo);
+    		result=pstmt.executeUpdate();
+    	}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+    }
+    
+
     public int insertFaq (Connection conn, Faq f){
     	PreparedStatement pstmt = null;
     	int result=0;
@@ -69,6 +106,8 @@ public class FaqDao {
     	
     	
     }
+    
+    //전체출력 페이징처리 전체 데이터 수 
     public int selectFaqCount(Connection conn) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -88,6 +127,7 @@ public class FaqDao {
     }
 
     
+    //카테고리별 전체 데이터수 =페이징처리
     public int selectFaqCountByCategory(Connection conn, String category) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -98,7 +138,6 @@ public class FaqDao {
             rs = pstmt.executeQuery();
             if (rs.next()) result = rs.getInt(1);
         } catch (SQLException e) {
-            // 적절한 예외 처리를 추가할 수 있습니다.
             e.printStackTrace();
         } finally {
             close(rs);
@@ -106,6 +145,9 @@ public class FaqDao {
         }
         return result;
     }
+    
+    
+    
     
     public List<Faq> selectFaqCategory(Connection conn, int cPage, int numPerpage, String category){
     	PreparedStatement pstmt = null;
@@ -122,7 +164,6 @@ public class FaqDao {
                 result.add(getFaq(rs));
             }
         } catch (SQLException e) {
-            // 적절한 예외 처리를 추가할 수 있습니다.
             e.printStackTrace();
         } finally {
             close(rs);
@@ -131,19 +172,18 @@ public class FaqDao {
         return result;
     }
    
-    public List<Faq> searchFaqByMenu(Connection conn, String title, String content, int cPage, int numPerPage) {
+    public List<Faq> searchFaqByMenu(Connection conn, String subject, String content, int cPage, int numPerPage) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Faq> result = new ArrayList<>();
         String query = sql.getProperty("searchFaqByMenu");
-        query = query.replace("#COL", title);
+        query = query.replace("#COL", subject); 
 
         try {
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, title);
-            pstmt.setString(2, content);
-            pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
-            pstmt.setInt(4, cPage * numPerPage);
+            pstmt.setString(1, content); // content -> 사용자 입력 input value 값을 keyword로 가져오기
+            pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
+            pstmt.setInt(3, cPage * numPerPage);
 
             rs = pstmt.executeQuery();
 

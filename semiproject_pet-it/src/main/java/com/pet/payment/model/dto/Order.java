@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Order {
+
 	private long orderNo;
 	private String orderId;
 	private String orderName;
@@ -17,3 +18,4 @@ public class Order {
 	private int orderTotalPrice;
 	private String deliveryReq;
 }
+

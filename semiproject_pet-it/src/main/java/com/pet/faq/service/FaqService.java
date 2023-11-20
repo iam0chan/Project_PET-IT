@@ -1,16 +1,18 @@
 package com.pet.faq.service;
 
 import static com.pet.common.JDBCTemplate.close;
-import static com.pet.common.JDBCTemplate.getConnection;
 import static com.pet.common.JDBCTemplate.commit;
-import static com.pet.common.JDBCTemplate.rollback;
 import static com.pet.common.JDBCTemplate.getConnection;
+import static com.pet.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.pet.faq.model.dao.FaqDao;
 import com.pet.faq.model.dto.Faq;
+import com.pet.notice.model.dto.Notice;
+
+
 
 public class FaqService {
 
@@ -41,6 +43,24 @@ public class FaqService {
 			return result;
 		}
 		
+		//조회수증가 메소드 
+		public Faq selectFaqByNo (String faqNo, boolean readResult) {
+			Connection conn = getConnection();
+			Faq f = dao.selectFaqByNo(conn, faqNo);
+				if(f!=null && !readResult) {
+					int result = dao.updateFaqReadCount(conn,faqNo);
+					if (result > 0) {
+						commit(conn);
+						f.setFaqHits(f.getFaqHits() + 1);
+					} else
+						rollback(conn);
+				}
+				close(conn);
+				return f;
+
+			}
+		
+	
 		public int insertFaq(Faq f) {
 			Connection conn=getConnection();
 			int result=dao.insertFaq(conn, f);
@@ -70,7 +90,7 @@ public class FaqService {
 		
 		
 		
-		
+
 		
 		
 		
