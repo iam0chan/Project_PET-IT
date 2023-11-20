@@ -27,7 +27,7 @@ public class FindPwViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.sendRedirect(request.getContextPath()+"/member/findPw.jsp");
+		response.sendRedirect(request.getContextPath()+"/views/member/findPw.jsp");
 	}
 
 	/**

@@ -15,7 +15,7 @@ import com.pet.member.service.MemberService;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login.do")
+@WebServlet(name="login", urlPatterns="/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,13 +38,21 @@ public class LoginServlet extends HttpServlet {
 		
 		if(m!=null) {
 		HttpSession session = request.getSession();
+		// 로그인 정보 저장
 		session.setAttribute("loginMember", m);
-		
-		request.getRequestDispatcher("/").forward(request, response);
+		// 이전페이지 URI 저장
+		 String originalURI = request.getParameter("oriURI");
+         
+         if (originalURI != null && !originalURI.isEmpty()) {
+             response.sendRedirect(originalURI);
+         } else {
+             // 이전 페이지 URI가 없을 경우 기본적으로 설정할 페이지
+             response.sendRedirect(request.getContextPath() + "/processLogin");
+         }
 		}else {
 			request.setAttribute("msg", "아이디, 패스워드를 확인해주세요.");
-			request.setAttribute("loc", "/member/login.jsp");
-			request.getRequestDispatcher("/member/loginErr.jsp").forward(request, response);
+			request.setAttribute("loc", "/views/member/login.jsp");
+			request.getRequestDispatcher("/views/member/loginErr.jsp").forward(request, response);
 		}
 	}
 

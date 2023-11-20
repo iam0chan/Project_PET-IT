@@ -106,7 +106,7 @@
                 <div class="d-flex mx-auto flex-column flex-lg-row align-items-center" style="font-size: 15pt; font-family: G마켓 산스;">
                   <ul class="navbar-nav  ">
                     <li class="nav-item active header-menu-item">
-                      <a class="nav-link " href="<%=request.getContextPath() %>/brandInfo/brandInfoPage.jsp">Pet-It <span class="sr-only">(current)</span></a>
+                      <a class="nav-link " href="<%=request.getContextPath() %>/views/brandInfo/brandInfoPage.jsp">Pet-It <span class="sr-only">(current)</span></a>
                       <!-- <ul class="sub-nav">
                       	<a href="#"><li class = "sub-item">신상품</li></a>
                       	<li class = "sub-item">베스트</li>
@@ -136,7 +136,7 @@
                       </ul>
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link" href="blog.html">마이페이지</a>
+                      <a class="nav-link" href="<%=request.getContextPath() %>/views/myPage/mypageView.jsp">마이페이지</a>
                       <!-- <ul class="sub-nav">
                       	<li class = "sub-item">신상품</li>
                       	<li class = "sub-item">베스트</li>
@@ -158,21 +158,21 @@
                   </ul>
                 </div>
                 <div class="quote_btn-container">
-                  <a href="">
+
                   <%if(loginMember==null) {%>
-                  <a href="<%=request.getContextPath()%>/member/login.jsp"> <!--11.13 12:07 jm 연결주소 추가-->
+
+                  <a href="<%=request.getContextPath()%>/views/member/login.jsp"> <!--11.13 12:07 jm 연결주소 추가-->
+
                     <i class="fa-solid fa-dog"></i>
                     <span>Login</span>
                   </a>
+                  <a href="<%=request.getContextPath() %>/views/cart/cartList.jsp">
                   <%}else{ %>
                   	<i class="fa-solid fa-dog"></i>
                   	<span id="memberName"><%=loginMember.getMemberName() %>님</span><br>
                   	<span id="logoutbtn" style="display:none;"
                   		onclick="location.assign('<%=request.getContextPath()%>/logout.do');">로그아웃</span>
                   <%} %>
-                  <style>
-                  	
-                  </style>
                   <script>
 				  document.getElementById('memberName').addEventListener('click', function() {
 				    var logoutbtn = document.getElementById('logoutbtn');
@@ -183,11 +183,11 @@
 				      logoutbtn.style.display = 'none';
 				    }
 				  });
-				  
-				  /* document.getElementById('logoutbtn').addEventListener('click', function(){
+				  document.getElementById('logoutbtn').addEventListener('click', function(){
 					 location.replace
 					  
-				  }); */
+				  });
+				  
 				  </script>
                   <a href="">
                     <i class="fa-solid fa-cart-shopping"></i>

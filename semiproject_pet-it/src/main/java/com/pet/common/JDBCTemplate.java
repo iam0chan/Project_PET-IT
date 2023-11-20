@@ -13,7 +13,7 @@ public class JDBCTemplate {
 		Connection conn = null;
 		Properties driver = new Properties();
 		String path = JDBCTemplate.class.getResource("/driver.properties").getPath();
-					
+		
 		try (FileReader fr = new FileReader(path);){
 			driver.load(fr);
 			Class.forName(driver.getProperty("driver"));
@@ -30,11 +30,12 @@ public class JDBCTemplate {
 	public static void close(Object conn) {
 		try {
 			if(conn!=null) {
-				if(conn instanceof Connection) {
+
+				if(conn instanceof Connection&&!((Connection) conn).isClosed()) {
 					((Connection)conn).close();
-				}else if(conn instanceof Statement) {
+				}else if(conn instanceof Statement && !((Statement) conn).isClosed()) {
 					((Statement)conn).close();
-				}else if(conn instanceof ResultSet) {
+				}else if(conn instanceof ResultSet && !((ResultSet) conn).isClosed()) {
 					((ResultSet)conn).close();
 				}
 			}	
