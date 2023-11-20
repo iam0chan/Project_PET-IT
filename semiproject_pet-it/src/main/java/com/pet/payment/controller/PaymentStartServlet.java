@@ -16,9 +16,7 @@ import com.pet.product.model.dto.Product;
 import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.service.ProductService;
 
-/**
- * Servlet implementation class PaymentStartServlet
- */
+
 @WebServlet("/paymentStart.do")
 public class PaymentStartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
