@@ -7,7 +7,6 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-
 	* {
 	font-family: 'Noto Sans KR', sans-serif;
 	}
@@ -15,6 +14,15 @@
 		margin-top:50px;
 	}
 	
+	.quote_btn-container{
+		width:534.475px;
+		height:80px;
+	}
+	
+	.navbar {
+		width:1519.2px;
+		height:130px;
+	}
 	.login-container{
 	
 		margin-top:20px;
@@ -40,7 +48,7 @@
  	 height: 50px;
   	background-color: red;
   /* 상하좌우 정중앙 정렬하기 */
-  	position: absolute;
+  	position:absolute;
   	top: 50%;
  	 left: 50%;
   	margin: -25px 0 0 -25px; /* 자식 요소 전체를 중앙 정렬하기 위해, 상단 및 왼쪽 margin을 마이너스 값으로 적용하기 */	
@@ -56,7 +64,7 @@
         padding: 10px;
     }
 
-    .btn {
+    .btn:not(.btn-outline-success) {
         width: 100%;
         height: 35px;
         margin-bottom : 10px;
@@ -124,8 +132,9 @@
         <input type="button" class="btn btn-outline-primary" style="width:300px; height:43px" onclick="location.assign('<%=request.getContextPath()%>/enrollView.do');"
         	value="회원가입">
         <hr>	
-        <div class="sns-login">
+        <div class="sns-login" style="height:100px;">
             <div class="btn kakao_id_login"><a href="javascript:kakaoLogin()"><img src="<%=request.getContextPath()%>/img/kakao_login.png"></a></div>
+            <p style="height:10px; margin:0px 0px 0px 0px;">
             <div class="btn naver_id_login"><a><img src="<%=request.getContextPath()%>/img/naver_login.png"></a></div>
             <!-- <span class="btn btn-success" style="width:300px; height:45px">네이버 로그인</span> -->
         </div>

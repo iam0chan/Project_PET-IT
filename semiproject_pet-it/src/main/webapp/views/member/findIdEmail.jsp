@@ -73,9 +73,9 @@
    		border-width: 1px 1px 1px 1px;
    }
    
-   .field_info {
+   .field_info{
    		width:460px;
-   		height:200px;
+   		height:50px;
    		border:1px solid;
    		display: inline-block;
    	 	align-items: center; /* 가로 중앙 정렬 */
@@ -107,16 +107,38 @@
 		</li>
 	</ul>
 	<form action="<%=request.getContextPath()%>/mail.do" method="get">								
-			<div class="field_info">
-					<div class="field_idnav"><span>회원님의 아이디는[<%=loginMember.getMemberId() %>]입니다.</span></div>
-			</div>
+			<span>이메일로 발송된 회원님의 인증번호를 입력해주세요.</span>
+			<br>
+					<input type="text" placeholder="인증번호" style="width:460px; height:50px; text-align:center;" name="memberEmail_code" id="memberEmail_code">
+					<div class="idFindView"></div>
 			<br><br>
-  		  <button type="button" id="clsoe" class="btn btn-outline-primary" style="width:460px; height:40px;"><span>로그인</span></button>
+  		  <button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>
 		</form>
 </div>
 <script>
-	
-	
+  $(document).ready(function() {
+    $("#memberEmail_check").click(function(){
+      const memberEmailCode = $('#memberEmail_code').val();
+      console.log('유저입력값:'+memberEmailCode);
+      $.ajax({
+        type:"POST",
+        url: "<%=request.getContextPath()%>/mail.do",
+        data:{emailCode: memberEmailCode},
+        success:function(response){
+          var emailCode = "${emailCode}";
+          if(memberEmailCode === emailCode){   // id가 checkMessage인 것에 아래 텍스트 출력
+            $('.idFindView').html('회원님의 아이디는<br><%=loginMember.getMemberId() %>입니다');
+          }else{
+            $('.idFindView').html('인증번호가 일치하지 않습니다');
+            console.log('발송코드:'+emailCode);
+            console.log('응답:'+response);
+          }
+        $("#memberEmail_code").hide();
+        $(".idFind_view").show();
+        }
+      })
+      })
+    });
 </script>
 
 <%@ include file ="/views/footer.jsp" %>
