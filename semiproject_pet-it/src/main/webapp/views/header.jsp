@@ -124,7 +124,7 @@
                       </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link " href="<%=request.getContextPath()%>/productListServlet.do">주요상품</a>
+                      <a class="nav-link " href="<%=request.getContextPath()%>/productList.do">주요상품</a>
                       <ul class="sub-nav">
                          <a href="#"><li class = "sub-item">신상품</li></a>
                          <a href="#"><li class = "sub-item">베스트</li></a>

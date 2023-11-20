@@ -14,7 +14,7 @@ import com.pet.product.model.dto.Product;
 import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.service.ProductService;
 
-@WebServlet("/productListServlet.do")
+@WebServlet("/productList.do")
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
