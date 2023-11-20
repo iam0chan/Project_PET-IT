@@ -42,38 +42,13 @@ input#optionPrice {
 	width: 230px;
 }
 </style>
-<script>
-$(function(){
-$("#main-image").change(e=>{
-	$.each(e.target.files,(i,f)=>{
-		
-	//fileReader 클래스를 이용해서 inputfile에 저장된 데이터를 가져와 출력할 수 있다.
-	const filereader=new FileReader();
-	filereader.readAsDataURL(e.target.files[0]);
-	filereader.readAsDataURL(f);
-	filereader.onload=(e)=>{
-		/* 파일 가상 주소 */
-		const path=e.target.result;
-		console.log(path);
-		const img=$("#image-box").attr({
-			"src":path,
-			"width":"328",
-			"height":"329"
-		});
-		/* $("#prevImg").append(img); */
-	}
-	})
-});
-}) 
-</script>
+
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
 			<h2>상품등록</h2>
 			<div class="line"></div>
-			<form
-				action="<%=request.getContextPath()%>/product/productEnrollEnd.do"
-				method="post" enctype="multipart/form-data">
+			<form action="<%=request.getContextPath()%>/product/productEnrollEnd.do" method="post" enctype="multipart/form-data">
 				<div class="product-detail-container">
 					<div class="detail-container-l">
 						<div class="img-container">
@@ -345,6 +320,27 @@ $("#main-image").change(e=>{
               }
            }); --%>
         })
+       
+	$(function(){
+	$("#main-image").change(e=>{
+		$.each(e.target.files,(i,f)=>{
+		var filereader=new FileReader();
+		//fileReader 클래스를 이용해서 inputfile에 저장된 데이터를 가져와 출력할 수 있다.
+		/* filereader.readAsDataURL(e.target.files[0]); */
+		filereader.readAsDataURL(f);
+		filereader.onload=(e)=>{
+			/* 파일 가상 주소 */
+			const path=e.target.result;
+			console.log(path);
+			const img=$("#image-box").attr({
+				"src":path,
+				"width":"328",
+				"height":"329"
+			});
+		}
+		})
+	});
+	}) 
    
   
     </script>
