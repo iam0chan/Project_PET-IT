@@ -124,13 +124,12 @@
                       </ul> -->
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link " href="<%=request.getContextPath()%>/productList.do">주요상품</a>
+                      <a class="nav-link " href="<%=request.getContextPath()%>/productList.do?type=all">주요상품</a>
                       <ul class="sub-nav">
-                         <a href="#"><li class = "sub-item">신상품</li></a>
-                         <a href="#"><li class = "sub-item">베스트</li></a>
-                         <a href="#"><li class = "sub-item">사료</li></a>
-                         <a href="#"><li class = "sub-item">간식</li></a>
-                         <a href="#"><li class = "sub-item">용품</li></a>
+                         <li class = "sub-item"><a href="<%=request.getContextPath()%>/productList.do?type=new">신상품</a></li>
+                         <li class = "sub-item"><a href="<%=request.getContextPath()%>/productList.do?type=T-1">사료</a></li>
+                         <li class = "sub-item"><a href="<%=request.getContextPath()%>/productList.do?type=T-2">간식</a></li>
+                         <li class = "sub-item"><a href="<%=request.getContextPath()%>/productList.do?type=T-3">용품</a></li>
                       </ul>
                     </li>
                     <li class="nav-item header-menu-item">

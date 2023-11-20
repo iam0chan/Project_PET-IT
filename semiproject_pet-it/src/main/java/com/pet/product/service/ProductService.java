@@ -38,9 +38,9 @@ public class ProductService {
       return result;
    }
    
-   public List<Product> selectProductListAll(int cPage, int numPerpage){
+   public List<Product> selectProductListAll(int cPage, int numPerpage,String type){
       Connection conn = getConnection();
-      List<Product> result = dao.selectProductListAll(conn, cPage, numPerpage);
+      List<Product> result = dao.selectProductListAll(conn, cPage, numPerpage,type);
       close(conn);
       
       return result;
@@ -93,6 +93,65 @@ public class ProductService {
       
       return result;
             
+   }
+   
+   public int getProductCountByType(String type) {
+	   Connection conn = getConnection();
+	   int dataCount = dao.getProductCountByType(conn, type);
+	   close(conn);
+	   
+	   return dataCount;
+   }
+   
+   public int deleteProductImage(String productNo) {
+	   Connection conn = getConnection();
+	   int result = dao.deleteProductImage(conn, productNo);
+	   if(result>0) {
+		   commit(conn);
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   
+	   return result;
+   }
+   
+   public int updateProduct(Product p, Map<String,String> newoptions, Map<String,Map>updateOptions) {
+	   Connection conn = getConnection();
+	   int updateResult = dao.updateProduct(conn, p);
+	   int updateCheck = 0;
+	   int updateOption = 0;
+	   if(updateResult>0) {			
+		   int insertOption = dao.insertOption(conn,newoptions);
+		   for(Map.Entry<String,Map> entry : updateOptions.entrySet()) {
+			    updateOption = dao.updateOption(conn, entry.getKey(), entry.getValue()); 
+		   }
+		   if(insertOption>0 && updateOption>0){
+			   commit(conn);
+			   updateCheck=1;
+		   }
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   
+	   return updateCheck;
+   }
+   
+   public int updateMainImg(String productNo, String oriname, String rename) {
+	   Connection conn = getConnection();
+	   int updateResult =  dao.updateMainImg(conn,productNo,oriname,rename);
+	   close(conn);
+	   
+	   return updateResult;
+   }
+   
+   public List<ProductOption> selectProductOptionsByNo(String productNo){
+	   Connection conn = getConnection();
+	   List<ProductOption> options = dao.selecOptionByProductNo(conn, productNo);
+	   close(conn);
+	   
+	   return options;
    }
    
    /*
