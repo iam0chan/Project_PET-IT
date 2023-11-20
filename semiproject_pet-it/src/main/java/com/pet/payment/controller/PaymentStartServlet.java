@@ -30,15 +30,15 @@ public class PaymentStartServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		/* 장바구니에서 다수 상품으로 넘어올 때 */
-		String [] cartList = request.getParameterValues("cartList");
-		List<OrderDetail> odl = new ArrayList<OrderDetail>();
-		
-		if(cartList!=null) {
-			for(String value : cartList) {
-				OrderDetail od = new OrderDetail(value);
-			}
-		}
-		
+//		String [] cartList = request.getParameterValues("cartList");
+//		List<OrderDetail> odl = new ArrayList<OrderDetail>();
+//		
+//		if(cartList!=null) {
+//			for(String value : cartList) {
+//				OrderDetail od = new OrderDetail(value);
+//			}
+//		}
+//		
 		/* 상품페이지에서 단일 상품으로 넘어올 때 */
 		// 상품페이지에서 넘어온 상품 번호, 옵션명, 상품 갯수 가져오기
 		String productNo = request.getParameter("productNo");
