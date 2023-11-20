@@ -31,6 +31,7 @@ public class PaymentStartServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		/* 상품페이지에서 단일 상품으로 넘어올 때 */
+		
 		// 상품페이지에서 넘어온 상품 번호, 옵션명, 상품 갯수 가져오기
 		String productNo = request.getParameter("productNo");
 		String optionName = request.getParameter("optionName");
@@ -62,14 +63,14 @@ public class PaymentStartServlet extends HttpServlet {
 					.build();
 
 			odl.add(od);
-			
-			request.setAttribute("orderDetail", od);
+	
 			request.setAttribute("orderList", odl);
 			request.getRequestDispatcher("/views/payment/orderPay.jsp").forward(request, response);
 		
 		}else {
 		
 			/* 장바구니에서 다수 상품으로 넘어올 때 */		
+			
 			Gson gson = new Gson();
 			String cl = request.getParameter("cartList");
 	        Cart[] orderArray = gson.fromJson(cl, Cart[].class);
@@ -77,7 +78,6 @@ public class PaymentStartServlet extends HttpServlet {
 	        cartList = Arrays.asList(orderArray);
 	     
 				for(Cart c : cartList) {
-					
 					productNo = c.getProductNo();
 					Product p = new ProductService().selectProductByNo(productNo);
 					ProductImageFile img = new ProductService().selectMainImageFile(productNo);

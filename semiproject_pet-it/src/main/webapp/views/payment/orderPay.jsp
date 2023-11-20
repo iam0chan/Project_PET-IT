@@ -7,7 +7,6 @@
 				java.util.ArrayList" 
 %>
 
-<% OrderDetail od = (OrderDetail)request.getAttribute("orderDetail");%>
 <% List<OrderDetail> ol = (List<OrderDetail>)request.getAttribute("orderList"); %>
 
 <!-- header -->
@@ -361,7 +360,6 @@ $("#paymentBtn").on("click",function(e){
 	tell = $("#orderPhone").val();
 	addr = $("#addr").val()+", "+$("#detailAddr").val();
 	postcode = $("#zipcode").val();
-	productImg = "<%=request.getContextPath()%>/upload/<%=od.getProductImg()%>"
 	
 	//주문 객체 생성
 	order.orderNo = Number(orderNo);
@@ -377,12 +375,12 @@ $("#paymentBtn").on("click",function(e){
 	
 	//주문 상세 객체 생성
 	orderDetail.orderNo = Number(orderNo);
-	orderDetail.productNo = "<%=od.getProductNo()%>";
-	orderDetail.productName = "<%=od.getProductName()%>";
-	orderDetail.productOption = "<%=od.getProductOption()%>";
-	orderDetail.detailPrice = <%=od.getDetailPrice()%>;
-	orderDetail.detailCount = <%=od.getDetailCount()%>;
-	orderDetail.productImg = productImg;
+	orderDetail.productNo = "<%=ol.get(0).getProductNo()%>";
+	orderDetail.productName = "<%=ol.get(0).getProductName()%>";
+	orderDetail.productOption = "<%=ol.get(0).getProductOption()%>";
+	orderDetail.detailPrice = <%=ol.get(0).getDetailPrice()%>;
+	orderDetail.detailCount = <%=ol.get(0).getDetailCount()%>;
+	orderDetail.productImg = "<%=request.getContextPath()%>/upload/<%=ol.get(0).getProductImg()%>";
 
 	<%if(ol.size()>1){%>
 		product_name = "<%=ol.get(0).getProductName()%>"+" 등 "+"<%=ol.size()%>"+"개 상품";
