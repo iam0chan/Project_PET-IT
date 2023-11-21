@@ -49,7 +49,7 @@ Member login = (Member)session.getAttribute("loginMember");
 				<%
 				if (p.getProductDiscount() != null) {
 				%>
-				<input class="price" id=<%=discountPrice%> style="display: none;">
+				<input class="price" id="<%=discountPrice%>" style="display: none;">
 				<h3><%=p.getProductPrice()%>원
 					<%
 				if (discountPrice != p.getProductPrice()) {
@@ -60,7 +60,7 @@ Member login = (Member)session.getAttribute("loginMember");
 				<%
 				} else {
 				%>
-				<input class="price" id=<%=p.getProductPrice()%>
+				<input class="price" id="<%=p.getProductPrice()%>"
 					style="display: none;">
 				<h3><%=p.getProductPrice()%>원
 				</h3>
@@ -338,26 +338,17 @@ Member login = (Member)session.getAttribute("loginMember");
 	</div>
 </div>
 
-<form action="<%=request.getContextPath()%>/CartList"
-	method="post" id="addCartInfo">
-	<input type="hidden" id="memberId" name="memberId" value="<%=login.getMemberId()%>" />
-	<input type="hidden" id="productNo" name="productNo" value="" /> <input
-		type="hidden" id="orderPrice" name="orderPrice" value="" /> <input
-		type="hidden" id="orderAmount" name="orderAmount" value="" /> <input
-		type="hidden" id="optionPrice" name="optionPrice" value="" /> <input
-		type="hidden" id="optionName" name="optionName" value="" />
-</form>
-<form action="<%=request.getContextPath()%>/paymentStart.do"
-	method="post" id="orderInfo">
-	<input type="hidden" id="productNo" name="productNo" value="" /> <input
-		type="hidden" id="orderPrice" name="orderPrice" value="" /> <input
-		type="hidden" id="orderAmount" name="orderAmount" value="" /> <input
-		type="hidden" id="optionPrice" name="optionPrice" value="" /> <input
-		type="hidden" id="optionName" name="optionName" value="" />
+
+<form action="" method="post" id="orderInfo">
+	<input type="hidden" id="productNo" name="productNo" value="" /> 
+	<input type="hidden" id="orderPrice" name="orderPrice" value="" /> 
+	<input type="hidden" id="orderAmount" name="orderAmount" value="" /> 
+	<input type="hidden" id="optionPrice" name="optionPrice" value="" /> 
+	<input type="hidden" id="optionName" name="optionName" value="" />
 </form>
 
 
-<script src="<%=request.getContextPath()%>/js/product/productView.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/js/product/productView.js"></script> --%>
 <script>
 const review = document.querySelector("#review-btn");
 
@@ -425,7 +416,7 @@ $("#cart-btn").click(function() {
 		const orderAmount = $.trim($("#product-order-amount").val()); //주문수량
 		const optionPrice = $.trim($("#option-select").val()); //옵션가격
 		const optionName = $.trim($("#option-select option:selected").attr("id")); //옵션명
-		console.log(optionName); //옵션명 체크 console
+		console.log(orderAmount); //옵션명 체크 console
 
 		//paymentStart.do로 submit할 데이터가공
 		$("#productNo").val(productNo);
@@ -433,7 +424,8 @@ $("#cart-btn").click(function() {
 		$("#orderAmount").val(orderAmount);
 		$("#optionPrice").val(optionPrice);
 		$("#optionName").val(optionName);
-		$("#addCartInfo").submit();
+		$("#orderInfo").attr("action","<%=request.getContextPath()%>/CartList")
+		$("#orderInfo").submit();
 
 	});
 });
@@ -473,6 +465,7 @@ function purchase() {
 	$("#orderAmount").val(orderAmount);
 	$("#optionPrice").val(optionPrice);
 	$("#optionName").val(optionName);
+	$("#orderInfo").attr("action","<%=request.getContextPath()%>/paymentStart.do")
 	$("#orderInfo").submit();
 
 
