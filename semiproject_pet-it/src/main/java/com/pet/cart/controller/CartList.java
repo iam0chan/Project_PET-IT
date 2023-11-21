@@ -26,8 +26,8 @@ public class CartList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/cart/cartList.jsp").forward(request, response);
+		String memberId = request.getParameter("memberId");
+		System.out.println(memberId);
 	}
 
 	/**
