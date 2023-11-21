@@ -127,6 +127,30 @@ public class ProductDao {
       return optionResult;
    }
    
+   public int insertNewOption(Connection conn, String productNo, Map<String,String> options) {
+	   	PreparedStatement pstmt = null;
+	   	int insertNewOptionResult = 0;
+	   	int inputCount = 0;
+	   	
+	   	try {
+	   		for(Map.Entry<String, String> entry : options.entrySet()) {
+	   			pstmt = conn.prepareStatement(sql.getProperty("insertNewOption"));
+	   			pstmt.setString(1, productNo);
+	   			pstmt.setString(2, entry.getKey());
+	   			pstmt.setInt(3, Integer.parseInt(entry.getValue()));
+	   			insertNewOptionResult = pstmt.executeUpdate();
+	   			if(insertNewOptionResult>0) {
+	                ++inputCount;
+	             }
+	   		}
+	   		System.out.println("입력 성공 옵션 수 : "+inputCount);
+	   	}catch(SQLException e) {
+	   		e.printStackTrace();
+	   	}
+	   	
+	   	return insertNewOptionResult;
+   }
+   
    
    public List<Product> selectProductListAll(Connection conn,  int cPage, int numPerpage, String type){
       PreparedStatement pstmt = null;

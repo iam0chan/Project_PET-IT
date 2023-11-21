@@ -46,7 +46,7 @@ input#optionPrice {
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
-			<h2>상품등록</h2>
+<!-- 			<h2>상품수정</h2> -->
 			<div class="line"></div>
 			<form action="<%=request.getContextPath()%>/product/productUpdateEnd.do" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<div class="product-detail-container">
@@ -120,8 +120,7 @@ input#optionPrice {
 							</div>
 							<div class="enrollpage-content category"
 								style="text-align: center;">
-								<span>1차 분류</span> <select name="1st_category"
-									style="width: 150px">
+								<span>1차 분류</span> <select name="1st_category" style="width: 150px">
 									<option value="C-1">Dog</option>
 									<option value="C-2">Cat</option>
 								</select> <span>2차 분류</span> <select name="2nd_category"
@@ -150,10 +149,10 @@ input#optionPrice {
 							<div id="option-btn" style="line-height: 3.0"></div>
 						</div>
 						<%} else{%>
-						<%for(ProductOption op : product.getProductOption()){ %>
 						<% int count = 0;%>
+						<%for(ProductOption op : product.getProductOption()){ %>
 						<!-- 옵션 수정 창 (case : 옵션O) -->
-						<div class='enroll-content-container option<%=product.getProductOption().size()-1==count?"-new-contaier":"" %>'>
+						<div class='enroll-content-container option<%=product.getProductOption().size()-1==count?"-new-container":"" %>'>
 							<div class="enrollpage-title option-title">
 								<div style="padding-bottom: 14px;">
 									<%if(count==0){ %>
@@ -163,9 +162,9 @@ input#optionPrice {
 								</div>
 								<%if(count==0){ %>
 								<h4 style="width: 135px;">옵션 :</h4>
+								<% ++count; System.out.println("count: "+count); %>
 								<%} %>
 							</div>
-							<% count++; %>
 							<div class="enrollpage-content option-fix">
 								<input type="hidden" name="optionNo" id="optionNo" value="<%=op.getProductOptionNo()%>"/>
 								<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" value="<%=op.getProductOptionName()%>" /> 

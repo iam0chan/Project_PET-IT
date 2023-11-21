@@ -262,9 +262,9 @@ $("#main-image").change(e=>{
         })
         let count = 0;
         $("#option-btn").on("click",(e)=>{
-           if(count<2){
+           if($(".option-new-container").length<2){
            const optionBox = $(".detail-container-r");
-           const test = $("<div class='enroll-content-container '></div>");
+           const test = $("<div class='enroll-content-container option-new-container'></div>");
            const test2 = $("<div class='enrollpage-title'></div>");
            const test3 = $("<div class='enrollpage-content new-option'></div>");
            $(test).append(test2);
