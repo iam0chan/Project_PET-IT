@@ -284,52 +284,7 @@ background-color: green;
 			<%
 			}
 			%>
-			<%-- <tr>
-					<td><input type="checkbox"></td>
-					<td><img
-						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
-					<td class="product-name">
-						<h5>냥이 츄르 스푼</h5>
-						<p>츄르 먹이기가 쉬워지는 magic~</p>
-					</td>
-
-					<td class="price">10,000원</td>
-
-					<td class="qua-col first-row">
-						<div class="pro-qty">
-							<span class="dec qtybtn">-</span> <input name="cartCnt"
-								class="cartQty" id="cartQty" value="1" type="text"
-								style="width: 100px;"> <span class="inc qtybtn">+</span>
-						</div>
-					</td>
-					<td class="total">10,000원</td>
-
-					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><img src="request.getContextPath()>/images/cat_chu.jpg"></td>
-					<td class="product-name">
-						<h5>냥이 츄르 스푼</h5>
-						<p>츄르 먹이기가 쉬워지는 magic~</p>
-					</td>
-
-					<td class="price">10,000원</td>
-
-					<td class="qua-col first-row">
-						<div class="pro-qty">
-							<span class="dec qtybtn">-</span> <input name="cartCnt"
-								class="cartQty" id="cartQty" value="1" type="text"
-								style="width: 100px;"> <span class="inc qtybtn">+</span>
-						</div>
-					</td>
-					<td class="total">10,000원</td>
-
-					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-				</tr> --%>
-			<!-- 상품 추후에 추가하자 -->
+			
 			</tbody>
 		</table>
 
