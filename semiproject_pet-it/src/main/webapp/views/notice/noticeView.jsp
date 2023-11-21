@@ -45,6 +45,17 @@
 /* 	align-items: center; */
 	margin: 0px auto;
 }
+
+#contentBox{
+	width: 900px !important;
+}
+
+#contentBox img {
+	width: 400px !important;
+	height : 400px !important;
+}
+
+
 }
 
 
@@ -83,7 +94,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><%=n.getNoticeContent()%></td>
+						<td id="contentBox"><%=n.getNoticeContent()%></td>
 					</tr>
 				</tbody>
 			</table>
