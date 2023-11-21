@@ -73,12 +73,13 @@ public class ProductUpdateEndServlet extends HttpServlet {
 			}
 
 //			OPTION 존재 여부 판단(존재 시 업데이트, 존재하지 않을 시 새로운 OPTION 추가)
-			Map<String, Map> updateOption = new HashMap<>();
-			Map<String, String> newOptions = new HashMap<>();
-			List<ProductOption> originalOptions = new ProductService().selectProductOptionsByNo(productNo);
+			Map<String, Map> updateOption = new HashMap<>(); // 기존 옵션 이름이 같을 시 업데이트 할 옵션값
+			Map<String, String> newOptions = new HashMap<>(); // 존재하는 값에 새로운 업데이트 할 값
+			List<ProductOption> originalOptions = new ProductService().selectProductOptionsByNo(productNo); // 기존에 존재하는
+																											// 옵션들 불러오기
 			for (ProductOption po : originalOptions) {
 				for (Map.Entry<String, String> entry : options.entrySet()) {
-					if (po.getProductOptionName().equals(entry.getKey())) {
+					if (po.getProductOptionName().equals(entry.getKey())) { // 기존 존재 옵션과 새로 들어온 옵션
 						if (po.getProductOptionPrice() != Integer.parseInt(entry.getValue())) {
 							newOptions.put(po.getProductOptionName(), entry.getValue());
 							updateOption.put(po.getProductOptionNo(), newOptions);
@@ -98,29 +99,38 @@ public class ProductUpdateEndServlet extends HttpServlet {
 			int updateResult = new ProductService().updateProduct(item, newOptions, updateOption);
 			boolean delFileCheck = false;
 			if (updateResult > 0) {
-				ProductImageFile delImgFile = new ProductService().selectMainImageFile(productNo);
+				ProductImageFile selectImgFile = new ProductService().selectMainImageFile(productNo);
 
 				if (oriname != null && rename != null) {
-					int delImgResult = new ProductService().deleteProductImage(productNo);
-					if (delImgResult > 0) {
-						File delFile = new File("/upload/" + delImgFile.getProductFileRename());
-						if (delFile.exists()) {
-							delFile.delete();
-							delFileCheck = true;
+					if (!selectImgFile.getProductFileOriName().equals(oriname)) {
+						int delImgResult = new ProductService().deleteProductImage(productNo);
+						if (delImgResult > 0) {
+							File delFile = new File("/upload/" + selectImgFile.getProductFileRename());
+							if (delFile.exists()) {
+								delFile.delete();
+								delFileCheck = true;
+								if (delFileCheck) {
+									int updateMainImg = new ProductService().updateMainImg(productNo, oriname, rename);
+								}
+							}
 						}
 					}
 				}
-				int updateMainImg = new ProductService().updateMainImg(productNo,oriname,rename);
 			}
 
-			int result = new ProductService().insertProduct(item, oriname, rename, options);
-			if (result > 0) {
-				System.out.println(productNo + "상품 업데이트성공");
+			/*
+			 * int result = new ProductService().insertProduct(item, oriname, rename,
+			 * options);
+			 */
+
+			if (updateResult > 0) {
+				System.out.println(productNo + " 상품 업데이트성공");
 
 			} else {
 				System.out.println("업데이트실패");
 			}
 			response.sendRedirect(request.getContextPath() + "/productList.do?type=all");
+
 		}
 	}
 

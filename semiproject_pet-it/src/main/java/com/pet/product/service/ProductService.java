@@ -122,9 +122,10 @@ public class ProductService {
 	   int updateCheck = 0;
 	   int updateOption = 0;
 	   if(updateResult>0) {			
-		   int insertOption = dao.insertOption(conn,newoptions);
+		   int insertOption = dao.insertNewOption(conn,p.getProductNo(),newoptions);
 		   for(Map.Entry<String,Map> entry : updateOptions.entrySet()) {
-			    updateOption = dao.updateOption(conn, entry.getKey(), entry.getValue()); 
+			   
+			   updateOption = dao.updateOption(conn, entry.getKey(), entry.getValue()); 
 		   }
 		   if(insertOption>0 && updateOption>0){
 			   commit(conn);
