@@ -437,7 +437,7 @@ $("#paymentBtn").on("click",function(e){
 function payment_api(){
 	IMP.request_pay({							//결제창 호출 함수 IMP.request_pat({});
 		pg : pg,								//결제사명.PG상점아이디
-		pay_method : "card",					//지불방법
+		pay_method : pay_method,				//지불방법
 		merchant_uid: orderNo,  				//주문번호가 들어가야함.
 		name : product_name,					//결제창에 노출될 상품명
 		amount:	amount,							//결제 금액
