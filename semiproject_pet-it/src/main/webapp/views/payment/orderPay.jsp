@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.pet.payment.model.dto.OrderDetail" %>
+
+<%@ page import="com.pet.payment.model.dto.OrderDetail, 
+				com.pet.cart.model.dto.Cart, 
+				java.util.List, 
+				java.util.ArrayList" 
+%>
+
 <% OrderDetail od = (OrderDetail)request.getAttribute("orderDetail");%>
+<% List<OrderDetail> ol = (List<OrderDetail>)request.getAttribute("orderList"); %>
+
 <!-- header -->
 <%@ include file="/views/header.jsp"%>
 <!-- bootstrap -->
@@ -135,18 +143,22 @@
 			    </h2>
 			    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
 			      <div class="accordion-body" id="productAll">
-				      <div class="productDiv" id="productDiv">
+			      	
+			      <%if(!ol.isEmpty()){ %>
+			      		<%for(OrderDetail odl : ol){ %>
+			       		
+			       		<div class="productDiv" id="productDiv">
 					       <div style="width:15%; text-align:center">
-					       		<img src="<%=request.getContextPath()%>/upload/<%=od.getProductImg()%>" width="120px" height="120px">
+					       		<img src="<%=request.getContextPath()%>/upload/<%=odl.getProductImg()%>" width="120px" height="120px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
-						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder"><%=od.getProductName() %></li>
-						       		<li><p><span>옵션명 : &nbsp</span><span><%=od.getProductOption() %></span></span></li>
-								    <li><p><span>상품 가격 :&nbsp</span><span class="price"><%=od.getDetailPrice() %></span>원<p></li>
+						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder"><%=odl.getProductName() %></li>
+						       		<li><p><span>옵션명 : &nbsp</span><span><%=odl.getProductOption() %></span></span></li>
+								    <li><p><span>상품 가격 :&nbsp</span><span class="price"><%=odl.getDetailPrice() %></span>원<p></li>
 						       		<li style="display:flex; text-align:center;">
 									    <p>상품수량 : &nbsp</p>
-							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value="<%=od.getDetailCount() %>" style="font-size:13px; width:60px; height:25px;">
+							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value="<%=odl.getDetailCount() %>" style="font-size:13px; width:60px; height:25px;">
 								    	<span></span><span>개</span>
 								    </li>
 						       		<li><p><span>합계 가격 :&nbsp</span><span id="totalPrice">0</span>원</p></li>
@@ -156,6 +168,9 @@
 					       		<a href="#" id="deleteProduct"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
+				       <p></p>
+	       				<%} %>	
+			       <%} %>
 			      </div>
 			    </div>
 			  </div>
@@ -264,14 +279,7 @@
 							    <img alt="" src="<%=request.getContextPath()%>/img/card_payment.png">&nbsp&nbsp신용카드 결제
 							  </label>
 							</div>
-							
- 							<div class="form-check">
-							  <%-- input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
-							  <label class="form-check-label" for="Npay">
-							    <img alt="" src="<%=request.getContextPath()%>/img/Npay_badge.png">&nbsp&nbsp네이버페이
-							  </label> --%>
-							</div>
-							
+							<p></p>
 							<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="kakaopay" value="kakaopay">
 							  <label class="form-check-label" for="kakaopay">
@@ -338,6 +346,7 @@ let productImg = "";
 let orderNo = createOrderNum();
 let order ={};		//주문 객체
 let orderDetail = {};  //주문 상세 객체
+let orderArr =[]; 	//주문상세 객체 배열
 
 //결제 IMP 초기화
 var IMP = window.IMP;
@@ -345,8 +354,7 @@ IMP.init("imp58177585");
 
 //결제 버튼 클릭 이벤트
 $("#paymentBtn").on("click",function(e){
-	//변수값 세팅
-	product_name = "<%=od.getProductName()%>";
+	//변수값 세팅 (결제api에 들어갈 data값)
 	amount = parseInt($("#allPayCost").text());
 	email = $("#emailHead").val()+"@"+$("#textEmail").val();
 	buyer_name = $("#orderName").val();
@@ -375,9 +383,27 @@ $("#paymentBtn").on("click",function(e){
 	orderDetail.detailPrice = <%=od.getDetailPrice()%>;
 	orderDetail.detailCount = <%=od.getDetailCount()%>;
 	orderDetail.productImg = productImg;
+
+	<%if(ol.size()>1){%>
+		product_name = "<%=ol.get(0).getProductName()%>"+" 등 "+"<%=ol.size()%>"+"개 상품";
+	<%}else{%>
+		product_name = "<%=ol.get(0).getProductName()%>"
+	<%}%>
+	//주문 상세 객체배열 생성
+	<%for(OrderDetail odl : ol){ %>
+		orderDetail.orderNo = Number(orderNo);
+		orderDetail.productNo = "<%=odl.getProductNo()%>";
+		orderDetail.productName = "<%=odl.getProductName()%>";
+		orderDetail.productOption = "<%=odl.getProductOption()%>";
+		orderDetail.detailPrice = <%=odl.getDetailPrice()%>;
+		orderDetail.detailCount = <%=odl.getDetailCount()%>;
+		orderDetail.productImg = "<%=request.getContextPath()%>/upload/<%=odl.getProductImg()%>";
+		orderArr.push(orderDetail);
+	<%}%>
+
 	
 	//필수입력항목 체크
-	/* var isEmpty = false;
+	var isEmpty = false;
     $("input[type=text]").not(".optional").each(function() {
         if (!$(this).val()) {
             e.preventDefault();
@@ -394,7 +420,7 @@ $("#paymentBtn").on("click",function(e){
 
     if(isEmpty) {
         return; // 빈 필드가 있다면 여기서 함수 종료
-    } */
+    }
 
     // 빈 필드가 없다면 결제 방식 선택
     if($("#card-payment").is(":checked")){
@@ -435,8 +461,9 @@ function payment_api(){
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at,
                     order : JSON.stringify(order),				   	//주문 객체 보내기
-                    orderDetail : JSON.stringify(orderDetail)		//주문 상세 객체 보내기
-				}
+                    orderDetail : JSON.stringify(orderDetail),		//주문 상세 객체 보내기
+                    orderArr : JSON.stringify(orderArr)				//주문 상세 객체배열 보내기
+                }
 			}).done(function(data){
 					Swal.fire({
 				  		title: "결제 성공!",
@@ -465,11 +492,11 @@ function payment_api(){
 </script>
 <script>
 
-//모달창 jquery
+//회원정보 반영 모달창 jquery
 	$(document).ready(function(){
 		Swal.fire({
-		  title: "회원 정보 반영",
-		  text: "회원 정보에 등록된 내용을 그대로 적용할까요?",
+		  title: "회원정보 적용",
+		  text: "기존에 등록된 회원정보를 그대로 적용할까요?",
 		  icon: "question",
 		  showCancelButton: true,
 		  confirmButtonColor: "#3085d6",
@@ -479,7 +506,7 @@ function payment_api(){
 		  if (result.isConfirmed) {
 			    Swal.fire({
 			      title: "회원정보 적용!",
-			      text: "회원정보의 내용들을 적용했어요!😊",
+			      text: "기존 등록정보로 적용했어요!😊",
 			      icon: "success"
 			    });
 			    
