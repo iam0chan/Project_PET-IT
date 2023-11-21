@@ -10,8 +10,18 @@
 	body {
     box-sizing: border-box;
     line-height:40px;
-    
     	}
+    .quote_btn-container{
+		width:534.475px;
+		height:80px;
+	}
+	.navbar {
+		height:130px;
+	}
+    .footer_section{
+    	height:130px;
+    }	
+    
     .findId{
     text-align:center;
   	width: 700px;
@@ -86,6 +96,10 @@
    		width:100%;
 /*    		display:flex; */
    }
+   .id_btn{
+   		width:460px;
+   		height:60px;
+   }
    
 </style>
 
@@ -119,7 +133,9 @@
 				<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
 				<script src='https://www.google.com/recaptcha/api.js'></script>
 			</div>
-  		  <input type="submit" id="mail" style="height:40px;" value="인증번호 받기">
+			<div>
+  		  	<input type="submit" class="id_btn btn btn-outline-primary" id="mail" style="height:40px;" value="인증번호 받기">
+			</div>
 		</form>
 </div>
 <script>

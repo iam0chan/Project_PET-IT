@@ -42,14 +42,25 @@ private MemberDao dao = new MemberDao();
 	   return result;
    }
    
-   public int findIdEmail(String memberName, String memberEmail) {
+   public String findIdEmail(String memberName, String memberEmail) {
 	   Connection conn = getConnection();
-	   int result = dao.findIdEmail(conn, memberName, memberEmail);
-	   if(result>0) commit(conn);
+	   String memberId = dao.findIdEmail(conn, memberName, memberEmail);
+	   if(memberId!=null) commit(conn);
+	   else rollback(conn);
+	   close(conn);
+	   
+	   return memberId;
+   }
+   
+   public String findPwCheck(String memberId, String memberEmail) {
+	   Connection conn = getConnection();
+	   String result = dao.findIdEmail(conn, memberId, memberEmail);
+	   if(memberId!=null) commit(conn);
 	   else rollback(conn);
 	   close(conn);
 	   
 	   return result;
 	   
    }
+   
 }

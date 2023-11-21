@@ -10,7 +10,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,21 +18,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pet.member.dao.MemberDao;
-import com.pet.member.dto.Member;
 import com.pet.member.service.MemberService;
 
-
 /**
- * Servlet implementation class MailServlet
+ * Servlet implementation class MailPwServlet
  */
-@WebServlet("/mail.do")
-public class MailServlet extends HttpServlet {
+@WebServlet("/mailPw.do")
+public class MailPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MailServlet() {
+    public MailPwServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +39,7 @@ public class MailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    MemberDao dao = new MemberDao();
+		MemberDao dao = new MemberDao();
 	    String emailCode = null;
 
 	    Properties props = new Properties();
@@ -59,22 +56,23 @@ public class MailServlet extends HttpServlet {
 	        }
 	    });
 	    
+	    String memberId = request.getParameter("memberId"); 
 	    String memberEmail = request.getParameter("memberEmail"); // 메일 받을 주소
-	    String memberName = request.getParameter("memberName");
 	    
-	   	String memberId=null;
+	    
+	   	String findPwCheck=null;
 	    
 	    try {
 	        // 이름과 이메일이 데이터베이스에 일치하는지 확인
-	    	memberId=new MemberService().findIdEmail(memberName, memberEmail);
-	        if (memberId!=null) {
+	    	findPwCheck=new MemberService().findPwCheck(memberId, memberEmail);
+	        if (findPwCheck!=null) {
 	            // 일치하면 인증 코드 생성
 	            emailCode = dao.makeAuthenticationCode();
 	            
 	            // 세션에 저장
 	            HttpSession httpSession = request.getSession();
 	            httpSession.setAttribute("emailCode", emailCode);
-	            httpSession.setAttribute("memberName", memberName);
+	            httpSession.setAttribute("memberName", memberId);
 	            httpSession.setAttribute("memberEmail", memberEmail);
 	            request.setAttribute("emailCode", emailCode);
 	            request.setAttribute("memberId", memberId);
@@ -101,7 +99,6 @@ public class MailServlet extends HttpServlet {
 	        // 예외 처리에 따른 로직 추가
 	    }
 	}
-		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

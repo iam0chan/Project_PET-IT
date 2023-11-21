@@ -10,8 +10,8 @@
 	body {
     box-sizing: border-box;
     line-height:40px;
-    
     	}
+    
     .findId{
     text-align:center;
   	width: 700px;
@@ -113,32 +113,41 @@
 					<div class="idFindView"></div>
 			<br><br>
   		  <button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>
-		</form>
+	</form>
 </div>
 <script>
   $(document).ready(function() {
     $("#memberEmail_check").click(function(){
       const memberEmailCode = $('#memberEmail_code').val();
-      console.log('유저입력값:'+memberEmailCode);
-      $.ajax({
-        type:"POST",
-        url: "<%=request.getContextPath()%>/mail.do",
-        data:{emailCode: memberEmailCode},
-        success:function(response){
-          var emailCode = "${emailCode}";
-          if(memberEmailCode === emailCode){   // id가 checkMessage인 것에 아래 텍스트 출력
-            $('.idFindView').html('회원님의 아이디는<br><%=loginMember.getMemberId() %>입니다');
-          }else{
-            $('.idFindView').html('인증번호가 일치하지 않습니다');
-            console.log('발송코드:'+emailCode);
-            console.log('응답:'+response);
-          }
-        $("#memberEmail_code").hide();
-        $(".idFind_view").show();
-        }
-      })
-      })
+      var emailCode = "<%=request.getAttribute("emailCode")%>";
+      var memberId = "<%=request.getAttribute("memberId")%>";
+      console.log('발송코드:' + emailCode);
+      console.log('유저입력값:' + memberEmailCode);
+      console.log('유저아이디:' + memberId);
+      <%-- $.ajax({
+			url:"<%=request.getContextPath()%>/mail.do",
+			type:"post",
+			data:{emailCode:emailCode, memberId:memberId},
+			success:function(data){			
+				
+			},
+			error:(r,e)=>{
+				console.log(r);
+				console.log(r.status);
+				console.log(e);
+			}
+		}); --%>
+      
+      if(memberEmailCode === emailCode){   
+        $('.idFindView').html('회원님의 아이디는<br>' + memberId + '입니다');
+      } else {
+        $('.idFindView').html('인증번호가 일치하지 않습니다');
+      }
+      $("#memberEmail_code").hide();
+      $(".idFind_view").show();
     });
+  });
+  
 </script>
 
 <%@ include file ="/views/footer.jsp" %>

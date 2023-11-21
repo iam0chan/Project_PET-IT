@@ -7,7 +7,16 @@
 	* {
 	font-family: 'Noto Sans KR', sans-serif;
 	}
-	
+	.quote_btn-container{
+		width:534.475px;
+		height:80px;
+	}
+	.navbar {
+		height:130px;
+	}
+    .footer_section{
+    	height:130px;
+    }
 	body {
         box-sizing: border-box;
         line-height:40px;

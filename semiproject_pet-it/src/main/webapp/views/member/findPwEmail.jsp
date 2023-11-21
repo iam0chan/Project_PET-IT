@@ -1,27 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file ="/views/header.jsp" %>
+<%@ include file="/views/header.jsp"%>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 	* {
 	font-family: 'Noto Sans KR', sans-serif;
 	}
-	.quote_btn-container{
-		width:534.475px;
-		height:80px;
-	}
-	.navbar {
-		height:130px;
-	}
-    .footer_section{
-    	height:130px;
-    }
 	body {
     box-sizing: border-box;
     line-height:40px;
-    
     	}
+    
     .findId{
     text-align:center;
   	width: 700px;
@@ -75,20 +65,26 @@
    		border-bottom: 1px solid lightgray;
    }
    
-   .field_name{
-   		margin-bottom: 20px;
+   .field_name #memberName{
+   		border-width: 1px 1px 0px 1px;
    }
    
+   .field_email #memberEmail{
+   		border-width: 1px 1px 1px 1px;
+   }
    
-   .field_info input{
+   .field_info{
    		width:460px;
-   		height:60px;
+   		height:50px;
+   		border:1px solid;
+   		display: inline-block;
+   	 	align-items: center; /* 가로 중앙 정렬 */
+    	justify-content: center; /* 세로 중앙 정렬 */
    }
-   
-   .id_btn{
-   		width:460px;
-   		height:60px;
-   }
+  	.field_idnav {
+    
+    
+	}
    
    .google_recaptcha {
    		width:460px;
@@ -110,36 +106,31 @@
 			<a href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a	>
 		</li>
 	</ul>
-	<form action="<%=request.getContextPath()%>/mailPw.do" method="get" onsubmit="">								
-			<div class="field_info">
-				<div class="field_Id">
-					<span>
-						<input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId">
-					</span>
-				</div>
-				<div class="field_email">
-					<span>
-						<input type="email" placeholder="이메일을 입력해주세요" name="memberEmail" id="memberEmail" >
-					</span>
-				</div>
-			</div>
+	<form action="<%=request.getContextPath()%>/mailPw.do" method="get">								
+			<span>이메일로 발송된 회원님의 인증번호를 입력해주세요.</span>
 			<br>
-			<div class="recaptcha_view">
-				<p style="font-size: 14px; margin:0;">정보보호를위해 '로봇이 아닙니다.'를 눌러 진행해주세요</p>
-			</div>
-			
-			<div class="google_recaptcha">
-				<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
-				<script src='https://www.google.com/recaptcha/api.js'></script>
-			</div>
-				<div>
-					<input type="submit" class="id_btn btn btn-outline-primary" id="mail" style="height:40px;" value="인증번호 받기">
-				</div>
-		</form>
+					<input type="text" placeholder="인증번호" style="width:460px; height:50px; text-align:center;" name="memberEmail_code" id="memberEmail_code">
+					<div class="idFindView"></div>
+			<br><br>
+  		  <button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>
+	</form>
 </div>
 <script>
-	
-	
+  $(document).ready(function() {
+    $("#memberEmail_check").click(function(){
+      const memberEmailCode = $('#memberEmail_code').val();
+      var emailCode = "<%=request.getAttribute("emailCode")%>";
+      console.log('발송코드:' + emailCode);
+      console.log('유저입력값:' + memberEmailCode);
+      if(memberEmailCode === emailCode){
+        <%=request.getContextPath()%>
+      } else {
+        $('.idFindView').html('인증번호가 일치하지 않습니다');
+      }
+      $("#memberEmail_code").hide();
+      $(".idFind_view").show();
+    });
+  });
 </script>
 
 <%@ include file ="/views/footer.jsp" %>
