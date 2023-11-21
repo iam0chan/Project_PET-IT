@@ -33,9 +33,8 @@ public class AdminOrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-int cPage,numPerpage=5;
+int cPage,numPerpage=10;
 		
-//		if(request.getParameter("cPage")!=null) cPage=request;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -44,7 +43,7 @@ int cPage,numPerpage=5;
 		List<Order> result = new PaymentService().selectOrderList(cPage,numPerpage);
 		int totalData = new PaymentService().selectOrderCount();
 		int totalPage = (int)Math.ceil((double)totalData/numPerpage);
-		int pageBarSize=5;
+		int pageBarSize=3;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
