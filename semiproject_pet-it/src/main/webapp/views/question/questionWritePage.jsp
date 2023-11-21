@@ -60,23 +60,25 @@
 				<h2>1:1문의</h2>
 			</div>
 			<div class="container mt-3">
-				<div class="row">
-					<div class="col-lg-2"></div>
-					<div class="col-lg-8">
-						<form action="#">
+				<form id="questionform"
+					action="<%=request.getContextPath()%>/questionwriterpage.do"
+					method="post">
+					<div class="row">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8">
 							<table class="table table-bordered">
 								<thead>
 									<tr>
 										<th style="text-align: center; background-color: #F2F2F2;">제목</th>
-										<th><select id="board_category" name="board_category">
-												<option value="1">회원서비스</option>
-												<option value="2">제품문의</option>
-												<option value="3">주문/결제</option>
-												<option value="4">배송</option>
-												<option value="5">취소/반품/교환</option>
-												<option value="6">제품/서비스 이용 불만</option>
-												<option value="7">기타</option>
-										</select> <input id="notice-title" style="width: 400px;" type="text">
+										<th><select id="selectCategory" name="selectCategory">
+												<option value="회원서비스">회원서비스</option>
+												<option value="제품문의">제품문의</option>
+												<option value="주문/결제">주문/결제</option>
+												<option value="배송">배송</option>
+												<option value="취소/반품/교환">취소/반품/교환</option>
+												<option value="제품/서비스 이용 불만">제품/서비스 이용 불만</option>
+												<option value="기타">기타</option>
+										</select> <input id="question-title" style="width: 400px;" type="text">
 										</th>
 									</tr>
 								</thead>
@@ -86,39 +88,35 @@
 										<td><input type=""></td>
 										<!--아이디값 자동부여  -->
 									</tr>
-
 								</tbody>
 							</table>
+						</div>
+						<div class="col-lg-2"></div>
 					</div>
-					<div class="col-lg-2"></div>
-				</div>
-				<div id="editor"></div>
-				<br>
+					<div id="editor"></div>
+					<br>
+					<div id="submitBtn" class="row">
+						<div class="col-5"></div>
+						<div class="col-1">
+							<input type="hidden" id="content" name="content" value="">
+							<input class="btn btn-outline-success" onclick="test();"
+								type="submit" value="write" />
+						</div>
+						<div class="col-1">
+							<button class="btn btn-outline-success" type="reset"
+								id="resetBtn">cancell</button>
+						</div>
+					</div>
+					
 				</form>
 			</div>
 
-			<div class="container mt-3">
-				<div class="row">
-					<div class="col-lg-2"></div>
-					<div class="col-lg-8">
-						<form action="#">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th
-											style="text-align: center; width: 80px; background-color: #F2F2F2;">첨부파일</th>
-										<th><input class="fileBtn" type="submit"
-											onclick="test();" value="첨부파일" /></th>
-									</tr>
-							</table>
-
-
-
-							<div id="submitBtn">
-								<input class="Btn" type="submit" onclick="test();" value="작성완료" />
-							</div>
-							<script>
- 
+	<script>
+ 	
+	$("#resetBtn").on("click",function(){
+		location.href="<%=request.getContextPath()%>/views/question/questionList.jsp";
+	})
+	
 	var editor;
 	ClassicEditor
 	.create(document.querySelector('#editor'), {
@@ -134,12 +132,12 @@
 		console.error(error);
 	});
 	
-	function test(){	
-	    const editorData = editor.getData();
-	    /* console.log(editorData); */
-	    $("#upload").attr("value",editorData);
-	    console.log($("#upload").val());
-	}
+	function test(){    
+        const editorData = editor.getData();
+        $("#content").attr("value", editorData);
+        console.log($("#content").val());
+        $("#questionform").submit();
+    }
 	
 	</script>
 </body>
