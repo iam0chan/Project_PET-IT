@@ -105,6 +105,7 @@ private Properties sql = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("insertOrderList"));
+			
 			for (OrderDetail od : orderList) {
 			    pstmt.setLong(1, od.getOrderNo());
 			    pstmt.setString(2, od.getProductNo());

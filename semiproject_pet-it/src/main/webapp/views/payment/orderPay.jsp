@@ -468,6 +468,7 @@ function payment_api(){
 				  		text: "잠시 후 결제완료페이지로 이동합니다",
 				  		icon: "success"
 					});
+					console.log(data);
 				    window.location.replace("<%=request.getContextPath()%>/paymentEnd.do");
 					
 			}).fail(function(data){

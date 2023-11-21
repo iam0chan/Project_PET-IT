@@ -8,28 +8,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminPageServlet
+ * Servlet implementation class AdminDataServlet
  */
-@WebServlet("/adminPage.do")
-public class AdminPageServlet extends HttpServlet {
+@WebServlet("/adminOrder.do")
+public class AdminOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-    public AdminPageServlet() {
-        
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AdminOrderServlet() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		List<>
 		
-		
-		
-		request.getRequestDispatcher("/admin/adminPage.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminOrder.jsp").forward(request, response);
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

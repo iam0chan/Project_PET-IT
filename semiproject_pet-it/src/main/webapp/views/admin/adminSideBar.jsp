@@ -6,7 +6,7 @@
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
  <!-- Custom styles for this template -->
 <link href="<%=request.getContextPath()%>/css/dashboard.css" rel="stylesheet">
-
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
@@ -39,9 +39,9 @@
         </div>
       <div class="position-sticky pt-3">
       		<p>
-	            <a class="nav-link active" aria-current="page" href="#">
+	            <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/index.jsp">
 	              <span data-feather="home"></span>
-	              PetIt 메인페이지로
+	              Pet-It 메인페이지로
 	            </a>
             </p>
           <div class="accordion accordion-flush" id="nav-accor-fl">
@@ -54,9 +54,9 @@
           		</h2>
           		<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="">상품등록</a></p>
-        				<p><a href="">상품수정</a></p>
-        				<p><a href="">상품삭제</a></p>
+        				<p><a href="#" class="link" data-content="content">상품등록</a></p>
+        				<p><a href="#" class="link" data-content="content">상품수정</a></p>
+        				<p><a href="#" class="link" data-content="content">상품삭제</a></p>
 				    </div>
 			   	</div>
           	</div>
@@ -85,7 +85,7 @@
           		</h2>
           		<div id="f-accorOrder" class="accordion-collapse collapse" aria-labelledby="accorOrder" data-bs-parent="nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="">주문 관리</a></p>
+        				<p><a href="<%=request.getContextPath()%>/adminOrder.do">주문 관리</a></p>
         				<p><a href="">반품/환불 관리</a></p>
         				<p><a href="">배송 관리</a></p>
 				    </div>
