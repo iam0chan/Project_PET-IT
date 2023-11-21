@@ -155,7 +155,6 @@
             <td></td>
             <td></td>
             <td></td>
-            
           </tr>
         </tbody>
       </table>
@@ -165,7 +164,10 @@
         <button type="button" id="btnDelete" class="btn btn-outline-success">선택 주문 삭제</button>
       </div>
     </div>
-
+	
+	 <div id="pageBar">
+     	<%=request.getAttribute("pageBar") %>
+     </div>    
     
 <script type="text/javascript">
 	$(document).ready(function(){

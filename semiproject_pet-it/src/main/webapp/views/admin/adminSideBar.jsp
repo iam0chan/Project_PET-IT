@@ -33,10 +33,12 @@
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      	<a href="<%=request.getContextPath() %>/views/admin/adminPage.jsp">
       	<div class="logo">
       	<img src="<%=request.getContextPath()%>/img/petit_logo_bk.png" width="150" height="50">
       	<p><b>관리자 페이지</b></p>
         </div>
+        </a>
       <div class="position-sticky pt-3">
       		<p>
 	            <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/index.jsp">
