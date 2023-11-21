@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="com.pet.product.model.dto.Product, com.pet.product.model.dto.ProductImageFile, com.pet.product.model.dto.ProductOption"%>
+	import="com.pet.product.model.dto.Product, com.pet.product.model.dto.ProductImageFile, com.pet.product.model.dto.ProductOption, com.pet.member.dto.Member"%>
 <%@ include file="/views/header.jsp"%>
 <%
 Product p = (Product) request.getAttribute("product");
 int discountPrice = (int) (request.getAttribute("discountPrice"));
 ProductImageFile file = (ProductImageFile) request.getAttribute("file");
+Member login = (Member)session.getAttribute("loginMember");
 %>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/product/productview.css" />
@@ -339,6 +340,7 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 
 <form action="<%=request.getContextPath()%>/CartList"
 	method="post" id="addCartInfo">
+	<input type="hidden" id="memberId" name="memberId" value="<%=login.getMemberId()%>" />
 	<input type="hidden" id="productNo" name="productNo" value="" /> <input
 		type="hidden" id="orderPrice" name="orderPrice" value="" /> <input
 		type="hidden" id="orderAmount" name="orderAmount" value="" /> <input
