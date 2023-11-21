@@ -19,6 +19,9 @@ public class ProductDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String productNo = request.getParameter("productNo");
 		int result = new ProductService().deleteProductByProductNo(productNo);
+		if(result>0) {
+			response.sendRedirect("/views/product/productlist.jsp");
+		}
 		
 		
 	}
