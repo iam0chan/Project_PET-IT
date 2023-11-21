@@ -33,16 +33,17 @@ public class MainPageProductServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		System.out.println(type);
 		
-		List productInfo = new ArrayList();
-		Map data = new HashMap();
+		List<ProductImageFile> files = null;
+		Map<String,ProductImageFile> data = new HashMap<>();
 		List<Product> newProducts = new ProductService().selectProductListAll(1, 6, type);
-		List<ProductImageFile> files = new ProductService().selectMainImageFileAll();
-		data.put("newProduct", newProducts);
-		data.put("files", files);
+		for(Product p: newProducts) {
+			data.put(p.getProductNo(),new ProductService().selectMainImageFile(p.getProductNo()));
+			
+		}
 		
-		Gson gson = new Gson();
-		response.setHeader("content-type", "application/json;charset=utf-8");
-		gson.toJson(data,response.getWriter());
+		request.setAttribute("newProducts", newProducts);
+		request.setAttribute("imageData", data);
+		request.getRequestDispatcher("/").forward(request, response);
 		
 		
 	}

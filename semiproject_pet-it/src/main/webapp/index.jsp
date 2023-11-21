@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.pet.product.model.dto.*, java.util.*"%>
 <%@ include file="/views/header.jsp"%>
+<%
+	Map<String,ProductImageFile> imgData = (Map<String,ProductImageFile>)request.getAttribute("imageData");
+	List<Product> newProducts = (List<Product>)request.getAttribute("newProducts");
+%>
 <!-- slider section -->
 <section class="slider_section long_section">
 	<div id="customCarousel" class="carousel slide" data-ride="carousel">
@@ -27,27 +31,53 @@
 </div>
 
 <!-- furniture section -->
-
+<style>
+	.row-collection{
+		display:flex;
+		justify-content:space-evenly;
+		flex-wrap: wrap;
+		line-height:2.0;
+	}
+	.img-box{
+		margin-top:10px;
+		width:300px;
+		margin-bottom:10px;
+		border: 1px solid #28a745;
+		border-radius : 5px;
+		text-align:center;
+		border-bottom:1px solid #28a745;
+	}
+	.content{
+		width:300px;
+		display:flex;
+		flex-direction:column;
+		flex-wrap:wrap;
+		
+	}
+	
+	.content>p:first{
+		margin-top:5px;
+		height:30px;
+	}
+</style>
 <section class="furniture_section layout_padding">
 	<div class="container">
 		<div class="heading_container">
 			<h2>new 새로운 상품</h2>
 		</div>
-		<div class="row">
-			<div class="col-md-6 col-lg-4">
-				<div class="box">
-					<div class="img-box"></div>
-					<div class="detail-box">
-						<h5>brown Chair Design</h5>
-						<div class="price_box">
-							<h6 class="price_heading">
-								<span>$</span> 100.00
-							</h6>
-							<a href=""> Buy Now </a>
-						</div>
-					</div>
+		<div class="row-collection">
+		<%if(!newProducts.isEmpty()){ %>
+			<%for(Product p : newProducts){ %>
+			<div class="img-box">
+				<img src ="<%=request.getContextPath()%>/upload/<%=imgData.get(p.getProductNo()).getProductFileRename()%>" style="width:295px; height:295px;"/>
+				<div class="content">
+					<p><%= p.getProductName() %></p>
+					<p><%= p.getProductInfo() %></p>
+					<p><%= p.getProductPrice()%></p>
 				</div>
 			</div>
+			<%} %>
+		<%} %>
 		</div>
 	</div>
 </section>
@@ -128,58 +158,9 @@
 </section>
 <!-- end info_section -->
 <script>
+	<%-- window.onload = function(){
+		location.href="<%=request.getContextPath()%>/product/mainPage.do"
+	} --%>
 
-        	$(document).ready(function(){
-        		$.ajax({
-        			url:'<%=request.getContextPath()%>/product/mainPage.do',
-        			type:'post',
-        			data:{type:'new'},
-        			success:data=>{
-        				const div = $("<div class='col-md-6 col-lg-4'>")
-        				const div1 = $("<div class='box'>");
-        				const div2 = $("<div class='img-box'>");     					
-						const img = $("<img/>");
-					/* 	<div class="detail-box">
-						<h5>brown Chair Design</h5>
-						<div class="price_box">
-							<h6 class="price_heading">
-								<span>$</span> 100.00
-							</h6>
-							<a href=""> Buy Now </a>
-						</div>
-						</div> */
-						const div3 = $("div class='detail-box'");
-						const h5 = $("<h5>asdfsdf</h5>");
-						const div4 = $("<div class='price_box');
-						const h6 = $("<h6 class='price_heading'></h6>");
-						const span = $("<span>$</span>asdasd");
-						const a = $("<a href=''>asd</a>");
-        				$.each(data.newProduct,function(i,p){
-   							console.log(imgDiv[0]);
-        					console.log(p);
-        					$.each(data.files,function(i,f){
-        						if(p.productNo == f.productNo){
-        							console.log(f.productFileRename);
-        							console.log(img[0]);
-		        					img.attr("src","<%=request.getContextPath()%>/upload/"+f.productFileRename);
-        						}
-        					})
-        					h6.append(span);
-        					
-        					div4.append(h6);
-        					div4.append(a);
-        					div3.append(h5);
-        					div3.append(div4);
-        					
-        					
-							div2.append(img);
-							div1.append(div2);
-	        				div.append(div1);
-							$("div.row").append(div);
-        				})
-        			}
-        			
-        			})
-        		})
-        </script>
+</script>
 <%@ include file="/views/footer.jsp"%>
