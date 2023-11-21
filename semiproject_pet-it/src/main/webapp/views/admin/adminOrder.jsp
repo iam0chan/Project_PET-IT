@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.text.DecimalFormat, java.sql.*, java.util.*, com.pet.payment.model.dto.Order"%>
-<% Order o = (Order) session.getAttribute("orders"); %>
+<% List<Order> order = (List<Order>) request.getAttribute("orders"); %>
 <%@ include file="adminSideBar.jsp" %>   
 <title>Pet-It 관리자페이지</title>
 
@@ -19,9 +19,10 @@
 	}
 	div.app {
 	  margin-top:5%;	
-	  width: 95%;
+	  width: 100%;
 	  align-items:center;
 	  text-align:center;
+	  
 	}
 	table,
 	td {
@@ -30,6 +31,7 @@
 	  text-align : center;
 	}
 	table {
+	  
 	  margin: 20px;
 	}
 	td,
@@ -88,7 +90,7 @@
           <col width="3%" />
           <col width="10%" />
           <col width="10%" />
-          <col width="10%" />
+          <col width="5%" />
           <col width="5%" />
           <col width="20%" />
           <col width="10%" />
@@ -103,66 +105,30 @@
             <th>연락처</th>
             <th>배송지 주소</th>
             <th>총 가격</th>
-            <th>주문일자</th>
+            
           </tr>
         </thead>
+        
         <tbody>
+     <% if(!order.isEmpty()){ %>
+        <% for(Order o : order){%>
+        		
           <tr>
             <td class="center"><input type="checkbox" name="chkRow" id=""></td>
-            <td class="center" data-cell-header="no">1</td>
-            <td class="center" data-cell-header="id">test-1</td>
-            <td data-cell-header="content">TEST1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-           
+            <td class="center" data-cell-header="content"><%=o.getOrderNo()%></td>
+            <td class="center" data-cell-header="content"><%=o.getOrderId()%></td>
+            <td class="center" data-cell-header="content"><%=o.getOrderName()%></td>
+            <td class="center" data-cell-header="content"><%=o.getOrderPhone()%></td>
+            <td class="center" data-cell-header="content"><%=o.getOrderZipcode()%> <%=o.getOrderAddr()%> <%=o.getOrderDefAddr()%></td>
+            <td class="center" data-cell-header="content"><%=o.getOrderTotalPrice()%></td>
+                
           </tr>
-          <tr>
-            <td class="center"><input type="checkbox" name="chkRow" id=""></td>
-            <td class="center" data-cell-header="no">2</td>
-            <td class="center" data-cell-header="id">test-2</td>
-            <td data-cell-header="content">TEST2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            
-          </tr>
-          <tr>
-            <td class="center"><input type="checkbox" name="chkRow" id=""></td>
-            <td class="center" data-cell-header="no">3</td>
-            <td class="center" data-cell-header="id">test-3</td>
-            <td data-cell-header="content">TEST3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            
-          </tr>
-          <tr>
-            <td class="center"><input type="checkbox" name="chkRow" id=""></td>
-            <td class="center" data-cell-header="no">4</td>
-            <td class="center" data-cell-header="id">test-4</td>
-            <td data-cell-header="content">TEST4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            
-          </tr>
-          <tr>
-            <td class="center"><input type="checkbox" name="chkRow" id=""></td>
-            <td class="center" data-cell-header="no">5</td>
-            <td class="center" data-cell-header="id">test-5</td>
-            <td data-cell-header="content">TEST5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          
+        <%} %>  
+    <%} %>    
         </tbody>
       </table>
+	 
 	 <div id="pageBar">
      	<%=request.getAttribute("pageBar") %>
      </div>    
@@ -214,6 +180,18 @@
     	      $('#' + chgNm + 'All').prop('checked', false);
     	    }
     	  });
+    	  
+    	  // 행 어디를 선택해도 맨 앞의 checkbox선택
+    	  $('td').click(function(event) {
+    		    if (!$(event.target).is('input[type="checkbox"]')) {
+    		        var checkbox = $(this).closest('tr').find('input[type="checkbox"]');
+    		        checkbox.prop('checked', !checkbox.prop('checked'));
+    		    }
+    		});
+
+    		$('input[type="checkbox"]').click(function(event) {
+    		    event.stopPropagation();
+    		});
 
     	  // 버튼 클릭 Event
     	  $('#btnDelete').click(function() {
@@ -222,7 +200,7 @@
     	    $('input[name="chkRow"]:checked').each(function(idx, item) {
     	      arrIds.push(
     	        $(this).closest('tr').find('td').filter(function() {
-    	          return $(this).data('cellHeader') == 'id';
+    	          return $(this).data('cellHeader') == 'content';
     	        }).text()
     	      );
     	    });
