@@ -60,4 +60,20 @@ public class PaymentService {
 		
 		return resultOl;
 	}
+	
+	public List<Order> selectOrderList(int cPage, int numPerpage){
+		Connection conn = getConnection();
+		List<Order> order = dao.selectOrderList(conn,cPage,numPerpage);
+		close(conn);
+		
+		return order;
+	}
+	
+	public int selectOrderCount() {
+		Connection conn = getConnection();
+		int result = dao.selectOrderCount(conn);
+		close(conn);
+		return result;
+	}
+	
 }

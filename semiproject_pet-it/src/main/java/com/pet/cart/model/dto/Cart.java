@@ -20,7 +20,7 @@ public class Cart {
 	private String optionName;
     private String optionValue;
 	
-
+	
 	// 여러 제품 정보를 갖는 리스트
 	//private List<Product> products = new ArrayList<>();
 }

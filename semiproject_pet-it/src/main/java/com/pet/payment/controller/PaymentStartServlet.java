@@ -84,7 +84,7 @@ public class PaymentStartServlet extends HttpServlet {
 					Product p = new ProductService().selectProductByNo(productNo);
 					ProductImageFile img = new ProductService().selectMainImageFile(productNo);
 					String productName = p.getProductName();
-					String productOption = c.getProductOption();
+					String productOption = c.getOptionName();
 					int detailPrice = p.getProductPrice();
 					detailCount = c.getCartProductCount();
 					String productImg = img.getProductFileRename();
