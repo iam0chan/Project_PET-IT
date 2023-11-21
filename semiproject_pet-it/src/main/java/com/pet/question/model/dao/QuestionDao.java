@@ -98,6 +98,46 @@ public class QuestionDao {
 		}return result;
 	}
 	
+	public int selectQuestionCountByCategory(Connection conn, String category) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            pstmt = conn.prepareStatement(sql.getProperty("selectQuestionCountByCategory"));
+            pstmt.setString(1, category);
+            rs = pstmt.executeQuery();
+            if (rs.next()) result = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return result;
+    }
+    
+    public List<Question> selectQuestionCategory(Connection conn, int cPage, int numPerpage, String category){
+    	PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Question> result = new ArrayList<>();
+
+        try {
+            pstmt = conn.prepareCall(sql.getProperty("selectQuestionCategory"));
+            pstmt.setString(1, category);
+            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+            pstmt.setInt(3, cPage * numPerpage);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                result.add(getQuestion(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return result;
+    }
 	
 	
 	
@@ -116,10 +156,10 @@ public class QuestionDao {
 		return Question.builder()
 				.questionNo(rs.getString("QUESTION_NO"))
 				.memberId(rs.getString("MEMBER_ID"))
-				.questionDate(rs.getDate("NOTICE_DATE"))
-				.questionTitle(rs.getString("NOTICE_TITLE"))
-				.questionCategory(rs.getString("NOTICE_CATEGORY"))
-				.questionContent(rs.getString("NOTICE_CONTENT"))
+				.questionDate(rs.getDate("QUESTION_DATE"))
+				.questionTitle(rs.getString("QUESTION_TITLE"))
+				.questionCategory(rs.getString("QUESTION_CATEGORY"))
+				.questionContent(rs.getString("QUESTION_CONTENT"))
 				.build();
 		
 		

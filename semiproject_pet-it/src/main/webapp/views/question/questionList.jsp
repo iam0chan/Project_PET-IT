@@ -178,7 +178,7 @@ tr.item:hover {
 	const selectCategory = document.getElementById("selectCategory");
 	console.log(selectCategory)
 	selectCategory.addEventListener("change",function(e){
-	location.replace("<%=request.getContextPath()%>/noticeinquiry.do?notices="+ e.target.value);
+	location.replace("<%=request.getContextPath()%>/questioninquiry.do?question="+ e.target.value);
 	});
 	
 	
