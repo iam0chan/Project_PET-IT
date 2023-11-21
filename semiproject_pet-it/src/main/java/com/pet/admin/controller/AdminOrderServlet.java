@@ -74,7 +74,7 @@ int cPage,numPerpage=5;
 		}
 		pageBar+="</ul>";
 		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("orderList", result);		
+		request.setAttribute("orders", result);		
 		
 		request.getRequestDispatcher("/views/admin/adminOrder.jsp").forward(request, response);
 	}

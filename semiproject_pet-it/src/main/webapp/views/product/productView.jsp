@@ -474,7 +474,7 @@ function purchase() {
 	$("#optionPrice").val(optionPrice);
 	$("#optionName").val(optionName);
 	$("#orderInfo").submit();
-
+	
 
 };
 	$("#update-itemcontent-btn").on("click",function(){

@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.text.DecimalFormat"%>
-<%@page import="java.sql.*"%>
-<%@page import="java.util.*"%>
-
+<%@page import="java.text.DecimalFormat, java.sql.*, java.util.*, com.pet.payment.model.dto.Order"%>
+<% Order o = (Order) session.getAttribute("orders"); %>
 <%@ include file="adminSideBar.jsp" %>   
 <title>Pet-It 관리자페이지</title>
 
@@ -23,6 +21,7 @@
 	  margin-top:5%;	
 	  width: 95%;
 	  align-items:center;
+	  text-align:center;
 	}
 	table,
 	td {
@@ -59,6 +58,12 @@
 	
 	tbody{
 		font-size:0.7rem;
+	}
+	
+	input[type=checkbox] {
+
+	zoom: 1.3;
+	
 	}
 </style>
 
@@ -158,6 +163,9 @@
           </tr>
         </tbody>
       </table>
+	 <div id="pageBar">
+     	<%=request.getAttribute("pageBar") %>
+     </div>    
       <!-- 버튼 -->
       <div class="btnArea">
       	<button type="button" id="btnEdit" class="btn btn-outline-success">선택 주문 수정</button>
@@ -165,9 +173,6 @@
       </div>
     </div>
 	
-	 <div id="pageBar">
-     	<%=request.getAttribute("pageBar") %>
-     </div>    
     
 <script type="text/javascript">
 	$(document).ready(function(){
