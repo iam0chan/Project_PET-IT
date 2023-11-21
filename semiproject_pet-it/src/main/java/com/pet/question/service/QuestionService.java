@@ -16,6 +16,7 @@ public class QuestionService {
 
 	private QuestionDao dao = new QuestionDao();
 	
+	//전체게시글 
 	public List<Question> selectQuestion(int cPage, int numPerpage){
 		Connection conn = getConnection();
 		List<Question> result = dao.selectQuestion(conn, cPage, numPerpage);
@@ -64,6 +65,14 @@ public class QuestionService {
 		close(conn);
 		return result;
 		
+	}
+	
+	//로그인 했을 때 본인 게시글 보이게 하는 service
+	public List<Question> selectQuestion(int cPage, int numPerpage, String memberId) {
+		Connection conn = getConnection();
+		List<Question> result = dao.selectQuestion(conn, cPage, numPerpage, memberId);
+		close(conn);
+		return result;
 	}
 	
 	

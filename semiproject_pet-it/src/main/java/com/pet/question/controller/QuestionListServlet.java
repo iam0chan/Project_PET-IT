@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pet.member.dto.Member;
 import com.pet.question.model.dto.Question;
 import com.pet.question.service.QuestionService;
 
@@ -38,8 +39,13 @@ public class QuestionListServlet extends HttpServlet {
 		}catch (NumberFormatException e) {
 			cPage=1;
 		}
-		List<Question> question = new QuestionService().selectQuestion(cPage, numPerpage);
-		
+		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
+		List<Question> question = null;
+		if(loginMember !=null && loginMember.getMemberId().equals("petitad")) {
+			question = new QuestionService().selectQuestion(cPage, numPerpage);
+		}else {
+			question = new QuestionService().selectQuestion(cPage, numPerpage, loginMember.getMemberId());
+		}
 		int totalData=new QuestionService().selectQuestionCount();
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;

@@ -37,9 +37,12 @@ public class QuestionWriterPageServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		String title = request.getParameter("title");
 		String board_category = request.getParameter("selectCategory");
-		
+		String loginMember = request.getParameter("loginMember");
+		System.out.println(loginMember);
+		System.out.println("내가찾는"+title);
 		Question q = Question.builder()
 				.questionTitle(title)
+				.memberId(loginMember)
 				.questionCategory(board_category)
 				.questionContent(content)
 				.build();

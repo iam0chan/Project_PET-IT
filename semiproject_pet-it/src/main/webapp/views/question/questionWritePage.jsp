@@ -78,14 +78,14 @@
 												<option value="취소/반품/교환">취소/반품/교환</option>
 												<option value="제품/서비스 이용 불만">제품/서비스 이용 불만</option>
 												<option value="기타">기타</option>
-										</select> <input id="question-title" style="width: 400px;" type="text">
+										</select> <input id="question-title" style="width: 400px;" type="text" name="title">
 										</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td style="text-align: center; background-color: #F2F2F2;">작성자</td>
-										<td><input type=""></td>
+										<td><input type="text" name="loginMember" value="<%=loginMember.getMemberId()%>"></td>
 										<!--아이디값 자동부여  -->
 									</tr>
 								</tbody>

@@ -146,7 +146,7 @@ tr.item:hover {
 	  <div>
 		<%
 		if (loginMember != null ) {
-		%> --%>
+		%> 
 		<div class="questionwriter">
 			<button
 				onclick="location.assign('<%=request.getContextPath()%>/questionwriter.do')"

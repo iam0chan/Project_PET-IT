@@ -29,6 +29,7 @@ public class QuestionDao {
         }
     }
 	
+	//전체 게시글 
 	public List<Question> selectQuestion(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -70,7 +71,7 @@ public class QuestionDao {
 		ResultSet rs = null;
 		Question q = null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectQuestionByNo"));
+			pstmt=conn.prepareStatement(sql.getProperty("selectQuestionByNO"));
 			pstmt.setString(1, questionNo);
 			rs=pstmt.executeQuery();
 			if(rs.next()) q=getQuestion(rs);
@@ -87,9 +88,10 @@ public class QuestionDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertQuestion"));
-			pstmt.setString(1, q.getQuestionTitle());
-			pstmt.setString(2, q.getQuestionCategory());
-			pstmt.setString(3, q.getQuestionContent());
+			pstmt.setString(1, q.getMemberId());
+			pstmt.setString(2, q.getQuestionTitle());
+			pstmt.setString(3, q.getQuestionCategory());
+			pstmt.setString(4, q.getQuestionContent());
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -139,7 +141,27 @@ public class QuestionDao {
         return result;
     }
 	
-	
+  //로그인 했을 때 본인 게시글 보이게 하는 dao
+    public List<Question> selectQuestion(Connection conn, int cPage, int numPerpage, String memberId) {
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	List<Question> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectQuestionByUserId"));
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getQuestion(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}		
 	
 	
 	
@@ -164,6 +186,7 @@ public class QuestionDao {
 		
 		
 	}
+
 	
 	
 	
