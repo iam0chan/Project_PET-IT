@@ -275,13 +275,12 @@ background-color: green;
 		<table>
 			<thead>
 				<tr>
-					<th><input type="checkbox"></th>
-					<th>이미지</th>
-					<th>상품정보</th>
-					<th>판매가</th>
-					<th>수량</th>
-					<th>합계</th>
-					<th></th>
+					<td><input type="checkbox"></td>
+					<td>이미지</td>
+					<td>상품정보</td>
+					<td>판매가</td>
+					<td>수량</td>
+					<td></td>
 				</tr>
 			</thead>
 			</table>
