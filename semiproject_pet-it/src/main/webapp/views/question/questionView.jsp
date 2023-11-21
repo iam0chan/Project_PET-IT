@@ -33,7 +33,7 @@
 .row {
 	width: 900px;
 /* 	margin: 0 auto; */
-	display: flex;
+	display: flex{0,1,0};
 	flex-direction: column;
 	align-items: center;
 }
@@ -45,8 +45,15 @@
 /* 	align-items: center; */
 	margin: 0px auto;
 }
+
+#contentBox{
+	width: 900px !important;
 }
 
+#contentBox img {
+	width: 800px !important;
+	height : 800px !important;
+}
 
 </style>
 <div class="space">
@@ -83,7 +90,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><%=q.getQuestionContent()%></td>
+						<td id="contentBox"><%=q.getQuestionContent()%></td>
 					</tr>
 				</tbody>
 			</table>
