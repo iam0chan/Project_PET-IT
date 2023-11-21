@@ -86,6 +86,7 @@ public class FaqService {
 			return result;
 			
 		}
+		//조회수
 		public int updatefaqcnt(String faqno) {
 			Connection conn=getConnection();			
 			int result = dao.cntadd(conn,faqno);
@@ -100,7 +101,19 @@ public class FaqService {
 			return result;
 		}
 		
-		
+		//검색기능 
+		public List<Faq>selectFaq(int cPage, int numPerpage, String key, String keyword){
+			Connection conn = getConnection();
+			List<Faq> resultList = null;
+			if(key.equals("faq_title")) {
+				resultList = dao.faqSearchTitle(conn, cPage, numPerpage, keyword);
+			}else {
+				resultList = dao.faqSearchContenet(conn, cPage, numPerpage, keyword);
+			}
+			close(conn);
+			return resultList;
+					
+		}
 		
 		
 		

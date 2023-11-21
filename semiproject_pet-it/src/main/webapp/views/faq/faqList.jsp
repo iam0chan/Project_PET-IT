@@ -153,8 +153,8 @@ tr.item:hover {
 	<div class="boardsearchAll">
 		<form action='<%=request.getContextPath()%>/searchMenu.do' method="get" > 
 			<select id="searchKey" name="searchKey">
-				<option value="subject">제목</option>
-				<option value="subject">내용</option>
+				<option value="faq_title">제목</option>
+				<option value="faq_content">내용</option>
 			</select>
 		<input type="search" id="searchMenu" name="searchKeyword" placeholder="입력하세요">
 			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
@@ -177,6 +177,7 @@ tr.item:hover {
 		crossorigin="anonymous"></script>
 
 	<script>
+	//조회수
 	function hitadd(faqno) {
 		var td =  document.querySelector("#hit"+faqno)
 		const contentTr=$(td).parents("tr").next();
