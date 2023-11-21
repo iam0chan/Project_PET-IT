@@ -163,7 +163,7 @@ tr.item:hover {
 
 	<div>
 		<%if(loginMember!=null
-			&&loginMember.getMemberId().equals("jihyes")){ %>
+			&&loginMember.getMemberId().equals("petitad")){ %>
 			 <div class="Pet-it-adminBtn">
 			 <button onclick="location.assign('<%=request.getContextPath()%>/faqwriter.do')" class="btn btn-outline-success">글쓰기</button>
 			 </div>
