@@ -1,34 +1,35 @@
 package com.pet.cart.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pet.cart.model.dto.Cart;
-import com.pet.cart.model.service.CartService;
-
 /**
- * Servlet implementation class myInfo
+ * Servlet implementation class CartInsertServlet
  */
-@WebServlet("/cart.do")
-public class CartServlet extends HttpServlet {
+@WebServlet("/CartInsertServlet")
+public class CartInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CartInsertServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * List<Cart> c = new CartService().selectCart(1,3,"doyoungs");
-		 * request.setAttribute("cartList", c); for(Cart cart : c) {
-		 * System.out.println(cart); }
-		 * 
-		 * request.getRequestDispatcher("/views/cart/cartList.jsp").forward(request,
-		 * response);
-		 */
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -38,4 +39,3 @@ public class CartServlet extends HttpServlet {
 	}
 
 }
-

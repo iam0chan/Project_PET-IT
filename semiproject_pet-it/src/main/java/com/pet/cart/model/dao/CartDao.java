@@ -33,9 +33,9 @@ public class CartDao {
 		List<Cart> result = new ArrayList<>();
 		try {
 			pstmt = conn.prepareCall(sql.getProperty("selectCart"));
-			pstmt.setString(1, member_id);
-			pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
-			pstmt.setInt(3, cPage * numPerpage);
+			pstmt.setInt(1, (cPage - 1) * numPerpage + 1);
+			pstmt.setInt(2, cPage * numPerpage);
+			pstmt.setString(3, member_id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				result.add(getCart(rs));
@@ -85,6 +85,10 @@ public class CartDao {
 		}
 		return c;
 	}
+	
+	
+	
+	
 	private Cart getCart(ResultSet rs) throws SQLException {
 		return Cart.builder()
 				.cartNo(rs.getString("cart_no"))
