@@ -37,7 +37,7 @@ public class PaymentStartServlet extends HttpServlet {
 		String optionName = request.getParameter("optionName");
 		int detailCount = Integer.parseInt(request.getParameter("orderAmount"));
 		List<OrderDetail> odl= new ArrayList<>();
-		
+
 		if(productNo!=null&&optionName!=null&&detailCount!=0) {
 			
 			// 가져온 상품번호로 상품 객체, 상품이미지 객체 가져오기

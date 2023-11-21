@@ -1,4 +1,4 @@
-package com.pet.cart.controller;
+package com.pet.question.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CartList
+ * Servlet implementation class QuestionWriteServlet
  */
-@WebServlet("/CartList")
-public class CartList extends HttpServlet {
+@WebServlet("/questionwriter.do")
+public class QuestionWriterPageWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartList() {
+    public QuestionWriterPageWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +26,11 @@ public class CartList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		String productNo = request.getParameter("productNo");
-		System.out.println(productNo);
+		//글쓰기 화면으로 전환 
+		request.getRequestDispatcher("/views/question/questionWritePage.jsp").forward(request, response);
+		
+		
+		
 	}
 
 	/**
