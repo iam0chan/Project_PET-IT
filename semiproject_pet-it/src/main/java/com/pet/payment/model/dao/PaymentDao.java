@@ -1,6 +1,6 @@
 package com.pet.payment.model.dao;
 
-import static com.pet.common.JDBCTemplate.close;
+import static com.pet.common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -124,45 +124,6 @@ private Properties sql = new Properties();
 			close(pstmt);
 		}
 		return Arrays.stream(result).allMatch(count -> count > 0);
-	}
-	
-	public List<Order> selectOrderList(Connection conn, int cPage, int numPerpage){
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<Order>orders = new ArrayList<>();
-		
-		try {
-			pstmt = conn.prepareStatement(sql.getProperty("selectOrderList"));
-			pstmt.setInt(1,(cPage-1)*numPerpage+1);
-			pstmt.setInt(2, cPage * numPerpage);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				orders.add(getOrders(rs));
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return orders;
-	}
-	
-	public int selectOrderCount(Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int result = 0;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectOrderCount"));
-			rs = pstmt.executeQuery();
-			if(rs.next()) result=rs.getInt(1);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return result;
 	}
 	
 	private static Order getOrders(ResultSet rs) throws SQLException {

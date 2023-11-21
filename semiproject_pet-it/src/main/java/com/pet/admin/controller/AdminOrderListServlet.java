@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pet.admin.service.AdminService;
 import com.pet.payment.model.dto.Order;
-import com.pet.payment.service.PaymentService;
 
 
 /**
  * Servlet implementation class AdminDataServlet
  */
 @WebServlet("/adminOrder.do")
-public class AdminOrderServlet extends HttpServlet {
+public class AdminOrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminOrderServlet() {
+    public AdminOrderListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,8 +40,8 @@ int cPage,numPerpage=10;
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		List<Order> result = new PaymentService().selectOrderList(cPage,numPerpage);
-		int totalData = new PaymentService().selectOrderCount();
+		List<Order> result = new AdminService().selectOrderList(cPage,numPerpage);
+		int totalData = new AdminService().selectOrderCount();
 		int totalPage = (int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=3;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -75,7 +75,7 @@ int cPage,numPerpage=10;
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("orders", result);		
 		
-		request.getRequestDispatcher("/views/admin/adminOrder.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminOrderList.jsp").forward(request, response);
 	}
 
 	/**

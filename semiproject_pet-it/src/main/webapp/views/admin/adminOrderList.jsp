@@ -2,41 +2,33 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.text.DecimalFormat, java.sql.*, java.util.*, com.pet.payment.model.dto.Order"%>
 <% List<Order> order = (List<Order>) request.getAttribute("orders"); %>
-<%@ include file="adminSideBar.jsp" %>   
+<%@ include file="adminSideBar.jsp" %>
+
 <title>Pet-It 관리자페이지</title>
 
 <style>
-	* {
-	  margin: 0;
-	  padding: 0;
-	}
-	button {
-	  padding: 5px 10px;
-	  cursor: pointer;
-	}
-	button:hover {
-	  background-color: lightgreen;
-	}
-	div.app {
-	  margin-top:5%;	
-	  width: 100%;
-	  align-items:center;
-	  text-align:center;
+
+	table{
+		border-collapse: collapse;
+	  text-align : center;
 	  
 	}
-	table,
+	
 	td {
 	  /* border: 1px solid #333; */
 	  border-collapse: collapse;
 	  text-align : center;
+	  justfy-content : center;
 	}
 	table {
-	  
-	  margin: 20px;
+	  margin-left : 40px; 
+	  margin: 40px;
 	}
 	td,
 	th {
 	  padding: 3px;
+	  
+	  vertical-align : middel;
 	}
 	thead,
 	tfoot {
@@ -48,6 +40,7 @@
 	}
 	td.center {
 	  text-align: center;
+	  cursor: pointer;
 	  
 	}
 	div.btnArea {
@@ -67,6 +60,17 @@
 	zoom: 1.3;
 	
 	}
+	
+	.btnEditDel{
+		font-size:0.8rem;
+	}
+	
+	#tableContainer{
+		text-align : center;
+		display : flax;
+		item-aligns : center;
+		justfy-content : center;
+	}
 </style>
 
 <link rel="icon" href="<%=request.getContextPath()%>/img/favicon-16x16.png" type="image/png" />
@@ -80,19 +84,21 @@
         </div>
       </div>
       	
-    <div class="app">
     <h3 id="title"> 주문 목록 </h3>
+    
 
       <!-- 테이블 -->
+      <div id="tableContainer">
       <table class="table table-hover">
         <caption></caption>
         <colgroup>
           <col width="3%" />
           <col width="10%" />
           <col width="10%" />
-          <col width="5%" />
+          <col width="10%" />
           <col width="5%" />
           <col width="20%" />
+          <col width="10%" />
           <col width="10%" />
           <col width="10%" />
         </colgroup>
@@ -105,7 +111,7 @@
             <th>연락처</th>
             <th>배송지 주소</th>
             <th>총 가격</th>
-            
+            <th>주문 수정/취소</th>
           </tr>
         </thead>
         
@@ -115,31 +121,33 @@
         		
           <tr>
             <td class="center"><input type="checkbox" name="chkRow" id=""></td>
-            <td class="center" data-cell-header="content"><%=o.getOrderNo()%></td>
+            <td class="center" data-cell-header="orderNo"><%=o.getOrderNo()%></td>
             <td class="center" data-cell-header="content"><%=o.getOrderId()%></td>
             <td class="center" data-cell-header="content"><%=o.getOrderName()%></td>
             <td class="center" data-cell-header="content"><%=o.getOrderPhone()%></td>
             <td class="center" data-cell-header="content"><%=o.getOrderZipcode()%> <%=o.getOrderAddr()%> <%=o.getOrderDefAddr()%></td>
             <td class="center" data-cell-header="content"><%=o.getOrderTotalPrice()%></td>
-                
+            <td class="center" data-cell-header="btnEditDel"><button class="btn btn-outline-success btnEditDel">주문 수정/취소</button></td>   
           </tr>
           
         <%} %>  
     <%} %>    
         </tbody>
       </table>
-	 
+	 </div>
+
+      <!-- pageBar / 버튼 -->
 	 <div id="pageBar">
      	<%=request.getAttribute("pageBar") %>
      </div>    
-      <!-- 버튼 -->
       <div class="btnArea">
-      	<button type="button" id="btnEdit" class="btn btn-outline-success">선택 주문 수정</button>
-        <button type="button" id="btnDelete" class="btn btn-outline-success">선택 주문 삭제</button>
+        <button type="button" id="btnDelete" class="btn btn-outline-success">선택주문 일괄취소/환불</button>
       </div>
-    </div>
-	
-    
+      
+<form id="myForm" action="/submit" method="post">
+
+<!-- Sweet alert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>       
 <script type="text/javascript">
 	$(document).ready(function(){
 		init();
@@ -196,42 +204,64 @@
     	  // 버튼 클릭 Event
     	  $('#btnDelete').click(function() {
     	    // 체크된 항목 확인
-    	    var arrIds = [];
+    	    var arrOrderNo = [];
     	    $('input[name="chkRow"]:checked').each(function(idx, item) {
-    	      arrIds.push(
+    	    	arrOrderNo.push(
     	        $(this).closest('tr').find('td').filter(function() {
-    	          return $(this).data('cellHeader') == 'content';
+    	          return $(this).data('cellHeader') == 'orderNo';
     	        }).text()
     	      );
     	    });
 
-    	    if (arrIds.length == 0) {
-    	      alert('체크된 항목이 없습니다.');
+    	    if (arrOrderNo.length == 0) {
+    	    	Swal.fire({
+    	    		  icon: "error",
+    	    		  title: "이런...",
+    	    		  text: "주문이 선택되지 않았어요!",
+    	    		});
     	      return;
     	    } else {
-    	      alert(arrIds.join());
+    	    	Swal.fire({
+    	    		  title: "주문 일괄 삭제/환불",
+    	    		  text: "선택 주문들을 정말 환불하고 삭제합니까?",
+    	    		  icon: "warning",
+    	    		  showCancelButton: true,
+    	    		  confirmButtonColor: "#3085d6",
+    	    		  cancelButtonColor: "#d33",
+    	    		  confirmButtonText: "Delete"
+    	    		}).then((result) => {
+    	    		  if (result.isConfirmed) {
+    	    		    $.ajax({
+    	    		    	url : '<%=request.getContextPath()%>/adminOrderDelete',
+    	    		    	type : 'POST',
+    	    		    	dataType : 'json',
+    	    		    	data : { 
+    	    		    		arrOrderNo: JSON.stringify(arrOrderNo) 
+   	    		    		},
+   	    		    		success : {
+   	    		    			window.location.href("<%=request.getContextPath()%>/adminOrder.do");
+   	    		    		},"
+    	    		    	error: function(error){
+    	    		    		Swal.fire({
+    	      	    		      title: "삭제/환불 실패!",
+    	      	    		      text: "자세한 사항은 담당자에게 문의하세요",
+    	      	    		      icon: "error"
+    	      	    		    });
+    	    		    	}
+    	    		    });
+    	    			  
+    	    			Swal.fire({
+    	    		      title: "삭제 되었습니다!",
+    	    		      text: "선택된 주문들이 환불되고 삭제되었습니다",
+    	    		      icon: "success"
+    	    		    });
+    	    		    
+    	    		    location.reload(true);
+    	    		  }
+    	    		});
     	    }
     	  });
-    	  
-    	  $('#btnEdit').click(function() {
-      	    // 체크된 항목 확인
-      	    var arrIds = [];
-      	    $('input[name="chkRow"]:checked').each(function(idx, item) {
-      	      arrIds.push(
-      	        $(this).closest('tr').find('td').filter(function() {
-      	          return $(this).data('cellHeader') == 'id';
-      	        }).text()
-      	      );
-      	    });
 
-      	    if (arrIds.length == 0) {
-      	      alert('체크된 항목이 없습니다.');
-      	      return;
-      	    } else {
-      	      alert(arrIds.join());
-      	    }
-      	  });
-    	  
     	}
 
     	/**
