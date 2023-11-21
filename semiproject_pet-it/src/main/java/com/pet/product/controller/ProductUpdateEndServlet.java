@@ -72,23 +72,36 @@ public class ProductUpdateEndServlet extends HttpServlet {
 				System.out.println("key: " + entry.getKey() + " " + "value: " + entry.getValue());
 			}
 
-//			OPTION 존재 여부 판단(존재 시 업데이트, 존재하지 않을 시 새로운 OPTION 추가)
-			Map<String, Map> updateOption = new HashMap<>(); // 기존 옵션 이름이 같을 시 업데이트 할 옵션값
-			Map<String, String> newOptions = new HashMap<>(); // 존재하는 값에 새로운 업데이트 할 값
-			List<ProductOption> originalOptions = new ProductService().selectProductOptionsByNo(productNo); // 기존에 존재하는
-																											// 옵션들 불러오기
-			for (ProductOption po : originalOptions) {
-				for (Map.Entry<String, String> entry : options.entrySet()) {
-					if (po.getProductOptionName().equals(entry.getKey())) { // 기존 존재 옵션과 새로 들어온 옵션
-						if (po.getProductOptionPrice() != Integer.parseInt(entry.getValue())) {
-							newOptions.put(po.getProductOptionName(), entry.getValue());
-							updateOption.put(po.getProductOptionNo(), newOptions);
-						}
-					} else {
-						newOptions.put(entry.getKey(), entry.getValue());
+			
+			List<ProductOption> originalOptions = new ProductService().selectProductOptionsByNo(productNo);
+			if(!originalOptions.isEmpty()) {
+				 int insertOption = new
+				 ProductService().insertProductOption(productNo,options);
+				 
+			}else {
+				for(ProductOption po : originalOptions) {
+					for(Map.Entry<String, String> entry : options.entrySet()) {
+						
 					}
 				}
 			}
+			
+//			OPTION 존재 여부 판단(존재 시 업데이트, 존재하지 않을 시 새로운 OPTION 추가)
+			/*
+			 * Map<String, Map> updateOption = new HashMap<>(); // 기존 옵션 이름이 같을 시 업데이트 할 옵션값
+			 * Map<String, String> newOptions = new HashMap<>(); // 존재하는 값에 새로운 업데이트 할 값
+			 * List<ProductOption> originalOptions = new
+			 * ProductService().selectProductOptionsByNo(productNo); // 기존에 존재하는 // 옵션들 불러오기
+			 * for (ProductOption po : originalOptions) {
+			 * System.out.println("확인확인확인확인확인확인확인확인확인확인확인확인확인 "+po); for (Map.Entry<String,
+			 * String> entry : options.entrySet()) { if
+			 * (po.getProductOptionName().equals(entry.getKey())) { // 기존 존재 옵션과 새로 들어온 옵션
+			 * System.out.println(po.getProductOptionName()+" ++++ "+entry.getKey()); if
+			 * (po.getProductOptionPrice() != Integer.parseInt(entry.getValue())) {
+			 * newOptions.put(po.getProductOptionName(), entry.getValue());
+			 * updateOption.put(po.getProductOptionNo(), newOptions); } } else {
+			 * newOptions.put(entry.getKey(), entry.getValue()); } } }
+			 */
 
 //			PRODUCT UPDATE 정보
 			Product item = Product.builder().productNo(productNo).productName(productName).productPrice(productPrice)
