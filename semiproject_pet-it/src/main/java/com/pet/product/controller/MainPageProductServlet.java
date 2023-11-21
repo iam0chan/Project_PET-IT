@@ -22,7 +22,7 @@ import com.pet.product.service.ProductService;
 /**
  * Servlet implementation class MainPageProductServlet
  */
-@WebServlet("/product/mainPage.do")
+@WebServlet(urlPatterns={"/product/mainPage.do"})
 public class MainPageProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,12 +30,9 @@ public class MainPageProductServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("utf-8");
 		
-		String type = request.getParameter("type");
-		System.out.println(type);
-		
 		List<ProductImageFile> files = null;
 		Map<String,ProductImageFile> data = new HashMap<>();
-		List<Product> newProducts = new ProductService().selectProductListAll(1, 6, type);
+		List<Product> newProducts = new ProductService().selectProductListAll(1, 6, "new");
 		for(Product p: newProducts) {
 			data.put(p.getProductNo(),new ProductService().selectMainImageFile(p.getProductNo()));
 			
@@ -43,7 +40,7 @@ public class MainPageProductServlet extends HttpServlet {
 		
 		request.setAttribute("newProducts", newProducts);
 		request.setAttribute("imageData", data);
-		request.getRequestDispatcher("/").forward(request, response);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 		
 		
 	}
