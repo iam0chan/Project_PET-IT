@@ -54,7 +54,7 @@ public class ProductListServlet extends HttpServlet {
 		pageBar.append("<ul class='pagination justify-content-center'>");
 		
 		if(pageNo==1) {
-			pageBar.append("<li class='page-item disabled'><a class='page-link' href='#'>이전</a></li>");
+			pageBar.append("<li class='page-item disabled' ><a class='page-link' href='#'>이전</a></li>");
 		}else {
 			pageBar.append("<li calss = 'page-item'><a class='page-link' href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&type="+type+"'>이전</a></li>");
 		}
