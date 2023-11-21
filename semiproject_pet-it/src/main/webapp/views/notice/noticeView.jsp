@@ -56,7 +56,7 @@
 	
 	<div id="list-btn" class="btn-container" style="width: 107px;" >
 		<%if(loginMember!=null
-			&&loginMember.getMemberId().equals("jihyes")){ %>
+			&&loginMember.getMemberId().equals("petitad")){ %>
 			 <div class="Pet-it-adminBtn">
 			 <button onclick="location.assign('<%=request.getContextPath()%>/noticewriter.do')" class="btn btn-outline-success">수정</button>
 			 </div>
