@@ -334,6 +334,7 @@
 // 결제정보관련 변수 설정
 let id="<%=loginMember.getMemberId()%>"
 let pg="";
+let pay_method = "";
 let product_name="";
 let amount= "";
 let addr="";
@@ -422,9 +423,11 @@ $("#paymentBtn").on("click",function(e){
 
     // 빈 필드가 없다면 결제 방식 선택
     if($("#card-payment").is(":checked")){
-        pg = "kcp.AO09C";	
+        pg = "kcp.AO09C";
+        pay_method = "Card";
     } else {
         pg = "kakaopay.TC0ONETIME";
+        pay_method = "KakaoPay"
     }
     payment_api();
 
