@@ -6,6 +6,7 @@ import static com.pet.common.JDBCTemplate.getConnection;
 import static com.pet.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.pet.faq.model.dao.FaqDao;
@@ -47,14 +48,14 @@ public class FaqService {
 		public Faq selectFaqByNo (String faqNo, boolean readResult) {
 			Connection conn = getConnection();
 			Faq f = dao.selectFaqByNo(conn, faqNo);
-				if(f!=null && !readResult) {
-					int result = dao.updateFaqReadCount(conn,faqNo);
-					if (result > 0) {
-						commit(conn);
-						f.setFaqHits(f.getFaqHits() + 1);
-					} else
-						rollback(conn);
-				}
+//				if(f!=null && !readResult) {
+//					int result = dao.updateFaqReadCount(conn,faqNo);
+//					if (result > 0) {
+//						commit(conn);
+//						f.setFaqHits(f.getFaqHits() + 1);
+//					} else
+//						rollback(conn);
+//				}
 				close(conn);
 				return f;
 
@@ -84,6 +85,19 @@ public class FaqService {
 			close(conn);
 			return result;
 			
+		}
+		public int updatefaqcnt(String faqno) {
+			Connection conn=getConnection();			
+			int result = dao.cntadd(conn,faqno);
+			try {
+				conn.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("service updatefaqcnt:"+result);
+			close(conn);
+			return result;
 		}
 		
 		

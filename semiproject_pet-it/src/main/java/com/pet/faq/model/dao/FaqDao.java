@@ -60,9 +60,10 @@ public class FaqDao {
 		Faq f=null;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectFaqByNo"));
-			pstmt.setInt(1, f.getFaqHits()); 
+			pstmt.setString(1, faqNo); 
 			rs=pstmt.executeQuery();
 			if(rs.next()) f=getFaq(rs);
+			conn.commit();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			
@@ -81,6 +82,7 @@ public class FaqDao {
     		pstmt = conn.prepareStatement(sql.getProperty("updateFaqReadCount"));
     		pstmt.setString(1,FaqNo);
     		result=pstmt.executeUpdate();
+    		conn.commit();
     	}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -217,4 +219,23 @@ public class FaqDao {
                 .faqContent(rs.getString("FAQ_CONTENT"))
                 .build();
     }
+
+	public int cntadd(Connection conn, String faqno) {
+	      PreparedStatement pstmt = null;
+	      System.out.println("cntadd 실행:"+faqno);
+          int result = 0;
+	        try {
+	            pstmt = conn.prepareStatement("update FAQ set FAQ_hits = FAQ_hits+1 where faq_no=?");
+	            pstmt.setString(1, faqno); 
+	 	        result = pstmt.executeUpdate();
+	 	        
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	        	
+	          close(pstmt);
+	        }
+
+		return result;
+	}
 }
