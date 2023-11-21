@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<%@ page import="java.util.List, com.pet.cart.model.dto.Cart" %>
+<%@ page import="java.util.List, com.pet.cart.model.dto.Cart"%>
 <%
 List<Cart> cart = (List<Cart>) request.getAttribute("cartList");
 %>
@@ -219,12 +220,58 @@ background-color: green;
 		<h6>
 			회원님은 <strong>[silver]</strong>등급입니다.
 		</h6>
-		<hr />
+		<!-- <hr />
 		<div class="info">
 			<div class="mileage">가용 적립금</div>
 			<div class="coupon">쿠폰</div>
 		</div>
-		<hr />
+		<hr /> -->
+		
+		<tr id="select">
+		<td colspan="6">
+		<select id="startMoney" name="startMoney">
+		<option>==최하==</option>
+		<c:choose>
+		<c:when test="${startMoney==10000 }">
+		<option selected="selected">10000</option>
+		<option>20000</option>
+		<option>30000</option>
+		</c:when>
+		<c:when test="${startMoney==20000 }">
+		<option>10000</option>
+		<option selected="selected">20000</option>
+		<option>30000</option>
+		</c:when>
+		<c:when test="${startMoney==30000 }">
+		<option>10000</option>
+		<option>20000</option>
+		<option selected="selected">30000</option>
+		</c:when>
+		</c:choose>
+	
+		
+		</select>
+		<select id="endMoney" name="endMoney">
+		<option>==최고==</option>
+		<c:choose>
+		<c:when test="${endMoney==10000 }">
+		<option selected="selected">10000</option>
+		<option>20000</option>
+		<option>30000</option>
+		</c:when>
+		<c:when test="${endMoney==20000 }">
+		<option>10000</option>
+		<option selected="selected">20000</option>
+		<option>30000</option>
+		</c:when>
+		<c:when test="${endMoney==30000 }">
+		<option>10000</option>
+		<option>20000</option>
+		<option selected="selected">30000</option>
+		</c:when>
+		</c:choose>
+		
+		</select>
 		<table>
 			<thead>
 				<tr>
@@ -237,7 +284,8 @@ background-color: green;
 					<th></th>
 				</tr>
 			</thead>
-	<%-- 		<tbody>
+			</table>
+			<%-- 		<tbody>
 				<tr>
 					<td><input type="checkbox"></td>
 					<td><img
@@ -267,38 +315,47 @@ background-color: green;
 			</tbody>
 
 			<tr>
-			<td></td>
-			<%if(cart.isEmpty()){ %>
+				<td></td>
+				<%
+				if (cart.isEmpty()) {
+				%>
 				<td colspan="6">장바구니가 비었습니다.</td>
 			</tr>
-			<%}else{ %>
-				<%for(Cart c : cart){ %>
+			<%
+			} else {
+			%>
+			<%
+			for (Cart c : cart) {
+			%>
 			<tr>
-					<td><input type="checkbox"></td>
-					<td><img
-						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
-					<td class="product-name">
-						<h5><%=c.getProductName() %></h5>
-						<p><%=c.getProductInfo() %></p>
-					</td>
+				<td><input type="checkbox"></td>
+				<td><img src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
+				<td class="product-name">
+					<h5><%=c.getProductName()%></h5>
+					<p><%=c.getProductInfo()%></p>
+				</td>
 
-					<td class="price"><%=c.getProductPrice() %>원</td>
+				<td class="price"><%=c.getProductPrice()%>원</td>
 
-					<td class="qua-col first-row">
-						<div class="pro-qty">
-							<span class="dec qtybtn">-</span> <input name="cartCnt"
-								class="cartQty" id="cartQty" value="1" type="text"
-								style="width: 100px;"> <span class="inc qtybtn">+</span>
-						</div>
-					</td>
-					<td class="total"><%=c.getProductPrice() %></td>
+				<td class="qua-col first-row">
+					<div class="pro-qty">
+						<span class="dec qtybtn">-</span> <input name="cartCnt"
+							class="cartQty" id="cartQty" value="1" type="text"
+							style="width: 100px;"> <span class="inc qtybtn">+</span>
+					</div>
+				</td>
+				<td class="total"><%=c.getProductPrice()%></td>
 
-					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-				</tr>
-					<%} %>
-				<%} %>
-				<%-- <tr>
+				<td class="button"><a href="javascript:;" class="btnNormal"
+					onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
+			</tr>
+			<%
+			}
+			%>
+			<%
+			}
+			%>
+			<%-- <tr>
 					<td><input type="checkbox"></td>
 					<td><img
 						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
@@ -343,33 +400,49 @@ background-color: green;
 					<td class="button"><a href="javascript:;" class="btnNormal"
 						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
 				</tr> --%>
-				<!-- 상품 추후에 추가하자 -->
+			<!-- 상품 추후에 추가하자 -->
 			</tbody>
-		</table> 
+		</table>
 
-			<div>
-				<button onclick="deleteSelectedProduct()">선택 상품 삭제</button>
-				<button onclick="continueShopping()">쇼핑 계속하기</button>
-			</div>
+		<div>
+			<button onclick="deleteSelectedProduct()">선택 상품 삭제</button>
+			<button onclick="continueShopping()">쇼핑 계속하기</button>
+		</div>
 
-			<div class="row justify-content-end" align="right">
-				<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-					<div class="cart-total mb-3">
-						<h3>장바구니 총 결제 금액</h3>
-						<hr>
-						<p class="d-flex total-price" style="font-size: 30px;">
-							<span>0원</span>
-						</p>
-					</div>
-					<!-- 주문하기 누르면 주문페이지로 이동 -->
-					<p>
-						<a href="#" class="btn btn-primary py-3 px-4">주문하기</a>
+		<div class="row justify-content-end" align="right">
+			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+				<div class="cart-total mb-3">
+					<h3>장바구니 총 결제 금액</h3>
+					<hr>
+					<p class="d-flex total-price" style="font-size: 30px;">
+						<span>0원</span>
 					</p>
 				</div>
+				<!-- 주문하기 누르면 주문페이지로 이동 -->
+				<p>
+					<a href="#" class="btn btn-primary py-3 px-4">주문하기</a>
+				</p>
 			</div>
+		</div>
 	</section>
 
 	<script>
+	function continueShopping() {
+	    // 쇼핑 계속하기를 누를 경우 카트 화면으로 이동
+	    window.location.href = "<%=request.getContextPath()%>/views/cart/cartList.jsp";
+	}
+	
+	// 선택상품 삭제-->체크박스
+	function checkAll(theForm){
+		if(theForm.remove.length == undefined){
+			theForm.remove.checked = theForm.allCheck.checked;
+		}else{
+		}for(var i=0;i<theForm.remove.length; i++){
+			theForm.remove[i].checked = theForm.allCheck.checked;
+		}
+	}
+	}
+	
 function deleteSelectedProduct() {
 	alert("선택한 상품이 삭제되었습니다.");
 }
