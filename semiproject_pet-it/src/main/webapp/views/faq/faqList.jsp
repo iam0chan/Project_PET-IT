@@ -125,8 +125,8 @@ tr.item:hover {
 				<tr class="item">
 					<td><%=f.getFaqNo()%></td>
 					<td><%=f.getFaqCategory()%></td>
-					<td><span class='title'><%=f.getFaqTitle()%></span></td>
-					<td><%=f.getFaqHits()%></td>
+					<td><span class='title' onclick="hitadd('<%=f.getFaqNo()%>')"><%=f.getFaqTitle()%></span></td>
+					<td id="hit<%=f.getFaqNo()%>"><%=f.getFaqHits()%></td>
 				</tr>
 				<!-- 아코디언효과를 넣은 리뷰내용 -->
 				<tr class="hide">
@@ -151,32 +151,16 @@ tr.item:hover {
 	</div>
 
 	<div class="boardsearchAll">
-		<form action='<%=request.getContextPath()%>/searchMenu.do' method="post" > 
+		<form action='<%=request.getContextPath()%>/searchMenu.do' method="get" > 
 			<select id="searchKey" name="searchKey">
-				<option value="subject">제목</option>
-				<option value="subject">내용</option>
+				<option value="faq_title">제목</option>
+				<option value="faq_content">내용</option>
 			</select>
-		<input type="search" id="searchMenu" placeholder="입력하세요">
-			<input type="submit" name="selectSearch" value="검색">
-		
-		</form>
-
-		<!-- <fieldset class="boardSearch">
-			<form>
-				<select id="searchKey" name="searchKey">
-					<option value="subject">제목</option>
-					<option value="subject">내용</option>
-				</select> <input id="search" name="search" placeholder="입력하세요">
-				<button class="btn btn-primary btn-sm">
-					<a href="#none">SEARCH</a>
-				</button>
-			</form>
-		</fieldset> -->
-		
-		
-		
+		<input type="search" id="searchMenu" name="searchKeyword" placeholder="입력하세요">
+			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
+		</form>		
 	</div>
-	<br>
+
 	<div>
 		<%if(loginMember!=null
 			&&loginMember.getMemberId().equals("jihyes")){ %>
@@ -193,7 +177,25 @@ tr.item:hover {
 		crossorigin="anonymous"></script>
 
 	<script>
-	
+	//조회수
+	function hitadd(faqno) {
+		var td =  document.querySelector("#hit"+faqno)
+		const contentTr=$(td).parents("tr").next();
+
+		if(contentTr[0].classList.contains("hide")){
+			$.ajax({
+				url : "<%=request.getContextPath()%>/faqcntadd.do?faqno="+faqno,
+				success : function(data) {
+					   console.log("====="+data)
+					   document.querySelector("#hit"+faqno).innerHTML=data
+			    },
+			    error:function(request,status,error){   
+			    	     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+		     }
+			});
+		}
+//	    location.href="<%=request.getContextPath()%>/faqcntadd.do?faqno="+faqno;    
+	}
 	
 	<!-- show와 hide 클래스를 추가한 아코디언 효과 jquey -->
 		$(function() {
@@ -209,7 +211,8 @@ tr.item:hover {
 					$(article).removeClass('show').addClass('hide')
 
 					$(myArticle).removeClass('hide').addClass('show');
-
+					
+               
 				}
 
 				else {
@@ -217,7 +220,6 @@ tr.item:hover {
 					$(myArticle).addClass('hide').removeClass('show');
 
 				}
-
 			});
 
 		});
