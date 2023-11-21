@@ -49,6 +49,7 @@ public class ProductService {
    public int getProductCount() {
       Connection conn = getConnection();
       int count = dao.getProductCount(conn);
+      close(conn);
       
       return count;
    }
@@ -90,6 +91,7 @@ public class ProductService {
       }else {
          rollback(conn);
       }
+      close(conn);
       
       return result;
             
