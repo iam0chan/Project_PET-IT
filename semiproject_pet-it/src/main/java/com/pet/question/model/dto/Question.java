@@ -1,6 +1,10 @@
 package com.pet.question.model.dto;
 
 import java.sql.Date;
+import lombok.Builder;
+import lombok.Data;
+@Data
+@Builder
 
 public class Question {
 
@@ -9,5 +13,5 @@ public class Question {
 	private Date questionDate;
 	private String questionTitle;
 	private String questionCategory;
-	
+	private String questionContent;
 }

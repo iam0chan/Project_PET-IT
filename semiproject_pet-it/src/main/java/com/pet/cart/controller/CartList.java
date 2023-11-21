@@ -24,6 +24,14 @@ public class CartList extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+<<<<<<< HEAD
+=======
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String memberId = request.getParameter("memberId");
+		String productNo = request.getParameter("productNo");
+		System.out.println(productNo);
+	}
+>>>>>>> refs/heads/dev
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

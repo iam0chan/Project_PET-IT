@@ -132,7 +132,6 @@ public class NoticeDao {
 	                result.add(getNotice(rs));
 	            }
 	        } catch (SQLException e) {
-	            // 적절한 예외 처리를 추가할 수 있습니다.
 	            e.printStackTrace();
 	        } finally {
 	            close(rs);
