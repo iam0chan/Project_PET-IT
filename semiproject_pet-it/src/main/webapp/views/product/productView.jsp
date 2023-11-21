@@ -337,8 +337,8 @@ ProductImageFile file = (ProductImageFile) request.getAttribute("file");
 	</div>
 </div>
 
-<form action="<%=request.getContextPath()%>/paymentStart.do"
-	method="post" id="orderInfo">
+<form action="<%=request.getContextPath()%>/CartList"
+	method="post" id="addCartInfo">
 	<input type="hidden" id="productNo" name="productNo" value="" /> <input
 		type="hidden" id="orderPrice" name="orderPrice" value="" /> <input
 		type="hidden" id="orderAmount" name="orderAmount" value="" /> <input
@@ -418,7 +418,20 @@ $("#cart-btn").click(function() {
 	$(".modal-footer>.btn:nth-child(2)").click(function() {
 	console.log("이벤트발생");
 	$(".modal").css("display", "none");
-	location.href = '<%=request.getContextPath()%>/views/cart/cartList.jsp?productNo=<%=p.getProductNo()%>';
+		const productNo = $.trim($("#pNo").val()); // 상품번호
+		const orderPrice = $.trim($(".total-price>span>strong").text()); //주문가격
+		const orderAmount = $.trim($("#product-order-amount").val()); //주문수량
+		const optionPrice = $.trim($("#option-select").val()); //옵션가격
+		const optionName = $.trim($("#option-select option:selected").attr("id")); //옵션명
+		console.log(optionName); //옵션명 체크 console
+
+		//paymentStart.do로 submit할 데이터가공
+		$("#productNo").val(productNo);
+		$("#orderPrice").val(orderPrice);
+		$("#orderAmount").val(orderAmount);
+		$("#optionPrice").val(optionPrice);
+		$("#optionName").val(optionName);
+		$("#addCartInfo").submit();
 
 	});
 });

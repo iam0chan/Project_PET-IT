@@ -37,7 +37,7 @@
             <div class="row">
               <div class="col-md-6 col-lg-4">
                 <div class="box">
-                  <div class="img-box">
+                  <div class="img-box1">
                     <img src="<%=request.getContextPath()%>/images/f1.png" alt="">
                   </div>
                   <div class="detail-box">
@@ -57,7 +57,7 @@
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="box">
-                  <div class="img-box">
+                  <div class="img-box2">
                     <img src="<%=request.getContextPath()%>/images/f2.png" alt="">
                   </div>
                   <div class="detail-box">
@@ -77,7 +77,7 @@
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="box">
-                  <div class="img-box">
+                  <div class="img-box3">
                     <img src="<%=request.getContextPath()%>/images/f3.png" alt="">
                   </div>
                   <div class="detail-box">
@@ -97,7 +97,7 @@
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="box">
-                  <div class="img-box">
+                  <div class="img-box4">
                     <img src="<%=request.getContextPath()%>/images/f4.png" alt="">
                   </div>
                   <div class="detail-box">
@@ -117,7 +117,7 @@
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="box">
-                  <div class="img-box">
+                  <div class="img-box5">
                     <img src="<%=request.getContextPath()%>/images/f5.png" alt="">
                   </div>
                   <div class="detail-box">
@@ -137,7 +137,7 @@
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="box">
-                  <div class="img-box">
+                  <div class="img-box6">
                     <img src="<%=request.getContextPath()%>/images/f6.png" alt="">
                   </div>
                   <div class="detail-box">
@@ -268,8 +268,20 @@
         			type:'post',
         			data:{type:'new'},
         			success:data=>{
-        				console.log(data);
-        				console.log(data[0].productNo);
+        				let i = 1;
+        				$.each(data.newProduct,function(i,p){
+        					console.log(p);
+        					$.each(data.files,function(i,f){
+        						if(p.productNo === f.productNo){
+        							console.log(f.productFileRename);
+        							const img = $("div.img-box"+i);
+        							img.attr("src","<%=request.getContextPath()%>/upload/f.productFileRename");
+        							console.log(img.html());
+        							++i;
+        						}
+        					})
+        					
+        				})
         			}
         			
         			})
