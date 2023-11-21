@@ -21,19 +21,6 @@ import com.pet.product.service.ProductService;
 public class CartList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-<<<<<<< HEAD
-=======
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		String productNo = request.getParameter("productNo");
-		System.out.println(productNo);
-	}
->>>>>>> refs/heads/dev
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
