@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.pet.payment.model.dto.OrderDetail" %>
+
+<%@ page import="com.pet.payment.model.dto.OrderDetail, 
+				com.pet.cart.model.dto.Cart, 
+				java.util.List, 
+				java.util.ArrayList" 
+%>
+
 <% OrderDetail od = (OrderDetail)request.getAttribute("orderDetail");%>
+<% List<OrderDetail> ol = (List<OrderDetail>)request.getAttribute("orderList"); %>
+
 <!-- header -->
 <%@ include file="/views/header.jsp"%>
 <!-- bootstrap -->
@@ -49,7 +57,7 @@
 				      		<td style="font-size:1.15rem; text-align:center;">받는 사람 <strong>*</strong></td>
 				      		<td>
 					      		<div class="input-group input-group col-lg-3">
-								  <input type="text" id="orderName" class="form-control" placeholder="받는 사람">
+								  <input type="text" id="orderName" class="form-control" placeholder="받는 사람" value="">
 								</div>
 							</td>
 						</tr>
@@ -58,16 +66,16 @@
 							<td style="font-size:1.15rem; text-align:center; width:20%">주소 <strong>*</strong></td>
 							<td>	
 								<div class="input-group input-group col-lg-5">
-								  <input id="zipcode" name="orderZipcode" type="text" class="form-control" placeholder="우편 번호" >
+								  <input id="zipcode" name="orderZipcode" type="text" class="form-control" placeholder="우편 번호" value="">
 								  <input id="addrBtn" class="btn btn-outline-success optional" type="button" onclick="addrBtnAction()" value="주소 검색">
 								</div>
 							
 			      				<div class="input-group input-group col-lg-10">
-								  <input id="addr" id="orderAddr" type="text" class="form-control" placeholder="기본 주소" >
+								  <input id="addr" id="orderAddr" type="text" class="form-control" placeholder="기본 주소" value="">
 								</div>
 			      			
 			      				<div class="input-group input-group col-lg-10">
-								  <input id="detailAddr" name="orderDefAddr" type="text" class="form-control" placeholder="상세 주소">
+								  <input id="detailAddr" name="orderDefAddr" type="text" class="form-control" placeholder="상세 주소" value="">
 								  <input id="extraAddr" type="text" class="form-control optional" placeholder="참조 주소">
 								</div>
 			      			</td>
@@ -77,18 +85,18 @@
 			      			<td style="font-size:1.15rem; text-align:center;">휴대 전화 <strong>*</strong></td>
 			      			<td>
 			      				<div class="input-group input-group col-lg-7">
-								  <input type="text" id="orderPhone" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력">
+								  <input type="text" id="orderPhone" class="form-control" placeholder="휴대번화 번호 '-'제외하고 입력" value="">
 								</div>
 			      			</td>
 			      		</tr>
 			      		<tr style="height:10px"></tr>
 			      		<tr>
-			      			<td style="font-size:1.15rem; text-align:center;">이메일</td>
+			      			<td style="font-size:1.15rem; text-align:center;">이메일 <strong>*</strong></td>
 			      			<td>
 			      				<div class="input-group col-lg-9">
-		   						    <input type="text" class="form-control optional" id="emailHead" placeholder="이메일" aria-label="Username">
+		   						    <input type="text" class="form-control" id="emailHead" placeholder="이메일" aria-label="Username">
 								  	<span class="input-group-text">@</span>
-								  	<input type="text" class="form-control optional" name="emailTail" id="textEmail" placeholder="이메일 선택">
+								  	<input type="text" class="form-control" name="emailTail" id="textEmail" placeholder="이메일 선택">
 									<select class="form-select" id="selectEmail">
 									  	 <option disabled selected>이메일 선택</option>
 									 	 <option value="naver.com" id="naver.com">naver.com</option>
@@ -135,18 +143,22 @@
 			    </h2>
 			    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
 			      <div class="accordion-body" id="productAll">
-				      <div class="productDiv" id="productDiv">
+			      	
+			      <%if(!ol.isEmpty()){ %>
+			      		<%for(OrderDetail odl : ol){ %>
+			       		
+			       		<div class="productDiv" id="productDiv">
 					       <div style="width:15%; text-align:center">
-					       		<img src="<%=request.getContextPath()%>/upload/<%=od.getProductImg()%>" width="120px" height="120px">
+					       		<img src="<%=request.getContextPath()%>/upload/<%=odl.getProductImg()%>" width="120px" height="120px">
 					       </div>
 					       <div style="width:70%">
 					       		<ul id="product-info">
-						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder"><%=od.getProductName() %></li>
-						       		<li><p><span>옵션명 : &nbsp</span><span><%=od.getProductOption() %></span></span></li>
-								    <li><p><span>상품 가격 :&nbsp</span><span class="price"><%=od.getDetailPrice() %></span>원<p></li>
+						       		<li id='productName' style="font-size:1.1rem; font-weight:bolder"><%=odl.getProductName() %></li>
+						       		<li><p><span>옵션명 : &nbsp</span><span><%=odl.getProductOption() %></span></span></li>
+								    <li><p><span>상품 가격 :&nbsp</span><span class="price"><%=odl.getDetailPrice() %></span>원<p></li>
 						       		<li style="display:flex; text-align:center;">
 									    <p>상품수량 : &nbsp</p>
-							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value="<%=od.getDetailCount() %>" style="font-size:13px; width:60px; height:25px;">
+							       		<input type="number" min="1" id="count" name="productCount" class="form-control productCount" value="<%=odl.getDetailCount() %>" style="font-size:13px; width:60px; height:25px;">
 								    	<span></span><span>개</span>
 								    </li>
 						       		<li><p><span>합계 가격 :&nbsp</span><span id="totalPrice">0</span>원</p></li>
@@ -156,6 +168,9 @@
 					       		<a href="#" id="deleteProduct"><img alt="" src="<%=request.getContextPath()%>/img/x-button.png" width="30px" height="30px"></a>
 					       </div>
 				       </div>
+				       <p></p>
+	       				<%} %>	
+			       <%} %>
 			      </div>
 			    </div>
 			  </div>
@@ -264,14 +279,7 @@
 							    <img alt="" src="<%=request.getContextPath()%>/img/card_payment.png">&nbsp&nbsp신용카드 결제
 							  </label>
 							</div>
-							
- 							<div class="form-check">
-							  <%-- input class="form-check-input" name="payment-btn" type="radio" id="Npay" value="option2">
-							  <label class="form-check-label" for="Npay">
-							    <img alt="" src="<%=request.getContextPath()%>/img/Npay_badge.png">&nbsp&nbsp네이버페이
-							  </label> --%>
-							</div>
-							
+							<p></p>
 							<div class="form-check">
 							  <input class="form-check-input" name="payment-btn" type="radio" id="kakaopay" value="kakaopay">
 							  <label class="form-check-label" for="kakaopay">
@@ -325,6 +333,7 @@
 <!-- ----------결제하기 버튼 클릭 js----------------- -->
 <script>
 // 결제정보관련 변수 설정
+let id="<%=loginMember.getMemberId()%>"
 let pg="";
 let product_name="";
 let amount= "";
@@ -337,6 +346,7 @@ let productImg = "";
 let orderNo = createOrderNum();
 let order ={};		//주문 객체
 let orderDetail = {};  //주문 상세 객체
+let orderArr =[]; 	//주문상세 객체 배열
 
 //결제 IMP 초기화
 var IMP = window.IMP;
@@ -344,8 +354,7 @@ IMP.init("imp58177585");
 
 //결제 버튼 클릭 이벤트
 $("#paymentBtn").on("click",function(e){
-	//변수값 세팅
-	product_name = "<%=od.getProductName()%>";
+	//변수값 세팅 (결제api에 들어갈 data값)
 	amount = parseInt($("#allPayCost").text());
 	email = $("#emailHead").val()+"@"+$("#textEmail").val();
 	buyer_name = $("#orderName").val();
@@ -356,6 +365,7 @@ $("#paymentBtn").on("click",function(e){
 	
 	//주문 객체 생성
 	order.orderNo = Number(orderNo);
+	order.orderId = id;
 	order.orderName = buyer_name;
 	order.orderZipcode = postcode;
 	order.orderAddr = $("#addr").val();
@@ -373,9 +383,27 @@ $("#paymentBtn").on("click",function(e){
 	orderDetail.detailPrice = <%=od.getDetailPrice()%>;
 	orderDetail.detailCount = <%=od.getDetailCount()%>;
 	orderDetail.productImg = productImg;
+
+	<%if(ol.size()>1){%>
+		product_name = "<%=ol.get(0).getProductName()%>"+" 등 "+"<%=ol.size()%>"+"개 상품";
+	<%}else{%>
+		product_name = "<%=ol.get(0).getProductName()%>"
+	<%}%>
+	//주문 상세 객체배열 생성
+	<%for(OrderDetail odl : ol){ %>
+		orderDetail.orderNo = Number(orderNo);
+		orderDetail.productNo = "<%=odl.getProductNo()%>";
+		orderDetail.productName = "<%=odl.getProductName()%>";
+		orderDetail.productOption = "<%=odl.getProductOption()%>";
+		orderDetail.detailPrice = <%=odl.getDetailPrice()%>;
+		orderDetail.detailCount = <%=odl.getDetailCount()%>;
+		orderDetail.productImg = "<%=request.getContextPath()%>/upload/<%=odl.getProductImg()%>";
+		orderArr.push(orderDetail);
+	<%}%>
+
 	
 	//필수입력항목 체크
-	/* var isEmpty = false;
+	var isEmpty = false;
     $("input[type=text]").not(".optional").each(function() {
         if (!$(this).val()) {
             e.preventDefault();
@@ -392,7 +420,7 @@ $("#paymentBtn").on("click",function(e){
 
     if(isEmpty) {
         return; // 빈 필드가 있다면 여기서 함수 종료
-    } */
+    }
 
     // 빈 필드가 없다면 결제 방식 선택
     if($("#card-payment").is(":checked")){
@@ -433,8 +461,9 @@ function payment_api(){
                     pay_method : rsp.pay_method,
                     paid_at : rsp.paid_at,
                     order : JSON.stringify(order),				   	//주문 객체 보내기
-                    orderDetail : JSON.stringify(orderDetail)		//주문 상세 객체 보내기
-				}
+                    orderDetail : JSON.stringify(orderDetail),		//주문 상세 객체 보내기
+                    orderArr : JSON.stringify(orderArr)				//주문 상세 객체배열 보내기
+                }
 			}).done(function(data){
 					Swal.fire({
 				  		title: "결제 성공!",
@@ -463,11 +492,11 @@ function payment_api(){
 </script>
 <script>
 
-//모달창 jquery
+//회원정보 반영 모달창 jquery
 	$(document).ready(function(){
 		Swal.fire({
-		  title: "주소지 입력",
-		  text: "기존에 등록된 주소지를 그대로 적용할까요?",
+		  title: "회원정보 적용",
+		  text: "기존에 등록된 회원정보를 그대로 적용할까요?",
 		  icon: "question",
 		  showCancelButton: true,
 		  confirmButtonColor: "#3085d6",
@@ -475,12 +504,31 @@ function payment_api(){
 		  confirmButtonText: "Yes"
 		}).then((result) => {
 		  if (result.isConfirmed) {
-		    Swal.fire({
-		      title: "주소지 적용",
-		      text: "회원정보의 주소지를 불러왔어요!😊",
-		      icon: "success"
-		    });
-		  }
+			    Swal.fire({
+			      title: "회원정보 적용!",
+			      text: "기존 등록정보로 적용했어요!😊",
+			      icon: "success"
+			    });
+			    
+			    // input태그에 session에서 가져온 회원정보 반영
+			    $("#orderName").val("<%=loginMember.getMemberName()%>");
+			    $("#zipcode").val("<%=loginMember.getMemberZipCode()%>");
+			    $("#addr").val("<%=loginMember.getMemberAddr()%>");
+			    $("#detailAddr").val("<%=loginMember.getMemberDetailAddr()%>"); 
+			    $("#orderPhone").val("<%=loginMember.getMemberPhone()%>"); 
+			     
+			 	// email parsing입력
+			    var email = "<%=loginMember.getMemberEmail()%>";		      
+			    var index = email.indexOf("@");
+			    
+			    if (index !== -1) {
+				    var beforeText = email.substring(0, index);
+				    var afterText = email.substring(index + 1);
+				    
+				    $("#emailHead").val(beforeText);
+				    $("#textEmail").val(afterText);
+			    }
+		  	}
 		});	
 	});
 </script>

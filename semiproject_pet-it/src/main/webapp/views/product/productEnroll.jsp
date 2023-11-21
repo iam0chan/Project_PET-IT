@@ -55,7 +55,6 @@ $("#main-image").change(e=>{
 			"width":"328",
 			"height":"329"
 		});
-		$("#prevImg").append(img);
 	}
 	})
 });
@@ -72,10 +71,8 @@ $("#main-image").change(e=>{
 				<div class="product-detail-container">
 					<div class="detail-container-l">
 						<div class="img-container">
-							<img id="image-box"
-								src="<%=request.getContextPath()%>/img/Image-Size.jpg" /> <input
-								type="file" class="btn btn-outline-success" name="mainImage"
-								id="main-image" />
+							<img id="image-box"	src="<%=request.getContextPath()%>/img/Image-Size.jpg" /> 
+								<input type="file" class="btn btn-outline-success" name="mainImage"	id="main-image" />
 						</div>
 					</div>
 					<div class="detail-container-r">
@@ -102,7 +99,7 @@ $("#main-image").change(e=>{
 								</div>
 								<div class="discount-radio">
 								<label for="discount">
-								<input class="discount" type="radio" id="discount" name="discount" value="0">
+								<input class="discount" type="radio" id="discount" name="discount" value="0" checked>
 								없음</label>
 								<label for="discount1">
 								<input class="discount" type="radio" id="discount1" name="discount" value="0.1">
@@ -156,6 +153,7 @@ $("#main-image").change(e=>{
 							<div class="enrollpage-title option-title">
 								<div style="padding-bottom: 14px;">
 									<button type="button" id="option-btn" class="btn btn-success">+</button>
+									<button type="button" id="option-btn-remove" class="btn btn-success">-</button>
 								</div>
 								<h4 style="width: 135px;">옵션 :</h4>
 							</div>
@@ -207,7 +205,6 @@ $("#main-image").change(e=>{
 <!-- =======================================================================================================  -->
 
 <script>
-    
         const editor = new toastui.Editor({
             el: document.querySelector('#editor-container'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
@@ -265,9 +262,9 @@ $("#main-image").change(e=>{
         })
         let count = 0;
         $("#option-btn").on("click",(e)=>{
-           if(count<2){
+           if($(".option-new-container").length<2){
            const optionBox = $(".detail-container-r");
-           const test = $("<div class='enroll-content-container '></div>");
+           const test = $("<div class='enroll-content-container option-new-container'></div>");
            const test2 = $("<div class='enrollpage-title'></div>");
            const test3 = $("<div class='enrollpage-content new-option'></div>");
            $(test).append(test2);
@@ -280,6 +277,12 @@ $("#main-image").change(e=>{
            ++count;
            }
         });
+        $("#option-btn-remove").on("click",function(){
+        	const target = $(".option-new-container").last();
+        	console.log(target);
+        	target.remove("");
+        	/* const target2 = $(".option:last-child()").remove(); */
+        })
       
         /* 모달 컨트롤 스크립트  */
         $("#enroll-itemcontent-btn").on("click",function(){    

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -110,7 +109,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			 */
 			PrintWriter out = response.getWriter();
 			out.print(productContent);
-			response.sendRedirect(request.getContextPath()+"/productListServlet.do");
+			response.sendRedirect(request.getContextPath()+"/productList.do?type=all");
 		}
 
 	}

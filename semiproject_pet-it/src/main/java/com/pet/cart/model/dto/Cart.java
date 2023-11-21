@@ -16,6 +16,10 @@ public class Cart {
 	private int productPoint;
 	private String productContent;
 	
+	// 상품옵션 추가
+	private String optionName;
+    private String optionValue;
+	
 	
 	// 여러 제품 정보를 갖는 리스트
 	//private List<Product> products = new ArrayList<>();

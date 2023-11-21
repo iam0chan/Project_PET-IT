@@ -22,7 +22,6 @@ public class CartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Cart> c = new CartService().selectCart(1,3,"doyoungs");
 		request.setAttribute("cartList", c);
-		
 		for(Cart cart :  c) {
 			System.out.println(cart);
 		}
