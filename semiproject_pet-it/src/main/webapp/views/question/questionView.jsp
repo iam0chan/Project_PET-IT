@@ -60,7 +60,7 @@
 	<div class="titleArea">
 		<h2>1:1문의</h2>
 	</div>
-	
+
 	<div id="list-btn" class="btn-container" style="width: 107px;" >
 		<%if(loginMember!=null
 			&&loginMember.getMemberId().equals("jihyes")){ %>
