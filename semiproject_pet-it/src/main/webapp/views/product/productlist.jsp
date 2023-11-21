@@ -29,10 +29,11 @@
             </div>
             <div class="button">
                 <div class="btn-container">
-                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>신상품</a></button>
-                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 사료</a></button>
-                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 간식</a></button>
-                    <button type="button" class="btn btn-outline-success" style="width:auto;"><a>Dog 용품</a></button>
+                	<button name="type-btn" id="all" type="button" class="btn btn-outline-success" style="width:auto;">전체보기</button>
+                    <button name="type-btn" id="new" type="button" class="btn btn-outline-success" style="width:auto;">신상품</button>
+                    <button name="type-btn" id="T-1"type="button" class="btn btn-outline-success" style="width:auto;">Dog 사료</button>
+                    <button name="type-btn" id="T-2" type="button" class="btn btn-outline-success" style="width:auto;">Dog 간식</button>
+                    <button name="type-btn" id="T-3" type="button" class="btn btn-outline-success" style="width:auto;">Dog 용품</button>
                 </div>
             </div>
         </div>
@@ -117,6 +118,11 @@
    $(".card").mouseout(function(){
       $(this).css("border","1px solid #dbdbd9");
    });    
+    
+    $("button[name=type-btn]").click(function(){
+		const type = $(this).prop("id");
+		location.href='<%=request.getContextPath()%>/productList.do?type='+type;
+	})
     </script>
     
 <%@ include file="/views/footer.jsp"%>

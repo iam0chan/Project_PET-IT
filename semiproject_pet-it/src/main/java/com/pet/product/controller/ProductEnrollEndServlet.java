@@ -109,7 +109,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			 */
 			PrintWriter out = response.getWriter();
 			out.print(productContent);
-			response.sendRedirect(request.getContextPath()+"/productListServlet.do");
+			response.sendRedirect(request.getContextPath()+"/productList.do?type=all");
 		}
 
 	}

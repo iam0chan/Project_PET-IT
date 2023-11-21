@@ -77,7 +77,8 @@ input#optionPrice {
 							<div class="enrollpage-content">
 								<div class="price-container">
 								<input type="number" name="productPrice"
-									placeholder="상품가격을 입력하세요" min="0" step="1000" value="<%=product.getProductPrice()%>" required />
+									placeholder="상품가격을 입력하세요" min="0" step="1000" value="<%=product.getProductPrice()%>" required 
+									style="padding-left:10px;"/>
 								</div>
 								<div class="discount-radio">
 								<label for="discount">
@@ -261,16 +262,7 @@ input#optionPrice {
         		}
         });
         
-      /*  $("#enroll-itemcontent-btn").on("click",function(){
-        	document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
-            //콘솔창에 표시
-            console.log(editor.getHTML());	
-        }) */
-        
-        $("input[type=button]").on("click",function(){
-          	open("<%=request.getContextPath()%>/product/enroll_mainimage.jsp","_blank","width=650px, height=500px, top=50, left=300");
 
-        })
         let count = 0;
         $("#option-btn-add").on("click",(e)=>{
            console.log($(".option").length);
