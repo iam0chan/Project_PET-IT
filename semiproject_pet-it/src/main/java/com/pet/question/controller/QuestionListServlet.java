@@ -41,56 +41,53 @@ public class QuestionListServlet extends HttpServlet {
 		}
 		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
 		List<Question> question = null;
-		if(loginMember !=null && loginMember.getMemberId().equals("petitad")) {
-			question = new QuestionService().selectQuestion(cPage, numPerpage);
-		}else {
+		if(loginMember !=null) {
+			if(loginMember.getMemberId().equals("petitad")) {
+				question = new QuestionService().selectQuestion(cPage, numPerpage);
+			}else {
 			question = new QuestionService().selectQuestion(cPage, numPerpage, loginMember.getMemberId());
-		}
-		int totalData=new QuestionService().selectQuestionCount();
-		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-		int pageBarSize=5;
-		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1; 
-		int pageEnd=pageNo+pageBarSize-1; 
-		
-		
-		StringBuffer pageBar=new StringBuffer(); 
-		
-		if(pageNo==1) {
-			pageBar.append("<span>[이전]</span>"); 
-											
-		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>");
-			pageBar.append("[이전]</a>"); 
-		}
-		
-		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(cPage==pageNo) {
-				pageBar.append("<span>"+pageNo+"</span>"); 
+			}
+			int totalData=new QuestionService().selectQuestionCount();
+			int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+			int pageBarSize=5;
+			int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1; 
+			int pageEnd=pageNo+pageBarSize-1; 
+			
+			
+			StringBuffer pageBar=new StringBuffer(); 
+			
+			if(pageNo==1) {
+				pageBar.append("<span>[이전]</span>"); 
+				
+			}else {
+				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>");
+				pageBar.append("[이전]</a>"); 
+			}
+			
+			while(!(pageNo>pageEnd||pageNo>totalPage)) {
+				if(cPage==pageNo) {
+					pageBar.append("<span>"+pageNo+"</span>"); 
+				}else {
+					pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
+					pageBar.append(pageNo);
+					pageBar.append("</a>"); 
+				}
+				pageNo++;
+			}
+			
+			if(pageNo>totalPage) {
+				pageBar.append("<span>[다음]</span>"); 
 			}else {
 				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
-				pageBar.append(pageNo);
+				pageBar.append("[다음]");
 				pageBar.append("</a>"); 
 			}
-			pageNo++;
+			
+			request.setAttribute("question", question); 
+			request.setAttribute("pageBar", pageBar); 
+			request.getRequestDispatcher("/views/question/questionList.jsp").forward(request, response); 
 		}
-		
-		if(pageNo>totalPage) {
-			pageBar.append("<span>[다음]</span>"); 
-		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
-			pageBar.append("[다음]");
-			pageBar.append("</a>"); 
-		}
-		
-		request.setAttribute("question", question); 
-		request.setAttribute("pageBar", pageBar); 
-		request.getRequestDispatcher("/views/question/questionList.jsp").forward(request, response); 
-		
-		
-		
-		
-		
-		
+
 	}
 
 	/**

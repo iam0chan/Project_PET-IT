@@ -116,7 +116,7 @@ tr.item:hover {
 				<tr class="questionTitle">
 					<th scope="col" class="active text-center" style="width: 80px;">번호</th>
 					<th scope="col" class="active text-center" style="width: 180px;">카테고리</th>
-					<th scope="col" class="active text-center" style="width: 400px;">제목</th>
+					<th scope="col" class="active text-center" style="width: 600px;">제목</th>
 					<th scope="col" class="active text-center" style="width: 100px;">작성일</th>
 
 				</tr>
