@@ -201,13 +201,8 @@
     		$('input[type="checkbox"]').click(function(event) {
     		    event.stopPropagation();
     		});
-
-    	  // 버튼 클릭 Event
-    	  $('#btnRefresh').click(function(){
-    		  location.reload();
-    	  });
-    		  
-    	  
+ 		  
+    	  //일괄 삭제 버튼 클릭
     	  $('#btnDelete').click(function() {
     	    // 체크된 항목 확인
     	    var arrOrderNo = [];
@@ -260,6 +255,49 @@
     	  });
 
     	}
+    
+	 // 버튼 클릭 Event
+		  $('#btnRefresh').click(function(){
+			  location.reload();
+		  });
+		  
+		  $('#btnEditDel').click(function(){
+			// 체크된 항목 확인
+	    	    var arrOrderNo = "";
+	    	    $('input[name="chkRow"]:checked').each(function(idx, item) {
+	    	    	arrOrderNo(
+	    	        $(this).closest('tr').find('td').filter(function() {
+	    	          return $(this).data('cellHeader') == 'orderNo';
+	    	        }).text()
+	    	      );
+	    	    });
+	    	    console.log(arrOrderNo);
+	    	    <%-- if (arrOrderNo.length == 0) {
+	    	    	Swal.fire({
+	    	    		  icon: "error",
+	    	    		  title: "이런...",
+	    	    		  text: "주문이 선택되지 않았어요!",
+	    	    		});
+	    	      return;
+	    	    } else {
+	    	    	Swal.fire({
+	    	    		  title: "주문 일괄 삭제/환불",
+	    	    		  text: "선택 주문들을 정말 환불하고 삭제합니까?",
+	    	    		  icon: "warning",
+	    	    		  showCancelButton: true,
+	    	    		  confirmButtonColor: "#3085d6",
+	    	    		  cancelButtonColor: "#d33",
+	    	    		  confirmButtonText: "Delete"
+	    	    		}).then((result) => {
+	    	    		  if (result.isConfirmed) {
+	    	    		    $.ajax({
+	    	    		    	url : '<%=request.getContextPath()%>/adminOrderView.do',
+	    	    		    	type : 'POST',
+	    	    		    	dataType : 'json',
+	    	    		    	data : { 
+	    	    		    		arrOrderNo: JSON.stringify(arrOrderNo) 
+	   	    		    		} --%>
+		  })
 
     	/**
     	 * 체크박스 전체 체크/해제
