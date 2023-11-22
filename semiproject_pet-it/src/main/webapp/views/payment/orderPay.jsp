@@ -241,7 +241,7 @@
 				        	<td style="width:70%"><p><b>배송비</b></p></td>
 				        	<td style="width:15%; text-align:right"><p><span id="delivery-cost">2500</span>원</p></td>
 				        </tr>
-				        <tr>
+				      	<tr>
 				        	<td style="width:5%"></td>
 				        	<td style="width:70%"><p><b>적립금/쿠폰적용</b></p></td>
 				        	<td style="width:15%; text-align:right"><p><span id="discountPrice">0</span>원</p></td>
@@ -292,7 +292,7 @@
 			<!-- ----------------payment choice end -------------------- -->
 			
 			<!-- ----------------point start -------------------- -->        
-				    <div class="accordion-item">
+				    <!-- <div class="accordion-item">
 					    <h2 class="accordion-header" id="headingSix">
 					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
 					        <div class="btn-text"><b>적립혜택</b></div>
@@ -310,7 +310,7 @@
 						      </div>
 				          </div>  		        
 				      	</div>
-			    	</div>
+			    	</div> -->
 				</form>
 	    	<!-- ----------------point end -------------------- -->
 	    	

@@ -68,8 +68,8 @@ public class AdminDao {
 		return result;
 	}
 	
-	public boolean deleteOrderList(Connection conn, long[]orderArr) {
-		int [] result = null;
+	public int deleteOrderList(Connection conn, long[]orderArr) {
+		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -78,16 +78,28 @@ public class AdminDao {
 			for(long oa : orderArr) {
 				pstmt.setLong(1, oa);
 				pstmt.addBatch();
-				pstmt.clearBatch();
+				pstmt.clearParameters();
 			}
-			result = pstmt.executeBatch();
-			System.out.println(Arrays.toString(result));
+			int[]results = pstmt.executeBatch();
+			result = 1;
+			
+			for(int i: results) {
+				if(i==-2) {
+					i=1;
+				}else if(i==-3) {
+					i=0;
+				}
+				result*=i;
+			}
+			if(result>0)System.out.println("DAO : db결과성공");
+			else System.out.println("DAO : db결과실패");
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		return Arrays.stream(result).allMatch(count -> count > 0);
+		return result;
 	}
 	
 	private static Order getOrders(ResultSet rs) throws SQLException {
