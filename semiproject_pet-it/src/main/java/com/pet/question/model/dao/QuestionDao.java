@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.pet.notice.model.dto.Notice;
 import com.pet.question.model.dto.Question;
 
 public class QuestionDao {
@@ -163,14 +164,55 @@ public class QuestionDao {
 		}return result;
 	}		
 	
+	//제목으로 검색 
+    public List<Question> questionSearchTitle (Connection conn, int cPage, int numPerpage, String keyword){
+    	PreparedStatement pstmt = null; 
+    	ResultSet rs = null; 
+    	List<Question> result = new ArrayList<>();
+    	
+    	 try {
+	            pstmt = conn.prepareCall(sql.getProperty("questionSearchTitle"));
+	            pstmt.setString(1, keyword);
+	            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+	            pstmt.setInt(3, cPage * numPerpage);
+	            rs = pstmt.executeQuery();
+	            while (rs.next()) {
+	                result.add(getQuestion(rs));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return result;
+    }
 	
 	
-	
-	
-	
-	
-	
-	
+	//내용으로 검색 
+    public List <Question> questionSearchContent (Connection conn, int cPage, int numPerpage, String keyword){
+    	PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Question> result = new ArrayList<>();
+
+        try {
+            pstmt = conn.prepareCall(sql.getProperty("questionSearchContent"));
+            pstmt.setString(1, keyword);
+            pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+            pstmt.setInt(3, cPage * numPerpage);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                result.add(getQuestion(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return result;
+    	
+    }
 	
 	
 	
