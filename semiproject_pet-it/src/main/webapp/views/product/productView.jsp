@@ -436,9 +436,9 @@ $("#cart-btn").click(function() {
 						optionPrice:optionPrice,optionName:optionName}
 						).done(data=>{
 							if(data){
-								alert("장바구니등록 성공!");
+								alert("장바구니에 상품이 담겼습니다.");
 							}else{
-								alert("장바구니등록 실패 TT");
+								alert("장바구니에 상품을 올리는데 실패했습니다.");
 							}
 						});
 			});
