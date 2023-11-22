@@ -3,7 +3,6 @@ package com.pet.cart.model.dao;
 import com.pet.cart.model.dto.Cart;
 
 import static com.pet.common.JDBCTemplate.close;
-import static com.pet.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -33,9 +32,9 @@ public class CartDao {
 		List<Cart> result = new ArrayList<>();
 		try {
 			pstmt = conn.prepareCall(sql.getProperty("selectCart"));
-			pstmt.setInt(1, (cPage - 1) * numPerpage + 1);
-			pstmt.setInt(2, cPage * numPerpage);
-			pstmt.setString(3, member_id);
+			pstmt.setString(1, member_id);
+			pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+			pstmt.setInt(3, cPage * numPerpage);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				result.add(getCart(rs));
