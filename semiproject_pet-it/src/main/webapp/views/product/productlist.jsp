@@ -83,10 +83,10 @@
               <%} %>
             <div class="bottom-container">
                 <div class="search-bar">
-                    <form class="d-flex">
+                   <!--  <form class="d-flex">
                       <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass search-icon" style="width:50px;margin-top:5px"></i></button>
-                    </form>
+                      <button class="btn btn-outline-success" id="search-btn"><i class="fa-solid fa-magnifying-glass search-icon" style="width:50px;margin-top:5px"></i></button>
+                    </form> -->
                 </div>
                 <div class="btn-bottom-container">
                 <a class="admin-btn"href="<%=request.getContextPath()%>/product/productEnroll.do" style="color:#28A745;">
