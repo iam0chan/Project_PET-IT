@@ -15,7 +15,7 @@ body {
 </style>
 <body>
 	<section>
-		<h3>마이페이지</h3>
+		<h5>my page</h5>
 		<hr />
 		<section class="titles">
 			<article class="sytle1">
@@ -45,7 +45,7 @@ body {
 					</div>
 				</a>
 			</article>
-			<article class="sytle3">
+			<%-- <article class="sytle3">
 				<span class="image"> <img
 					src="<%=request.getContextPath()%>/images/wishListIcon.png">
 				</span> <a href="/">
@@ -81,7 +81,7 @@ body {
 						<p>고객님이 보유하신 쿠폰내역을 보여드립니다.</p>
 					</div>
 				</a>
-			</article>
+			</article> --%>
 			<article class="sytle6">
 				<span class="image"> <img
 					src="<%=request.getContextPath()%>/images/boardIcon.png">

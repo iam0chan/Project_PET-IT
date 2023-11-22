@@ -217,7 +217,7 @@ background-color: green;
 </head>
 <body>
 	<section>
-		<h5>장바구니</h5>
+		<h5>my cart</h5>
 	
 		<!-- <hr />
 		<div class="info">
