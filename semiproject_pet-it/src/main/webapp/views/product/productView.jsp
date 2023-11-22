@@ -140,7 +140,7 @@ Member login = (Member)session.getAttribute("loginMember");
 				</strong>원 </span>
 			</div>
 			<div class="info button-container">
-				<button id="purchase-btn" onclick="purchase();"
+				<button id="purchase-btn" onclick=<%=loginMember!=null?"purchase();":"warnning();"%>
 					class="btn btn-outline-success">구매하기</button>
 				<button id="cart-btn" class="btn btn-outline-success">장바구니</button>
 				<!-- 장바구니 모달 -->
@@ -404,6 +404,7 @@ $("#btn-l").click(function() {
 
 
 
+
 /* 장바구니 modal창 출력 */
 $("#cart-btn").click(function() {
 	if(<%=loginMember!=null%>){
@@ -488,6 +489,11 @@ function purchase() {
 	
 
 };
+
+function warnning() {
+	alert("로그인 후 이용하세요!");
+	location.href='<%=request.getContextPath()%>/views/member/login.jsp';
+}
 	$("#update-itemcontent-btn").on("click",function(){
 		const productNo = $("#pNo").val();
 		location.href="<%=request.getContextPath()%>/product/productUpdate.do?productNo="+productNo;
