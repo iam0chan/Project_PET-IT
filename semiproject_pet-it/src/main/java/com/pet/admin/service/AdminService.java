@@ -16,6 +16,7 @@ public class AdminService {
 		int result=dao.deleteOrderList(conn,orderArr);
 		if(result>0)commit(conn);
 		else rollback(conn);
+		close(conn);
 		return result;
 	}
 	
@@ -24,7 +25,6 @@ public class AdminService {
 		Connection conn = getConnection();
 		List<Order> order = dao.selectOrderList(conn,cPage,numPerpage);
 		close(conn);
-		
 		return order;
 	}
 	
