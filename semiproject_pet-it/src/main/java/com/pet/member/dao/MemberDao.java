@@ -91,17 +91,13 @@ public class MemberDao {
 		return bf.toString();
     }
 
-	//메일인증번호 저장
-	public void saveAuthenticationCode(String memberName, String memberEmail, String authenCode) {
-		
-	}
 	
 	//아이디찾기
-	public int findIdEmail(Connection conn, String memberName, String memberEmail) {
+	public String findIdEmail(Connection conn, String memberName, String memberEmail) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int result=0;
+		String memberId = null;
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("findIdEmail"));
@@ -109,8 +105,31 @@ public class MemberDao {
 			pstmt.setString(2, memberEmail);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-			    result = rs.getInt(1);
+			   memberId = rs.getString("MEMBER_ID");
 			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+            close(rs);
+            close(pstmt);
+        }return memberId;
+	}
+	
+	//비밀번호재설정
+	public String findPwCheck(Connection conn, String memberId, String memberEmail) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = "";
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("findPwCheck"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberEmail);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getString("MEMBER_STATUS");
+			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -118,11 +137,6 @@ public class MemberDao {
             close(pstmt);
         }return result;
 	}
-	
-//	//비밀번호재설정
-//	public int findPw(String memberId) {
-//		
-//	}
 	
 	
 	//회원가입 아이디중복체크
@@ -144,6 +158,38 @@ public class MemberDao {
 	        } else if (memberId.length()<6||memberId.length()>10) {
 	        	// memberId의 length제한에 걸린 경우 (6~10)
 	        	result = -2;
+	        }
+	        else {
+	            // 중복된 아이디가 존재하지 않는 경우
+	            result = 1;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+	    return result;
+	}
+	
+	public int memberPwCheck(Connection conn, String memberPw) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+	        pstmt = conn.prepareStatement(sql.getProperty("memberPwCheck"));
+	        pstmt.setString(1, memberPw);
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	            // 중복된 아이디가 존재하는 경우
+	            result = 0;
+	        } else if (memberPw.equals("")) {
+	            // memberId가 빈 문자열인 경우
+	            result = -0;
+	        } else if (memberPw.length()<8||memberPw.length()>12) {
+	        	// memberId의 length제한에 걸린 경우 (6~10)
+	        	result = -1;
 	        }
 	        else {
 	            // 중복된 아이디가 존재하지 않는 경우

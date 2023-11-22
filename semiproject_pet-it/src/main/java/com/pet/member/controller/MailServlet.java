@@ -1,7 +1,6 @@
 package com.pet.member.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.pet.member.dao.MemberDao;
 import com.pet.member.service.MemberService;
 
@@ -57,29 +57,27 @@ public class MailServlet extends HttpServlet {
 	            return new PasswordAuthentication("petittttttt1@gmail.com", "yrdq fhre xkwc zulq");
 	        }
 	    });
-
+	    
 	    String memberEmail = request.getParameter("memberEmail"); // 메일 받을 주소
 	    String memberName = request.getParameter("memberName");
-	    int result=0;
+	    
+	   	String memberId=null;
 	    
 	    try {
 	        // 이름과 이메일이 데이터베이스에 일치하는지 확인
-	    	result=new MemberService().findIdEmail(memberName, memberEmail);
-	        if (result==1) {
+	    	memberId=new MemberService().findIdEmail(memberName, memberEmail);
+	        if (memberId!=null) {
 	            // 일치하면 인증 코드 생성
 	            emailCode = dao.makeAuthenticationCode();
 	            
 	            // 세션에 저장
 	            HttpSession httpSession = request.getSession();
-	            httpSession.setAttribute("authenCode", emailCode);
-	            httpSession.setAttribute("authenName", memberName);
-	            httpSession.setAttribute("authenEmail", memberEmail);
-	            
 	            httpSession.setAttribute("emailCode", emailCode);
+	            httpSession.setAttribute("memberName", memberName);
+	            httpSession.setAttribute("memberEmail", memberEmail);
+	            request.setAttribute("emailCode", emailCode);
+	            request.setAttribute("memberId", memberId);
 	            
-	            // 데이터베이스에 인증 코드 저장 (이 메서드는 데이터베이스 구조와 요구 사항에 맞게 구현 필요)
-	            dao.saveAuthenticationCode(memberName, memberEmail, emailCode);
-
 	            // 이메일 전송
 	            String title = "pet-it 인증코드";
 	            Message message = new MimeMessage(session);
@@ -89,10 +87,17 @@ public class MailServlet extends HttpServlet {
 	            message.setContent(emailCode, "text/html; charset=utf-8");
 
 	            Transport.send(message);
-
+	            
+//	            Gson gson = new Gson();
+//	            
+//	            response.setContentType("application/json;charset=utf-8");
+	            
+	            
+	            
 	            // 이메일 전송 후 페이지 이동
-	            response.sendRedirect(request.getContextPath() + "/views/member/findIdEmail.jsp");
-	        } else {
+	            request.getRequestDispatcher("/views/member/findIdEmail.jsp").forward(request, response);
+	            
+	        	} else {
 	            // 이름과 이메일이 일치하지 않을 경우 처리
 //	            response.sendRedirect(request.getContextPath() + "/views/member/findIdFail.jsp");
 	            response.getWriter().write("fail");
@@ -102,7 +107,7 @@ public class MailServlet extends HttpServlet {
 	        // 예외 처리에 따른 로직 추가
 	    }
 	}
-	
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -20,6 +20,10 @@ private MemberDao dao = new MemberDao();
       close(conn);
       return m;
    }
+   public String selectMemberByPw(String memberPw) {
+	   
+	   return memberPw;
+   }
 
 
    public int insertMember(Member m) {
@@ -42,14 +46,35 @@ private MemberDao dao = new MemberDao();
 	   return result;
    }
    
-   public int findIdEmail(String memberName, String memberEmail) {
+   public int memberPwCheck(String memberPw) {
 	   Connection conn = getConnection();
-	   int result = dao.findIdEmail(conn, memberName, memberEmail);
+	   int result = dao.memberIdCheck(conn, memberPw);
 	   if(result>0) commit(conn);
+	   else rollback(conn);
+	   close(conn);
+	   
+	   return result;
+   }
+   
+   public String findIdEmail(String memberName, String memberEmail) {
+	   Connection conn = getConnection();
+	   String memberId = dao.findIdEmail(conn, memberName, memberEmail);
+	   if(memberId!=null) commit(conn);
+	   else rollback(conn);
+	   close(conn);
+	   
+	   return memberId;
+   }
+   
+   public String findPwCheck(String memberId, String memberEmail) {
+	   Connection conn = getConnection();
+	   String result = dao.findIdEmail(conn, memberId, memberEmail);
+	   if(memberId!=null) commit(conn);
 	   else rollback(conn);
 	   close(conn);
 	   
 	   return result;
 	   
    }
+   
 }
