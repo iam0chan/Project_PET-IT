@@ -44,7 +44,7 @@ public class NoticeSearchMenu extends HttpServlet {
 			cPage=1;
 		}
 		
-		int totalData = new NoticeService().selectNoticeCount();
+		int totalData = new NoticeService().selectNoticeCount(); //총개수 구함
 		List<Notice> serachResult = new NoticeService().searchNotice(cPage, numPerpage, key, keyword);
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
