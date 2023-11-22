@@ -33,14 +33,16 @@ public class AdminOrderListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-int cPage,numPerpage=10;
+		int cPage,numPerpage=10;
 		
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
+		
 		List<Order> result = new AdminService().selectOrderList(cPage,numPerpage);
+		
 		int totalData = new AdminService().selectOrderCount();
 		int totalPage = (int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=3;
