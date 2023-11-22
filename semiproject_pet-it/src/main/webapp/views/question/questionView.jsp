@@ -51,8 +51,8 @@
 }
 
 #contentBox img {
-	width: 800px !important;
-	height : 800px !important;
+	width: 600px !important;
+	height : 500px !important;
 }
 #comment-container {
 	text-align: center;
