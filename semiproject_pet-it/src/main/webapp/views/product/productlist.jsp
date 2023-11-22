@@ -90,9 +90,11 @@
                 </div>
                 <div class="btn-bottom-container">
                 <a class="admin-btn"href="<%=request.getContextPath()%>/product/productEnroll.do" style="color:#28A745;">
+                    <%if(loginMember!=null && loginMember.getMemberId().equals("petitad")){ %>
                     <button type="button" class="btn btn-outline-success button-bottom">
                        상품등록
                     </button></a>
+                    <%} %>
                 </div>
             </div>
         </div>
