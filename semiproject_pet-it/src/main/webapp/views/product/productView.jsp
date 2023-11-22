@@ -273,7 +273,8 @@ Member login = (Member)session.getAttribute("loginMember");
 			<h3>Reviews</h3>
 		</div>
 		<div class="review-item-container">
-			<div>
+			<h3>구매후기 준비중...</h3>
+			<!-- <div>
 				<img src="" alt="" width="200" height="200">
 				<div></div>
 			</div>
@@ -332,7 +333,7 @@ Member login = (Member)session.getAttribute("loginMember");
 			<div>
 				<img src="" alt="" width="200" height="200">
 				<div></div>
-			</div>
+			</div> -->
 		</div>
 		<div class="review-btn">
 			<button id="review-btn" class="btn btn-outline-success">후기등록</button>

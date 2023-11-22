@@ -46,7 +46,7 @@ input#optionPrice {
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
-			<!-- 			<h2>상품수정</h2> -->
+			<h2>상품수정</h2>
 			<div class="line"></div>
 			<form
 				action="<%=request.getContextPath()%>/product/productUpdateEnd.do"
