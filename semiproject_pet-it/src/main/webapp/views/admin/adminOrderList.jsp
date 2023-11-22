@@ -141,6 +141,7 @@
      	<%=request.getAttribute("pageBar") %>
      </div>    
       <div class="btnArea">
+      	<button type="button" id="btnRefresh" class="btn btn-outline-success">주문목록 새로고침</button>
         <button type="button" id="btnDelete" class="btn btn-outline-success">선택주문 일괄취소/환불</button>
       </div>
       
@@ -200,8 +201,8 @@
     		$('input[type="checkbox"]').click(function(event) {
     		    event.stopPropagation();
     		});
-
-    	  // 버튼 클릭 Event
+ 		  
+    	  //일괄 삭제 버튼 클릭
     	  $('#btnDelete').click(function() {
     	    // 체크된 항목 확인
     	    var arrOrderNo = [];
@@ -238,31 +239,65 @@
     	    		    	data : { 
     	    		    		arrOrderNo: JSON.stringify(arrOrderNo) 
    	    		    		},
-   	    		    		success : {
-   	    		    			window.location.href("<%=request.getContextPath()%>/adminOrder.do");
-   	    		    		},"
-    	    		    	error: function(error){
-    	    		    		Swal.fire({
-    	      	    		      title: "삭제/환불 실패!",
-    	      	    		      text: "자세한 사항은 담당자에게 문의하세요",
-    	      	    		      icon: "error"
-    	      	    		    });
-    	    		    	}
+   	    		    		success :(data)=>{
+   	    		    			location.reload();
+   	    		    		}
     	    		    });
-    	    			  
     	    			Swal.fire({
     	    		      title: "삭제 되었습니다!",
     	    		      text: "선택된 주문들이 환불되고 삭제되었습니다",
     	    		      icon: "success"
     	    		    });
-    	    		    
-    	    		    location.reload(true);
     	    		  }
+    	    			location.reload();
     	    		});
     	    }
     	  });
 
     	}
+    
+	 // 버튼 클릭 Event
+		  $('#btnRefresh').click(function(){
+			  location.reload();
+		  });
+		  
+		  $('#btnEditDel').click(function(){
+			// 체크된 항목 확인
+	    	    var arrOrderNo = "";
+	    	    $('input[name="chkRow"]:checked').each(function(idx, item) {
+	    	    	arrOrderNo(
+	    	        $(this).closest('tr').find('td').filter(function() {
+	    	          return $(this).data('cellHeader') == 'orderNo';
+	    	        }).text()
+	    	      );
+	    	    });
+	    	    console.log(arrOrderNo);
+	    	    <%-- if (arrOrderNo.length == 0) {
+	    	    	Swal.fire({
+	    	    		  icon: "error",
+	    	    		  title: "이런...",
+	    	    		  text: "주문이 선택되지 않았어요!",
+	    	    		});
+	    	      return;
+	    	    } else {
+	    	    	Swal.fire({
+	    	    		  title: "주문 일괄 삭제/환불",
+	    	    		  text: "선택 주문들을 정말 환불하고 삭제합니까?",
+	    	    		  icon: "warning",
+	    	    		  showCancelButton: true,
+	    	    		  confirmButtonColor: "#3085d6",
+	    	    		  cancelButtonColor: "#d33",
+	    	    		  confirmButtonText: "Delete"
+	    	    		}).then((result) => {
+	    	    		  if (result.isConfirmed) {
+	    	    		    $.ajax({
+	    	    		    	url : '<%=request.getContextPath()%>/adminOrderView.do',
+	    	    		    	type : 'POST',
+	    	    		    	dataType : 'json',
+	    	    		    	data : { 
+	    	    		    		arrOrderNo: JSON.stringify(arrOrderNo) 
+	   	    		    		} --%>
+		  })
 
     	/**
     	 * 체크박스 전체 체크/해제
