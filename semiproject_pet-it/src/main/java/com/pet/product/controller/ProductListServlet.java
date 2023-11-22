@@ -43,11 +43,10 @@ public class ProductListServlet extends HttpServlet {
 		products = new ProductService().selectProductListAll(cPage,numPerpage,type);
 		List<ProductImageFile> files = new ProductService().selectMainImageFileAll();
 		int check = 0;
-		for(Product p : products) {
-			System.out.println(p);
-			check++;
-		}
-		System.out.println("데이터수:"+check);
+		/*
+		 * for(Product p : products) { System.out.println(p); check++; }
+		 * System.out.println("데이터수:"+check);
+		 */
 		
 		StringBuilder pageBar = new StringBuilder();
 		

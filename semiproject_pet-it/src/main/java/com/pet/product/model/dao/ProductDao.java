@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.pet.common.JDBCTemplate;
 import com.pet.product.model.dto.Product;
 import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.model.dto.ProductOption;
@@ -23,7 +24,6 @@ public class ProductDao {
    private Properties sql = new Properties();
    {
       String path = ProductDao.class.getResource("/sql/product/product_sql.properties").getPath(); 
-      System.out.println(path);
       try (FileReader fr = new FileReader(path)){
          sql.load(fr);
       }catch(IOException e) {
@@ -127,17 +127,17 @@ public class ProductDao {
       return optionResult;
    }
    
-   public int insertNewOption(Connection conn, String productNo, Map<String,String> options) {
+   public int insertNewOption(Connection conn, String productNo, List<ProductOption> options) {
 	   	PreparedStatement pstmt = null;
 	   	int insertNewOptionResult = 0;
 	   	int inputCount = 0;
 	   	
 	   	try {
-	   		for(Map.Entry<String, String> entry : options.entrySet()) {
+	   		for(ProductOption po : options) {
 	   			pstmt = conn.prepareStatement(sql.getProperty("insertNewOption"));
 	   			pstmt.setString(1, productNo);
-	   			pstmt.setString(2, entry.getKey());
-	   			pstmt.setInt(3, Integer.parseInt(entry.getValue()));
+	   			pstmt.setString(2, po.getProductOptionName());
+	   			pstmt.setInt(3, po.getProductOptionPrice());
 	   			insertNewOptionResult = pstmt.executeUpdate();
 	   			if(insertNewOptionResult>0) {
 	                ++inputCount;
@@ -339,7 +339,8 @@ public class ProductDao {
 		   pstmt.setString(5, p.getProductInfo());
 		   pstmt.setString(6,p.getProductDiscount());
 		   pstmt.setString(7,p.getProductContent());
-		   pstmt.setString(8, p.getProductNo());
+		   pstmt.setString(8,p.getProductOptionStatus());
+		   pstmt.setString(9, p.getProductNo());
 		   
 		   updateResult = pstmt.executeUpdate();
 		   
@@ -371,18 +372,19 @@ public class ProductDao {
 	   return updateImg;
    }
    
-   public int updateOption(Connection conn, String optionNo, Map<String,String> options) {
+   public int updateOption(Connection conn,String productNo ,List<ProductOption> options) {
 	   PreparedStatement pstmt = null;
 	   int updateOption = 0;
 	   try {
-		   for(Map.Entry<String,String> entry: options.entrySet()) {
-	            pstmt = conn.prepareStatement(sql.getProperty("updateOptions"));
-	            pstmt.setString(1,entry.getKey());
-	            pstmt.setInt(2, Integer.parseInt(entry.getValue()));
-	            pstmt.setString(3, optionNo);
-	            updateOption += pstmt.executeUpdate();
-	         }
-		   
+		   for(ProductOption po: options) {
+			   pstmt = conn.prepareStatement(sql.getProperty("updateOptions"));
+			   pstmt.setString(1, po.getProductOptionName());
+			   pstmt.setInt(2, po.getProductOptionPrice());
+			   pstmt.setString(3, po.getProductOptionNo());
+			   updateOption += pstmt.executeUpdate();
+			   
+		   }
+
 	   }catch(SQLException e) {
 		   
 	   }finally {
@@ -390,6 +392,26 @@ public class ProductDao {
 	   }
 	   
 	   return updateOption;
+   }
+   
+   public int deleteProductOption(Connection conn, String productNo, List<ProductOption> origianl) {
+	   PreparedStatement pstmt = null;
+	   int delResult = 0;
+	   try {
+		   for(ProductOption po : origianl) {
+			   pstmt = conn.prepareStatement(sql.getProperty("deleteOptions"));
+				/* pstmt.setString(1,productNo); */
+			   pstmt.setString(1, po.getProductOptionNo());
+			   
+			   delResult=pstmt.executeUpdate();
+		   }
+	   }catch(SQLException e) {
+		   e.printStackTrace();
+	   }finally {
+		   close(pstmt);
+	   }
+	   
+	   return delResult;
    }
    
    

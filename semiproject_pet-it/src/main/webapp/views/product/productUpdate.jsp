@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8" import="com.pet.product.model.dto.*"%>
 <%@ include file="/views/header.jsp"%>
 <%
-	Product product = (Product)request.getAttribute("product");
-	ProductImageFile mainImg = (ProductImageFile)request.getAttribute("productFileImage");
+Product product = (Product) request.getAttribute("product");
+ProductImageFile mainImg = (ProductImageFile) request.getAttribute("productFileImage");
 %>
 <!-- TUI 에디터 JS CDN -->
 <script
@@ -46,28 +46,35 @@ input#optionPrice {
 <div class="wrapper">
 	<div class="product-enroll-wrapper">
 		<div class="product-enroll-container">
-<!-- 			<h2>상품수정</h2> -->
+			<!-- 			<h2>상품수정</h2> -->
 			<div class="line"></div>
-			<form action="<%=request.getContextPath()%>/product/productUpdateEnd.do" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+			<form
+				action="<%=request.getContextPath()%>/product/productUpdateEnd.do"
+				method="post" accept-charset="utf-8" enctype="multipart/form-data"
+				>
 				<div class="product-detail-container">
 					<div class="detail-container-l">
 						<div class="img-container">
-							<img id="image-box"	src="<%=request.getContextPath()%>/upload/<%=mainImg.getProductFileRename()%>" /> 
-								<input type="file" class="btn btn-outline-success" name="mainImage" id="main-image" value="" />
+							<img id="image-box"
+								src="<%=request.getContextPath()%>/upload/<%=mainImg.getProductFileRename()%>" />
+							<input type="file" class="btn btn-outline-success"
+								name="mainImage" id="main-image" value="" />
 						</div>
 					</div>
 					<div class="detail-container-r">
 						<!-- 입력데이터 DB 저장 후 저장된 정보를 가지고 product List에서 해당 컬럼데이터에 맞게 출력 -->
 						<!-- 				<input type="file" name="mainImage" id="main-image" style="display:none"/> -->
-						<input type="hidden" name="productNo" value="<%=product.getProductNo()%>"/>
-						<input type="hidden" name="content" id="product-content" />
+						<input type="hidden" name="productNo"
+							value="<%=product.getProductNo()%>" /> <input type="hidden"
+							name="content" id="product-content" />
 						<div class='enroll-content-container'>
 							<div class="enrollpage-title">
 								<h4>상품명 :</h4>
 							</div>
 							<div class="enrollpage-content">
 								<input type="text" name="productName"
-									placeholder="상품명을 입력하세요 (30자)" maxlength="30" value="<%=product.getProductName()%>" readOnly/>
+									placeholder="상품명을 입력하세요 (30자)" maxlength="30"
+									value="<%=product.getProductName()%>" readOnly />
 							</div>
 						</div>
 						<div class='enroll-content-container'>
@@ -76,23 +83,29 @@ input#optionPrice {
 							</div>
 							<div class="enrollpage-content">
 								<div class="price-container">
-								<input type="number" name="productPrice"
-									placeholder="상품가격을 입력하세요" min="0" step="1000" value="<%=product.getProductPrice()%>" required 
-									style="padding-left:10px;"/>
+									<input type="number" name="productPrice"
+										placeholder="상품가격을 입력하세요" min="0" step="1000"
+										value="<%=product.getProductPrice()%>" required
+										style="padding-left: 10px;" />
 								</div>
 								<div class="discount-radio">
-								<label for="discount">
-								<input class="discount" type="radio" id="discount" name="discount" value="0" <%=product.getProductDiscount().equals("0")?"checked":"" %>>
-								없음</label>
-								<label for="discount1">
-								<input class="discount" type="radio" id="discount1" name="discount" value="0.1" <%= product.getProductDiscount().equals("0.1")?"checked":"" %>>
-								10%</label>
-								<label for="discount2">
-								<input class="discount" type="radio" id="discount2" name="discount" value="0.2" <%= product.getProductDiscount().equals("0.2")?"checked":"" %>>
-								20%</label>
-								<label for="discount3">
-								<input class="discount" type="radio" id="discount3" name="discount" value="0.3" <%= product.getProductDiscount().equals("0.3")?"checked":"" %>>
-								30%</label>
+									<label for="discount"> <input class="discount"
+										type="radio" id="discount" name="discount" value="0"
+										<%=product.getProductDiscount().equals("0") ? "checked" : ""%>>
+										없음
+									</label> <label for="discount1"> <input class="discount"
+										type="radio" id="discount1" name="discount" value="0.1"
+										<%=product.getProductDiscount().equals("0.1") ? "checked" : ""%>>
+										10%
+									</label> <label for="discount2"> <input class="discount"
+										type="radio" id="discount2" name="discount" value="0.2"
+										<%=product.getProductDiscount().equals("0.2") ? "checked" : ""%>>
+										20%
+									</label> <label for="discount3"> <input class="discount"
+										type="radio" id="discount3" name="discount" value="0.3"
+										<%=product.getProductDiscount().equals("0.3") ? "checked" : ""%>>
+										30%
+									</label>
 								</div>
 							</div>
 						</div>
@@ -102,7 +115,8 @@ input#optionPrice {
 							</div>
 							<div class="enrollpage-content">
 								<input type="text" name="productSummary"
-									placeholder="상품 한줄 소개 (40자)" maxlength="40" value="<%=product.getProductInfo() %>" required/>
+									placeholder="상품 한줄 소개 (40자)" maxlength="40"
+									value="<%=product.getProductInfo()%>" required />
 							</div>
 						</div>
 						<div class='enroll-content-container'>
@@ -111,7 +125,8 @@ input#optionPrice {
 							</div>
 							<div class="enrollpage-content">
 								<input type="number" name="productStock"
-									placeholder="판매 재고 개수 입력" min="0" value="<%=product.getProductStock()%>" required />
+									placeholder="판매 재고 개수 입력" min="0"
+									value="<%=product.getProductStock()%>" required />
 							</div>
 						</div>
 						<div class='enroll-content-container'>
@@ -120,7 +135,8 @@ input#optionPrice {
 							</div>
 							<div class="enrollpage-content category"
 								style="text-align: center;">
-								<span>1차 분류</span> <select name="1st_category" style="width: 150px">
+								<span>1차 분류</span> <select name="1st_category"
+									style="width: 150px">
 									<option value="C-1">Dog</option>
 									<option value="C-2">Cat</option>
 								</select> <span>2차 분류</span> <select name="2nd_category"
@@ -131,49 +147,81 @@ input#optionPrice {
 								</select>
 							</div>
 						</div>
-						<%if(product.getProductOption().isEmpty()){ %>
-						<!-- 옵션 수정 창 (case : 옵션X) -->						
+						<%
+						if (product.getProductOption().isEmpty()) {
+						%>
+						<!-- 옵션 수정 창 (case : 옵션X) -->
 						<div class='enroll-content-container option'>
 							<div class="enrollpage-title option-title">
 								<div style="padding-bottom: 14px;">
-									<button type="button" id="option-btn-add" class="btn btn-success">+</button>
-									<button type="button" id="option-btn-remove" class="btn btn-success">-</button>
+									<button type="button" id="option-btn-add"
+										class="btn btn-success">+</button>
+									<button type="button" id="option-btn-remove"
+										class="btn btn-success">-</button>
 								</div>
 								<h4 style="width: 135px;">옵션 :</h4>
 							</div>
-							<div class="enrollpage-content option-fix">
-								<input type="hidden" name="optionNo" id="optionNo" value=""/>
-								<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" value="" /> 
-								<input type="number" name="optionPrice"	id="optionPrice" placeholder="가격" value=""/>
+							<div class="enrollpage-content option">
+								<input type="hidden" name="optionNo" id="optionNo" value="" /> <input
+									type="text" name="optionName" id="optionName"
+									placeholder="가격옵션명" value="기본" required /> <input type="number"
+									name="optionPrice" id="optionPrice" placeholder="가격"
+									value="<%=product.getProductPrice()%>" required />
 							</div>
 							<div id="option-btn" style="line-height: 3.0"></div>
 						</div>
-						<%} else{%>
-						<% int count = 0;%>
-						<%for(ProductOption op : product.getProductOption()){ %>
+						<%
+						} else {
+						%>
+						<%
+						int count = 0;
+						%>
+						<%
+						for (ProductOption op : product.getProductOption()) {
+						%>
 						<!-- 옵션 수정 창 (case : 옵션O) -->
-						<div class='enroll-content-container option<%=product.getProductOption().size()-1==count?"-new-container":"" %>'>
+						<div class='enroll-content-container option'>
 							<div class="enrollpage-title option-title">
 								<div style="padding-bottom: 14px;">
-									<%if(count==0){ %>
-									<button type="button" id="option-btn-add" class="btn btn-success">+</button>
-									<button type="button" id="option-btn-remove" class="btn btn-success">-</button>
-								<%} %>
+									<%
+									if (count == 0) {
+									%>
+									<button type="button" id="option-btn-add"
+										class="btn btn-success">+</button>
+									<button type="button" id="option-btn-remove"
+										class="btn btn-success">-</button>
+									<%
+									}
+									%>
 								</div>
-								<%if(count==0){ %>
+								<%
+								if (count == 0) {
+								%>
 								<h4 style="width: 135px;">옵션 :</h4>
-								<% ++count; System.out.println("count: "+count); %>
-								<%} %>
+								<%
+								++count;
+								System.out.println("count: " + count);
+								%>
+								<%
+								}
+								%>
 							</div>
 							<div class="enrollpage-content option-fix">
-								<input type="hidden" name="optionNo" id="optionNo" value="<%=op.getProductOptionNo()%>"/>
-								<input type="text" name="optionName" id="optionName" placeholder="가격옵션명" value="<%=op.getProductOptionName()%>" /> 
-								<input type="number" name="optionPrice"	id="optionPrice" placeholder="가격" value="<%=op.getProductOptionPrice()%>"/>
+								<input type="hidden" name="optionNo" id="optionNo"
+									value="<%=op.getProductOptionNo()%>" /> <input type="text"
+									name="optionName" id="optionName" placeholder="가격옵션명"
+									value="<%=op.getProductOptionName()%>" /> <input type="number"
+									name="optionPrice" id="optionPrice" placeholder="가격"
+									value="<%=op.getProductOptionPrice()%>" />
 							</div>
 							<div id="option-btn" style="line-height: 3.0"></div>
 						</div>
-						<%} %>
-						<%} %>	
+						<%
+						}
+						%>
+						<%
+						}
+						%>
 					</div>
 				</div>
 			</form>
@@ -215,7 +263,9 @@ input#optionPrice {
 <!-- =======================================================================================================  -->
 
 <script>
-    
+
+    	
+    	
         const editor = new toastui.Editor({
             el: document.querySelector('#editor-container'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
@@ -260,16 +310,16 @@ input#optionPrice {
        		    	}
         		}
         });
-        
 
+        
         let count = 0;
         $("#option-btn-add").on("click",(e)=>{
            console.log($(".option").length);
-           if($(".option-new-container").length<2){
+           if($(".option").length<3){
            const optionBox = $(".detail-container-r");
-           const div1 = $("<div class='enroll-content-container option-new-container'></div>");
+           const div1 = $("<div class='enroll-content-container option'></div>");
            const div2 = $("<div class='enrollpage-title'></div>");
-           const div3 = $("<div class='enrollpage-content option-new'></div>");
+           const div3 = $("<div class='enrollpage-content option'></div>");
            $(div1).append(div2);
            $(div1).append(div3);
            const inputName = $('<input type="text" name="optionName" id="optionName"+ placeholder="가격옵션명" />');
@@ -281,14 +331,25 @@ input#optionPrice {
            }
         });
         $("#option-btn-remove").on("click",function(){
-        	const target = $(".option-new-container").last();
+        	if($(".option").length!=1){
+        	const target = $(".option").last();
         	console.log(target);
         	target.remove("");
+        	}
         	/* const target2 = $(".option:last-child()").remove(); */
         })
       
-        /* 모달 컨트롤 스크립트  */
-        $("#enroll-itemcontent-btn").on("click",function(){    
+ /*        $("#enroll-itemcontent-btn").on("click",function(){
+        	if($("#optionName").val().trim()=="" || $("#optionName").val()=="null"){
+    			alert("옵션명과 가격을 입력하세요, 옵션추가를 원하지 않을경우 '기본','제품가격'을 입력해주세요.");
+    			return false;
+    		}
+    		return true;
+        })
+         */
+       /* 모달 컨트롤 스크립트  */
+        $("#enroll-itemcontent-btn").on("click",function(){
+    		
            $(".modal").css("display","block").css("top","230px");
                             
               $(".modal-footer>.btn:nth-child(1)").click(function(){
@@ -304,8 +365,7 @@ input#optionPrice {
                $(".product-enroll-container>form").submit();
          
                  
-                 <%-- location.href='<%=request.getContextPath()%>/product/productlist.jsp'; --%>
-                 /* ajax or get-> queryString방식으로 product# 넘기기 ,  */
+                
               })
            
               
