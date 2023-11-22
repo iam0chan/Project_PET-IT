@@ -132,7 +132,7 @@
                       </ul> 
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link " href="about.html">이벤트</a>
+                      <a class="nav-link " href="<%=request.getContextPath() %>/views/event/eventList.jsp">이벤트</a>
                      <!--  <ul class="sub-nav">
                          <li class = "sub-item">신상품</li>
                          <li class = "sub-item">베스트</li>
