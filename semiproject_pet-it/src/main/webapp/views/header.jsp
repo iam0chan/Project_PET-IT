@@ -193,7 +193,7 @@
                  
               }); */
               </script>
-                  <a href="<%=request.getContextPath()%>/CartList">
+                  <a href="">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>장바구니</span>
                   </a>
