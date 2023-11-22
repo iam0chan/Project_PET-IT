@@ -81,6 +81,7 @@
 	<div class="container mt-3">
 		<div class="row">
 			<table class="table table-bordered">
+					<%if(q!=null) {%>
 					<tr>
 						<th style="text-align: center; background-color: #F2F2F2;">제목</th>
 						<th style="color:black;"><%=q.getQuestionTitle()%></th>
@@ -101,6 +102,7 @@
 						<td id="contentBox"><%=q.getQuestionContent()%></td>
 					</tr>
 				</tbody>
+				<%} %>
 			</table>
 		</div>
 	</div>
@@ -114,7 +116,8 @@
 		<form action="<%=request.getContextPath()%>/insertComment.do" method="post">
 			<input type="hidden" name="questionRef" value="<%=q.getQuestionNo()%>">
 			<textarea name="content" cols="55" rows="3"></textarea>
-			<button id="comment-btn" type="submit" class="btn btn-outline-success" onclick="listBtn();">등록</button> 
+			<button id="comment-btn" type="submit" class="btn btn-outline-success" onclick="listBtn();">등록</button>
+		</form> 
 	</div>
 	<%} %>
 

@@ -98,7 +98,12 @@ public class QuestionService {
 		close(conn);
 		return result;
 	}
-	
+	public QuestionComment selectQuestionComment(String questionNo) {
+		Connection conn = getConnection();
+		QuestionComment result = dao.selectQuestionComment(conn,questionNo);
+		close(conn);
+		return result;
+	}
 	
 	
 	

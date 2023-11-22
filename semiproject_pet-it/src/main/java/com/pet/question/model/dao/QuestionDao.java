@@ -237,7 +237,7 @@ public class QuestionDao {
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertQuestionComment"));
-			pstmt.setInt(1, 1);
+			pstmt.setString(1, qc.getQuestionNo());
 			pstmt.setString(2, qc.getReplyContent());
 			result=pstmt.executeUpdate();
 		}catch (SQLException e) {
@@ -247,7 +247,36 @@ public class QuestionDao {
 		}return result;
 		
 	}
-
+	
+	public QuestionComment selectQuestionComment(Connection conn, String questionNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		QuestionComment result=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectQuestionComment"));
+			pstmt.setString(1, questionNo);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) result=getQuestionComment(rs);
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	private QuestionComment getQuestionComment (ResultSet rs) throws SQLException{
+	return QuestionComment.builder()
+			.questionNo(rs.getString("QUESTION_NO"))
+			.replyNo(rs.getInt("REPLY_NO"))
+			.replyDate(rs.getDate("REPLY_DATE"))
+			.replyContent(rs.getString("REPLY_CONTENT"))
+			.build();
+	
+	
+	}
 	
 	
 	

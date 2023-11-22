@@ -1,6 +1,7 @@
 package com.pet.question.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,17 +34,22 @@ public class QuestionCommentInsertServlet extends HttpServlet {
 //		int  replyNo =Integer.parseInt(request.getParameter("replyNo"));
 		String questionNo = request.getParameter("questionRef");
 //		String replyDate = request.getParameter("replyDate");
-		String replyContent = request.getParameter("replyContent");
+		String replyContent = request.getParameter("content");
 		
 		QuestionComment qc = QuestionComment.builder()
-				.replyNo(1)
-				.questionNo(questionNo)
-				.replyContent(replyContent)
-				.build();
+							.questionNo(questionNo)
+							.replyContent(replyContent)
+							.build();
+		System.out.println(qc);
 		
 		int result = new QuestionService().insertQuestionComment(qc);
 		
-		response.sendRedirect(request.getContextPath()+"/questionView.do?no="+1);
+		QuestionComment qcc= new QuestionService().selectQuestionComment(questionNo);
+		
+		System.out.println(result);
+		
+		
+		response.sendRedirect(request.getContextPath()+"/questionView.do?no="+questionNo); 
 		
 	}
 		
