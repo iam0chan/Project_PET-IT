@@ -25,7 +25,7 @@ public class Cart {
 	
 	// 상품옵션 추가
 	private String optionName;
-    private String optionValue;
+    private int optionValue;
 	
 	
 	// 여러 제품 정보를 갖는 리스트

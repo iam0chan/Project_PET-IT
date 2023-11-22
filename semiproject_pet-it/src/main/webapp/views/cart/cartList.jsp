@@ -218,9 +218,7 @@ background-color: green;
 <body>
 	<section>
 		<h3>장바구니</h3>
-		<h6>
-			회원님은 <strong>[silver]</strong>등급입니다.
-		</h6>
+	
 		<!-- <hr />
 		<div class="info">
 			<div class="mileage">가용 적립금</div>
