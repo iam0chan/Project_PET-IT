@@ -22,7 +22,7 @@ import com.pet.product.service.ProductService;
 /**
  * Servlet implementation class MainPageProductServlet
  */
-@WebServlet("/product/mainPage.do")
+@WebServlet(urlPatterns={"/product/mainPage.do"})
 public class MainPageProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,19 +30,17 @@ public class MainPageProductServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("utf-8");
 		
-		String type = request.getParameter("type");
-		System.out.println(type);
+		List<ProductImageFile> files = null;
+		Map<String,ProductImageFile> data = new HashMap<>();
+		List<Product> newProducts = new ProductService().selectProductListAll(1, 6, "new");
+		for(Product p: newProducts) {
+			data.put(p.getProductNo(),new ProductService().selectMainImageFile(p.getProductNo()));
+			
+		}
 		
-		List productInfo = new ArrayList();
-		Map data = new HashMap();
-		List<Product> newProducts = new ProductService().selectProductListAll(1, 6, type);
-		List<ProductImageFile> files = new ProductService().selectMainImageFileAll();
-		data.put("newProduct", newProducts);
-		data.put("files", files);
-		
-		Gson gson = new Gson();
-		response.setHeader("content-type", "application/json;charset=utf-8");
-		gson.toJson(data,response.getWriter());
+		request.setAttribute("newProducts", newProducts);
+		request.setAttribute("imageData", data);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 		
 		
 	}

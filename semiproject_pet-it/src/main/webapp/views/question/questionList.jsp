@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/header.jsp" %>
+<%@ page import="java.util.List,com.pet.question.model.dto.Question"%>
+<%
+List<Question> question = (List<Question>) request.getAttribute("question");
+%>
+<%@ include file="/views/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,39 +44,42 @@
 	text-align: center;
 }
 
-#search {
+#searchMenu {
 	text-align: center;
 	height: 25px;
 }
 
-#writeBtn{
-	
-	float : right;
+#writeBtn {
+	float: right;
 }
 
-table#tbl-question td,table#tbl-question th{
-	line-height:35px !important;
+table#tbl-question td, table#tbl-question th {
+	line-height: 35px !important;
 }
-
 
 tr.item {
-  color: #000; /* 텍스트 색상 */
-  background-color: #fff; /* 기본 배경 색상 */
+	color: #000;
+	background-color: #fff;
 }
 
 tr.item:hover {
-  color: #000; /* 마우스를 올렸을 때 텍스트 색상 */
-  background-color: #04aa6d; 
+	color: #000;
+	background-color: #04aa6d;
 }
 
+#pageBar {
+	text-align: center;
+}
 
-
+.questionwriter {
+	text-align: center;
+	height: 25px;
+	line-height: 20px;
+}
 </style>
 </head>
 <body>
-	<!-- 전체화면 div -->
 	<div class="space">
-		<!-- 1대1문의 header div -->
 		<div class="titleArea">
 			<h2>1:1문의</h2>
 			<p>문의내용을 남겨주시면 빠른 시간 내 답변을 드리겠습니다.</p>
@@ -83,81 +90,91 @@ tr.item:hover {
 
 		<div class="boardSort">
 			<p class="boardSort"></p>
-			<span class="categoryBar"> <!-- 카테고리 선택 메뉴바 --> <select
-				id="selectCategory" name="selectCategory">
-					<option value selected="selected">전체</option>
-					<option value="1">회원서비스</option>
-					<option value="2">제품문의</option>
-					<option value="3">주문/결제</option>
-					<option value="4">배송</option>
-					<option value="5">취소/반품/교환</option>
-					<option value="6">제품/서비스 이용불만</option>
-					<option value="7">기타</option>
+			<span class="categoryBar"> <select id="selectCategory"
+				name="selectCategory">
+					<option value="전체"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("전체") ? "selected" : ""%>>전체</option>
+					<option value="회원서비스"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("회원서비스") ? "selected" : ""%>>회원서비스</option>
+					<option value="제품문의"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("제품문의") ? "selected" : ""%>>제품문의</option>
+					<option value="주문/결제"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("주문/결제") ? "selected" : ""%>>주문/결제</option>
+					<option value="배송"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("배송") ? "selected" : ""%>>배송</option>
+					<option value="취소/반품/교환"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("취소/반품/교환") ? "selected" : ""%>>취소/반품/교환</option>
+					<option value="제품/서비스 이용불만"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("제품/서비스 이용불만") ? "selected" : ""%>>제품/서비스이용불만</option>
+					<option value="기타"
+						<%=request.getParameter("question") != null && request.getParameter("question").equals("기타") ? "selected" : ""%>>기타</option>
 			</select>
 			</span>
 		</div>
-		<div class="boardTable">
-			<table id="tbl-question" class="table table-sm">
-				<colgroup>
-					<col style="width: 50px";>
-					<col style="width: 170px";>
-					<col style="width: 300px";>
-					<col style="width: 150px";>
-					<col style="width: 150px";>
-					<col style="width: 60px";>
+		<table id="tbl-question" class="table table-sm">
+			<thead class="listHeard">
+				<tr class="questionTitle">
+					<th scope="col" class="active text-center" style="width: 80px;">번호</th>
+					<th scope="col" class="active text-center" style="width: 180px;">카테고리</th>
+					<th scope="col" class="active text-center" style="width: 400px;">제목</th>
+					<th scope="col" class="active text-center" style="width: 100px;">작성일</th>
 
-				</colgroup>
-				<thead calss="listHeard">
-					<tr>
-						<th scope="col">번호</th>
-						<th scope="col">카테고리</th>
-						<th scope="col">제목</th>
-						<th scope="col">작성자</th>
-						<th scope="col">작성일</th>
-						<th scope="col">답변</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="item">
-						<td>3</td>
-						<td>배송</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">배송질문 있습니다.</a></td>
-						<td>이오공</td>
-						<td>2023-11-11</td>
-						<td>O</td>
-					</tr>
-					<tr class="item">
-						<td>2</td>
-						<td>제품/서비스이용불만</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">북어트릿 맛없어요.</a></td>
-						<td>이오공</td>
-						<td>2023-10-11</td>
-						<td>O</td>
-					</tr>
-					<tr class="item">
-						<td>1</td>
-						<td>제품문의</td>
-						<td class=""><a href="" style="text-decoration:none; color:black;">북어트릿 주문확인 부탁드려요.</a></td>
-						<td>이오공</td>
-						<td>2023-10-08</td>
-						<td>O</td>
-					</tr>
-				</tbody>
-				
-				
-			</table>
-		</div>
-				<div id="writeBtn">
-					<button class="btn btn-outline-success" onclick="#">
-						<span class="customerBtn"> 글쓰기	</span>
-					</button>
-				</div>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				<%
+				if (question!= null && !question.isEmpty()) {
+					for (Question q : question) {
+				%>
+				<tr class="item">
+					<td><%=q.getQuestionNo()%></td>
+					<td><%=q.getQuestionCategory()%></td>
+					<td>
+						<a href="<%=request.getContextPath()%>/questionView.do?no=<%=q.getQuestionNo()%>">
+						<%=q.getQuestionTitle() %>
+						</a>
+					</td>
+					<td><%=q.getQuestionDate() %></td>
+				</tr>
+				<%
+				}
+				}
+				%>
+			</tbody>
+		</table>
 	</div>
-	<div class="pageingBar">
-		<h2>페이징바 영역</h2>
+	  <div>
+		<%
+		if (loginMember != null ) {
+		%> 
+		<div class="questionwriter">
+			<button
+				onclick="location.assign('<%=request.getContextPath()%>/questionwriter.do')"
+				class="btn btn-outline-success">글쓰기</button>
+		</div>
+	 </div>
+	<%
+	}
+	%>  
+
+	<div id="pageBar">
+		<%=request.getAttribute("pageBar")%>
 	</div>
 	<div class="boardsearchAll">
-		<fieldset class="boardSearch">
+		<form action='<%=request.getContextPath()%>/questionSearchMenu.do' method="get" >
+			<select id="searchKey" name="searchKey">
+					<option value="subject">제목</option>
+					<option value="subject">내용</option>
+			</select>
+			<input type="search" id="searchMenu" name="searchKeyword" placeholder="입력하세요">
+			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
+		</form> 
+	</div> 
+		
+		
+		
+		
+		<!-- <fieldset class="boardSearch">
 			<p>
 				<select id="searchKey" name="searchKey">
 					<option value="subject">제목</option>
@@ -167,8 +184,21 @@ tr.item:hover {
 					<a href="#none">SEARCH</a>
 				</button>
 			</p>
-		</fieldset>
+		</fieldset> -->
 	</div>
+
+	<script>
+	const selectCategory = document.getElementById("selectCategory");
+	console.log(selectCategory)
+	selectCategory.addEventListener("change",function(e){
+	location.replace("<%=request.getContextPath()%>/questioninquiry.do?question="+ e.target.value);
+	});
+	
+	
+	
+	</script>
+
+
 
 </body>
 </html>

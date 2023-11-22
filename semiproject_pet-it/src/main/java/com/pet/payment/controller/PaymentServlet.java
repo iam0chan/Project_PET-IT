@@ -47,10 +47,9 @@ public class PaymentServlet extends HttpServlet {
 		//주문상세객체배열 가져오기
 		String orderArr = request.getParameter("orderArr");
         List<OrderDetail>orderList = null;
-        if(orderArr!=null) {
-			OrderDetail[] orderArray = gson.fromJson(orderArr, OrderDetail[].class);
-			orderList = Arrays.asList(orderArray);
-        }
+		OrderDetail[] orderArray = gson.fromJson(orderArr, OrderDetail[].class);
+		orderList = Arrays.asList(orderArray);
+        
         
 		//결제테이블에 넣을 정보 가져오기
 		String imp_uid = request.getParameter("imp_uid");

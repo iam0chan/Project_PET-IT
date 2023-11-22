@@ -161,7 +161,7 @@ tr.item:hover {
 	
 	<div>
 		<%if(loginMember!=null
-			&&loginMember.getMemberId().equals("jihyes")){ %>
+			&&loginMember.getMemberId().equals("petitad")){ %>
 			 <div class="Pet-it-adminBtn">
 			 	<button onclick="location.assign('<%=request.getContextPath()%>/noticewriter.do')" class="btn btn-outline-success">글쓰기</button>
 			 </div>
@@ -172,7 +172,7 @@ tr.item:hover {
 	<!--카테고리별 조회 script-->
 	<script>
 	const selectCategory = document.getElementById("selectCategory");
-	console.log(selectCategory)ㅑ
+	console.log(selectCategory)
 	selectCategory.addEventListener("change",function(e){
 	location.replace("<%=request.getContextPath()%>/noticeinquiry.do?notices="+ e.target.value);
 	});

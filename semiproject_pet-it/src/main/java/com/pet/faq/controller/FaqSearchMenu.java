@@ -31,15 +31,20 @@ public class FaqSearchMenu extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String keyword = request.getParameter("keyword");
+		//검색창으로 search 하는 서블릿 
+		
+		String key = request.getParameter("searchKey");
+		String keyword = request.getParameter("searchKeyword");
 		int cPage,numPerpage=10; 
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		List<Faq> faqs=new FaqService().selectFaq(cPage, numPerpage);
+		
 		int totalData=new FaqService().selectFaqCount();  
+		List<Faq> serachResult=new FaqService().selectFaq(cPage, numPerpage, key, keyword);
+
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1; 
@@ -52,7 +57,7 @@ public class FaqSearchMenu extends HttpServlet {
 			pageBar.append("<span>[이전]</span>"); 
 											
 		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>");
+			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&question="+(keyword)+"'>");
 			pageBar.append("[이전]</a>"); 
 		}
 		
@@ -60,7 +65,7 @@ public class FaqSearchMenu extends HttpServlet {
 			if(cPage==pageNo) {
 				pageBar.append("<span>"+pageNo+"</span>"); 
 			}else {
-				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
+				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&question="+(keyword)+"'>");
 				pageBar.append(pageNo);
 				pageBar.append("</a>"); 
 			}
@@ -70,14 +75,14 @@ public class FaqSearchMenu extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar.append("<span>[다음]</span>"); 
 		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
+			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&question="+(keyword)+"'>");
 			pageBar.append("[다음]");
 			pageBar.append("</a>"); 
 		}
 		
-		request.setAttribute("faqs", faqs); 
+		request.setAttribute("faqs", serachResult); 
 		request.setAttribute("pageBar", pageBar); 
-		request.getRequestDispatcher("/faq/faqList.jsp").forward(request, response); 
+		request.getRequestDispatcher("/views/faq/faqList.jsp").forward(request, response); 
 		
 		
 	}

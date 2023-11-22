@@ -132,7 +132,6 @@ public class NoticeDao {
 	                result.add(getNotice(rs));
 	            }
 	        } catch (SQLException e) {
-	            // 적절한 예외 처리를 추가할 수 있습니다.
 	            e.printStackTrace();
 	        } finally {
 	            close(rs);
@@ -159,6 +158,7 @@ public class NoticeDao {
 	    	
 	    }
 		
+	    //제목으로 검색 
 	    public List<Notice> noticeSearchTitle(Connection conn, int cPage, int numPerpage, String keyword){
 	    	PreparedStatement pstmt = null;
 	        ResultSet rs = null;
@@ -182,6 +182,7 @@ public class NoticeDao {
 	        return result;
 	    }
 	    
+	    //내용으로 검색 
 	    public List<Notice> noticeSearchContent(Connection conn, int cPage, int numPerpage, String keyword){
 	    	PreparedStatement pstmt = null;
 	        ResultSet rs = null;

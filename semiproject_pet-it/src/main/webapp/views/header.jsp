@@ -110,7 +110,7 @@
                        <ul class="sub-nav">
                          <a href="<%=request.getContextPath() %>/views/brandInfo/brandInfoPage.jsp"><li class = "sub-item">브랜드소개</li></a>
                          <a href="<%=request.getContextPath() %>/noticeList.do"><li class = "sub-item">공지사항</li></a>
-                         <a href="#"><li class = "sub-item">1:1문의</li></a>
+                         <a href="<%=request.getContextPath() %>/questionList.do"><li class = "sub-item">1:1문의</li></a>
                       </ul> 
                     </li>
                     <li class="nav-item header-menu-item">
@@ -133,7 +133,12 @@
                       </ul>
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link" href="<%=request.getContextPath() %>/views/myPage/mypageView.jsp">마이페이지</a>
+                    <!-- ty 11/21 17:27 관리자페이지 링크 추가 -->
+                    <% if(loginMember!=null&& loginMember.getMemberId().equals("petitad")) {%>
+                    	<a class="nav-link" href="<%=request.getContextPath() %>/views/admin/adminPage.jsp">관리자페이지</a>
+                    <%}else{ %>
+                        <a class="nav-link" href="<%=request.getContextPath() %>/views/myPage/mypageView.jsp">마이페이지</a>                    
+                    <%} %>
                       <!-- <ul class="sub-nav">
                          <li class = "sub-item">신상품</li>
                          <li class = "sub-item">베스트</li>

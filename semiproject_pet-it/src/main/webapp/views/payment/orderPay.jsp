@@ -7,7 +7,6 @@
 				java.util.ArrayList" 
 %>
 
-<% OrderDetail od = (OrderDetail)request.getAttribute("orderDetail");%>
 <% List<OrderDetail> ol = (List<OrderDetail>)request.getAttribute("orderList"); %>
 
 <!-- header -->
@@ -335,6 +334,7 @@
 // 결제정보관련 변수 설정
 let id="<%=loginMember.getMemberId()%>"
 let pg="";
+let pay_method = "";
 let product_name="";
 let amount= "";
 let addr="";
@@ -361,7 +361,6 @@ $("#paymentBtn").on("click",function(e){
 	tell = $("#orderPhone").val();
 	addr = $("#addr").val()+", "+$("#detailAddr").val();
 	postcode = $("#zipcode").val();
-	productImg = "<%=request.getContextPath()%>/upload/<%=od.getProductImg()%>"
 	
 	//주문 객체 생성
 	order.orderNo = Number(orderNo);
@@ -377,12 +376,12 @@ $("#paymentBtn").on("click",function(e){
 	
 	//주문 상세 객체 생성
 	orderDetail.orderNo = Number(orderNo);
-	orderDetail.productNo = "<%=od.getProductNo()%>";
-	orderDetail.productName = "<%=od.getProductName()%>";
-	orderDetail.productOption = "<%=od.getProductOption()%>";
-	orderDetail.detailPrice = <%=od.getDetailPrice()%>;
-	orderDetail.detailCount = <%=od.getDetailCount()%>;
-	orderDetail.productImg = productImg;
+	orderDetail.productNo = "<%=ol.get(0).getProductNo()%>";
+	orderDetail.productName = "<%=ol.get(0).getProductName()%>";
+	orderDetail.productOption = "<%=ol.get(0).getProductOption()%>";
+	orderDetail.detailPrice = <%=ol.get(0).getDetailPrice()%>;
+	orderDetail.detailCount = <%=ol.get(0).getDetailCount()%>;
+	orderDetail.productImg = "<%=request.getContextPath()%>/upload/<%=ol.get(0).getProductImg()%>";
 
 	<%if(ol.size()>1){%>
 		product_name = "<%=ol.get(0).getProductName()%>"+" 등 "+"<%=ol.size()%>"+"개 상품";
@@ -424,9 +423,11 @@ $("#paymentBtn").on("click",function(e){
 
     // 빈 필드가 없다면 결제 방식 선택
     if($("#card-payment").is(":checked")){
-        pg = "kcp.AO09C";	
+        pg = "kcp.AO09C";
+        pay_method = "Card";
     } else {
         pg = "kakaopay.TC0ONETIME";
+        pay_method = "KakaoPay"
     }
     payment_api();
 
@@ -436,7 +437,7 @@ $("#paymentBtn").on("click",function(e){
 function payment_api(){
 	IMP.request_pay({							//결제창 호출 함수 IMP.request_pat({});
 		pg : pg,								//결제사명.PG상점아이디
-		pay_method : "card",					//지불방법
+		pay_method : pay_method,				//지불방법
 		merchant_uid: orderNo,  				//주문번호가 들어가야함.
 		name : product_name,					//결제창에 노출될 상품명
 		amount:	amount,							//결제 금액
@@ -470,6 +471,7 @@ function payment_api(){
 				  		text: "잠시 후 결제완료페이지로 이동합니다",
 				  		icon: "success"
 					});
+					console.log(data);
 				    window.location.replace("<%=request.getContextPath()%>/paymentEnd.do");
 					
 			}).fail(function(data){
