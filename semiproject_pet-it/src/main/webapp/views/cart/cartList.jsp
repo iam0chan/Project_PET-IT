@@ -4,6 +4,7 @@
 <%@ page import="java.util.List, com.pet.cart.model.dto.Cart"%>
 <%
 List<Cart> cart = (List<Cart>) request.getAttribute("cartList");
+System.out.print(cart);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -217,9 +218,7 @@ background-color: green;
 <body>
 	<section>
 		<h3>장바구니</h3>
-		<h6>
-			회원님은 <strong>[silver]</strong>등급입니다.
-		</h6>
+	
 		<!-- <hr />
 		<div class="info">
 			<div class="mileage">가용 적립금</div>
@@ -227,92 +226,21 @@ background-color: green;
 		</div>
 		<hr /> -->
 		
-		<tr id="select">
-		<td colspan="6">
-		<select id="startMoney" name="startMoney">
-		<option>==최하==</option>
-		<c:choose>
-		<c:when test="${startMoney==10000 }">
-		<option selected="selected">10000</option>
-		<option>20000</option>
-		<option>30000</option>
-		</c:when>
-		<c:when test="${startMoney==20000 }">
-		<option>10000</option>
-		<option selected="selected">20000</option>
-		<option>30000</option>
-		</c:when>
-		<c:when test="${startMoney==30000 }">
-		<option>10000</option>
-		<option>20000</option>
-		<option selected="selected">30000</option>
-		</c:when>
-		</c:choose>
-	
 		
-		</select>
-		<select id="endMoney" name="endMoney">
-		<option>==최고==</option>
-		<c:choose>
-		<c:when test="${endMoney==10000 }">
-		<option selected="selected">10000</option>
-		<option>20000</option>
-		<option>30000</option>
-		</c:when>
-		<c:when test="${endMoney==20000 }">
-		<option>10000</option>
-		<option selected="selected">20000</option>
-		<option>30000</option>
-		</c:when>
-		<c:when test="${endMoney==30000 }">
-		<option>10000</option>
-		<option>20000</option>
-		<option selected="selected">30000</option>
-		</c:when>
-		</c:choose>
-		
-		</select>
 		<table>
 			<thead>
 				<tr>
 					<td><input type="checkbox"></td>
 					<td>이미지</td>
 					<td>상품정보</td>
+					<td>옵션</td>
 					<td>판매가</td>
 					<td>수량</td>
 					<td></td>
 				</tr>
 			</thead>
 			</table>
-			<%-- 		<tbody>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><img
-						src="<%=request.getContextPath()%>/images/default_product_image.jpg"
-						alt="상품 이미지"></td>
-					<td class="product-name">
-						<h5>상품명</h5>
-						<p>상품 설명</p>
-					</td>
-					<td class="price">100원</td>
-					<td class="qua-col first-row">
-						<div class="pro-qty">
-							<span class="dec qtybtn">-</span> <input name="cartCnt"
-								class="cartQty" id="cartQty"
-								value="" type="text"
-								style="width: 100px;"> <span class="inc qtybtn">+</span>
-						</div>
-					</td>
-					<td class="total">200원</td>
-					<td class="button">
-						<button onclick="deleteProduct('1')">삭제</button>
-					</td>
-	<%
-		}
-		}
-		%> --%>
-			</tbody>
-
+		
 			<tr>
 				<td></td>
 				<%
@@ -354,52 +282,7 @@ background-color: green;
 			<%
 			}
 			%>
-			<%-- <tr>
-					<td><input type="checkbox"></td>
-					<td><img
-						src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
-					<td class="product-name">
-						<h5>냥이 츄르 스푼</h5>
-						<p>츄르 먹이기가 쉬워지는 magic~</p>
-					</td>
-
-					<td class="price">10,000원</td>
-
-					<td class="qua-col first-row">
-						<div class="pro-qty">
-							<span class="dec qtybtn">-</span> <input name="cartCnt"
-								class="cartQty" id="cartQty" value="1" type="text"
-								style="width: 100px;"> <span class="inc qtybtn">+</span>
-						</div>
-					</td>
-					<td class="total">10,000원</td>
-
-					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><img src="request.getContextPath()>/images/cat_chu.jpg"></td>
-					<td class="product-name">
-						<h5>냥이 츄르 스푼</h5>
-						<p>츄르 먹이기가 쉬워지는 magic~</p>
-					</td>
-
-					<td class="price">10,000원</td>
-
-					<td class="qua-col first-row">
-						<div class="pro-qty">
-							<span class="dec qtybtn">-</span> <input name="cartCnt"
-								class="cartQty" id="cartQty" value="1" type="text"
-								style="width: 100px;"> <span class="inc qtybtn">+</span>
-						</div>
-					</td>
-					<td class="total">10,000원</td>
-
-					<td class="button"><a href="javascript:;" class="btnNormal"
-						onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-				</tr> --%>
-			<!-- 상품 추후에 추가하자 -->
+			
 			</tbody>
 		</table>
 

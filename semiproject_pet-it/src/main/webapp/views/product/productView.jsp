@@ -406,30 +406,46 @@ $("#btn-l").click(function() {
 
 /* 장바구니 modal창 출력 */
 $("#cart-btn").click(function() {
-	$(".modal").css("display", "block").css("top", "230px","right","230px");
-	$(".modal-header>h5").text("장바구니 확인");
-	$(".modal-body>p").text("장바구니에 담으시겠습니까?");
-	$(".modal-footer>.btn-primary").text("담기");
-	$(".modal-footer>.btn:nth-child(2)").click(function() {
-	console.log("이벤트발생");
-	$(".modal").css("display", "none");
-		const productNo = $.trim($("#pNo").val()); // 상품번호
-		const orderPrice = $.trim($(".total-price>span>strong").text()); //주문가격
-		const orderAmount = $.trim($("#product-order-amount").val()); //주문수량
-		const optionPrice = $.trim($("#option-select").val()); //옵션가격
-		const optionName = $.trim($("#option-select option:selected").attr("id")); //옵션명
-		console.log(orderAmount); //옵션명 체크 console
-
-		//paymentStart.do로 submit할 데이터가공
-		$("#productNo").val(productNo);
-		$("#orderPrice").val(orderPrice);
-		$("#orderAmount").val(orderAmount);
-		$("#optionPrice").val(optionPrice);
-		$("#optionName").val(optionName);
-		$("#orderInfo").attr("action","<%=request.getContextPath()%>/CartList")
-		$("#orderInfo").submit();
-
-	});
+	if(<%=loginMember!=null%>){
+		$(".modal").css("display", "block").css("top", "230px","right","230px");
+		$(".modal-header>h5").text("장바구니 확인");
+		$(".modal-body>p").text("장바구니에 담으시겠습니까?");
+		$(".modal-footer>.btn-primary").text("담기");
+		$(".modal-footer>.btn:nth-child(2)").click(
+				function() {
+				$(".modal").css("display", "none");
+				const productNo = $.trim($("#pNo").val()); // 상품번호
+	// 			const orderPrice = $.trim($(".total-price>span>strong").text()); //주문가격
+				const orderAmount = $.trim($("#product-order-amount").val()); //주문수량
+	 			const optionPrice = $.trim($("#option-select").val()); //옵션가격
+	 			const optionName = $.trim($("#option-select option:selected").attr("id")); //옵션명
+				/* console.log(orderAmount); */ //옵션명 체크 console
+	
+				//paymentStart.do로 submit할 데이터가공
+				<%-- $("#productNo").val(productNo);
+				$("#orderPrice").val(orderPrice);
+				$("#orderAmount").val(orderAmount);
+				$("#optionPrice").val(optionPrice);
+				$("#optionName").val(optionName);
+				$("#orderInfo").attr("action","<%=request.getContextPath()%>/CartList") --%>
+				//$("#orderInfo").submit();
+				$.post("<%=request.getContextPath()%>/cart/cartinsert.do",
+						{productNo:productNo,orderAmount:orderAmount,
+						memberId:'<%=loginMember!=null?loginMember.getMemberId():""%>',
+						optionPrice:optionPrice,optionName:optionName}
+						).done(data=>{
+							if(data){
+								alert("장바구니등록 성공!");
+							}else{
+								alert("장바구니등록 실패 TT");
+							}
+						});
+			});
+	}else{
+		alert('로그인 후 이용할 수 있습니다.');
+		window.location.href='<%=request.getContextPath()%>/views/member/login.jsp';
+		// 창 띄운 후, 로그인화면으로 이동
+	}
 });
 
 /* modal창 취소 버튼 이벤트 */
@@ -441,7 +457,7 @@ $(".modal-footer>.btn:nth-child(1)").click(function() {
 
 /* 삭제 버튼 이벤트 */
 $("#delete-itemcontent-btn").on("click", function() {
-	$(".modal-header>h5").text("상품 삭제 확인");
+	$(".modal-header>h5").text("상품이 삭제되었습니다.");
 	$(".modal-body>p").text("정말로 삭제하시겠습니까?");
 	$(".modal-footer>.btn-primary").text("삭제");
 	$(".modal").css("display","block").css("top","230px","right","230px");
