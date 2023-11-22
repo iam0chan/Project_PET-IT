@@ -1,12 +1,17 @@
 package com.pet.admin.service;
 
-import static com.pet.common.JDBCTemplate.*;
+import static com.pet.common.JDBCTemplate.close;
+import static com.pet.common.JDBCTemplate.commit;
+import static com.pet.common.JDBCTemplate.getConnection;
+import static com.pet.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.pet.admin.model.dao.AdminDao;
 import com.pet.payment.model.dto.Order;
+import com.pet.payment.model.dto.OrderDetail;
+import com.pet.payment.model.dto.Payment;
 
 public class AdminService {
 	AdminDao dao = new AdminDao();
@@ -31,6 +36,27 @@ public class AdminService {
 	public int selectOrderCount() {
 		Connection conn = getConnection();
 		int result = dao.selectOrderCount(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<OrderDetail> selectOrderDetailByNo(long orderNo) {
+		Connection conn = getConnection();
+		List<OrderDetail> result = dao.selectOrderDetailByNo(conn, orderNo);
+		close(conn);
+		return result;
+	}
+	
+	public List<Payment>selectPaymentByNo(long orderNo){
+		Connection conn = getConnection();
+		List<Payment> result = dao.selectPaymentByNo(conn, orderNo);
+		close(conn);
+		return result;
+	}
+	
+	public List<Order>selectOrderByNo(long orderNo){
+		Connection conn = getConnection();
+		List<Order> result = dao.selectOrderByNo(conn, orderNo);
 		close(conn);
 		return result;
 	}
