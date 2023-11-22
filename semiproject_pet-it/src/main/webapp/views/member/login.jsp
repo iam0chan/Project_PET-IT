@@ -18,35 +18,31 @@
 		width:534.475px;
 		height:80px;
 	}
-	
 	.navbar {
-		width:1519.2px;
 		height:130px;
 	}
-	.login-container{
-	
-		margin-top:20px;
-	}
-	body {
-        box-sizing: border-box;
-        line-height:40px;
+    .footer_section{
+    	height:130px;
     }
-    
 	section {
         text-align:center;
         width: 350px;
 	    max-width: 1000px;
-	    height: 550px;
+	    height: 599px;
 	    padding: 0 20px;
 	    margin: 0px auto;
+	    margin-bottom: 50px;
 	    background: white;
-	    /* border:1px solid lightgray; */
     }
+	body {
+        box-sizing: border-box;
+        line-height:40px;
+    }
+	.login-container{
+		margin-top:20px;
+	}
     
-    /* section>*{
-  	width: 50px;
- 	 height: 50px;
-  	background-color: red;
+    
   /* 상하좌우 정중앙 정렬하기 */
   	position:absolute;
   	top: 50%;
