@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>배송 주소록 관리</title>
 </head>
 <body>
 	<section>

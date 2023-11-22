@@ -273,6 +273,7 @@ public class ProductDao {
          while(rs.next()) {
             options.add(getProductOption(rs));
          }
+         System.out.print(options);
       }catch(SQLException e) {
          e.printStackTrace();
       }finally {
