@@ -16,12 +16,14 @@ Member login = (Member)session.getAttribute("loginMember");
 }
 </style>
 <div class="wrapper">
+	<%if(loginMember!=null && loginMember.getMemberId().equals("petitad")){ %>
 	<div class="update-delete-btn-container">
 		<button id="update-itemcontent-btn" type="button"
 			class="btn btn-outline-success button-bottom">수정</button>
 		<button id="delete-itemcontent-btn" type="button"
 			class="btn btn-outline-success button-bottom">삭제</button>
 	</div>
+	<%} %>
 	<div class="item-info-container">
 		<div class="item-image">
 			<div>
