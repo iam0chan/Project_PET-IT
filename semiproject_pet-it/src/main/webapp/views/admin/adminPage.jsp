@@ -10,48 +10,60 @@
 <!-- content start --> 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">일일 매출 통계</h1>
+        <h2 class="h2">매출 통계</h2>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
         </div>
       </div>
  
-    <!-- <div data-include-path="../product/productlist.jsp"></div>
- 
-    <script>
-        window.addEventListener('load', function() {
-            var allElements = document.getElementsByTagName('*');
-            Array.prototype.forEach.call(allElements, function(el) {
-                var includePath = el.dataset.includePath;
-                if (includePath) {
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            el.outerHTML = this.responseText;
-                        }
-                    };
-                    xhttp.open('GET', includePath, true);
-                    xhttp.send();
-                }
-            });
-        });
-    </script> -->
-    
-<!-- 	<iframe
-	 src="../product/productlist.jsp" 
-	onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"
-	>
-	</iframe> -->
+<div class="content">
+
+
+	<div id="content1">
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+				
+				google.charts.load('current', {'packages':['corechart']});
+				google.charts.setOnLoadCallback(drawVisualization);
+				
+				function drawVisualization() {
+				  // Some raw data (not necessarily accurate)
+				  var data = google.visualization.arrayToDataTable([
+				    ['일자별',	 '사료',		 '간식',		'용품'],
+				    ['2004/05',  165,      938,         522 ],
+				    ['2005/06',  135,      1120,        599 ],
+				    ['2006/07',  157,      1167,        587 ],
+				    ['2007/08',  139,      1110,        615 ],
+				    ['2008/09',  136,      691,         629 ]
+				  ]);
+				
+				  var options = {
+				    title : '일별 매출 통계',
+				    vAxis: {title: '매출'},
+				    hAxis: {title: '일자별'},
+				    seriesType: 'bars',
+				    series: {5: {type: 'line'}}
+				  };
+				
+				  var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+				  chart.draw(data, options);
+				}
+		</script>
+		
+		<body>
+		  <div id="chart_div" style="width: 1000px; height: 600px;"></div>
+		</body>
+	</div>
+
+</div>
+
+
 	      
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+<!--       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
       <h2>Section title</h2>
       <div class="table-responsive">
@@ -180,11 +192,18 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
     </main>
   </div>
 </div>
+
 <!-- content end --> 
 
 
-</body>
+
+<script>
+	function showContent(content) {
+		  $('.content').hide();  // Hide all content divs
+		  $('#' + content).show();  // Show the clicked content div
+		}
+</script>

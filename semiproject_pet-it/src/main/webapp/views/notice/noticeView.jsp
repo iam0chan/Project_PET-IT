@@ -28,6 +28,8 @@
 	justify-content: center;
 	width: 1000px !important;
 	padding: 0px !important;
+	text-align: center;  
+	
 }
 
 .row {
@@ -45,7 +47,19 @@
 /* 	align-items: center; */
 	margin: 0px auto;
 }
+
+#contentBox{
+	width: 900px !important;
+	text-decoration: none; /* 링크의 밑줄 제거 */  
+	color: inherit; /* 링크의 색상 제거 */
 }
+
+#contentBox img {
+	width: 400px !important;
+	height : 400px !important;
+}
+
+
 
 
 </style>
@@ -56,7 +70,7 @@
 	
 	<div id="list-btn" class="btn-container" style="width: 107px;" >
 		<%if(loginMember!=null
-			&&loginMember.getMemberId().equals("jihyes")){ %>
+			&&loginMember.getMemberId().equals("petitad")){ %>
 			 <div class="Pet-it-adminBtn">
 			 <button onclick="location.assign('<%=request.getContextPath()%>/noticewriter.do')" class="btn btn-outline-success">수정</button>
 			 </div>
@@ -67,8 +81,8 @@
 		<div class="row">
 			<table class="table table-bordered">
 					<tr>
-						<th style="text-align: center; background-color: #F2F2F2;">제목</th>
-						<th><%=n.getNoticeTitle()%></th>
+						<th style="text-align: center; background-color: #F2F2F2; ">제목</th>
+						<th"><%=n.getNoticeTitle()%></th>
 					</tr>
 					<tr>
 						<td style="text-align: center; background-color: #F2F2F2;">작성일</td>
@@ -83,7 +97,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><%=n.getNoticeContent()%></td>
+						<td id="contentBox"><%=n.getNoticeContent()%></td>
 					</tr>
 				</tbody>
 			</table>

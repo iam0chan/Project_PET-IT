@@ -483,7 +483,7 @@ function purchase() {
 	$("#optionName").val(optionName);
 	$("#orderInfo").attr("action","<%=request.getContextPath()%>/paymentStart.do")
 	$("#orderInfo").submit();
-
+	
 
 };
 	$("#update-itemcontent-btn").on("click",function(){

@@ -1,12 +1,14 @@
 package com.pet.payment.model.dao;
 
-import static com.pet.common.JDBCTemplate.close;
+import static com.pet.common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -105,6 +107,7 @@ private Properties sql = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("insertOrderList"));
+			
 			for (OrderDetail od : orderList) {
 			    pstmt.setLong(1, od.getOrderNo());
 			    pstmt.setString(2, od.getProductNo());
@@ -121,5 +124,20 @@ private Properties sql = new Properties();
 			close(pstmt);
 		}
 		return Arrays.stream(result).allMatch(count -> count > 0);
+	}
+	
+	private static Order getOrders(ResultSet rs) throws SQLException {
+		return Order.builder()
+				.orderNo(rs.getLong("PURCHASE_NO"))
+				.orderId(rs.getString("member_id"))
+				.orderName(rs.getString("purchase_name"))
+				.orderPhone(rs.getString("purchase_phone"))
+				.orderZipcode(rs.getString("purchase_zip_code"))
+				.orderAddr(rs.getString("purchase_addr"))
+				.orderDefAddr(rs.getString("purchase_def_addr"))
+				.orderEmail(rs.getString("purchase_email"))
+				.orderTotalPrice(rs.getInt("purchase_total_price"))
+				.deliveryReq(rs.getString("purchase_req"))
+				.build();
 	}
 }

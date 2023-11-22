@@ -106,7 +106,7 @@
 				
 	<script>
 	$("#resetBtn").on("click",function(){
-		location.href="<%=request.getContextPath()%>/views/notice/noticeList.jsp";
+		location.href="<%=request.getContextPath()%>/noticeList.do";
 	})
 	
 	

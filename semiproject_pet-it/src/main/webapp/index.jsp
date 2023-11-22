@@ -66,7 +66,7 @@
 			<h2>new 새로운 상품</h2>
 		</div>
 		<div class="row-collection">
-		<%-- <%if(!newProducts.isEmpty()){ %>
+		<%if(!newProducts.isEmpty()){ %>
 			<%for(Product p : newProducts){ %>
 			<div class="img-box">
 				<img src ="<%=request.getContextPath()%>/upload/<%=imgData.get(p.getProductNo()).getProductFileRename()%>" style="width:295px; height:295px;"/>
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 			<%} %>
-		<%} %> --%>
+		<%} %>
 		</div>
 	</div>
 </section>
