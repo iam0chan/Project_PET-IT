@@ -84,6 +84,12 @@
             height: 65px;
             line-height:3.0 !important;
          }
+         
+         .quote_btn-container{
+         	width: 300px;
+    		display: flex;
+    		justify-content: center;
+         }
       </style>
       </head>
       
@@ -160,14 +166,14 @@
                   </ul>
                 </div>
                 <div class="quote_btn-container">
-
+				
                   <%if(loginMember==null) {%>
                   <a href="<%=request.getContextPath()%>/views/member/login.jsp"> <!--11.13 12:07 jm 연결주소 추가-->
 
                     <i class="fa-solid fa-dog"></i>
                     <span>Login</span>
                   </a>
-                  <a href="<%=request.getContextPath() %>/views/cart/cartList.jsp">
+                  <%-- <a href="<%=request.getContextPath() %>/views/cart/cartList.jsp"> --%>
                   <%}else{ %>
                      <i class="fa-solid fa-dog"></i>
                      <span id="memberName"><%=loginMember.getMemberName() %>님</span><br>
@@ -197,12 +203,12 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>장바구니</span>
                   </a>
-                  <a href="">
+<!--                   <a href="">
                     <form class="d-flex">
                       <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
                       <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
-                  </a>
+                  </a> -->
                   
                 </div>
               </div>
