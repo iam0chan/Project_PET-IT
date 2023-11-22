@@ -11,6 +11,14 @@
 		width:534.475px;
 		height:80px;
 	}
+	
+	button{
+		border-radius: 3px;
+		align-self: center;
+		display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
 	.navbar {
 		height:130px;
 	}
@@ -24,57 +32,86 @@
     .enroll_title{
     	text-align:center;
     	margin-top: 50px;
+    	font-size: 26px;
+    	font-weight: bold;
+    }
+    .enroll_line{
+    	text-align:right;
+    	font-size: 12px;
+    	border-bottom: 2px solid;
+    	width:600px;
     }
     
-    .enroll{
+    .enroll:not(.enroll_line) {
     	text-align:left;
-        width: 600px;
+        width: 650px;
        	padding: 20px;
 	    margin: 0px auto;
 	    background: white;
-	    border:1px solid lightgray;
+
 	}
 	
+	
+		
 	.enroll div{
 		margin-bottom: 20px;
 	}
-	.enroll input[type="text"],[type="password"],[type="email"]{
-		width:300px;
+	
+	.checkbox-group div{
+		margin-bottom: 7px;
 	}
-	/* section {
-        text-align:center;
-        width: 350px;
-	    max-width: 1000px;
-	    height: 600px;
-	    padding: 20px;
-	    margin: 0px auto;
-	    background: white;
-    } */
-    .enroll .field{
+	
+	.description{
+		margin:0;
+		height:30px;
+	}
+	
+    
+    .field_addr input[type="text"]{
+    }
+    
+    .nn{
+    	color:red;
+    }
+    .field{
+    	display:flex;
+    	height:65px;
+    	padding-left:20px;
+    }
+    .field b{
+    	width:120px;
+    	font-size:14px;
+    }
+    
+    .field input{
+    	width: 330px;
+    	height: 40px;
+    	margin-bottom: 20px;
+    	margin-right: 10px;
     	
     }
     
-    .field_addr input[type="text"]{
-    	width: 300px;
-    }
-    .field_id{
-    	display:flex;
+    .field input:not(.btn){
+    	border:1px lightgray solid;
+    	border-radius: 0.25rem;
     }
     
-    .field input {
-    	width: 300px;
-    	height: 30px;
-    	margin-bottom: 20px;
+    #enroll_form input[type="submit"] {
+    	text-align: center;
     }
     
-    .checkbox-group {
-    	width:580px;
-    	border:1px solid;
+    .checkbox-item {
+    	width:400px;
     }
     
     .submit {
-    	width: 300px;
-    	align-self: center;
+    	width: 610px;
+    	text-align: center;
+    }
+    
+    .submit input{
+    	width: 240px;
+    	height: 56px;
     }
     
     .modal {
@@ -90,25 +127,47 @@
     	overflow-y:clip;
     }
     
+    .du_btn{
+    	 position: relative;
+    }
+    
+    #mail_du, #id_du{
+    	width: 105px;
+    	height:38px;
+    	position: absolute;
+    	top: 0;	
+    }
+    
+    
     .modal *{
      	width:100%;
      	height:100%;
      	text-align:center;
     }
+    
+    .addr {
+    	display:none;
+    }
+    .checkbox-items{
+    	width:400px;
+    }
+    
+    .checkbox-group{
+    	display:flex;
+    	height:250px;
+    }
 </style>
-<div class="enroll_title"><h2>회원가입</h2></div>
-<br>
+<div class="enroll_title">회원가입</div>
 <div class="enroll">
+<div class="enroll_line"><span class="nn">*</span>필수입력사항</div>
 	<form id="enroll_form" action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" >							
-			<div class="field_id">
-				<div>
-					<b>아이디</b>
-				</div>
+			<div class="field id">
+					<b>아이디<span class="nn">*</span></b>
 				<span>
-					<input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" oninput="validateId()">
+					<input type="text" placeholder="  아이디를 입력해주세요" name="memberId" id="memberId" oninput="validateId()">
 				</span>
-				<div>
-					<button type="button" id="id_du" class="modal_open"><span id="id_du_span">중복확인</span></button>
+				<div class="du_btn">
+					<button type="button" id="id_du" class="modal_open btn btn-outline-primary"><span id="id_du_span" style="font-size:14px;">중복확인</span></button>
 				</div>
 			</div>
 			
@@ -168,63 +227,70 @@
 				</div>
 				</div>
 				
-			<div class="field_pw">
-				<b>패스워드</b>
+			<div class="field pw">
+				<b>비밀번호<span class="nn">*</span></b>
 				<span>
-					<input type="password" placeholder="비밀번호를 입력해주세요" name="memberPw" id="memberPw" oninput="validatePw()">
+					<input type="password" placeholder="  비밀번호를 입력해주세요" name="memberPw" id="memberPw" oninput="validatePw()">
 				</span>
 			</div>
-			<div class="field_pw2">
-				<b>패스워드확인</b>
+			<div class="field pw2">
+				<b>비밀번호확인<span class="nn">*</span></b>
 				<span>	
-					<input type="password" placeholder="비밀번호를 한번 더 입력해주세요" id="memberPw2" >
+					<input type="password" placeholder="  비밀번호를 한번 더 입력해주세요" id="memberPw2" >
 				</span>
 			</div>
-			<div class="field_name">
-				<b>이름</b>
+			<div class="field name">
+				<b>이름<span class="nn">*</span></b>
 				<span>	
-				<input type="text" placeholder="이름을 입력해주세요"  name="memberName" id="memberName" >
+				<input type="text" placeholder="  이름을 입력해주세요"  name="memberName" id="memberName" >
 				</span>
 			</div>
-			<div class="field_email">
-				<b>이메일</b>
+			<div class="field email">
+				<b>이메일<span class="nn">*</span></b>
 				<span>	
-					<input type="email" placeholder="pet@it.com" name="memberEmail" id="memberEmail">
+					<input type="email" placeholder="  pet@it.com" name="memberEmail" id="memberEmail">
 				</span>
+				<div class="du_btn">
+					<button type="button" id="mail_du" class="modal_open btn btn-outline-primary"><span id="mail_du_span" style="font-size:14px;">중복확인</span></button>
+				</div>
 			</div>
-			<div class="field_phone">
+			<div class="field phone">
 				<b>휴대폰</b>
 				<span>	
-					<input type="text" placeholder="숫자만 입력해주세요" name="memberPhone" id="memberPhone">
+					<input type="text" placeholder="  숫자만 입력해주세요" name="memberPhone" id="memberPhone">
 				</span>
 			</div>
-			<div class="field_addr">
-				<b>주소</b>	
-					<input type="button" onclick="execDaumPostcode()" value="주소 검색"><br>
-					<input type="text" id="memberZipCode" name="memberZipCode" placeholder="우편번호">
-					<input type="text" id="memberAddr" name="memberAddr" placeholder="주소"><br>
-					<input type="text" id="memberDetailAddr" name="memberDetailAddr" placeholder="상세주소">
+			<div class="field adress">
+				<b>주소<span class="nn">*</span></b>	
+					<input type="button" class="btn btn-outline-primary" onclick="execDaumPostcode()" value="주소 검색"><br>
+					<input type="text" class="addr" id="memberZipCode" name="memberZipCode" placeholder="우편번호">
+					<input type="text" class="addr" id="memberAddr" name="memberAddr" placeholder="주소"><br>
+					<input type="text" class="addr" id="memberDetailAddr" name="memberDetailAddr" placeholder="상세주소">
 			</div>
-	
-	<div class="checkbox-group">
+	<div style="width:600px; border:1px solid"></div>
+	<div class="checkbox-group" style="padding-left: 20px;">
+	<div style="width:120px; height:200px;">
+   	<label><b style="font-size:14px;">이용약관동의</b></label>	
+	</div>
     <!-- 첫 번째 동의 항목 -->
+    <div class="checkbox-items">
     <div class="checkbox-item">
-        <label for="TermsAgreeAll">
+        <label for="TermsAgreeAll" style="margin:0;">
             <input id="TermsAgreeAll" type="checkbox" class="checkbox-input" value="Y" name="memberTersm">
-            <span>전체 동의합니다.</span>        
+            <span><b>전체 동의합니다.</b></span>        
         </label>
-        <p class="description" style="font-size:12px">(선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.)</p>
+        <p class="description" style="font-size:11px">(선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.)</p>
     </div>
 	<div>
 		<input id="terms1" type="checkbox" value="Y">
-		<span>이용약관 동의(필수)</span>
+		<span>이용약관 동의(필수)<span class="nn">*</span></span>
 		<a href="#" id=te1>
 			약관보기 >
 		</a>
 	</div>
     <div>
 		<input type="checkbox" id="terms2" value="Y">
-		<span>개인정보 수집,이용 동의(필수)</span>
+		<span>개인정보 수집,이용 동의(필수)<span class="nn">*</span></span>
 		<a href="#" id=te2>
 			약관보기 >
 		</a>
@@ -237,7 +303,10 @@
 		</a>
 	</div>
     </div>
-	<input class="submit" type="submit" value="가입하기">
+    </div>
+    <div class="submit">
+	<input class="submit btn btn-primary btn-sm" type="submit" value="가입하기" style="font-size:16px; font-weight:bold;">
+    </div>
     <script>
     //약관동의 전체동의 스크립트
     $(document).ready(function() {
@@ -332,6 +401,7 @@
     </script>
 </form>
 </div>
+
 <script>
 	$('form').submit(function(event){
 		$.post('<%=request.getContextPath()%>/member/enrollMemberEnd.do')		

@@ -106,6 +106,7 @@
 			<a href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a	>
 		</li>
 	</ul>
+	<div class="field_info_nd">
 	<form action="<%=request.getContextPath()%>/mail.do" method="get">								
 			<span>이메일로 발송된 회원님의 인증번호를 입력해주세요.</span>
 			<br>
@@ -114,6 +115,7 @@
 			<br><br>
   		   <button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>
 	</form>
+	</div>
 </div>
 <script>
     $(document).ready(function() {

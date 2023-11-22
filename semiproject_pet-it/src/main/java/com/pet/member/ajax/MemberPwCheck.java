@@ -13,7 +13,7 @@ import com.pet.member.service.MemberService;
 /**
  * Servlet implementation class MemberPwCheck
  */
-@WebServlet("/pwCheck.do")
+@WebServlet("/pwFind/pwCheck.do")
 public class MemberPwCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,9 +29,7 @@ public class MemberPwCheck extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberPw = request.getParameter("memberPw");
 		
-		new MemberService().selectMemberByPw(memberPw);
 		
 	}
 
