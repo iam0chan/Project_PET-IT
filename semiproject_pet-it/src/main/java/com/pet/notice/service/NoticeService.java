@@ -76,6 +76,7 @@ public class NoticeService {
 		return result;
 	}
 	
+	//검색창 
 	public List<Notice> searchNotice(int cPage, int numPerpage, String key, String keyword){
 		Connection conn = getConnection();
 		List<Notice> resultList = null;

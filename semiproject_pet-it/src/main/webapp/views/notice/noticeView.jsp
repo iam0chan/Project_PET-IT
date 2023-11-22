@@ -28,6 +28,8 @@
 	justify-content: center;
 	width: 1000px !important;
 	padding: 0px !important;
+	text-align: center;  
+	
 }
 
 .row {
@@ -48,6 +50,8 @@
 
 #contentBox{
 	width: 900px !important;
+	text-decoration: none; /* 링크의 밑줄 제거 */  
+	color: inherit; /* 링크의 색상 제거 */
 }
 
 #contentBox img {
@@ -56,7 +60,6 @@
 }
 
 
-}
 
 
 </style>
@@ -78,8 +81,8 @@
 		<div class="row">
 			<table class="table table-bordered">
 					<tr>
-						<th style="text-align: center; background-color: #F2F2F2;">제목</th>
-						<th><%=n.getNoticeTitle()%></th>
+						<th style="text-align: center; background-color: #F2F2F2; ">제목</th>
+						<th"><%=n.getNoticeTitle()%></th>
 					</tr>
 					<tr>
 						<td style="text-align: center; background-color: #F2F2F2;">작성일</td>

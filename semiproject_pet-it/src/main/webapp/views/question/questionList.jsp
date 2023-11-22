@@ -44,7 +44,7 @@ List<Question> question = (List<Question>) request.getAttribute("question");
 	text-align: center;
 }
 
-#search {
+#searchMenu {
 	text-align: center;
 	height: 25px;
 }
@@ -161,7 +161,20 @@ tr.item:hover {
 		<%=request.getAttribute("pageBar")%>
 	</div>
 	<div class="boardsearchAll">
-		<fieldset class="boardSearch">
+		<form action='<%=request.getContextPath()%>/questionSearchMenu.do' method="get" >
+			<select id="searchKey" name="searchKey">
+					<option value="subject">제목</option>
+					<option value="subject">내용</option>
+			</select>
+			<input type="search" id="searchMenu" name="searchKeyword" placeholder="입력하세요">
+			<input type="submit" name="selectSearch" class="btn btn-outline-success" value="검색" style="line-height:1.0;">
+		</form> 
+	</div> 
+		
+		
+		
+		
+		<!-- <fieldset class="boardSearch">
 			<p>
 				<select id="searchKey" name="searchKey">
 					<option value="subject">제목</option>
@@ -171,7 +184,7 @@ tr.item:hover {
 					<a href="#none">SEARCH</a>
 				</button>
 			</p>
-		</fieldset>
+		</fieldset> -->
 	</div>
 
 	<script>

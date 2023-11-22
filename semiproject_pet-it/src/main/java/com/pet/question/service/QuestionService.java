@@ -75,6 +75,18 @@ public class QuestionService {
 		return result;
 	}
 	
+	//검색창
+	public List<Question> searchQuestion(int cPage, int numPerpage, String key, String keyword){
+		Connection conn = getConnection();
+		List<Question> resultList = null;
+		if(key.equals("question_title")) {
+			resultList = dao.questionSearchTitle(conn, cPage, numPerpage, keyword);
+		}else {
+			resultList = dao.questionSearchContent(conn, cPage, numPerpage, keyword);
+		}
+		close(conn);
+		return resultList;
+	}
 	
 	
 	
