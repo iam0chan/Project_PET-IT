@@ -58,6 +58,10 @@
 	text-align: center;
 }
 
+.btn-container{
+	text-align: center;
+}
+
 #comment-btn{
 	margin-bottom: 30px;
 }
@@ -120,10 +124,11 @@
 		</form> 
 	</div>
 	<%} %>
+	</div>
 
 	<!--목록버튼-->
 	<div class="btn-container">
-		<button id="list-btn" class="btn btn-outline-success" onclick="listBtn();">목록</button>
+		<button id="list-btn" class="btn btn-outline-success" onclick="listBtn(); ">목록</button>
 	</div>
 	
 	
