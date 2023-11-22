@@ -81,9 +81,10 @@ List<Product> newProducts = (List<Product>) request.getAttribute("newProducts");
 	margin-bottom: 20px;
 }
 
-/* section.info_section {
-	padding-bottom: 0 !important;
-} */
+section.info_section {
+	background-color:#27a745 !important;
+	margin:0;
+} 
 .container {
 	display: flex;
 	flex-direction: column;
@@ -103,10 +104,8 @@ List<Product> newProducts = (List<Product>) request.getAttribute("newProducts");
 			<%
 			for (Product p : newProducts) {
 			%>
-			<div class="img-box">
-				<input type="hidden" id="productNo" value="<%=p.getProductNo()%>" />
-				<img
-					src="<%=request.getContextPath()%>/upload/<%=imgData.get(p.getProductNo()).getProductFileRename()%>"
+			<div class="img-box" id="<%=p.getProductNo()%>">
+				<img  src="<%=request.getContextPath()%>/upload/<%=imgData.get(p.getProductNo()).getProductFileRename()%>"
 					style="width: 291px; height: 291px;" />
 				<div class="content">
 					<span style="font-weight: bold;"><%=p.getProductName()%></span> <span
@@ -187,13 +186,13 @@ List<Product> newProducts = (List<Product>) request.getAttribute("newProducts");
 <section class="info_section long_section">
 	<div class="wrapper">
 		<div class="title">
-			<h1 style="font-size: 60px;">PET-IT</h1>
+			<h1 style="font-size: 60px; font-weight:bolder;">PET-IT</h1>
 		</div>
 	</div>
 	<div class="container">
 		<div class="contact_nav">
 			<a id="center-instruction"> <i class="fa fa-phone"
-				aria-hidden="true"></i> <span> Call : +01 123455678990 </span>
+				aria-hidden="true"></i> <span> C/S CENTER : 010-1234-5567 </span>
 			</a> <a href=""> <i class="fa fa-envelope" aria-hidden="true"></i> <span>
 					Email : petittttttt1@gmail.com </span>
 			</a> <a id="location"> <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -209,13 +208,18 @@ List<Product> newProducts = (List<Product>) request.getAttribute("newProducts");
 		open("https://map.naver.com/p/entry/place/38301833?c=16.88,0,0,0,dh","_blank","width=800px height=600px top=100 left=40");
 	})
 	
+	$("#center-instruction").on("click",function(){
+		open("<%=request.getContextPath()%>/views/admin/callcenterInstruction.jsp","_blank","width=450px height=380px top=100 left=40");
+	})
+	
 	$(".img-box").mouseenter(function(){
 		$(this).css("cursor","pointer");
 		$(this).css("border","3px solid #28a745");
-		$(this).on("click",function(){
-			const productNo = $("#productNo").val();
-			location.href="<%=request.getContextPath()%>/product/productview.do?productNo="+productNo;
-		})
+		$(this).click(function(){
+				const productNo = $(this).prop("id");
+				console.log(productNo);
+				location.href="<%=request.getContextPath()%>/product/productview.do?productNo="+productNo;
+			})
 	})
 	
 	$(".img-box").mouseleave(function(){
