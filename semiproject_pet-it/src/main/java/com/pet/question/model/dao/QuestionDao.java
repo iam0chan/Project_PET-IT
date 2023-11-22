@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.sql.RowSetInternal;
+
 import com.pet.notice.model.dto.Notice;
 import com.pet.question.model.dto.Question;
+import com.pet.question.model.dto.QuestionComment;
 
 public class QuestionDao {
 
@@ -226,6 +229,22 @@ public class QuestionDao {
 				.questionContent(rs.getString("QUESTION_CONTENT"))
 				.build();
 		
+		
+	}
+
+	public int insertQuestionComment(Connection conn, QuestionComment qc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertQuestionComment"));
+			pstmt.setInt(1, 1);
+			pstmt.setString(2, qc.getReplyContent());
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 		
 	}
 

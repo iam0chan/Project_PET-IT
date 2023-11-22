@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.pet.question.model.dao.QuestionDao;
 import com.pet.question.model.dto.Question;
+import com.pet.question.model.dto.QuestionComment;
 
 
 public class QuestionService {
@@ -86,6 +87,16 @@ public class QuestionService {
 		}
 		close(conn);
 		return resultList;
+	}
+	
+	//관리자 댓글기능
+	public int insertQuestionComment(QuestionComment qc) {
+		Connection conn= getConnection();
+		int result = dao.insertQuestionComment(conn, qc);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 	

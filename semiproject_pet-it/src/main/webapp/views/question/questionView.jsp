@@ -111,11 +111,10 @@
 	<%if(loginMember!=null
 			&&loginMember.getMemberId().equals("petitad")){ %>
 		<div class="comment-editer">
-		<form action="" method="">
+		<form action="<%=request.getContextPath()%>/insertComment.do" method="post">
 			<input type="hidden" name="questionRef" value="<%=q.getQuestionNo()%>">
-			<input type="hidden" name=level value="1">
 			<textarea name="content" cols="55" rows="3"></textarea>
-			<button id="comment-btn" class="btn btn-outline-success" onclick="listBtn();">버튼</button> 
+			<button id="comment-btn" type="submit" class="btn btn-outline-success" onclick="listBtn();">등록</button> 
 	</div>
 	<%} %>
 
