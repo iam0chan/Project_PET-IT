@@ -54,9 +54,14 @@
 	width: 800px !important;
 	height : 800px !important;
 }
-th {
-	color:black;
+#comment-container {
+	text-align: center;
 }
+
+#comment-btn{
+	margin-bottom: 30px;
+}
+
 
 </style>
 <div class="space">
@@ -97,14 +102,28 @@ th {
 					</tr>
 				</tbody>
 			</table>
-			<div class="btn-container">
-				<button id="list-btn" class="btn btn-outline-success" onclick="listBtn();">목록</button>
-			</div>
 		</div>
 	</div>
 
 </div>
+	<!--관리자 댓글기능-->
+	<div id = "comment-container">
+	<%if(loginMember!=null
+			&&loginMember.getMemberId().equals("petitad")){ %>
+		<div class="comment-editer">
+		<form action="" method="">
+			<textarea name="content" cols="55" rows="3"></textarea>
+			<button id="comment-btn" class="btn btn-outline-success" onclick="listBtn();">버튼</button>
+	</div>
+	<%} %>
 
+	<!--목록버튼-->
+	<div class="btn-container">
+		<button id="list-btn" class="btn btn-outline-success" onclick="listBtn();">목록</button>
+	</div>
+	
+	
+	
 <script>
 	//목록버튼 눌렀을 때 questionList로 페이지이동 
 	const listBtn = ()=> {
