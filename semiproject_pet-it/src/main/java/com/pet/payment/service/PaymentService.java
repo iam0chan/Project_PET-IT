@@ -4,6 +4,7 @@ package com.pet.payment.service;
 import static com.pet.common.JDBCTemplate.commit;
 import static com.pet.common.JDBCTemplate.getConnection;
 import static com.pet.common.JDBCTemplate.rollback;
+import static com.pet.common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.util.List;
@@ -31,6 +32,8 @@ public class PaymentService {
 		}else { 
 			rollback(conn);
 		}
+		close(conn);
+		
 		return result;
 	}
 	
@@ -53,6 +56,10 @@ public class PaymentService {
 			if(resultOl) commit(conn);
 			else rollback(conn);
 		}
+		close(conn);
+		
 		return resultOl;
 	}
+
+	
 }
