@@ -116,11 +116,23 @@
                        <ul class="sub-nav">
                          <a href="<%=request.getContextPath() %>/views/brandInfo/brandInfoPage.jsp"><li class = "sub-item">브랜드소개</li></a>
                          <a href="<%=request.getContextPath() %>/noticeList.do"><li class = "sub-item">공지사항</li></a>
-                         <a href="<%=request.getContextPath() %>/questionList.do"><li class = "sub-item">1:1문의</li></a>
+                         <a id="questionBtn"><li class = "sub-item">1:1문의</li></a>
+                         <!--로그인 한 회원만 1:1문의 볼 수 있는 script-->
+                         <script>                         	
+                         	$("#questionBtn").click(function(){
+                         		if(<%=loginMember==null%>){
+                         			alert('로그인 후 이용할 수 있습니다');
+                         			location.href='<%=request.getContextPath()%>/views/member/login.jsp';
+                         		}else{
+                         			location.href='<%=request.getContextPath()%>/questionList.do';
+                         		}
+                         	});
+                         </script>	
+                         
                       </ul> 
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link " href="about.html">이벤트</a>
+                      <a class="nav-link " href="<%=request.getContextPath() %>/views/event/eventList.jsp">이벤트</a>
                      <!--  <ul class="sub-nav">
                          <li class = "sub-item">신상품</li>
                          <li class = "sub-item">베스트</li>

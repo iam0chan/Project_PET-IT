@@ -51,8 +51,8 @@
 }
 
 #contentBox img {
-	width: 800px !important;
-	height : 800px !important;
+	width: 600px !important;
+	height : 500px !important;
 }
 #comment-container {
 	text-align: center;
@@ -112,8 +112,10 @@
 			&&loginMember.getMemberId().equals("petitad")){ %>
 		<div class="comment-editer">
 		<form action="" method="">
+			<input type="hidden" name="questionRef" value="<%=q.getQuestionNo()%>">
+			<input type="hidden" name=level value="1">
 			<textarea name="content" cols="55" rows="3"></textarea>
-			<button id="comment-btn" class="btn btn-outline-success" onclick="listBtn();">버튼</button>
+			<button id="comment-btn" class="btn btn-outline-success" onclick="listBtn();">버튼</button> 
 	</div>
 	<%} %>
 
