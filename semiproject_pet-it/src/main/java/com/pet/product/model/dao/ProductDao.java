@@ -128,27 +128,27 @@ public class ProductDao {
    }
    
    public int insertNewOption(Connection conn, String productNo, List<ProductOption> options) {
-	   	PreparedStatement pstmt = null;
-	   	int insertNewOptionResult = 0;
-	   	int inputCount = 0;
-	   	
-	   	try {
-	   		for(ProductOption po : options) {
-	   			pstmt = conn.prepareStatement(sql.getProperty("insertNewOption"));
-	   			pstmt.setString(1, productNo);
-	   			pstmt.setString(2, po.getProductOptionName());
-	   			pstmt.setInt(3, po.getProductOptionPrice());
-	   			insertNewOptionResult = pstmt.executeUpdate();
-	   			if(insertNewOptionResult>0) {
-	                ++inputCount;
-	             }
-	   		}
-	   		System.out.println("입력 성공 옵션 수 : "+inputCount);
-	   	}catch(SQLException e) {
-	   		e.printStackTrace();
-	   	}
-	   	
-	   	return insertNewOptionResult;
+         PreparedStatement pstmt = null;
+         int insertNewOptionResult = 0;
+         int inputCount = 0;
+         
+         try {
+            for(ProductOption po : options) {
+               pstmt = conn.prepareStatement(sql.getProperty("insertNewOption"));
+               pstmt.setString(1, productNo);
+               pstmt.setString(2, po.getProductOptionName());
+               pstmt.setInt(3, po.getProductOptionPrice());
+               insertNewOptionResult = pstmt.executeUpdate();
+               if(insertNewOptionResult>0) {
+                   ++inputCount;
+                }
+            }
+            System.out.println("입력 성공 옵션 수 : "+inputCount);
+         }catch(SQLException e) {
+            e.printStackTrace();
+         }
+         
+         return insertNewOptionResult;
    }
    
    
@@ -157,21 +157,21 @@ public class ProductDao {
       ResultSet rs = null;
       List<Product> result = new ArrayList<>();
       try {
-    	 if(type.equals("all")) {
-	         pstmt = conn.prepareStatement(sql.getProperty("selectProductListAll"));
-	         pstmt.setInt(1, (cPage-1)*numPerpage+1);
-	         pstmt.setInt(2, cPage*numPerpage);
-    	 }else if(type.equals("new")) {
-    		 pstmt = conn.prepareStatement(sql.getProperty("selectProductListByNew"));
-	         pstmt.setInt(1, (cPage-1)*numPerpage+1);
-	         pstmt.setInt(2, cPage*numPerpage);
-    	 }else {
-    		 pstmt = conn.prepareStatement(sql.getProperty("selectProductListByType"));
+        if(type.equals("all")) {
+            pstmt = conn.prepareStatement(sql.getProperty("selectProductListAll"));
+            pstmt.setInt(1, (cPage-1)*numPerpage+1);
+            pstmt.setInt(2, cPage*numPerpage);
+        }else if(type.equals("new")) {
+           pstmt = conn.prepareStatement(sql.getProperty("selectProductListByNew"));
+            pstmt.setInt(1, (cPage-1)*numPerpage+1);
+            pstmt.setInt(2, cPage*numPerpage);
+        }else {
+           pstmt = conn.prepareStatement(sql.getProperty("selectProductListByType"));
              pstmt.setString(1, type);
              pstmt.setInt(2, (cPage-1)*numPerpage+1);
              pstmt.setInt(3, cPage*numPerpage);
-    	 }
-    	 rs = pstmt.executeQuery();
+        }
+        rs = pstmt.executeQuery();
          while(rs.next()) {
             result.add(getProduct(rs));
          }
@@ -300,137 +300,137 @@ public class ProductDao {
    }
    
    public int getProductCountByType(Connection conn, String type) {
-	   PreparedStatement pstmt = null;
-	   ResultSet rs = null;
-	   int dataCount = 0;
-	   
-	   try {
-		   if(type.equals("all")) {
-			pstmt = conn.prepareStatement(sql.getProperty("getProductCount"));
-		   }else if(type.equals("new")) {
-		   //new -> 등록일 3일 이내 상품
-			   pstmt = conn.prepareStatement(sql.getProperty("getNewProductCountByNew"));
-		   }else {
-			   pstmt = conn.prepareStatement(sql.getProperty("getProductCountByType"));
-			   pstmt.setString(1, type);
-		   }
-		   rs = pstmt.executeQuery();
-		   if(rs.next()) dataCount = rs.getInt(1);
-	   }catch(SQLException e) {
-		   e.printStackTrace();
-	   }finally {
-		   close(rs);
-		   close(pstmt);
-	   }
-	   
-	   return dataCount;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      int dataCount = 0;
+      
+      try {
+         if(type.equals("all")) {
+         pstmt = conn.prepareStatement(sql.getProperty("getProductCount"));
+         }else if(type.equals("new")) {
+         //new -> 등록일 3일 이내 상품
+            pstmt = conn.prepareStatement(sql.getProperty("getNewProductCountByNew"));
+         }else {
+            pstmt = conn.prepareStatement(sql.getProperty("getProductCountByType"));
+            pstmt.setString(1, type);
+         }
+         rs = pstmt.executeQuery();
+         if(rs.next()) dataCount = rs.getInt(1);
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(rs);
+         close(pstmt);
+      }
+      
+      return dataCount;
    }
    
    public int updateProduct(Connection conn, Product p) {
-	   PreparedStatement pstmt = null;
-	  
-	   int updateResult = 0;
-	   try {
-		   pstmt = conn.prepareStatement(sql.getProperty("updateProductByNo"));
-		   pstmt.setString(1, p.getCateogryNo());
-		   pstmt.setString(2,p.getTypeNo());
-		   pstmt.setInt(3, p.getProductPrice());
-		   pstmt.setInt(4, p.getProductStock());
-		   pstmt.setString(5, p.getProductInfo());
-		   pstmt.setString(6,p.getProductDiscount());
-		   pstmt.setString(7,p.getProductContent());
-		   pstmt.setString(8,p.getProductOptionStatus());
-		   pstmt.setString(9, p.getProductNo());
-		   
-		   updateResult = pstmt.executeUpdate();
-		   
-	   }catch(SQLException e) {
-		   e.printStackTrace();
-	   }finally {
-		   close(pstmt);
-	   }
-	   
-	   return updateResult;
+      PreparedStatement pstmt = null;
+     
+      int updateResult = 0;
+      try {
+         pstmt = conn.prepareStatement(sql.getProperty("updateProductByNo"));
+         pstmt.setString(1, p.getCateogryNo());
+         pstmt.setString(2,p.getTypeNo());
+         pstmt.setInt(3, p.getProductPrice());
+         pstmt.setInt(4, p.getProductStock());
+         pstmt.setString(5, p.getProductInfo());
+         pstmt.setString(6,p.getProductDiscount());
+         pstmt.setString(7,p.getProductContent());
+         pstmt.setString(8,p.getProductOptionStatus());
+         pstmt.setString(9, p.getProductNo());
+         
+         updateResult = pstmt.executeUpdate();
+         
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
+      
+      return updateResult;
    }
    
    public int updateMainImg(Connection conn, String productNo, String ori, String re) {
-	   PreparedStatement pstmt = null;
-	   int updateImg = 0;
-	   try {
-		   pstmt = conn.prepareStatement(sql.getProperty("updateMainImg"));
-		   pstmt.setString(1,ori);
-		   pstmt.setString(2,re);
-		   pstmt.setString(3,productNo);
-		   updateImg = pstmt.executeUpdate();
-		   
-	   }catch(SQLException e) {
-		   e.printStackTrace();
-	   }finally {
-		   close(pstmt);
-	   }
-	   
-	   return updateImg;
+      PreparedStatement pstmt = null;
+      int updateImg = 0;
+      try {
+         pstmt = conn.prepareStatement(sql.getProperty("updateMainImg"));
+         pstmt.setString(1,ori);
+         pstmt.setString(2,re);
+         pstmt.setString(3,productNo);
+         updateImg = pstmt.executeUpdate();
+         
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
+      
+      return updateImg;
    }
    
    public int updateOption(Connection conn,String productNo ,List<ProductOption> options) {
-	   PreparedStatement pstmt = null;
-	   int updateOption = 0;
-	   try {
-		   for(ProductOption po: options) {
-			   pstmt = conn.prepareStatement(sql.getProperty("updateOptions"));
-			   pstmt.setString(1, po.getProductOptionName());
-			   pstmt.setInt(2, po.getProductOptionPrice());
-			   pstmt.setString(3, po.getProductOptionNo());
-			   updateOption += pstmt.executeUpdate();
-			   
-		   }
+      PreparedStatement pstmt = null;
+      int updateOption = 0;
+      try {
+         for(ProductOption po: options) {
+            pstmt = conn.prepareStatement(sql.getProperty("updateOptions"));
+            pstmt.setString(1, po.getProductOptionName());
+            pstmt.setInt(2, po.getProductOptionPrice());
+            pstmt.setString(3, po.getProductOptionNo());
+            updateOption += pstmt.executeUpdate();
+            
+         }
 
-	   }catch(SQLException e) {
-		   
-	   }finally {
-		   close(pstmt);
-	   }
-	   
-	   return updateOption;
+      }catch(SQLException e) {
+         
+      }finally {
+         close(pstmt);
+      }
+      
+      return updateOption;
    }
    
    public int deleteProductOption(Connection conn, String productNo, List<ProductOption> origianl) {
-	   PreparedStatement pstmt = null;
-	   int delResult = 0;
-	   try {
-		   for(ProductOption po : origianl) {
-			   pstmt = conn.prepareStatement(sql.getProperty("deleteOptions"));
-				/* pstmt.setString(1,productNo); */
-			   pstmt.setString(1, po.getProductOptionNo());
-			   
-			   delResult=pstmt.executeUpdate();
-		   }
-	   }catch(SQLException e) {
-		   e.printStackTrace();
-	   }finally {
-		   close(pstmt);
-	   }
-	   
-	   return delResult;
+      PreparedStatement pstmt = null;
+      int delResult = 0;
+      try {
+         for(ProductOption po : origianl) {
+            pstmt = conn.prepareStatement(sql.getProperty("deleteOptions"));
+            /* pstmt.setString(1,productNo); */
+            pstmt.setString(1, po.getProductOptionNo());
+            
+            delResult=pstmt.executeUpdate();
+         }
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
+      
+      return delResult;
    }
    
    
    public int deleteProductImage(Connection conn, String productNo) {
-	   PreparedStatement pstmt = null;
-	   int delResult = 0;
-	   
-	   try {
-		   pstmt = conn.prepareStatement(sql.getProperty("delMainImg"));
-		   pstmt.setString(1, productNo);
-		   delResult = pstmt.executeUpdate();
-	   }catch(SQLException e) {
-		   e.printStackTrace();
-	   }finally {
-		   close(pstmt);
-	   }
-	   
-	   return delResult;
-	   
+      PreparedStatement pstmt = null;
+      int delResult = 0;
+      
+      try {
+         pstmt = conn.prepareStatement(sql.getProperty("delMainImg"));
+         pstmt.setString(1, productNo);
+         delResult = pstmt.executeUpdate();
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
+      
+      return delResult;
+      
    }
    
    /*

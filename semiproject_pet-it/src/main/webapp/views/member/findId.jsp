@@ -10,8 +10,18 @@
 	body {
     box-sizing: border-box;
     line-height:40px;
-    
     	}
+    .quote_btn-container{
+		width:534.475px;
+		height:80px;
+	}
+	.navbar {
+		height:130px;
+	}
+    .footer_section{
+    	height:130px;
+    }	
+    
     .findId{
     text-align:center;
   	width: 700px;
@@ -86,6 +96,10 @@
    		width:100%;
 /*    		display:flex; */
    }
+   .id_btn{
+   		width:460px;
+   		height:60px;
+   }
    
 </style>
 
@@ -119,12 +133,70 @@
 				<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
 				<script src='https://www.google.com/recaptcha/api.js'></script>
 			</div>
-  		  <input type="submit" id="mail" style="height:40px;" value="인증번호 받기">
+			<div>
+  		  	<input type="submit" class="id_btn btn btn-outline-primary" id="mail" style="height:40px;" value="인증번호 받기">
+			</div>
 		</form>
 </div>
 <script>
-	
-	
+
+<%-- $(document).ready(function() {
+    $(".id_btn").click(function() {
+    	var contextPath = "<%=request.getContextPath()%>";
+    	
+    	
+    	$.ajax({
+            url : "<%=request.getContextPath()%>/mail.do",
+            type: "post",
+            data: { emailCode: '<%= request.getSession().getAttribute("emailCode") %>'},
+            success: function(data) {
+                const html = '<div class="send_mail">' +
+                    '<form action="<%=request.getContextPath()%>/mail.do" method="get">' +
+                    '<span>이메일로 발송된 회원님의 인증번호를 입력해주세요.</span>' +
+                    '<br>' +
+                    '<input type="text" placeholder="인증번호" style="width:460px; height:50px; text-align:center;" name="memberEmail_code" id="memberEmail_code">' +
+                    '<div class="idFindView"></div>' +
+                    '<br><br>' +
+                    '<button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>' +
+                    '</form>' +
+                    '</div>'
+                $(".field_info").html(html);
+
+                $("#memberEmail_check").click(function() {
+                    const memberEmailCode = $('#memberEmail_code').val();
+                    var emailCode = data.emailCode;
+                    var memberId =	data.memberId;
+                    console.log('발송코드:' + emailCode);
+                    console.log('유저아이디:' + memberId);
+
+                    if (memberEmailCode === emailCode) {
+                        $(".send_mail").html('회원님의 아이디는<br>' + memberId + '입니다');
+                    } else {
+                        $(".send_mail").html('인증번호가 일치하지 않습니다');
+                    }
+                    $(".field_info").hide();
+                    $(".idFind_view").show();
+                })
+            },
+            error: function() {
+                alert("에러가 발생했습니다");
+            }
+        })
+      });
+    }); --%>
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <%@ include file ="/views/footer.jsp" %>

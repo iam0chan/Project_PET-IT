@@ -1,4 +1,4 @@
-package com.pet.question.controller;
+package com.pet.notice.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pet.member.dto.Member;
-import com.pet.question.model.dto.Question;
-import com.pet.question.service.QuestionService;
+import com.pet.notice.model.dto.Notice;
+import com.pet.notice.service.NoticeService;
 
 /**
- * Servlet implementation class questionListServlet
+ * Servlet implementation class NoticeSearchMenu
  */
-@WebServlet("/questionList.do")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/noticeSearchMenu.do")
+public class NoticeSearchMenu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public NoticeSearchMenu() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +31,22 @@ public class QuestionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 //DB에서 전체 게시글 가져오기 
-		int cPage,numPerpage=10;
+		//검색창으로 search 하는 서블릿 
+		//넘겨준 값 갖고오기 name값 2개 가져오기 
+		String key = request.getParameter("searchKey");
+		String keyword = request.getParameter("searchKeyword");
+		System.out.println(key +", "+ keyword);
+		//서비스->dao->쿼리문까지 가져가서 select문에 넣어서 선택해서 가져오기 
+		int cPage,numPerpage=10; 
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
-		}catch (NumberFormatException e) {
+		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
-		List<Question> question = null;
-		if(loginMember !=null && loginMember.getMemberId().equals("petitad")) {
-			question = new QuestionService().selectQuestion(cPage, numPerpage);
-		}else {
-			question = new QuestionService().selectQuestion(cPage, numPerpage, loginMember.getMemberId());
-		}
-		int totalData=new QuestionService().selectQuestionCount();
+		
+		int totalData = new NoticeService().selectNoticeCount();
+		List<Notice> serachResult = new NoticeService().searchNotice(cPage, numPerpage, key, keyword);
+		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1; 
@@ -59,7 +59,7 @@ public class QuestionListServlet extends HttpServlet {
 			pageBar.append("<span>[이전]</span>"); 
 											
 		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>");
+			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&notices="+(keyword)+"'>");
 			pageBar.append("[이전]</a>"); 
 		}
 		
@@ -67,7 +67,7 @@ public class QuestionListServlet extends HttpServlet {
 			if(cPage==pageNo) {
 				pageBar.append("<span>"+pageNo+"</span>"); 
 			}else {
-				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
+				pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"&notices="+(keyword)+"'>");
 				pageBar.append(pageNo);
 				pageBar.append("</a>"); 
 			}
@@ -77,17 +77,14 @@ public class QuestionListServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar.append("<span>[다음]</span>"); 
 		}else {
-			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>");
+			pageBar.append("<a href='"+request.getRequestURI()+"?cPage="+pageNo+"&notices"+(keyword)+"'>");
 			pageBar.append("[다음]");
 			pageBar.append("</a>"); 
 		}
 		
-		request.setAttribute("question", question); 
+		request.setAttribute("notices", serachResult); 
 		request.setAttribute("pageBar", pageBar); 
-		request.getRequestDispatcher("/views/question/questionList.jsp").forward(request, response); 
-		
-		
-		
+		request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response); 
 		
 		
 		
