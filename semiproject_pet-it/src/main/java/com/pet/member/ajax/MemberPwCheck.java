@@ -1,23 +1,26 @@
-package com.pet.member.controller;
+package com.pet.member.ajax;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pet.member.service.MemberService;
+
 /**
- * Servlet implementation class EnrollMemberAjaxServlet
+ * Servlet implementation class MemberPwCheck
  */
-@WebServlet("/ajax/enrollmember.do")
-public class EnrollMemberAjaxServlet extends HttpServlet {
+@WebServlet("/pwCheck.do")
+public class MemberPwCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMemberAjaxServlet() {
+    public MemberPwCheck() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +29,10 @@ public class EnrollMemberAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String memberPw = request.getParameter("memberPw");
 		
-		response.setContentType("text/plain;charset=utf-8");
-		response.getWriter().print("하이");
+		new MemberService().selectMemberByPw(memberPw);
+		
 	}
 
 	/**

@@ -20,6 +20,10 @@ private MemberDao dao = new MemberDao();
       close(conn);
       return m;
    }
+   public String selectMemberByPw(String memberPw) {
+	   
+	   return memberPw;
+   }
 
 
    public int insertMember(Member m) {
@@ -35,6 +39,16 @@ private MemberDao dao = new MemberDao();
    public int memberIdCheck(String memberId) {
 	   Connection conn = getConnection();
 	   int result = dao.memberIdCheck(conn, memberId);
+	   if(result>0) commit(conn);
+	   else rollback(conn);
+	   close(conn);
+	   
+	   return result;
+   }
+   
+   public int memberPwCheck(String memberPw) {
+	   Connection conn = getConnection();
+	   int result = dao.memberIdCheck(conn, memberPw);
 	   if(result>0) commit(conn);
 	   else rollback(conn);
 	   close(conn);

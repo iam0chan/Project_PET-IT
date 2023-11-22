@@ -74,6 +74,7 @@ public class MailPwServlet extends HttpServlet {
 	            httpSession.setAttribute("emailCode", emailCode);
 	            httpSession.setAttribute("memberName", memberId);
 	            httpSession.setAttribute("memberEmail", memberEmail);
+	            
 	            request.setAttribute("emailCode", emailCode);
 	            request.setAttribute("memberId", memberId);
 	            // 이메일 전송

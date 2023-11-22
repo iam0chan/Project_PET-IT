@@ -10,7 +10,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.pet.member.dao.MemberDao;
-import com.pet.member.dto.Member;
 import com.pet.member.service.MemberService;
 
 
@@ -78,6 +77,7 @@ public class MailServlet extends HttpServlet {
 	            httpSession.setAttribute("memberEmail", memberEmail);
 	            request.setAttribute("emailCode", emailCode);
 	            request.setAttribute("memberId", memberId);
+	            
 	            // 이메일 전송
 	            String title = "pet-it 인증코드";
 	            Message message = new MimeMessage(session);
@@ -87,6 +87,12 @@ public class MailServlet extends HttpServlet {
 	            message.setContent(emailCode, "text/html; charset=utf-8");
 
 	            Transport.send(message);
+	            
+//	            Gson gson = new Gson();
+//	            
+//	            response.setContentType("application/json;charset=utf-8");
+	            
+	            
 	            
 	            // 이메일 전송 후 페이지 이동
 	            request.getRequestDispatcher("/views/member/findIdEmail.jsp").forward(request, response);

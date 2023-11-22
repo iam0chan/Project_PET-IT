@@ -82,13 +82,18 @@
    	    height:178px;
     	margin-bottom:0px;
     	position: fixed;
-	  	top: 50%;
-  		left: 50%;
+	  	top: 40%;
+  		left: 40%;
+  		
+    }
+    .modal-open .modal{
+    	overflow-y:clip;
     }
     
     .modal *{
      	width:100%;
      	height:100%;
+     	text-align:center;
     }
 </style>
 <div class="enroll_title"><h2>회원가입</h2></div>
@@ -244,6 +249,17 @@
    /*  var id_ck = 0;
 	var memberId=$("memberId").val(); */
 	
+	//비밀번호 체크 스크립트
+	$("#memberPw").keyup(e=>{
+		const memberPw=e.target.value;
+		if(userId.length>=4){
+			$.get("<%=request.getContextPath()%>/pwCheck.do?memberPw="+memberPw,
+					data=>{
+						console.log(data);
+					})
+			
+		}
+	});
 	
 	//필수약관 동의체크 스크립트
 	$(document).ready(function(){
