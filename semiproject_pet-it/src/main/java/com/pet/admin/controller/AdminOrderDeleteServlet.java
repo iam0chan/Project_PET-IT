@@ -16,13 +16,13 @@ import com.pet.admin.service.AdminService;
  * Servlet implementation class AdminOrderDelete
  */
 @WebServlet("/adminOrderDelete")
-public class AdminOrderDelete extends HttpServlet {
+public class AdminOrderDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminOrderDelete() {
+    public AdminOrderDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,8 +41,11 @@ public class AdminOrderDelete extends HttpServlet {
 	    }
 	    System.out.println(Arrays.toString(orderArr));
 	    
-	    boolean result = new AdminService().deleteOrderList(orderArr);
-	    if(result) System.out.println("DB삭제 성공!");
+	    int result = new AdminService().deleteOrderList(orderArr);
+	    
+	    if(result>0) System.out.println("서블릿 : DB삭제 성공!");
+	    else System.out.println("서블릿 : DB삭제 실패 ㅠㅠ");
+	    
 	    response.setStatus(HttpServletResponse.SC_OK);
 	}
 

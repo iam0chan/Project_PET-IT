@@ -11,10 +11,10 @@ import com.pet.payment.model.dto.Order;
 public class AdminService {
 	AdminDao dao = new AdminDao();
 	
-	public boolean deleteOrderList (long[] orderArr) {
+	public int deleteOrderList (long[] orderArr) {
 		Connection conn = getConnection();
-		boolean result=dao.deleteOrderList(conn,orderArr);
-		if(result)commit(conn);
+		int result=dao.deleteOrderList(conn,orderArr);
+		if(result>0)commit(conn);
 		else rollback(conn);
 		return result;
 	}

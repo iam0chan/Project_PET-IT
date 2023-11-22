@@ -141,6 +141,7 @@
      	<%=request.getAttribute("pageBar") %>
      </div>    
       <div class="btnArea">
+      	<button type="button" id="btnRefresh" class="btn btn-outline-success">주문목록 새로고침</button>
         <button type="button" id="btnDelete" class="btn btn-outline-success">선택주문 일괄취소/환불</button>
       </div>
       
@@ -202,6 +203,11 @@
     		});
 
     	  // 버튼 클릭 Event
+    	  $('#btnRefresh').click(function(){
+    		  location.reload();
+    	  });
+    		  
+    	  
     	  $('#btnDelete').click(function() {
     	    // 체크된 항목 확인
     	    var arrOrderNo = [];
@@ -238,26 +244,17 @@
     	    		    	data : { 
     	    		    		arrOrderNo: JSON.stringify(arrOrderNo) 
    	    		    		},
-   	    		    		success : {
-   	    		    			window.location.href("<%=request.getContextPath()%>/adminOrder.do");
-   	    		    		},"
-    	    		    	error: function(error){
-    	    		    		Swal.fire({
-    	      	    		      title: "삭제/환불 실패!",
-    	      	    		      text: "자세한 사항은 담당자에게 문의하세요",
-    	      	    		      icon: "error"
-    	      	    		    });
-    	    		    	}
+   	    		    		success :(data)=>{
+   	    		    			location.reload();
+   	    		    		}
     	    		    });
-    	    			  
     	    			Swal.fire({
     	    		      title: "삭제 되었습니다!",
     	    		      text: "선택된 주문들이 환불되고 삭제되었습니다",
     	    		      icon: "success"
     	    		    });
-    	    		    
-    	    		    location.reload(true);
     	    		  }
+    	    			location.reload();
     	    		});
     	    }
     	  });
