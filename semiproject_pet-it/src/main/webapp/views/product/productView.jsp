@@ -273,7 +273,8 @@ Member login = (Member)session.getAttribute("loginMember");
 			<h3>Reviews</h3>
 		</div>
 		<div class="review-item-container">
-			<div>
+			<h3>구매후기 준비중...</h3>
+			<!-- <div>
 				<img src="" alt="" width="200" height="200">
 				<div></div>
 			</div>
@@ -332,7 +333,7 @@ Member login = (Member)session.getAttribute("loginMember");
 			<div>
 				<img src="" alt="" width="200" height="200">
 				<div></div>
-			</div>
+			</div> -->
 		</div>
 		<div class="review-btn">
 			<button id="review-btn" class="btn btn-outline-success">후기등록</button>
@@ -436,9 +437,9 @@ $("#cart-btn").click(function() {
 						optionPrice:optionPrice,optionName:optionName}
 						).done(data=>{
 							if(data){
-								alert("장바구니등록 성공!");
+								alert("장바구니에 상품이 담겼습니다.");
 							}else{
-								alert("장바구니등록 실패 TT");
+								alert("장바구니에 상품을 올리는데 실패했습니다.");
 							}
 						});
 			});
