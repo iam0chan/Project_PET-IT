@@ -22,7 +22,7 @@ import com.pet.product.service.ProductService;
 /**
  * Servlet implementation class MainPageProductServlet
  */
-@WebServlet(urlPatterns={"/product/mainPage.do"})
+@WebServlet(urlPatterns={"/main.do","/product/mainPage.do"})
 public class MainPageProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
