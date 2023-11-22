@@ -65,9 +65,7 @@ $("#main-image").change(e=>{
 		<div class="product-enroll-container">
 			<h2>상품등록</h2>
 			<div class="line"></div>
-			<form
-				action="<%=request.getContextPath()%>/product/productEnrollEnd.do"
-				method="post" enctype="multipart/form-data">
+			<form action="<%=request.getContextPath()%>/product/productEnrollEnd.do" method="post" enctype="multipart/form-data">
 				<div class="product-detail-container">
 					<div class="detail-container-l">
 						<div class="img-container">
@@ -284,7 +282,7 @@ $("#main-image").change(e=>{
         	/* const target2 = $(".option:last-child()").remove(); */
         })
       
-        /* 모달 컨트롤 스크립트  */
+       /* 모달 컨트롤 스크립트  */
         $("#enroll-itemcontent-btn").on("click",function(){    
            $(".modal").css("display","block").css("top","230px");
                             
@@ -302,7 +300,7 @@ $("#main-image").change(e=>{
                $(".product-enroll-container>form").submit();
          
                  
-                 <%-- location.href='<%=request.getContextPath()%>/product/productlist.jsp'; --%>
+                <%--  location.href='<%=request.getContextPath()%>/product/productlist.jsp'; --%>
                  /* ajax or get-> queryString방식으로 product# 넘기기 ,  */
               })
            
@@ -316,7 +314,7 @@ $("#main-image").change(e=>{
               console.log(optionArr);
            })
            /* header, body로 나눠서 보낸다. real!!! */
-           <%-- $.ajax({
+          <%--  $.ajax({
               url:'<%=request.getContextPath()%>/productListServlet.do',
               type:"get",
               data:formdata, /* json은 아님 */
@@ -330,7 +328,13 @@ $("#main-image").change(e=>{
               }
            }); --%>
         })
-   
+   		
+    /*     $("#enroll-itemcontent-btn").on("click",function(){
+        	if($("#optionName").val().trim()=="" || $("#optionName").val()=="null"){
+    			alert("옵션명과 가격을 입력하세요, 옵션추가를 원하지 않을경우 '기본','제품가격'을 입력해주세요.");
+    		}
+        	$(".product-enroll-container>form").submit();
+        }) */
   
     </script>
 
