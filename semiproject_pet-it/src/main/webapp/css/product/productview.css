@@ -2,14 +2,14 @@
 			scroll-behavior: smooth;
 		}
         
-        * {
+/*        * {
         	margin: 0;
         	padding: 0;
-        	/*border: 1px solid red;*/
+        	border: 1px solid red;
         	list-style: none;
         	text-decoration: none;
             font-family: 'Roboto','Noto Sans KR',sans-serif !important;
-        }
+        }*/
 		
 		strong{
 			font-weight:bold;
@@ -24,6 +24,8 @@
         	align-items: center;
         	margin-top: 80px;
         	line-height: 1;
+        	text-decoration: none;
+        	letter-spacing: 2px !important;
         }
 
         .update-delete-btn-container {

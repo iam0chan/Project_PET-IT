@@ -49,13 +49,12 @@ Member login = (Member)session.getAttribute("loginMember");
 			</div>
 			<div class="info item-price-info">
 				<%
-				if (p.getProductDiscount() != null) {
+				if (!p.getProductDiscount().equals("0")) {
 				%>
 				<input class="price" id="<%=discountPrice%>" style="display: none;">
-				<h3><%=p.getProductPrice()%>원
-					<%
-				if (discountPrice != p.getProductPrice()) {
-				%>(할인가<%=discountPrice%>원)<%
+				<h3><span style="text-decoration:line-through red; font-size:25px;"><%=p.getProductPrice()%>원</span>
+				<% if (discountPrice != p.getProductPrice()) {
+				%>(할인가<span style="font-weight:bolder;"><%=discountPrice%>원</span>)<%
 				}
 				%>
 				</h3>
