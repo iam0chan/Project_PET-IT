@@ -54,6 +54,9 @@
 	width: 800px !important;
 	height : 800px !important;
 }
+th {
+	color:black;
+}
 
 </style>
 <div class="space">
@@ -75,7 +78,7 @@
 			<table class="table table-bordered">
 					<tr>
 						<th style="text-align: center; background-color: #F2F2F2;">제목</th>
-						<th><%=q.getQuestionTitle()%></th>
+						<th style="color:black;"><%=q.getQuestionTitle()%></th>
 					</tr>
 					<tr>
 						<td style="text-align: center; background-color: #F2F2F2;">작성일</td>
