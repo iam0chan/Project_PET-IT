@@ -158,6 +158,7 @@ public class NoticeDao {
 	    	
 	    }
 		
+	    //제목으로 검색 
 	    public List<Notice> noticeSearchTitle(Connection conn, int cPage, int numPerpage, String keyword){
 	    	PreparedStatement pstmt = null;
 	        ResultSet rs = null;
@@ -181,6 +182,7 @@ public class NoticeDao {
 	        return result;
 	    }
 	    
+	    //내용으로 검색 
 	    public List<Notice> noticeSearchContent(Connection conn, int cPage, int numPerpage, String keyword){
 	    	PreparedStatement pstmt = null;
 	        ResultSet rs = null;
