@@ -78,7 +78,8 @@ public class ProductListServlet extends HttpServlet {
 			
 		if(!products.isEmpty()) {
 			request.setAttribute("products", products);
-			request.setAttribute("pageBar", pageBar);	
+			request.setAttribute("pageBar", pageBar);
+			request.setAttribute("type", type);
 			request.setAttribute("files", files);
 		}
 		
