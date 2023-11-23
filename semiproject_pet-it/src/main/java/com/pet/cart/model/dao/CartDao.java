@@ -1,6 +1,7 @@
 package com.pet.cart.model.dao;
 
 import com.pet.cart.model.dto.Cart;
+import com.pet.product.model.dto.Product;
 
 import static com.pet.common.JDBCTemplate.close;
 
@@ -98,7 +99,8 @@ public class CartDao {
 				.productPrice(rs.getInt("product_price"))
 				.productInfo(rs.getString("product_info"))
 				.productPoint(rs.getInt("product_point"))
-				.productContent(rs.getString("product_content")).build();
+				.productContent(rs.getString("product_content"))
+				.productImg(rs.getString("PRODUCT_FILE_RENAME")).build();
 	}
 	public int insertCart(Connection conn, Cart c) {
 		PreparedStatement pstmt=null;

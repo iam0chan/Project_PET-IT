@@ -220,7 +220,7 @@ background-color: green;
 </style>
 </head>
 <body>
-	<section>
+	<section id="cart-content">
 		<h5>my cart</h5>
 	
 		<!-- <hr />
@@ -236,9 +236,9 @@ background-color: green;
 					<td><input type="checkbox"></td>
 					<td>이미지</td>
 					<td>상품정보</td>
-					<td>옵션</td>
+					<td>옵션 상품가</td>
 					<td>수량</td>
-					<td>판매가</td>
+					<td>합계</td>
 					<td></td>
 				</tr>
 			</thead>
@@ -255,7 +255,7 @@ background-color: green;
 				<% for (Cart c : cart) { totalPrice+=(c.getProductPrice()*c.getCartProductCount()); %>
 						<tr>
 							<td><input type="checkbox" value="<%=c.getCartNo() %>" class="delchoice-cart"></td>
-							<td><img src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
+							<td><img src="<%=request.getContextPath()%>/upload/<%=c.getProductImg()%>"></td>
 							<td class="product-name">
 								<h5><%=c.getProductName()%></h5>
 								<p><%=c.getProductInfo()%></p>
@@ -304,13 +304,40 @@ background-color: green;
 				</div>
 				<!-- 주문하기 누르면 주문페이지로 이동 -->
 				<p>
-					<a href="<%=request.getContextPath()%>/cartPay.do" class="btn btn-primary py-3 px-4">주문하기</a>
+					<a href="javascript:orderPay();" class="btn btn-primary py-3 px-4">주문하기</a>
 				</p>
 			</div>
 		</div>
 	</section>
 
 	<script>
+	const orderPay=()=>{
+		const oriCartList=<%=request.getAttribute("cartListJson")%>;
+		const orderProduct=[];
+		$(".delchoice-cart").each((i,e)=>{
+			orderProduct.push(e.value);
+		});
+		let sellProduct=[];
+		for(cart of oriCartList){
+			for(orderNo of orderProduct){
+				if(cart.cartNo==orderNo){ 
+					sellProduct.push(cart);
+					break;
+				}
+			}
+		}
+		if(sellProduct.length>0){
+			$.post("<%=request.getContextPath()%>/paymentStart.do",
+					{cartList:JSON.stringify(sellProduct)})
+					.done(e=>{
+						$("#cart-content").html(e);
+					});
+		}else{
+			alert("장바구니가 비어있습니다.");
+		}
+	}
+	
+	
 	// 카트에 상품 담겼을 때 장바구니 클릭하면 장바구니로 이동
 	$(document).ready(function(){
 		var cartList = ${not empty cartList};

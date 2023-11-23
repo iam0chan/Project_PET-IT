@@ -252,7 +252,7 @@ public class ProductDao {
          pstmt.setString(1, productNo);
          rs = pstmt.executeQuery();
          if(rs.next()) file = getMainImageFile(rs);
-         System.out.println(file.toString());
+        // System.out.println(file.toString());
       }catch(SQLException e) {
          e.printStackTrace();
       }finally {
