@@ -67,12 +67,12 @@ public class ProductUpdateEndServlet extends HttpServlet {
 			ProductOption newProductOption;
 
 			if (!optionNames[0].equals("") && !optionPrice[0].equals("")) {
-					for (int i = 0; i < optionNames.length; i++) {
-						newProductOption = new ProductOption();
-						newProductOption.setProductNo(productNo);
-						newProductOption.setProductOptionName(optionNames[i]);
-						newProductOption.setProductOptionPrice(Integer.parseInt(optionPrice[i]));
-						newOptions.add(newProductOption);
+				for (int i = 0; i < optionNames.length; i++) {
+					newProductOption = new ProductOption();
+					newProductOption.setProductNo(productNo);
+					newProductOption.setProductOptionName(optionNames[i]);
+					newProductOption.setProductOptionPrice(Integer.parseInt(optionPrice[i]));
+					newOptions.add(newProductOption);
 					int updateOptionResult = new ProductService().updateProductOption(productNo, newOptions);
 					if (updateOptionResult > 0) {
 						System.out.println("상품 옵션 수정 성공!!!");
@@ -99,23 +99,20 @@ public class ProductUpdateEndServlet extends HttpServlet {
 				System.out.println("상품업데이트 성공!!!");
 				ProductImageFile selectImgFile = new ProductService().selectMainImageFile(productNo);
 				boolean delFileCheck = false;
-				if (oriname != null && rename != null) {
-					if (!selectImgFile.getProductFileOriName().equals(oriname)) {
-						int delImgResult = new ProductService().deleteProductImage(productNo);
-						if (delImgResult > 0) {
-							File delFile = new File("/upload/" + selectImgFile.getProductFileRename());
-							if (delFile.exists()) {
-								delFile.delete();
-								delFileCheck = true;
-								if (delFileCheck) {
-									int updateMainImg = new ProductService().updateMainImg(productNo, oriname, rename);
-									if (updateMainImg > 0) {
-										System.out.println("메인이미지가 변경되어 수정완료!!!");
-									}
-								}
+				if (oriname.length()>0 && rename.length()>0) {
+						int updateMainImg = new ProductService().updateMainImg(productNo, oriname, rename);
+						if (updateMainImg > 0) {
+							System.out.println("메인이미지가 변경되어 수정완료!!!");
+						File delFile = new File("/upload/" + selectImgFile.getProductFileRename());
+						if (delFile.exists()) {
+							delFile.delete();
+							delFileCheck = true;
+							if (delFileCheck) {
+								System.out.println("상품이미지 삭제");
 							}
 						}
 					}
+
 				}
 			}
 		}

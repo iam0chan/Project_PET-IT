@@ -5,6 +5,7 @@
 <%  List<Product> products = (List<Product>)request.getAttribute("products"); 
     StringBuilder pageBar = (StringBuilder)request.getAttribute("pageBar");
     List<ProductImageFile> files = (List<ProductImageFile>)request.getAttribute("files");
+    String type = (String)request.getAttribute("type");
     String productNo = "";
     String no="";
 %>
@@ -29,6 +30,7 @@
             </div>
             <div class="button">
                 <div class="btn-container">
+                	<input type="hidden" id="type" value="<%=type%>">
                 	<button name="type-btn" id="all" type="button" class="btn btn-outline-success" style="width:auto;">전체보기</button>
                     <button name="type-btn" id="new" type="button" class="btn btn-outline-success" style="width:auto;">신상품</button>
                     <button name="type-btn" id="T-1"type="button" class="btn btn-outline-success" style="width:auto;">Dog 사료</button>
@@ -107,6 +109,28 @@
     
     
     <script>
+    
+    $(document).ready(function(){
+    	const type = $("#type").val();
+    	
+    	switch(type){
+    	case "all":
+    		$("#all").css("background-color","#28A745").css("color","white");
+    		break;
+    	case "new":
+    		$("#new").css("background-color","#28A745").css("color","white");
+    		break;
+    	case "T-1" : 
+    		$("#T-1").css("background-color","#28A745").css("color","white");
+    		break;
+    	case "T-2" :
+    		$("#T-2").css("background-color","#28A745").css("color","white");
+    		break;
+    	case "T-3" :
+    		$("#T-3").css("background-color","#28A745").css("color","white");
+    		break;
+    	}
+    })
     const lengthcheck = function(){
     	const value = $("#search").val();
     	if(value.length>=1){
@@ -121,7 +145,7 @@
    })   
    $(".admin-btn").mouseleave(function(){
       $(this).css("color","#28A745");
-   })   
+   })
  
    $(".card").mouseenter(function(){
       $(this).css("cursor","pointer");
