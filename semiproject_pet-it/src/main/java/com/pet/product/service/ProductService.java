@@ -148,32 +148,19 @@ public class ProductService {
       return options;
    }
 
-   public int insertNewOption(String productNo, List<ProductOption> options, List<ProductOption> original) {
+   public int updateProductOption(String productNo, List<ProductOption> options) {
       Connection conn = getConnection();
-      int insertOptionResult = dao.insertNewOption(conn, productNo, options);
-      if (insertOptionResult > 0) {
-         int deleteOptionResult = dao.deleteProductOption(conn, productNo, original);
-         if(deleteOptionResult>0) {
-            System.out.println("기존옵션삭제");
-            commit(conn);
-         }
-      } else {
-         rollback(conn);
-      }
-      close(conn);
-
-      return insertOptionResult;
-   }
-
-   public int updateProductOption(String productNo, List<ProductOption> options, List<ProductOption> original) {
-      Connection conn = getConnection();
-      int updateResult = dao.updateOption(conn, productNo, options);
-      if (updateResult > 0) {
-         int deleteOptionResult = dao.deleteProductOption(conn, productNo, original);
-         if(deleteOptionResult>0) {
-            System.out.println("기존옵션삭제");
-         }
-         commit(conn);
+      int updateResult = 0;
+      int deleteOptionResult = 0;
+      Product p = dao.selectProductByNo(conn, productNo);
+  
+   	  deleteOptionResult = dao.deleteProductOption(conn, productNo);
+      
+      System.out.println("옵션삭제 확인: "+deleteOptionResult);
+      if (deleteOptionResult > 0 && p.getProductOption()==null) {
+    	  System.out.println("삭제가 문제없니?");
+    	 updateResult = dao.updateOption(conn, productNo, options);
+    	 if(updateResult>0) commit(conn);
       } else {
          rollback(conn);
       }
@@ -182,26 +169,21 @@ public class ProductService {
 
       return updateResult;
    }
-
-   public int deleteProductOption(String productNo, List<ProductOption> po) {
-      Connection conn = getConnection();
-      int result = dao.deleteProductOption(conn, productNo, po);
-      if (result > 0) {
-         commit(conn);
-      } else {
-         rollback(conn);
-      }
-
-      close(conn);
-
-      return result;
+   
+   public int selectProductCountByKeyword(String keyword) {
+	   Connection conn = getConnection();
+	   int totalData = dao.selectProductCountByKeyword(conn,keyword);
+	   close(conn);
+	   
+	   return totalData;
    }
-
-   /*
-    * public ProductOption getOptionName(String productNo, String optionPrice) {
-    * Connection conn = getConnection(); ProductOption po = dao.getOptionName(conn,
-    * productNo, optionPrice); close(conn);
-    * 
-    * return po; }
-    */
+   
+   public List<Product> selectProductListByKeyword(int cPage, int numPerPage, String keyword){
+	  Connection conn = getConnection();
+	  List<Product> products = dao.selectProductListByKeyword(conn, cPage, numPerPage, keyword);
+	  close(conn);
+	  
+	  return products;
+	   
+   }
 }
