@@ -163,6 +163,33 @@ public class AdminDao {
 		return result;
 	}
 	
+	public int updateOrder(Connection conn, Order o) {
+		System.out.println("dao : "+ o);
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("updateOrder"));
+			
+			pstmt.setString(1, o.getOrderName());
+			pstmt.setString(2, o.getOrderZipcode());
+			pstmt.setString(3, o.getOrderAddr());
+			pstmt.setString(4, o.getOrderDefAddr());
+			pstmt.setString(5, o.getOrderPhone());
+			pstmt.setString(6, o.getOrderEmail());
+			pstmt.setString(7, o.getDeliveryReq());
+			pstmt.setLong(8, o.getOrderNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	private static Order getOrders(ResultSet rs) throws SQLException {
 		return Order.builder()
 				.orderNo(rs.getLong("PURCHASE_NO"))

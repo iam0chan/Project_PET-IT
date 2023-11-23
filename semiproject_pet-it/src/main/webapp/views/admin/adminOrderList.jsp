@@ -8,12 +8,6 @@
 
 <style>
 
-	table{
-		border-collapse: collapse;
-	  text-align : center;
-	  
-	}
-	
 	td {
 	  /* border: 1px solid #333; */
 	  border-collapse: collapse;
@@ -23,16 +17,17 @@
 	table {
 	  margin-left : 40px; 
 	  margin: 40px;
+	  border-collapse: collapse;
+	  text-align : center;
 	}
 	td,
 	th {
 	  padding: 3px;
-	  
-	  vertical-align : middel;
+	  vertical-align : middle;
 	}
 	thead,
 	tfoot {
-	  background-color: #333;
+	  background-color: #43AF82;
 	  color: #fff;
 	}
 	th {
@@ -43,16 +38,18 @@
 	  cursor: pointer;
 	  
 	}
+
 	div.btnArea {
 	  margin: 20px;
 	  text-align : center;
 	}
 	#title {
+		margin-top : 50px;
 		text-align : center;
 	}
 	
 	tbody{
-		font-size:0.7rem;
+		font-size:0.8rem;
 	}
 	
 	input[type=checkbox] {
@@ -71,6 +68,10 @@
 		item-aligns : center;
 		justfy-content : center;
 	}
+	li{
+		color:black;
+		
+	}
 </style>
 
 <link rel="icon" href="<%=request.getContextPath()%>/img/favicon-16x16.png" type="image/png" />
@@ -85,7 +86,10 @@
       </div>
       	
     <h3 id="title"> 주문 목록 </h3>
-    
+    <div class="btnArea">
+      	<button type="button" id="btnRefresh" class="btn btn-outline-success">주문목록 새로고침</button>
+        <button type="button" id="btnDelete" class="btn btn-outline-success">선택주문 일괄취소/환불</button>
+      </div>
 
       <!-- 테이블 -->
       <div id="tableContainer">
@@ -140,10 +144,7 @@
 	 <div id="pageBar">
      	<%=request.getAttribute("pageBar") %>
      </div>    
-      <div class="btnArea">
-      	<button type="button" id="btnRefresh" class="btn btn-outline-success">주문목록 새로고침</button>
-        <button type="button" id="btnDelete" class="btn btn-outline-success">선택주문 일괄취소/환불</button>
-      </div>
+      
       
 <form id="myForm" action="/submit" method="post">
 

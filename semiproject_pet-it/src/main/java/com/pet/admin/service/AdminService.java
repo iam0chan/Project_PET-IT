@@ -60,4 +60,11 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateOrder(Order o) {
+		Connection conn = getConnection();
+		int result = dao.updateOrder(conn,o);
+		close(conn);
+		return result;
+	}
 }
