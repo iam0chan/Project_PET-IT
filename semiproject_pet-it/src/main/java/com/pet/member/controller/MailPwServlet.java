@@ -63,20 +63,21 @@ public class MailPwServlet extends HttpServlet {
 	   	String findPwCheck=null;
 	    
 	    try {
-	        // 이름과 이메일이 데이터베이스에 일치하는지 확인
+	        // 아이디와 이메일이 데이터베이스에 일치하는지 확인
 	    	findPwCheck=new MemberService().findPwCheck(memberId, memberEmail);
-	        if (findPwCheck!=null) {
+	    	System.out.println(findPwCheck);
+	        if (findPwCheck.equals("Y")) {
 	            // 일치하면 인증 코드 생성
 	            emailCode = dao.makeAuthenticationCode();
 	            
 	            // 세션에 저장
 	            HttpSession httpSession = request.getSession();
 	            httpSession.setAttribute("emailCode", emailCode);
-	            httpSession.setAttribute("memberName", memberId);
+	            httpSession.setAttribute("memberId", memberId);
 	            httpSession.setAttribute("memberEmail", memberEmail);
-	            
 	            request.setAttribute("emailCode", emailCode);
 	            request.setAttribute("memberId", memberId);
+	            
 	            // 이메일 전송
 	            String title = "pet-it 인증코드";
 	            Message message = new MimeMessage(session);
@@ -88,10 +89,10 @@ public class MailPwServlet extends HttpServlet {
 	            Transport.send(message);
 	            
 	            // 이메일 전송 후 페이지 이동
-	            request.getRequestDispatcher("/views/member/findIdEmail.jsp").forward(request, response);
+	            request.getRequestDispatcher("/views/member/findPwEmail.jsp").forward(request, response);
 	            
 	        	} else {
-	            // 이름과 이메일이 일치하지 않을 경우 처리
+	            // 아이디와 이메일이 일치하지 않을 경우 처리
 //	            response.sendRedirect(request.getContextPath() + "/views/member/findIdFail.jsp");
 	            response.getWriter().write("fail");
 	        }

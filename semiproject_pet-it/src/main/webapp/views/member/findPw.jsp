@@ -148,7 +148,6 @@
 </div>
 <script>
 	
-	
 </script>
 
 <%@ include file ="/views/footer.jsp" %>

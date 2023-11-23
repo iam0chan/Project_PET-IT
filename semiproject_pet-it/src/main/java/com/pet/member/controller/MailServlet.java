@@ -58,13 +58,13 @@ public class MailServlet extends HttpServlet {
 	        }
 	    });
 	    
-	    String memberEmail = request.getParameter("memberEmail"); // 메일 받을 주소
 	    String memberName = request.getParameter("memberName");
+	    String memberEmail = request.getParameter("memberEmail"); // 메일 받을 주소
 	    
 	   	String memberId=null;
 	    
 	    try {
-	        // 이름과 이메일이 데이터베이스에 일치하는지 확인
+	        // 이름과 이메일이 데이터베이스에 일치하는지 확인후 memberId가져오기
 	    	memberId=new MemberService().findIdEmail(memberName, memberEmail);
 	        if (memberId!=null) {
 	            // 일치하면 인증 코드 생성

@@ -51,6 +51,9 @@
 
 	}
 	
+	#en_container{
+		margin-bottom:40px;
+	}
 	
 		
 	.enroll div{
@@ -172,7 +175,7 @@
     }
 </style>
 <div class="enroll_title">회원가입</div>
-<div class="enroll">
+<div class="enroll" id="en_container">
 <div class="enroll_line"><span class="nn">*</span>필수입력사항</div>
 	<form id="enroll_form" action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" >							
 			<div class="field id">
@@ -251,7 +254,7 @@
 			<div class="field pw2">
 				<b>비밀번호확인<span class="nn">*</span></b>
 				<span>	
-					<input type="password" placeholder="  비밀번호를 한번 더 입력해주세요" id="memberPw2" >
+					<input type="password" placeholder="  비밀번호를 다시 입력해주세요" id="memberPw2" >
 				</span>
 			</div>
 			<div class="field pw2c" style="height:20px; display:none;" >테스트</div>

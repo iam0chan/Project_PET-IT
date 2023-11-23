@@ -100,33 +100,37 @@
 <div class="findId">
 	<ul class="title">
 		<li>
-			<a href="<%=request.getContextPath()%>/find/id.do">아이디 찾기</a>
+			<a href="<%=request.getContextPath()%>/findId.do">아이디 찾기</a>
 		</li>
 		<li>
-			<a href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a	>
+			<a href="<%=request.getContextPath()%>/findPw.do">비밀번호 찾기</a	>
 		</li>
 	</ul>
 	<form action="<%=request.getContextPath()%>/mailPw.do" method="get">								
 			<span>이메일로 발송된 회원님의 인증번호를 입력해주세요.</span>
 			<br>
 					<input type="text" placeholder="인증번호" style="width:460px; height:50px; text-align:center;" name="memberEmail_code" id="memberEmail_code">
-					<div class="idFindView"></div>
-			<br><br>
-  		  <button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>
+					<div class="pwFindView"></div>
+		  <br><br>
+  		  <button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호확인</button>
+  		  <button type="button" id="memberEmail_recheck" class="btn btn-outline-primary" style="width:460px; height:40px; display:none;" onclick="location.reload()">인증다시받기</button>
+		  <button type="button" id="memberEmail_login" class="btn btn-outline-primary" style="width:460px; height:40px; display:none;" onclick="location.assign('<%=request.getContextPath()%>/loginView.do');">로그인</button>
 	</form>
 </div>
 <script>
-  $(document).ready(function() {
+$(document).ready(function() {
     $("#memberEmail_check").click(function(){
       const memberEmailCode = $('#memberEmail_code').val();
       var emailCode = "<%=request.getAttribute("emailCode")%>";
-      console.log('발송코드:' + emailCode);
-      console.log('유저입력값:' + memberEmailCode);
-      if(memberEmailCode === emailCode){
-        <%=request.getContextPath()%>
+      
+      if(memberEmailCode === emailCode){ 
+       	location.assign('<%=request.getContextPath()%>/newPw.do');
       } else {
-        $('.idFindView').html('인증번호가 일치하지 않습니다');
+        $('.pwFindView').html('인증번호가 일치하지 않습니다');
+        $("#memberEmail_recheck").show();
       }
+      $("#memberEmail_check").hide();
+      $("#email_nav").hide();
       $("#memberEmail_code").hide();
       $(".idFind_view").show();
     });
