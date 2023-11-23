@@ -56,6 +56,17 @@ private MemberDao dao = new MemberDao();
 	   return result;
    }
    
+   public int memberEmailCheck(String memberEmail) {
+	   Connection conn = getConnection();
+	   int result = dao.memberEmailCheck(conn, memberEmail);
+	   if(result>0) commit(conn);
+	   else rollback(conn);
+	   close(conn);
+	   
+	   return result;
+   }
+   
+   
    public String findIdEmail(String memberName, String memberEmail) {
 	   Connection conn = getConnection();
 	   String memberId = dao.findIdEmail(conn, memberName, memberEmail);

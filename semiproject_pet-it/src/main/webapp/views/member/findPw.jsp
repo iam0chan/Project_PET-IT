@@ -30,6 +30,7 @@
     /* padding: 0 20px; */
 /*     margin-bottom: 20px; */
     height:500px;
+    background-color: #f7f7f7;
     }
 /*     .findId .title{
     	border:1px solid;
@@ -91,7 +92,7 @@
    }
    
    .google_recaptcha {
-   		width:460px;
+   		width:698.7px;
    }
    
    .google_recaptcha>*{
@@ -99,36 +100,44 @@
 /*    		display:flex; */
    }
    
+   .field_Id #memberId{
+   		border-width: 1px 1px 0px 1px;
+   }
+   
+   .field_email #memberEmail{
+   		border-width: 1px 1px 1px 1px;
+   }
+   
 </style>
 
 <div class="findId">
 	<ul class="title">
 		<li>
-			<a href="<%=request.getContextPath()%>/find/id.do">아이디 찾기</a>
+			<a href="<%=request.getContextPath()%>/findId.do">아이디 찾기</a>
 		</li>
 		<li>
-			<a href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a	>
+			<a href="<%=request.getContextPath()%>/findPw.do">비밀번호 찾기</a	>
 		</li>
 	</ul>
 	<form action="<%=request.getContextPath()%>/mailPw.do" method="get" onsubmit="">								
 			<div class="field_info">
 				<div class="field_Id">
 					<span>
-						<input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId">
+						<input type="text" placeholder="  아이디를 입력해주세요" name="memberId" id="memberId">
 					</span>
 				</div>
 				<div class="field_email">
 					<span>
-						<input type="email" placeholder="이메일을 입력해주세요" name="memberEmail" id="memberEmail" >
+						<input type="email" placeholder="  이메일을 입력해주세요" name="memberEmail" id="memberEmail" >
 					</span>
 				</div>
 			</div>
 			<br>
-			<div class="recaptcha_view">
+			<div class="field" style="margin-bottom:20px;">
 				<p style="font-size: 14px; margin:0;">정보보호를위해 '로봇이 아닙니다.'를 눌러 진행해주세요</p>
 			</div>
 			
-			<div class="google_recaptcha">
+			<div class="google_recaptcha" style="margin-bottom:20px;">
 				<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
 				<script src='https://www.google.com/recaptcha/api.js'></script>
 			</div>
