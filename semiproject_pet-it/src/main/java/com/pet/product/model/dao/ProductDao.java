@@ -381,7 +381,7 @@ public class ProductDao {
             pstmt = conn.prepareStatement(sql.getProperty("updateOptions"));
             pstmt.setString(1, po.getProductOptionName());
             pstmt.setInt(2, po.getProductOptionPrice());
-            pstmt.setString(3, po.getProductOptionNo());
+            pstmt.setString(3, productNo);
             updateOption += pstmt.executeUpdate();
             
          }
@@ -395,17 +395,13 @@ public class ProductDao {
       return updateOption;
    }
    
-   public int deleteProductOption(Connection conn, String productNo, List<ProductOption> origianl) {
+   public int deleteProductOption(Connection conn, String productNo) {
       PreparedStatement pstmt = null;
       int delResult = 0;
       try {
-         for(ProductOption po : origianl) {
             pstmt = conn.prepareStatement(sql.getProperty("deleteOptions"));
-            /* pstmt.setString(1,productNo); */
-            pstmt.setString(1, po.getProductOptionNo());
-            
+            pstmt.setString(1, productNo);           
             delResult=pstmt.executeUpdate();
-         }
       }catch(SQLException e) {
          e.printStackTrace();
       }finally {
@@ -432,6 +428,51 @@ public class ProductDao {
       
       return delResult;
       
+   }
+   
+   public int selectProductCountByKeyword(Connection conn, String keyword) {
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   int totalData = 0;
+	   try {
+		   pstmt = conn.prepareStatement(sql.getProperty("selectProductCountByKeyword"));
+		   pstmt.setString(1,'%'+keyword+'%');
+		   rs = pstmt.executeQuery();
+		   
+		   if(rs.next()) totalData = rs.getInt(1);
+	   }catch(SQLException e) {
+		   e.printStackTrace();
+	   }finally {
+		   close(rs);
+		   close(pstmt);
+	   }
+	   
+	   return totalData;
+   }
+   
+   public List<Product> selectProductListByKeyword(Connection conn, int cPage, int numPerPage, String keyword){
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   List<Product> products = new ArrayList<>();
+	   
+	   try {
+		   pstmt = conn.prepareStatement(sql.getProperty("selectProductListByKeyword"));
+		   pstmt.setString(1, '%'+keyword+'%');
+		   pstmt.setInt(2, (cPage-1)*numPerPage+1);
+		   pstmt.setInt(3, cPage*numPerPage);
+		   rs = pstmt.executeQuery();
+		   while(rs.next()) {
+			   products.add(getProduct(rs));
+		   }
+		   
+	   }catch(SQLException e) {
+		   e.printStackTrace();
+	   }finally {
+		   close(rs);
+		   close(pstmt);
+	   }
+	   
+	   return products;
    }
    
    /*
