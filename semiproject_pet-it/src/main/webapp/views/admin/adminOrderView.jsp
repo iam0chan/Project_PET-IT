@@ -183,12 +183,12 @@
 <script>
 
 	//input태그 수정 내용 실시간으로 적용
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 	    $("input").on("change", function() {
 	      var userInput = $(this).val();
 	      $(this).attr("value", userInput);
 	    });
-	});
+	}); */
 
 	//목록으로
 	$('.backList').click(function(){
