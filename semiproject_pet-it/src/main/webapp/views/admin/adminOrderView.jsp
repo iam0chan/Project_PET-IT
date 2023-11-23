@@ -112,9 +112,9 @@
 			<div style="height:30px"></div>
 			
 			<h5>상품정보</h5>
-			<div class="productInfo" style="vertical-align:middle; text-align: center;">
 			<%if(!odl.isEmpty()){ %>
 				<%for(OrderDetail od : odl){ %>
+			<div class="productInfo" style="vertical-align:middle; text-align: center;">
 				<div class="input-group mb-3">
 				  <span class="input-group-text" id="orderNo">상품번호</span>
 				  <input type="text" class="form-control" value="<%=od.getProductNo() %>"  aria-label="orderNo" aria-describedby="orderNo" readonly>
@@ -207,4 +207,8 @@
 		$('input[name=deliveryReq]').val($("#deliveryReq"));
 	    $("#orderForm").submit();
     });
+	
+	$(".orderDelete").click(function(){
+		
+	});
 </script>		
