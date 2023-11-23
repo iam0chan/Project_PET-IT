@@ -9,8 +9,8 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-
-
+<%@ page import="com.pet.member.dto.Member" %>
+<% Member m=(Member)session.getAttribute("loginMember");%>
 <style>
   .bd-placeholder-img {
     font-size: 1.125rem;
@@ -25,10 +25,14 @@
       font-size: 3.5rem;
     }
   }
+  *{
+  	font-family:G마켓 산스;
+  }
 </style>
    
 </head>
 <body>
+
 <!-- sidebar start -->    
 <div class="container-fluid">
   <div class="row">
@@ -41,7 +45,7 @@
         </a>
       <div class="position-sticky pt-3">
       		<p>
-	            <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/index.jsp">
+	            <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/">
 	              <span data-feather="home"></span>
 	              Pet-It 메인페이지로
 	            </a>
@@ -56,9 +60,8 @@
           		</h2>
           		<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="#" class="link" data-content="content">상품등록</a></p>
-        				<p><a href="#" class="link" data-content="content">상품수정</a></p>
-        				<p><a href="#" class="link" data-content="content">상품삭제</a></p>
+        				<p><a href="<%=request.getContextPath()%>/adminProductEnroll.do" class="link" data-content="content">상품등록</a></p>
+        				<p><a href="<%=request.getContextPath()%>/adminProductList.do" class="link" data-content="content">상품수정/삭제</a></p>
 				    </div>
 			   	</div>
           	</div>
@@ -71,10 +74,10 @@
           		</h2>
           		<div id="f-accorMember" class="accordion-collapse collapse" aria-labelledby="accorMember" data-bs-parent="nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="">회원정보관리</a></p>
-        				<p><a href="">후기관리</a></p>
-        				<p><a href="">쿠폰관리</a></p>
-        				<p><a href="">적립금관리</a></p>
+        				<p><a href="">회원정보관리(준비중)</a></p>
+        				<p><a href="">후기관리(준비중)</a></p>
+        				<p><a href="">쿠폰관리(준비중)</a></p>
+        				<p><a href="">적립금관리(준비중)</a></p>
 				    </div>
 			   	</div>
           	</div>
@@ -87,9 +90,8 @@
           		</h2>
           		<div id="f-accorOrder" class="accordion-collapse collapse" aria-labelledby="accorOrder" data-bs-parent="nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="<%=request.getContextPath()%>/adminOrder.do">주문 관리</a></p>
-        				<p><a href="">반품/환불 관리</a></p>
-        				<p><a href="">배송 관리</a></p>
+        				<p><a href="<%=request.getContextPath()%>/adminOrder.do">주문/환불 관리</a></p>
+        				<p><a href="">배송 관리(준비중)</a></p>
 				    </div>
 			   	</div>
           	</div>
@@ -102,8 +104,8 @@
           		</h2>
           		<div id="f-accorBoard" class="accordion-collapse collapse" aria-labelledby="accorBoard" data-bs-parent="nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="">공지사항 관리</a></p>
-        				<p><a href="">이벤트 관리</a></p>
+        				<p><a href="<%=request.getContextPath() %>/noticeList.do?=<%=m.getMemberId()%>">공지사항 관리</a></p>
+        				<p><a href="">이벤트 관리(준비중)</a></p>
 				    </div>
 			   	</div>
           	</div>

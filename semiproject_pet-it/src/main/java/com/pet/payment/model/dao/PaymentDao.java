@@ -115,6 +115,7 @@ private Properties sql = new Properties();
 			    pstmt.setInt(4, od.getDetailCount());
 			    pstmt.setString(5, od.getProductOption());
 				pstmt.addBatch();
+				pstmt.clearBatch();
 			}
 		    result = pstmt.executeBatch();
 		     

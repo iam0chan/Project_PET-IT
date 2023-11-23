@@ -35,7 +35,12 @@ public class PaymentStartServlet extends HttpServlet {
 		// 상품페이지에서 넘어온 상품 번호, 옵션명, 상품 갯수 가져오기
 		String productNo = request.getParameter("productNo");
 		String optionName = request.getParameter("optionName");
-		int detailCount = Integer.parseInt(request.getParameter("orderAmount"));
+		int detailCount=0;
+		try {
+			detailCount = Integer.parseInt(request.getParameter("orderAmount"));
+		}catch(NumberFormatException e) {
+			
+		}
 		List<OrderDetail> odl= new ArrayList<>();
 
 		if(productNo!=null&&optionName!=null&&detailCount!=0) {
@@ -77,6 +82,8 @@ public class PaymentStartServlet extends HttpServlet {
 	        Cart[] orderArray = gson.fromJson(cl, Cart[].class);
 	        List<Cart> cartList = null;
 	        cartList = Arrays.asList(orderArray);
+	        
+	        System.out.println("start서블릿(장바구니): "+cartList);
 	     
 				for(Cart c : cartList) {
 					productNo = c.getProductNo();
@@ -98,8 +105,10 @@ public class PaymentStartServlet extends HttpServlet {
 							.build();		
 					odl.add(od);
 				}
+				System.out.println("start서블릿(Orderdetail)리스트"+odl);
+				
 			request.setAttribute("orderList",odl);
-			request.getRequestDispatcher("/views/payment/orderPay.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/payment/ajaxOrderPay.jsp").forward(request, response);
 		}
 	}
 

@@ -49,28 +49,31 @@ public class NoticeListServlet extends HttpServlet {
 			int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 			int pageEnd=pageNo+pageBarSize-1;
 			
-			String pageBar="";
+			String pageBar="<ul class='pagination justify-content-center'>";
+			
 			if(pageNo==1) {
-				pageBar+="<span>[이전]</span>";
+				pageBar+="<li class='page-item disabled'><a class='page-link' href='#'>이전</a></li>";
 			}else {
-				pageBar+="<a href='"+request.getRequestURI()
-							+"?cPage="+(pageNo-1)+"'>[이전]</a>";
+				pageBar+="<li class='page-item'><a class='page-link' href='"+request.getRequestURI()
+							+"?cPage="+(pageNo-1)+"'>이전</a></li>";
 			}
 			while(!(pageNo>pageEnd||pageNo>totalPage)) {
 				if(pageNo==cPage) {
-					pageBar+="<span>"+pageNo+"</span>";
+					pageBar+="<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>";
 				}else {
-					pageBar+="<a href='"+request.getRequestURI()
-							+"?cPage="+pageNo+"'>"+pageNo+"</a>";
+					pageBar+="<li class='page-item'><a class='page-link' href='"+request.getRequestURI()
+							+"?cPage="+pageNo+"'>"+pageNo+"</a></li> ";
 				}
 				pageNo++;
 			}
+			
 			if(pageNo>totalPage) {
-				pageBar+="<span>[다음]</span>";
+				pageBar+="<li class='page-item disabled'><a class='page-link' href='#'>다음</a></li>";
 			}else {
-				pageBar+="<a href='"+request.getRequestURI()
-						+"?cPage="+pageNo+"'>[다음]</a>";
+				pageBar+="<li class='page-item'><a class='page-link' href='"+request.getRequestURI()
+						+"?cPage="+pageNo+"'>다음</a></li>";
 			}
+			pageBar+="</ul>";
 			
 			request.setAttribute("notices",notices);
 			request.setAttribute("pageBar", pageBar);
