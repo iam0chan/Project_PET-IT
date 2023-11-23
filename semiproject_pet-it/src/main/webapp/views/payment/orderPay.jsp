@@ -130,7 +130,7 @@
 			      </div>
 			    </div>
 			  </div>
-		  
+		  	</div>
 		<!-- -----------------주문자정보 입력폼 end--------------- -->
 		
 		<!-- ----------------상품정보 start -------------------- -->	  
@@ -246,7 +246,7 @@
 				        	<td style="width:70%"><p><b>적립금/쿠폰적용</b></p></td>
 				        	<td style="width:15%; text-align:right"><p><span id="discountPrice">0</span>원</p></td>
 				        </tr>
-				        </tr>
+				        
 			        </table>
 			      </div>
 			      <div style="background-color:lightgray; height:50px; item-aligns:center; display:flex;">
@@ -318,12 +318,10 @@
 			      	<div class="d-grid gap-2">
 					  <input id="paymentBtn" class="btn btn-primary btn-lg btn-success" type="button" value="결제하기">
 					</div>
-			  </div>
-			</div>
-
-	</section>
-
+		
+		</section>
 </div>
+			
 
 
 <!-- js -->

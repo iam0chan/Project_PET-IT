@@ -46,6 +46,7 @@
 	    calculatePrice();
 	});
 
+
 // 주문번호 생성 함수
 function createOrderNum() {
     const date = new Date();
