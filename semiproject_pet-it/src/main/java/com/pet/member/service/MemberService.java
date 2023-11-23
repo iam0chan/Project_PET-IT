@@ -36,6 +36,16 @@ private MemberDao dao = new MemberDao();
       return result;
    }
    
+   public int updatePw(String newPw, String memberId) {
+	   Connection conn = getConnection();
+	      int result=dao.updatePw(conn, newPw, memberId);
+	      if(result>0) commit(conn);
+	      else rollback(conn);
+	      close(conn);
+	  
+	      return result;
+   }
+   
    public int memberIdCheck(String memberId) {
 	   Connection conn = getConnection();
 	   int result = dao.memberIdCheck(conn, memberId);
@@ -79,13 +89,22 @@ private MemberDao dao = new MemberDao();
    
    public String findPwCheck(String memberId, String memberEmail) {
 	   Connection conn = getConnection();
-	   String result = dao.findIdEmail(conn, memberId, memberEmail);
-	   if(memberId!=null) commit(conn);
+	   String result = dao.findPwCheck(conn, memberId, memberEmail);
+	   if(result!=null) commit(conn);
 	   else rollback(conn);
 	   close(conn);
 	   
 	   return result;
-	   
    }
+   
+//   public String newPwCheck(String newPw, String newPw2) {
+//	   Connection conn = getConnection();
+//	   String result = dao.newPwCheck(conn, newPw, newPw2);
+//	   if(result!=null) commit(conn);
+//	   else rollback(conn);
+//	   close(conn);
+//	   
+//	   return result;
+//   }
    
 }

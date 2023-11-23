@@ -70,6 +70,24 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int updatePw(Connection conn, String newPw, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updatePw"));
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	//랜덤인증코드 생성 메소드
 	public String makeAuthenticationCode() throws Exception {
 		int pwdLength = 8;
@@ -202,39 +220,11 @@ public class MemberDao {
 		    }
 		    return result;
 		}
+		
+		
 	
 	
-	public int memberPwCheck(Connection conn, String memberPw) {
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		int result = 0;
-		try {
-	        pstmt = conn.prepareStatement(sql.getProperty("memberPwCheck"));
-	        pstmt.setString(1, memberPw);
-	        rs = pstmt.executeQuery();
-
-	        if (rs.next()) {
-	            // 중복된 아이디가 존재하는 경우
-	            result = 0;
-	        } else if (memberPw.equals("")) {
-	            // memberId가 빈 문자열인 경우
-	            result = -0;
-	        } else if (memberPw.length()<8||memberPw.length()>12) {
-	        	// memberId의 length제한에 걸린 경우 (6~10)
-	        	result = -1;
-	        }
-	        else {
-	            // 중복된 아이디가 존재하지 않는 경우
-	            result = 1;
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        close(rs);
-	        close(pstmt);
-	    }
-	    return result;
-	}
+	
 	
 	private Member getMember(ResultSet rs) throws SQLException{
 		return Member.builder()

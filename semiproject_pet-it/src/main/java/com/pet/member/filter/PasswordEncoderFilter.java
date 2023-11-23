@@ -17,7 +17,7 @@ import com.pet.member.security.PasswordEncoder;
 /**
  * Servlet Filter implementation class PasswordEncoderFilter
  */
-@WebFilter(servletNames = {"EnrollMemberEndServlet","login"})
+@WebFilter(servletNames = {"EnrollMemberEndServlet","login","FindPwNewSaveServlet"})
 public class PasswordEncoderFilter extends HttpFilter implements Filter {
        
     /**

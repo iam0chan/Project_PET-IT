@@ -6,6 +6,12 @@
    Member loginMember=(Member)session.getAttribute("loginMember");
 %>
 <!doctype html>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+	* {
+	font-family: 'Noto Sans KR', sans-serif;
+	}
+</style>
     <head>
         <!-- Basic -->
         <meta charset="utf-8" />

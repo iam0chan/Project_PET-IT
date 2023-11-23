@@ -51,6 +51,7 @@
    
    .findId{
    		border-color:lightgray;
+   		background-color: #f7f7f7;
    }
    
    .field input{
@@ -95,15 +96,20 @@
 /*    		display:flex; */
    }
    
+   .btn.btn-outline-primary{
+   		background-color:#fff;
+   		color:#007bff;
+}
+   
 </style>
 
 <div class="findId">
 	<ul class="title">
 		<li>
-			<a href="<%=request.getContextPath()%>/find/id.do">아이디 찾기</a>
+			<a href="<%=request.getContextPath()%>/findId.do"><button type="button" class="btn btn-primary" style="height:100%; width:100%">아이디 찾기</button></a>
 		</li>
 		<li>
-			<a href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a	>
+			<a href="<%=request.getContextPath()%>/findPw.do"><button type="button" class="btn btn-outline-primary" style="height:100%; width:100%">비밀번호 찾기</button></a>
 		</li>
 	</ul>
 	<form action="<%=request.getContextPath()%>/mail.do" method="get">								
@@ -116,16 +122,13 @@
   		   <button type="button" id="memberEmail_recheck" class="btn btn-outline-primary" style="width:460px; height:40px; display:none;" onclick="location.reload()">인증다시받기</button>
 		   <button type="button" id="memberEmail_login" class="btn btn-outline-primary" style="width:460px; height:40px; display:none;" onclick="location.assign('<%=request.getContextPath()%>/loginView.do');">로그인</button>
 	</form>
-</div>l
+</div>
 <script>
     $(document).ready(function() {
     $("#memberEmail_check").click(function(){
       const memberEmailCode = $('#memberEmail_code').val();
       var emailCode = "<%=request.getAttribute("emailCode")%>";
       var memberId = "<%=request.getAttribute("memberId")%>";
-      console.log('발송코드:' + emailCode);
-      console.log('유저입력값:' + memberEmailCode);
-      console.log('유저아이디:' + memberId);
       
       if(memberEmailCode === emailCode){ 
         $('.idFindView').html('회원님의 아이디는<br>' + memberId + '입니다');
