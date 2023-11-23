@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.pet.common.JDBCTemplate;
+import com.pet.common.JDBCTemplate.*;
 import com.pet.product.model.dto.Product;
 import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.model.dto.ProductOption;
@@ -252,7 +252,7 @@ public class ProductDao {
          pstmt.setString(1, productNo);
          rs = pstmt.executeQuery();
          if(rs.next()) file = getMainImageFile(rs);
-         System.out.println(file.toString());
+        // System.out.println(file.toString());
       }catch(SQLException e) {
          e.printStackTrace();
       }finally {

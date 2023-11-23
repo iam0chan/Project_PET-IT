@@ -6,7 +6,7 @@
 Product p = (Product) request.getAttribute("product");
 int discountPrice = (int) (request.getAttribute("discountPrice"));
 ProductImageFile file = (ProductImageFile) request.getAttribute("file");
-Member login = (Member)session.getAttribute("loginMember");
+Member login = (Member) session.getAttribute("loginMember");
 %>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/product/productview.css" />
@@ -16,14 +16,18 @@ Member login = (Member)session.getAttribute("loginMember");
 }
 </style>
 <div class="wrapper">
-	<%if(loginMember!=null && loginMember.getMemberId().equals("petitad")){ %>
+	<%
+	if (loginMember != null && loginMember.getMemberId().equals("petitad")) {
+	%>
 	<div class="update-delete-btn-container">
 		<button id="update-itemcontent-btn" type="button"
 			class="btn btn-outline-success button-bottom">수정</button>
 		<button id="delete-itemcontent-btn" type="button"
 			class="btn btn-outline-success button-bottom">삭제</button>
 	</div>
-	<%} %>
+	<%
+	}
+	%>
 	<div class="item-info-container">
 		<div class="item-image">
 			<div>
@@ -52,11 +56,13 @@ Member login = (Member)session.getAttribute("loginMember");
 				if (!p.getProductDiscount().equals("0")) {
 				%>
 				<input class="price" id="<%=discountPrice%>" style="display: none;">
-				<h3><span style="text-decoration:line-through red; font-size:25px;"><%=p.getProductPrice()%>원</span>
-				<% if (discountPrice != p.getProductPrice()) {
-				%>(할인가<span style="font-weight:bolder;"><%=discountPrice%>원</span>)<%
-				}
-				%>
+				<h3>
+					<span style="text-decoration: line-through red; font-size: 25px;"><%=p.getProductPrice()%>원</span>
+					<%
+					if (discountPrice != p.getProductPrice()) {
+					%>(할인가<span style="font-weight: bolder;"><%=discountPrice%>원</span>)<%
+					}
+					%>
 				</h3>
 				<%
 				} else {
@@ -85,10 +91,9 @@ Member login = (Member)session.getAttribute("loginMember");
 					<input type="hidden" id="option-name" name="optionName" value="" />
 					<select name="priceOption" id="option-select" style="width: 280px;"
 						style="text-align:center;">
-						<option value="<%=p.getProductPrice()%>" id="기본">기본 (<%=p.getProductPrice()%>)원
+						<option value="<%=p.getProductDiscount()==null?p.getProductPrice():(int)(p.getProductPrice()*(1.0-Double.parseDouble(p.getProductDiscount())))%>" id="기본">기본
 						</option>
-						<%
-						if (p.getProductOptionStatus().equals("Y")) {
+						<%if (p.getProductOptionStatus().equals("Y")) {
 						%>
 						<%
 						for (int i = 0; i < p.getProductOption().size(); i++) {
@@ -139,7 +144,8 @@ Member login = (Member)session.getAttribute("loginMember");
 				</strong>원 </span>
 			</div>
 			<div class="info button-container">
-				<button id="purchase-btn" onclick=<%=loginMember!=null?"purchase();":"warnning();"%>
+				<button id="purchase-btn"
+					onclick=<%=loginMember != null ? "purchase();" : "warnning();"%>
 					class="btn btn-outline-success">구매하기</button>
 				<button id="cart-btn" class="btn btn-outline-success">장바구니</button>
 				<!-- 장바구니 모달 -->
@@ -171,7 +177,7 @@ Member login = (Member)session.getAttribute("loginMember");
 			<div>
 				<a id="check1"></a>
 				<ul>
-					<li style="background-color: #ccc; color: white"><a
+					<li style="background-color: #ccc; color: white; "><a
 						href="#check1" class="">상품상세정보</a></li>
 					<li><a href="#check2" class="">상품구매안내</a></li>
 					<li><a href="#check3" class="">구매후기</a></li>
@@ -198,8 +204,8 @@ Member login = (Member)session.getAttribute("loginMember");
 			<ul>
 				<li>
 					<h3>상품결제정보</h3>
-					<div>상품 주문은 장바구니에 상품 담기 > 회원 주문 > 주문서 작성 > 결제 방법 선택 및 결제
-						> 주문완료로 이루어집니다.</div>
+					<div>상품 주문은 장바구니에 상품 담기 > 회원 주문 > 주문서 작성 > 결제 방법 선택 및 결제 >
+						주문완료로 이루어집니다.</div>
 					<div>
 						<br>
 					</div> "고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다."
@@ -342,11 +348,11 @@ Member login = (Member)session.getAttribute("loginMember");
 
 
 <form action="" method="post" id="orderInfo">
-	<input type="hidden" id="productNo" name="productNo" value="" /> 
-	<input type="hidden" id="orderPrice" name="orderPrice" value="" /> 
-	<input type="hidden" id="orderAmount" name="orderAmount" value="" /> 
-	<input type="hidden" id="optionPrice" name="optionPrice" value="" /> 
-	<input type="hidden" id="optionName" name="optionName" value="" />
+	<input type="hidden" id="productNo" name="productNo" value="" /> <input
+		type="hidden" id="orderPrice" name="orderPrice" value="" /> <input
+		type="hidden" id="orderAmount" name="orderAmount" value="" /> <input
+		type="hidden" id="optionPrice" name="optionPrice" value="" /> <input
+		type="hidden" id="optionName" name="optionName" value="" />
 </form>
 
 
@@ -407,7 +413,7 @@ $("#btn-l").click(function() {
 
 /* 장바구니 modal창 출력 */
 $("#cart-btn").click(function() {
-	if(<%=loginMember!=null%>){
+	if(<%=loginMember != null%>){
 		$(".modal").css("display", "block").css("top", "230px","right","230px");
 		$(".modal-header>h5").text("장바구니 확인");
 		$(".modal-body>p").text("장바구니에 담으시겠습니까?");
@@ -432,7 +438,7 @@ $("#cart-btn").click(function() {
 				//$("#orderInfo").submit();
 				$.post("<%=request.getContextPath()%>/cart/cartinsert.do",
 						{productNo:productNo,orderAmount:orderAmount,
-						memberId:'<%=loginMember!=null?loginMember.getMemberId():""%>',
+						memberId:'<%=loginMember != null ? loginMember.getMemberId() : ""%>',
 						optionPrice:optionPrice,optionName:optionName}
 						).done(data=>{
 							if(data){

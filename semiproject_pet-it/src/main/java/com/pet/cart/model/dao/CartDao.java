@@ -1,6 +1,7 @@
 package com.pet.cart.model.dao;
 
 import com.pet.cart.model.dto.Cart;
+import com.pet.product.model.dto.Product;
 
 import static com.pet.common.JDBCTemplate.close;
 
@@ -98,7 +99,8 @@ public class CartDao {
 				.productPrice(rs.getInt("product_price"))
 				.productInfo(rs.getString("product_info"))
 				.productPoint(rs.getInt("product_point"))
-				.productContent(rs.getString("product_content")).build();
+				.productContent(rs.getString("product_content"))
+				.productImg(rs.getString("PRODUCT_FILE_RENAME")).build();
 	}
 	public int insertCart(Connection conn, Cart c) {
 		PreparedStatement pstmt=null;
@@ -117,6 +119,22 @@ public class CartDao {
 			close(pstmt);
 		}return result;
 	}
+	
+	public int deleteCart(Connection conn, String where) {
+		PreparedStatement pstmt=null;
+		String query=sql.getProperty("deleteCart").replace("#WHERE", where);
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(query);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	
 /*
 	// 장바구니에 DB 정보 추가
 	public int insertCart(Connection conn, Cart cart) {

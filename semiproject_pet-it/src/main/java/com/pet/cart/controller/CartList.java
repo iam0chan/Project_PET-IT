@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.pet.cart.model.dto.Cart;
 import com.pet.cart.model.service.CartService;
 import com.pet.member.dto.Member;
@@ -35,6 +36,7 @@ public class CartList extends HttpServlet {
         
      // JSP 페이지로 전달하기 위해 request 속성에 장바구니 목록 설정
         request.setAttribute("cartList", cartList);
+        request.setAttribute("cartListJson", new Gson().toJson(cartList));
 //        String productNo = request.getParameter("productNo");
 //        Product product = new ProductService().selectProductByNo(productNo);
 		/* c.setP(product); */ // dto 생성 후 전달방법

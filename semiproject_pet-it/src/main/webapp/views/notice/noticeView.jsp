@@ -68,21 +68,12 @@
 		<h2>공지사항</h2>
 	</div>
 	
-	<div id="list-btn" class="btn-container" style="width: 107px;" >
-		<%if(loginMember!=null
-			&&loginMember.getMemberId().equals("petitad")){ %>
-			 <div class="Pet-it-adminBtn">
-			 <button onclick="location.assign('<%=request.getContextPath()%>/noticewriter.do')" class="btn btn-outline-success">수정</button>
-			 </div>
-	</div>
-	<%} %>
-	
 	<div class="container mt-3">
 		<div class="row">
 			<table class="table table-bordered">
 					<tr>
 						<th style="text-align: center; background-color: #F2F2F2; ">제목</th>
-						<th"><%=n.getNoticeTitle()%></th>
+						<th><%=n.getNoticeTitle()%></th>
 					</tr>
 					<tr>
 						<td style="text-align: center; background-color: #F2F2F2;">작성일</td>

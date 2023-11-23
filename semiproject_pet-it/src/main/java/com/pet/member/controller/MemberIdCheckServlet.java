@@ -35,7 +35,6 @@ public class MemberIdCheckServlet extends HttpServlet {
 		
 		String memberId = request.getParameter("memberId");
 		
-		System.out.println(memberId);
 		int result =new MemberService().memberIdCheck(memberId);
 		
 		response.getWriter().print(result); 
