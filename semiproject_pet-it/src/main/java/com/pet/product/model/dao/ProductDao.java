@@ -496,7 +496,7 @@ public class ProductDao {
    private Product getProduct(ResultSet rs) throws SQLException{
       return Product.builder()
             .productNo(rs.getString("product_no"))
-            .cateogryNo(rs.getString("category_no"))
+            .categoryNo(rs.getString("category_no"))
             .typeNo(rs.getString("type_no"))
             .productName(rs.getString("product_name"))
             .productPrice(rs.getInt("product_price"))
