@@ -217,7 +217,7 @@ background-color: green;
 </head>
 <body>
 	<section>
-		<h3>장바구니</h3>
+		<h5>my cart</h5>
 	
 		<!-- <hr />
 		<div class="info">
@@ -226,7 +226,6 @@ background-color: green;
 		</div>
 		<hr /> -->
 		
-		
 		<table>
 			<thead>
 				<tr>
@@ -234,55 +233,49 @@ background-color: green;
 					<td>이미지</td>
 					<td>상품정보</td>
 					<td>옵션</td>
-					<td>판매가</td>
 					<td>수량</td>
+					<td>판매가</td>
 					<td></td>
 				</tr>
 			</thead>
-			</table>
 		
-			<tr>
-				<td></td>
-				<%
-				if (cart.isEmpty()) {
-				%>
-				<td colspan="6">장바구니가 비었습니다.</td>
-			</tr>
 			<%
-			} else {
+			if (cart.isEmpty()) {
 			%>
+				<tr>
+					<td></td>
+					<td colspan="6">장바구니가 비었습니다.</td>
+				</tr>
 			<%
-			for (Cart c : cart) {
-			%>
-			<tr>
-				<td><input type="checkbox"></td>
-				<td><img src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
-				<td class="product-name">
-					<h5><%=c.getProductName()%></h5>
-					<p><%=c.getProductInfo()%></p>
-				</td>
-
-				<td class="price"><%=c.getProductPrice()%>원</td>
-
-				<td class="qua-col first-row">
-					<div class="pro-qty">
-						<span class="dec qtybtn">-</span> <input name="cartCnt"
-							class="cartQty" id="cartQty" value="1" type="text"
-							style="width: 100px;"> <span class="inc qtybtn">+</span>
-					</div>
-				</td>
-				<td class="total"><%=c.getProductPrice()%></td>
-
-				<td class="button"><a href="javascript:;" class="btnNormal"
-					onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
-			</tr>
-			<%
-			}
-			%>
-			<%
-			}
-			%>
+			} else {%>
+				<% for (Cart c : cart) { %>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><img src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
+							<td class="product-name">
+								<h5><%=c.getProductName()%></h5>
+								<p><%=c.getProductInfo()%></p>
+							</td>
 			
+							<td class="price"><%=c.getProductPrice()%>원</td>
+			
+							<td class="qua-col first-row">
+								<div class="pro-qty">
+									<span class="dec qtybtn">-</span> <input name="cartCnt"
+										class="cartQty" id="cartQty" value="1" type="text"
+										style="width: 100px;"> <span class="inc qtybtn">+</span>
+								</div>
+							</td>
+							<td class="total"><%=c.getProductPrice()%></td>
+			
+							<td class="button"><a href="javascript:;" class="btnNormal"
+								onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
+						</tr>
+						<%
+						}
+					}
+				%>
+				
 			</tbody>
 		</table>
 
@@ -309,6 +302,18 @@ background-color: green;
 	</section>
 
 	<script>
+	// 카트에 상품 담겼을 때 장바구니 클릭하면 장바구니로 이동
+	$(document).ready(function(){
+		var cartList = ${not empty cartList};
+		
+		if(cartList){
+			$("#cart-btn").click(function(){
+				window.location.href = "<%=request.getContextPath()%>/cart/cartList.do";
+			});
+			}
+		
+		});
+	
 	function continueShopping() {
 	    // 쇼핑 계속하기를 누를 경우 카트 화면으로 이동
 	    window.location.href = "<%=request.getContextPath()%>/views/cart/cartList.jsp";

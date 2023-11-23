@@ -38,7 +38,6 @@ public class CartInsertServlet extends HttpServlet {
                     .optionValue(optionPrice)
                     .build();
 
-            // CartDao를 통해 장바구니에 상품 추가
             int result= new CartService().insertCart(cart);
             System.out.println(result);
             // 장바구니 페이지로 이동합니다.

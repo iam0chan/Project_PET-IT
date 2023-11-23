@@ -59,10 +59,14 @@
                           <%} %>
                        <%} %>
                        </div>
-                       <div class="item-content">
-                          <p style="font-size:1.1rem; font-weight: bold; margin-bottom:10px;"><%= p.getProductName()%></p>
-                          <p style="font-size:0.8rem;"><%= p.getProductInfo() %></p>
-                          <p><%= p.getProductPrice() %>원</p>
+                       <div class="item-content" style="line-height:1.5;">
+                          <span style="font-size:17.5px; font-weight: bolder; margin-top:10px;"><%= p.getProductName()%></span>
+                          <span style="font-size:13px; margin-bottom:-5px;"><%= p.getProductInfo() %></span>
+                          <%if(p.getProductDiscount().equals("0")){ %>
+                          	<span style="margin-top:15px;"><%= p.getProductPrice() %>원</span>
+                          <%}else{ %>
+                          	<span style="margin-top:15px; text-decoration:line-through;"><%= p.getProductPrice() %>원 </span><b style="font-size:20px;"><%=(int)(p.getProductPrice()*(1.0-Double.parseDouble(p.getProductDiscount())))%>원</b><span style="font-weight:bold; color:red;">SALE <%=(int)(Double.parseDouble(p.getProductDiscount())*100)%>%</span>
+                          <%} %>
                           <%-- <input id="productNo" style="display:none" value="<%=p.getProductNo()%>"> --%>
                        </div>
                    </div>
@@ -83,21 +87,35 @@
               <%} %>
             <div class="bottom-container">
                 <div class="search-bar">
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass search-icon" style="width:50px;margin-top:5px"></i></button>
+                   <form class="d-flex" action="<%=request.getContextPath()%>/product/productSearch.do" method="get" onsubmit="return lengthcheck();">
+                      <input class="form-control me-2" name="keyword" id="search" placeholder="상품검색" aria-label="Search">
+                      <button type="submit" class="btn btn-outline-success" id="search-btn"><i class="fa-solid fa-magnifying-glass search-icon"></i></button>
                     </form>
                 </div>
                 <div class="btn-bottom-container">
                 <a class="admin-btn"href="<%=request.getContextPath()%>/product/productEnroll.do" style="color:#28A745;">
+                    <%if(loginMember!=null && loginMember.getMemberId().equals("petitad")){ %>
                     <button type="button" class="btn btn-outline-success button-bottom">
                        상품등록
                     </button></a>
+                    <%} %>
                 </div>
             </div>
         </div>
     </div>
+    
+    
+    
     <script>
+    const lengthcheck = function(){
+    	const value = $("#search").val();
+    	if(value.length>=1){
+    		return true;
+    	}
+    	alert("검색어를 입력하세요!");
+    	return false;
+    }
+    
     $(".admin-btn").mouseenter(function(){
       $(this).css("color","white");
    })   

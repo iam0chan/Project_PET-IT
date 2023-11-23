@@ -84,6 +84,15 @@
             height: 65px;
             line-height:3.0 !important;
          }
+         
+         .quote_btn-container{
+         	width: 300px;
+    		display: flex;
+    		justify-content: center;
+         }
+         header{
+         	margin-bottom:30px !important;
+         }
       </style>
       </head>
       
@@ -110,11 +119,23 @@
                        <ul class="sub-nav">
                          <a href="<%=request.getContextPath() %>/views/brandInfo/brandInfoPage.jsp"><li class = "sub-item">브랜드소개</li></a>
                          <a href="<%=request.getContextPath() %>/noticeList.do"><li class = "sub-item">공지사항</li></a>
-                         <a href="<%=request.getContextPath() %>/questionList.do"><li class = "sub-item">1:1문의</li></a>
+                         <a id="questionBtn"><li class = "sub-item">1:1문의</li></a>
+                         <!--로그인 한 회원만 1:1문의 볼 수 있는 script-->
+                         <script>                         	
+                         	$("#questionBtn").click(function(){
+                         		if(<%=loginMember==null%>){
+                         			alert('로그인 후 이용할 수 있습니다');
+                         			location.href='<%=request.getContextPath()%>/views/member/login.jsp';
+                         		}else{
+                         			location.href='<%=request.getContextPath()%>/questionList.do';
+                         		}
+                         	});
+                         </script>	
+                         
                       </ul> 
                     </li>
                     <li class="nav-item header-menu-item">
-                      <a class="nav-link " href="about.html">이벤트</a>
+                      <a class="nav-link " href="<%=request.getContextPath() %>/views/event/eventList.jsp">이벤트</a>
                      <!--  <ul class="sub-nav">
                          <li class = "sub-item">신상품</li>
                          <li class = "sub-item">베스트</li>
@@ -160,14 +181,14 @@
                   </ul>
                 </div>
                 <div class="quote_btn-container">
-
+				
                   <%if(loginMember==null) {%>
                   <a href="<%=request.getContextPath()%>/views/member/login.jsp"> <!--11.13 12:07 jm 연결주소 추가-->
 
                     <i class="fa-solid fa-dog"></i>
                     <span>Login</span>
                   </a>
-                  <a href="<%=request.getContextPath() %>/views/cart/cartList.jsp">
+                  <%-- <a href="<%=request.getContextPath() %>/views/cart/cartList.jsp"> --%>
                   <%}else{ %>
                      <i class="fa-solid fa-dog"></i>
                      <span id="memberName"><%=loginMember.getMemberName() %>님</span><br>
@@ -193,16 +214,16 @@
                  
               }); */
               </script>
-                  <a href="">
+                  <a href="<%=request.getContextPath()%>/cart/cartList.do">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>장바구니</span>
                   </a>
-                  <a href="">
+<!--                   <a href="">
                     <form class="d-flex">
                       <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
                       <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
-                  </a>
+                  </a> -->
                   
                 </div>
               </div>
