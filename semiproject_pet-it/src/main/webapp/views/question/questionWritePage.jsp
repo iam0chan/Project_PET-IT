@@ -110,7 +110,8 @@
 					
 				</form>
 			</div>
-
+	</div>
+	</section>
 	<script>
  	
 	$("#resetBtn").on("click",function(){
