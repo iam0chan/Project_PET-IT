@@ -33,6 +33,10 @@
             align-items: center;
             text-align: center;
         }
+        .Content{
+        	line-height: 350%;
+        
+        }
 
 </style>
 
@@ -47,36 +51,36 @@
             Pet-it으로 초대합니다!<br>
         </p>
     </div>
-    <img src="<%=request.getContextPath()%>/img/shushu.jpg" width="300" height="300" class="brandInfoPohto">
+    <img src="<%=request.getContextPath()%>/img/shulove.jpg" width="300" height="300" class="brandInfoPohto">
     &nbsp;
     <div class="Content"> <!-- 메인내용제목-->
         <h3 class=mainContentTitle>반려동물의 행복을 위하는 Pet-it </h3>
         <p>
-            반려동물 사랑 어쩌고 
+            반려동물을 사랑하는 마음으로 항상 노력하고
             <br>
-            행복한 반려동물 어쩌고 
+            반려동물과 그들의 집사들의 행복을 위해 생각합니다.
             <br>
-            반려동물들을 위하는 반려인들의 마음에 누구보다 공감하며
+            반려동물들을 위하는 집사들의 마음에 누구보다 공감하며
             <br>
-            함께 하는 시간을 소중이 하는 어쩌고 초심 어쩌고 
+            함께 하는 시간을 소중이 하고 초심을 잃지 않으려고 
             <br>
             노력하는 Pet-it 입니다.  
             <br>
         </p>
     </div>
-    <img src="<%=request.getContextPath()%>/sena.jpg" width="300" height="300" class="brandInfoPohto">
+    <img src="<%=request.getContextPath()%>/img/senalove.jpg" width="300" height="300" class="brandInfoPohto">
     &nbsp;
-    <div class="Content"> <!-- 메인내용제목2-->
+    <div class="Content"> 
         <h3 class=mainContentTitle> Pet-it 의 약속</h3>
         <p>
            <strong>품질</strong>
-           <br><br>
+           <br>
            네츄럴코어의 유기농 제품은 원료의 씨앗시기부터 이력을 철저하게 관리하고
            <br>
            교차 오염 방지를 위해 도로로부터 멀리 떨어진 공장에서 제품을 생산하며
            <br>
            체계적인 라인으로 최상의 품질을 자신합니다.
-           <br><br>
+           <br>
            <strong>고객서비스</strong> 
            <br>
            최고의 고객서비스는 끊임없는 공부를 바탕으로
@@ -84,7 +88,7 @@
            전문적인 지식을 갖추고 반려동물의 감정을
            <br>
            헤아리며 제공하는 서비스 입니다.
-           <br><br>
+           <br>
            <strong>환경</strong>
            <br>
            살충제, 방부제, 잔류농약, 유해물질, GMO(유전자 변형물질), 멜라민 등
@@ -92,7 +96,7 @@
            유해한 요소를 배제한 원료를 사용해 유기농 제품을 생산하며
            <br>
            친환경적인 자원 순환 생태계 조성에 기여합니다.
-           <br><br>
+           <br>
            <strong>열정</strong>
            <br>
            차별화된 제품 생산을 통해 최고급 반려동물 식품을 국내에 공급하고

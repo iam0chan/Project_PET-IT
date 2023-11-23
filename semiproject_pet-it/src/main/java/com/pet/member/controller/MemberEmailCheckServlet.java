@@ -1,4 +1,4 @@
-package com.pet.question.controller;
+package com.pet.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pet.question.model.dto.Question;
-import com.pet.question.model.dto.QuestionComment;
-import com.pet.question.service.QuestionService;
+import com.pet.member.service.MemberService;
 
 /**
- * Servlet implementation class QuestionViewServlet
+ * Servlet implementation class MemberEmailCheckServlet
  */
-@WebServlet("/questionView.do")
-public class QuestionViewServlet extends HttpServlet {
+@WebServlet("/memberEmailCheck.do")
+public class MemberEmailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionViewServlet() {
+    public MemberEmailCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,23 +28,14 @@ public class QuestionViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/plain; charset=UTF-8");
 		
-		String no=request.getParameter("no");
+		String memberEmail = request.getParameter("memberEmail");
 		
-		Question q = new QuestionService().selectQuestionByNo(no);
-		System.out.println(q);
-		//댓글을 받음
-		QuestionComment qcc = new QuestionService().selectQuestionComment(no);
+		int result =new MemberService().memberEmailCheck(memberEmail);
 		
-		request.setAttribute("question", q);
-		request.setAttribute("questionComment", qcc);
-		request.getRequestDispatcher("/views/question/questionView.jsp").forward(request, response);
-		
-
-		
-		
-		
-		
+		response.getWriter().print(result);
 	}
 
 	/**

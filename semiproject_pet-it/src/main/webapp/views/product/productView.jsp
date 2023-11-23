@@ -91,11 +91,9 @@ Member login = (Member) session.getAttribute("loginMember");
 					<input type="hidden" id="option-name" name="optionName" value="" />
 					<select name="priceOption" id="option-select" style="width: 280px;"
 						style="text-align:center;">
-						<%if(p.getProductOptionStatus().equals("N")){ %>
-						<option value="" id="기본">옵션없음
+						<option value="<%=p.getProductDiscount()==null?p.getProductPrice():(int)(p.getProductPrice()*(1.0-Double.parseDouble(p.getProductDiscount())))%>" id="기본">기본
 						</option>
-						<%}
-						else if (p.getProductOptionStatus().equals("Y")) {
+						<%if (p.getProductOptionStatus().equals("Y")) {
 						%>
 						<%
 						for (int i = 0; i < p.getProductOption().size(); i++) {

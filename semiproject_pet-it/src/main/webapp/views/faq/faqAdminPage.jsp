@@ -96,7 +96,8 @@
 	                		<button type="button" class="btn btn-outline-success" onclick="test();">write</button>
 	                	</div>
 	                    <div class="col-1">
-	                    	<input class="btn btn-outline-success" type="reset"  value="cancell" />
+	                    	<button class="btn btn-outline-success" type="reset" id="resetBtn">cancell</button>
+	                    	<!-- <input class="btn btn-outline-success" type="reset"  value="cancell" /> -->
 	                    </div>
 	                    <div class="col-5"></div>
 		            </div>
@@ -105,7 +106,9 @@
         </div>
      </section>
         </body>
+        
         <script>
+
             var editor;
             ClassicEditor
                 .create(document.querySelector('#editor'), {
@@ -127,6 +130,12 @@
                 console.log($("#content").val());
                 $("#faqform").submit();
             }
+    	
+           //글쓰기 취소버튼 
+           $("#resetBtn").on("click",function(){
+    		location.href="<%=request.getContextPath()%>/faqList.do";
+    	})
+   
         </script>
     </html>
     <%@ include file="/views/footer.jsp"%>

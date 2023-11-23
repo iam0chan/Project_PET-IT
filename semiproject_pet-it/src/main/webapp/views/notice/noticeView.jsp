@@ -82,7 +82,7 @@
 			<table class="table table-bordered">
 					<tr>
 						<th style="text-align: center; background-color: #F2F2F2; ">제목</th>
-						<th"><%=n.getNoticeTitle()%></th>
+						<th><%=n.getNoticeTitle()%></th>
 					</tr>
 					<tr>
 						<td style="text-align: center; background-color: #F2F2F2;">작성일</td>
