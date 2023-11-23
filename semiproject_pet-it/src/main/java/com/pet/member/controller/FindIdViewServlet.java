@@ -1,18 +1,16 @@
 package com.pet.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  * Servlet implementation class FindIdViewServlet
  */
-@WebServlet("/findId.do")
+@WebServlet("/find/id.do")
 public class FindIdViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +29,6 @@ public class FindIdViewServlet extends HttpServlet {
 		
 		response.sendRedirect(request.getContextPath()+"/views/member/findId.jsp");
 	}
-		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

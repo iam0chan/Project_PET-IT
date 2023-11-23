@@ -43,19 +43,18 @@
 	}
     
     
+  /* 상하좌우 정중앙 정렬하기 */
   	position:absolute;
   	top: 50%;
  	 left: 50%;
-  	margin: -25px 0 0 -25px;
-	}
+  	margin: -25px 0 0 -25px; /* 자식 요소 전체를 중앙 정렬하기 위해, 상단 및 왼쪽 margin을 마이너스 값으로 적용하기 */	
+	} */
 
     .form-group {
         margin-top: 20px;
         
     }
-    
 
-	
     .input-field {
         width: 100%;
         padding: 10px;
@@ -111,17 +110,17 @@
         <h5 style="font-weight: bold; margin-bottom:30px;">로그인</h5>
         <form id="loginFrm" action="<%=request.getContextPath()%>/login.do" method="post">
             <div class="form-group">
-                <input type="text" name="memberId" placeholder="아이디" class="form-control" style="width:300px;" autocomplete="off"; id="memberId">
+                <input type="text" name="memberId" placeholder="아이디" class="form-control" style="width:300px;">
             </div>
             <div class="form-group">
                 <input type="password" name="memberPw" placeholder="비밀번호" class="form-control" style="width:300px;">
             </div>
            	<div class="find-member">
 		        <div class="find-memberId">
-		            <a class="forgot-id" href="<%=request.getContextPath()%>/findId.do">아이디 찾기</a>
+		            <a class="forgot-id" href="<%=request.getContextPath()%>/find/id.do">아이디 찾기</a>
 		        </div>
 		        <div class="find-memberPw">
-		            <a class="forgot-pw" href="<%=request.getContextPath()%>/findPw.do">비밀번호 찾기</a>
+		            <a class="forgot-pw" href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a>
 	            </div>
 	        </div>
             <input type="submit" class="btn btn-primary btn-sm" style="width:300px; height:43px;" value="로그인">

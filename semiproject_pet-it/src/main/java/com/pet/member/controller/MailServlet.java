@@ -17,8 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-
+import com.google.gson.Gson;
 import com.pet.member.dao.MemberDao;
 import com.pet.member.service.MemberService;
 
@@ -76,10 +75,8 @@ public class MailServlet extends HttpServlet {
 	            httpSession.setAttribute("emailCode", emailCode);
 	            httpSession.setAttribute("memberName", memberName);
 	            httpSession.setAttribute("memberEmail", memberEmail);
-	            httpSession.setAttribute("memberId", memberId);
-//	            request.setAttribute("emailCode", emailCode);
-//	            request.setAttribute("memberId", memberId);
-	            
+	            request.setAttribute("emailCode", emailCode);
+	            request.setAttribute("memberId", memberId);
 	            
 	            // 이메일 전송
 	            String title = "pet-it 인증코드";
@@ -90,6 +87,11 @@ public class MailServlet extends HttpServlet {
 	            message.setContent(emailCode, "text/html; charset=utf-8");
 
 	            Transport.send(message);
+	            
+//	            Gson gson = new Gson();
+//	            
+//	            response.setContentType("application/json;charset=utf-8");
+	            
 	            
 	            
 	            // 이메일 전송 후 페이지 이동
@@ -104,7 +106,6 @@ public class MailServlet extends HttpServlet {
 	        e.printStackTrace();
 	        // 예외 처리에 따른 로직 추가
 	    }
-	    
 	}
 		
 

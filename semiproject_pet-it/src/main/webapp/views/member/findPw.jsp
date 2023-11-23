@@ -30,7 +30,6 @@
     /* padding: 0 20px; */
 /*     margin-bottom: 20px; */
     height:500px;
-    background-color: #f7f7f7;
     }
 /*     .findId .title{
     	border:1px solid;

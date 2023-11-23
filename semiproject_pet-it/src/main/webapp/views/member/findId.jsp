@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file ="/views/header.jsp" %>
-<%String id=(String)session.getAttribute("memberId");%>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
@@ -31,7 +30,6 @@
     /* padding: 0 20px; */
 /*     margin-bottom: 20px; */
     height:500px;
-    background-color: #f7f7f7;
     }
 /*     .findId .title{
     	border:1px solid;
@@ -104,6 +102,7 @@
    }
    
 </style>
+
 <div class="findId">
 	<ul class="title">
 		<li>
@@ -112,9 +111,9 @@
 		<li>
 			<a href="<%=request.getContextPath()%>/find/pw.do">비밀번호 찾기</a	>
 		</li>
-	</ul>							
-			<!--  -->
-			<div class="field_info st">
+	</ul>
+	<form action="<%=request.getContextPath()%>/mail.do" method="get" onsubmit="">								
+			<div class="field_info">
 				<div class="field_name">	
 					<span>
 						<input type="text" placeholder="이름을 입력해주세요" name="memberName" id="memberName">
@@ -125,109 +124,66 @@
 						<input type="email" placeholder="이메일을 입력해주세요" name="memberEmail" id="memberEmail" >
 					</span>
 				</div>
-				<br><br>
-				<div class="field">
-					<p style="font-size: 14px">정보보호를위해 '로봇이 아닙니다.'를 눌러 진행해주세요</p>
-				</div>  
-				<div class="google_recaptcha">
-					<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
-					<script src='https://www.google.com/recaptcha/api.js'></script>
-				</div>
-				<div class="btn_house">
-	  		  		<input type="button" class="id_btn btn btn-outline-primary" id="btn_st" style="height:40px;" value="인증번호 받기">
-				</div>
 			</div>
-			<!--  -->
-			<div class="field_info nd" style="display:none;">
-				<span>이메일로 발송된 회원님의 인증번호를 입력해주세요.</span><br>
-				<input type="text" placeholder="인증번호" style="width:460px; height:50px; text-align:center;" name="memberEmail_code" id="memberEmail_code">
-				<div class="idFindView"></div>
-				<br><br>
-  		   		<button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>
-				<br><br>
-				<div class="field">
-					<p style="font-size: 14px">정보보호를위해 '로봇이 아닙니다.'를 눌러 진행해주세요</p>
-				</div>  
-				<div class="google_recaptcha">
-					<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
-					<script src='https://www.google.com/recaptcha/api.js'></script>
-				</div>
-				<div class="btn_house">
-	  		  		<input type="button" class="id_btn btn btn-outline-primary" id="btn_nd" style="height:40px;" value="인증번호 받기">
-				</div>
+			<br><br>
+			<div class="field">
+				<p style="font-size: 14px">정보보호를위해 '로봇이 아닙니다.'를 눌러 진행해주세요</p>
+			</div>  
+			<div class="google_recaptcha">
+				<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
+				<script src='https://www.google.com/recaptcha/api.js'></script>
 			</div>
-			<!--  -->
-			<div class="field_info rd" style="display:none;">
-					<div class="field_idnav">테스트트트</div>
-					<br><br>
-				<div class="field">
-					<p style="font-size: 14px">정보보호를위해 '로봇이 아닙니다.'를 눌러 진행해주세요</p>
-				</div>  
-				<div class="google_recaptcha">
-					<div class="g-recaptcha" data-sitekey="6LfacRIpAAAAAMukAVLPDf5l4oaO-YWzOatMIywW"></div>
-					<script src='https://www.google.com/recaptcha/api.js'></script>
-				</div>
-				<div class="btn_house">
-	  		  		<input type="button" class="id_btn btn btn-outline-primary" id="btn_rd" style="height:40px;" value="인증번호 받기">
-				</div>
+			<div>
+  		  	<input type="submit" class="id_btn btn btn-outline-primary" id="mail" style="height:40px;" value="인증번호 받기">
 			</div>
+		</form>
 </div>
 <script>
 
-var cPath = "${pageContext.request.contextPath}";
-const name = $("#memberName").val();
-const email = $("memberEmail").val();
-const emailCode = $('#memberEmail_code').val();
-
-
-$(document).ready(function() {
-    $("#btn_st").click(function() {
-    	const memberEmailCode = $('#memberEmail_code').val();
+<%-- $(document).ready(function() {
+    $(".id_btn").click(function() {
+    	var contextPath = "<%=request.getContextPath()%>";
+    	
     	
     	$.ajax({
-            type: "GET",
-            url: cPath + "/idFind/idCheck.do",
-            data: {
-                memberName: "여기에 멤버 이름 값",
-                memberEmail: "여기에 멤버 이메일 값",
+            url : "<%=request.getContextPath()%>/mail.do",
+            type: "post",
+            data: { emailCode: '<%= request.getSession().getAttribute("emailCode") %>'},
+            success: function(data) {
+                const html = '<div class="send_mail">' +
+                    '<form action="<%=request.getContextPath()%>/mail.do" method="get">' +
+                    '<span>이메일로 발송된 회원님의 인증번호를 입력해주세요.</span>' +
+                    '<br>' +
+                    '<input type="text" placeholder="인증번호" style="width:460px; height:50px; text-align:center;" name="memberEmail_code" id="memberEmail_code">' +
+                    '<div class="idFindView"></div>' +
+                    '<br><br>' +
+                    '<button type="button" id="memberEmail_check" class="btn btn-outline-primary" style="width:460px; height:40px;">인증번호 확인</button>' +
+                    '</form>' +
+                    '</div>'
+                $(".field_info").html(html);
+
+                $("#memberEmail_check").click(function() {
+                    const memberEmailCode = $('#memberEmail_code').val();
+                    var emailCode = data.emailCode;
+                    var memberId =	data.memberId;
+                    console.log('발송코드:' + emailCode);
+                    console.log('유저아이디:' + memberId);
+
+                    if (memberEmailCode === emailCode) {
+                        $(".send_mail").html('회원님의 아이디는<br>' + memberId + '입니다');
+                    } else {
+                        $(".send_mail").html('인증번호가 일치하지 않습니다');
+                    }
+                    $(".field_info").hide();
+                    $(".idFind_view").show();
+                })
             },
-            success: function(response) {
-                if (response && response.memberId) {
-                    // memberId가 반환된 경우 성공적인 로직 추가
-
-                    // 세션에서 받아온 memberId
-                    const savedMemberId = response.memberId;
-
-                    // 예시: 받아온 memberId를 어딘가에 표시하거나 활용
-                    alert("Saved Member ID: " + savedMemberId);
-
-                    // 여기에 추가적인 로직을 추가할 수 있습니다.
-                } else if (response && response.error) {
-                    // 오류 메시지가 반환된 경우 오류 처리 로직 추가
-                    console.error("Error:", response.error);
-
-                    // 예시: 오류 메시지를 어딘가에 표시
-                    alert("Error: " + response.error);
-
-                    // 여기에 오류 발생 시 추가적인 처리를 할 수 있습니다.
-                } else {
-                    console.error("Unexpected response:", response);
-
-                    // 예상치 못한 응답에 대한 처리를 여기에 추가
-                }
-            },
-            error: function(error) {
-                console.error("AJAX 요청 실패:", error);
+            error: function() {
+                alert("에러가 발생했습니다");
             }
-        });
-    });
-
-    $("#btn_nd").click(function() {});
-
-    $("#btn_rd").click(function() {});
-    
-    });
-    
+        })
+      });
+    }); --%>
 </script>
 
 

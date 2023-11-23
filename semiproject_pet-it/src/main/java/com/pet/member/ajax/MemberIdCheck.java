@@ -46,7 +46,8 @@ public class MemberIdCheck extends HttpServlet {
 		String memberId=null;
 	    String memberName = request.getParameter("memberName");
     	String memberEmail = request.getParameter("memberEmail");
-	    
+    	int result=0;
+    	
 	    try {
 	        // 이름과 이메일이 데이터베이스에 일치하는지 확인
 	    	memberId=new MemberService().findIdEmail(memberName, memberEmail);
@@ -55,14 +56,15 @@ public class MemberIdCheck extends HttpServlet {
 	            HttpSession httpSession = request.getSession();
 	            httpSession.setAttribute("memberId", memberId);
 	            
-	            response.getWriter().write("{\"memberId\": \"" + memberId + "\"}");
-	      
+	            result=1;
+	            
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        
-	  
+	        
 	    }
+
 	}
 
 	/**
