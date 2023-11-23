@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pet.question.model.dto.Question;
+import com.pet.question.model.dto.QuestionComment;
 import com.pet.question.service.QuestionService;
 
 /**
@@ -31,9 +32,14 @@ public class QuestionViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String no=request.getParameter("no");
+		
 		Question q = new QuestionService().selectQuestionByNo(no);
+		System.out.println(q);
+		//댓글을 받음
+		QuestionComment qcc = new QuestionService().selectQuestionComment(no);
 		
 		request.setAttribute("question", q);
+		request.setAttribute("questionComment", qcc);
 		request.getRequestDispatcher("/views/question/questionView.jsp").forward(request, response);
 		
 

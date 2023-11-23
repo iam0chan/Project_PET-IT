@@ -1,8 +1,10 @@
+<%@page import="com.pet.question.model.dto.QuestionComment"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.pet.question.model.dto.Question" %>	
 <%
 	Question q = (Question) request.getAttribute("question");
+	QuestionComment qcc = (QuestionComment) request.getAttribute("questionComment");
 %>
 <%@ include file="/views/header.jsp"%>
 
@@ -124,7 +126,24 @@
 		</form> 
 	</div>
 	<%} %>
+	<!--댓글출력화면 -> 댓글이 있으면 출력해라 -->
 	</div>
+	<%if(qcc!=null){%>
+	<table id=""> <!--댓글이 없을 수도 있으니까 분기처리 해야함-->
+		<tr>
+			<th>작성자 : Pet-it</th>
+		</tr>
+		<tr>
+			<th style="font-size:13px"><%=qcc.getReplyDate() %></th>		
+		</tr>
+	
+		<tr>
+			<th><%=qcc.getReplyContent() %></th>
+		</tr>
+	</table>
+	<%} %>
+	
+	
 
 	<!--목록버튼-->
 	<div class="btn-container">

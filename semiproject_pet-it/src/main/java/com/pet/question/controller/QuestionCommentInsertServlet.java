@@ -31,6 +31,8 @@ public class QuestionCommentInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 //		int  replyNo =Integer.parseInt(request.getParameter("replyNo"));
 		String questionNo = request.getParameter("questionRef");
 //		String replyDate = request.getParameter("replyDate");
@@ -43,9 +45,7 @@ public class QuestionCommentInsertServlet extends HttpServlet {
 		System.out.println(qc);
 		
 		int result = new QuestionService().insertQuestionComment(qc);
-		
-		QuestionComment qcc= new QuestionService().selectQuestionComment(questionNo);
-		
+	
 		System.out.println(result);
 		
 		
