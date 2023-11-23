@@ -114,7 +114,7 @@
 	<script>
  	
 	$("#resetBtn").on("click",function(){
-		location.href="<%=request.getContextPath()%>/views/question/questionList.jsp";
+		location.href="<%=request.getContextPath()%>/questionList.do";
 	})
 	
 	var editor;
