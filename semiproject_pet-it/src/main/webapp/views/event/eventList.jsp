@@ -108,28 +108,25 @@
 		<div class="sub-title">
 			<p>이벤트 업데이트 중 입니다. 빠른시일내에 돌아오겠습니다.</p>
 		</div>
-
 	</div>
-	<div class="title-container">
-		<div class="container">
-			<div class="card">
-
-				<div class="item-img">
-					<a href="<%=request.getContextPath()%>/event.do"> <img
-						class="eventImg"
-						src="<%=request.getContextPath()%>/img/shuuuuuuu.jpg">
-					</a>
-				</div>
-				<div class="item-content">
-					<p>귀여운 슈 보고가세요</p>
-					<br>
-					<p>이름 : 슈</p>
-				</div>
-
-
-
-
-
+</div>
+<div class="title-container">
+	<div class="container">
+		<div class="card">
+			<div class="item-img">
+				<a href="<%=request.getContextPath()%>/event.do"> <img
+					class="eventImg"
+					src="<%=request.getContextPath()%>/img/shuuuuuuu.jpg">
+				</a>
+			</div>
+			<div class="item-content">
+				<p>귀여운 슈 보고가세요</p>
+				<br>
+				<p>이름 : 슈</p>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
@@ -141,4 +138,9 @@
 
 
 
-				<%@ include file="/views/footer.jsp"%>
+
+
+
+
+
+<%@ include file="/views/footer.jsp"%>
