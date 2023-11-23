@@ -193,7 +193,7 @@ section.info_section {
 		<div class="contact_nav">
 			<a id="center-instruction"> <i class="fa fa-phone"
 				aria-hidden="true"></i> <span> C/S CENTER : 010-1234-5567 </span>
-			</a> <a href=""> <i class="fa fa-envelope" aria-hidden="true"></i> <span>
+			</a> <a href="#"> <i class="fa fa-envelope" aria-hidden="true"></i> <span>
 					Email : petittttttt1@gmail.com </span>
 			</a> <a id="location"> <i class="fa fa-map-marker" aria-hidden="true"></i>
 				<span> Location </span>

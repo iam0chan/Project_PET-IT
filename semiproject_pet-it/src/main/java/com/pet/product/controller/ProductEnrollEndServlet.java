@@ -54,11 +54,14 @@ public class ProductEnrollEndServlet extends HttpServlet {
 			String optionStatus = "N"; //옵션입력여부체크변수
 			
 			//입력된 옵션을 key:value 형식으로 맵핑
-			if(optionNames.length!=0 && optionPrice.length!=0) {
+			
+			if(!optionNames[0].equals("") && !optionPrice[0].equals("")) {
 				for(int i=0; i<optionNames.length; i++) {
 					options.put(optionNames[i], optionPrice[i]);
 				}
 				optionStatus = "Y"; //입력된값이 존재할 경우 optionStatus = Y;
+			}else {
+				options.put("기본", mr.getParameter("productPrice"));
 			}
 			
 			for(Map.Entry<String, String> entry : options.entrySet()) {
