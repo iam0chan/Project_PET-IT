@@ -39,7 +39,7 @@ public class PaymentEndServlet extends HttpServlet {
 		Payment payment = (Payment) session.getAttribute("payment");
 		OrderDetail od = (OrderDetail) session.getAttribute("orderDetail");
 		List<OrderDetail>orderList = (List<OrderDetail>)session.getAttribute("orderList");
-
+		
 		boolean resultOl = new PaymentService().insertOrderDetail(orderList,od);
 		if(resultOl) System.out.println("OderList 저장성공!");
 		else System.out.println("OderList 저장실패ㅠㅠㅠㅠ");

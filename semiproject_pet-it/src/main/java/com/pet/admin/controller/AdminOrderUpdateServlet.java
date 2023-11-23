@@ -14,19 +14,48 @@ import com.pet.payment.model.dto.Order;
 import com.pet.payment.model.dto.OrderDetail;
 import com.pet.payment.model.dto.Payment;
 
-
-@WebServlet("/adminOrderView.do")
-public class AdminOrderViewServlet extends HttpServlet {
+/**
+ * Servlet implementation class AdminOrderUpdateServlet
+ */
+@WebServlet("/adminOrderUpdate.do")
+public class AdminOrderUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
- 
-    public AdminOrderViewServlet() {
-
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AdminOrderUpdateServlet() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		long orderNo = Long.parseLong(request.getParameter("orderNo"));
-		System.out.println(orderNo);
+		String orderName = request.getParameter("orderName");
+		String orderZipcode = request.getParameter("orderZipcode");
+		String orderAddr = request.getParameter("orderAddr");
+		String orderDefAddr = request.getParameter("orderDefAddr");
+		String orderPhone = request.getParameter("orderPhone");
+		String orderEmail = request.getParameter("orderEmail");
+		String deliveryReq = request.getParameter("deliveryReq");
+		
+		Order o = Order.builder()
+				.orderNo(orderNo)
+				.orderName(orderName)
+				.orderZipcode(orderZipcode)
+				.orderAddr(orderAddr)
+				.orderDefAddr(orderDefAddr)
+				.orderPhone(orderPhone)
+				.orderEmail(orderEmail)
+				.deliveryReq(deliveryReq)
+				.build();
+		System.out.println("update서블릿 : "+o);
+		int result = new AdminService().updateOrder(o);
 		
 		List<OrderDetail> odl = new AdminService().selectOrderDetailByNo(orderNo);
 		List<Payment> pl = new AdminService().selectPaymentByNo(orderNo);
@@ -39,12 +68,15 @@ public class AdminOrderViewServlet extends HttpServlet {
 		request.setAttribute("odl", odl);
 		request.setAttribute("pl", pl);
 		request.setAttribute("ol", ol);
+		
 		request.getRequestDispatcher("/views/admin/adminOrderView.jsp").forward(request, response);
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

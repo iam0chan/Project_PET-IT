@@ -58,9 +58,9 @@ public class ProductService {
       Connection conn = getConnection();
       Product product = dao.selectProductByNo(conn, productNo);
       List<ProductOption> options = dao.selecOptionByProductNo(conn, productNo);
-      System.out.println("asdasdasdasdasdasdasdasd" + options.size());
+      System.out.println("******************옵션 수: " + options.size());
       for (ProductOption po : options) {
-         System.out.println("asdasdasdasdasdasdasdasd" + po);
+         System.out.println("******************옵션 내용:" + po);
       }
       product.setProductOption(options);
       close(conn);

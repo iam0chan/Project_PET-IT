@@ -54,7 +54,7 @@
 	
 	<div class="pay-container">
 		<div id="titleDiv" style="display:flex;">
-			<div style="width:20%; text-align:center;">
+			<div style="width:20%; text-align:center;  margin-left:10px">
 				주문 번호
 			</div>
 			<div style="width:50%"></div>
@@ -67,7 +67,7 @@
 <%if(!ol.isEmpty()){ %>
 		<%for(OrderDetail odl : ol){ %>
 		<div style="display:flex;">
-			<div style="width:20%; text-align:center;">
+			<div style="width:20%; text-align:center; margin-left:10px">
 				주문 상품
 			</div>
 			<div style="width:60%; display:flex; line-height:1.0; margin-left:20px;">
@@ -82,9 +82,8 @@
 					<span><%=odl.getDetailPrice() %></span><span>원</span>
 				</div>
 			</div>
-				<div style="width:20%; text-align:center; margin-right:40px;">
-					<span>배송비</span>
-					<span>2500원</span>
+				<div style="width:30%; text-align:center; margin-right:20px;">
+					<span>배송비</span><span>2500원</span>
 				</div>
 		</div>
 		<br>
@@ -94,7 +93,7 @@
 <%} %>
 
 		<div  style="display:flex; font-size:1.2rem; font-weight:bolder">
-			<div style="width:20%; text-align:center;">
+			<div style="width:20%; text-align:center; margin-left:20px">
 				총 결제금액
 			</div>
 			<div style="width:50%"></div>
@@ -110,7 +109,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div id="pay-method" style="width:30%; text-align:center;">
-			<%=p.getPay_method() %>
+			<%=p.getPay_method().equals("point")?"KakaoPay":"Card" %>
 		</div>
 	</div>	
 	
@@ -120,7 +119,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div id="apply-num" style="width:30%; text-align:center;">
-			<%=p.getApply_num() %>
+			<%=p.getApply_num()==0?"없음":p.getApply_num() %>
 		</div>
 	</div>
 </section>
@@ -144,10 +143,21 @@ $('#pay-method').append($('<span>').text(data.pay_method));
 $('#apply-num').append($('<span>').text(data.apply_num));
 </script> -->
 
-
+<!-- Sweet alert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+	$(document).ready(function(){
+		Swal.fire({
+			  position: "top-center",
+			  icon: "success",
+			  title: "구입해주셔서 감사합니다😊",
+			  showConfirmButton: false,
+			  timer: 2000
+			});
+	});
+	
 	$(".continueBtn").click(function(){
-		$(window).prop("location","<%=request.getContextPath()%>/views/product/productlist.jsp")
+		$(window).prop("location","<%=request.getContextPath()%>/productList.do?type=all")
 	});
 	
 	$(".mypageBtn").click(function(){

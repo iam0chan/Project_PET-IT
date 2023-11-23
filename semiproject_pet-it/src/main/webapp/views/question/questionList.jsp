@@ -157,7 +157,7 @@ tr.item:hover {
 	}
 	%>  
 
-	<div id="pageBar">
+	<div id="pageBar" style="margin-top:30px">
 		<%=request.getAttribute("pageBar")%>
 	</div>
 	<div class="boardsearchAll">

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/header.jsp"%>
-<%@ page import="java.util.List, com.pet.cart.model.dto.Cart"%>
+<%@ page import="java.util.List, com.pet.cart.model.dto.Cart, com.google.gson.Gson"%>
 <%
 	List<Cart> cart = (List<Cart>) request.getAttribute("cartList");
 	int totalPrice=0;
@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <title>장바구니</title>
-<style>
+<style class="styler">
 body {
 	text-align: center;
 }
@@ -276,6 +276,7 @@ background-color: green;
 							<!-- <td class="button"><a href="javascript:;" class="btnNormal"
 								onclick="BasketNew.moveWish(0);">관심상품등록</a></td> -->
 						</tr>
+						
 						<%
 						}
 					}
@@ -309,7 +310,9 @@ background-color: green;
 			</div>
 		</div>
 	</section>
+	
 
+	
 	<script>
 	const orderPay=()=>{
 		const oriCartList=<%=request.getAttribute("cartListJson")%>;
@@ -327,10 +330,13 @@ background-color: green;
 			}
 		}
 		if(sellProduct.length>0){
-			$.post("<%=request.getContextPath()%>/paymentStart.do",
+				 $.post("<%=request.getContextPath()%>/paymentStart.do",
 					{cartList:JSON.stringify(sellProduct)})
 					.done(e=>{
+						$('.styler').empty();
 						$("#cart-content").html(e);
+						runModal();
+						
 					});
 		}else{
 			alert("장바구니가 비어있습니다.");
@@ -346,9 +352,9 @@ background-color: green;
 			$("#cart-btn").click(function(){
 				window.location.href = "<%=request.getContextPath()%>/cart/cartList.do";
 			});
-			}
+		}
 		
-		});
+	});
 	
 	function continueShopping() {
         // 쇼핑계속하기 누르면 상품 목록 페이지로 이동
@@ -416,7 +422,7 @@ $(document).ready(function () {
     // 숫자에 천 단위로 콤마 추가하는 함수
     function addCommas(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    } 
 
     function updateTotalPrice() {
         let totalAcount = 0;
@@ -432,7 +438,64 @@ $(document).ready(function () {
 
 </script>
 
+<!-- js -->
+<script src="<%=request.getContextPath()%>/js/orderPay.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<!-- PortOne SDK -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- Sweet alert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- daum address api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- css -->
+
+<!-- ----------결제하기 버튼 클릭 js----------------- -->
+<script>
+
+//회원정보 반영 모달창 jquery
+	function runModal() {
+		Swal.fire({
+		  title: "회원정보 적용",
+		  text: "기존에 등록된 회원정보를 그대로 적용할까요?",
+		  icon: "question",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "Yes"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			    Swal.fire({
+			      title: "회원정보 적용!",
+			      text: "기존 등록정보로 적용했어요!😊",
+			      icon: "success"
+			    });
+			    
+			    // input태그에 session에서 가져온 회원정보 반영
+			    $("#orderName").val("<%=loginMember.getMemberName()%>");
+			    $("#zipcode").val("<%=loginMember.getMemberZipCode()%>");
+			    $("#addr").val("<%=loginMember.getMemberAddr()%>");
+			    $("#detailAddr").val("<%=loginMember.getMemberDetailAddr()%>"); 
+			    $("#orderPhone").val("<%=loginMember.getMemberPhone()%>"); 
+			     
+			 	// email parsing입력
+			    var email = "<%=loginMember.getMemberEmail()%>";		      
+			    var index = email.indexOf("@");
+			    
+			    if (index !== -1) {
+				    var beforeText = email.substring(0, index);
+				    var afterText = email.substring(index + 1);
+				    
+				    $("#emailHead").val(beforeText);
+				    $("#textEmail").val(afterText);
+			    }
+		  	}
+		});	
+	};
+</script>
 
 
 

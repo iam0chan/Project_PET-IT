@@ -143,7 +143,7 @@ tr.item:hover {
 		</div>
 
 
-	<div class="pageBar">
+	<div class="pageBar" style="margin-top:20px;">
 		<div><%=request.getAttribute("pageBar") %></div>
 	</div>
 	
