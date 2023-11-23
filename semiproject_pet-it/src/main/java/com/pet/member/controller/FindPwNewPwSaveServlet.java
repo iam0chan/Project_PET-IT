@@ -7,15 +7,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.pet.member.dao.MemberDao;
 import com.pet.member.service.MemberService;
 
 /**
  * Servlet implementation class FindPwNewPwSaveServlet
  */
-@WebServlet("/newPwCheck.do")
+
+@WebServlet(name="FindPwNewSaveServlet",
+			urlPatterns="/newPwCheck.do")
 public class FindPwNewPwSaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,27 +31,28 @@ public class FindPwNewPwSaveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json;charset=UTF-8");
-		MemberDao dao = new MemberDao();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/plain; charset=UTF-8");
+		
+		MemberService ms = new MemberService();
 	    String newPw = request.getParameter("newPw");
-    	String newPw2 = request.getParameter("newPw2");
+    	String memberId = request.getParameter("memberId");
     	String result=null;
-    	
-    	try {
-	        // 이름과 이메일이 데이터베이스에 일치하는지 확인
-	    	String newPwCheck= dao.newPwCheck(newPw, newPw2);
-	        if (newPwCheck!=null) {
-	            // 세션에 저장
-	            HttpSession httpSession = request.getSession();
-	            httpSession.setAttribute("newPwCheck", newPwCheck);
-	           
-	            
+    	int result2=0;
+		
+		 if (newPw == null) {
+	            result = "-1";
+	        } else if (memberId == null) {
+	            result = "-2";
+	        }else{
+	        	result2 = ms.updatePw(newPw,memberId);
+	            if(result2>0) {
+	            	result = "1";
+	            }
 	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        
-	        
-	    }
+			
+	     
+		 response.getWriter().write(result);
 	}
 
 	/**

@@ -70,6 +70,24 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int updatePw(Connection conn, String newPw, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updatePw"));
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	//랜덤인증코드 생성 메소드
 	public String makeAuthenticationCode() throws Exception {
 		int pwdLength = 8;
@@ -203,16 +221,7 @@ public class MemberDao {
 		    return result;
 		}
 		
-		public String newPwCheck(String Pw, String Pw2) {
-			String result;
-			
-			if(Pw==null) result = "0";
-			else if(Pw2==null) result = "-1";
-			else if(Pw.length()<8||Pw.length()>12) result ="-2";
-			else result = "1";
-			
-			return result;
-		}
+		
 	
 	
 	

@@ -14,16 +14,13 @@
 		margin-top:50px;
 	}
 	
-	.quote_btn-container{
-		width:534.475px;
-		height:80px;
-	}
-	.navbar {
-		height:130px;
-	}
-    .footer_section{
-    	height:130px;
-    }
+		.navbar {
+			
+			height:130px;
+		}
+	    .footer_section{
+	    	height:130px;
+	    }
 	section {
         text-align:center;
         width: 350px;

@@ -11,7 +11,7 @@
 <body>
 	<script>
 		alert("<%=msg%>");
-		location.replace("<%=request.getContextPath()%><%=loc%>");
+		location.assign("<%=request.getContextPath()%><%=loc%>");
 	</script>
 </body>
 </head>

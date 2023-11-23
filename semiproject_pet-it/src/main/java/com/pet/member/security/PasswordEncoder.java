@@ -15,7 +15,7 @@ public class PasswordEncoder extends HttpServletRequestWrapper{
 	
 	@Override
 	public String getParameter(String name) {
-			if(name.equals("memberPw")) {
+			if(name.equals("memberPw")||name.equals("newPw")) {
 				String ori = super.getParameter(name);
 				/* System.out.println("password 원본 : "+ori); */
 				String change=getSHA512(ori);

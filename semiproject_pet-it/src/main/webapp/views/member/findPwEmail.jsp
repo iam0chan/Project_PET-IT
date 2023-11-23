@@ -20,6 +20,7 @@
     /* padding: 0 20px; */
 /*     margin-bottom: 20px; */
     height:500px;
+    background-color: #f7f7f7;
     }
 /*     .findId .title{
     	border:1px solid;
@@ -51,6 +52,7 @@
    
    .findId{
    		border-color:lightgray;
+   		background-color: #f7f7f7;
    }
    
    .field input{
@@ -95,15 +97,20 @@
 /*    		display:flex; */
    }
    
+   .btn.btn-outline-primary{
+   		background-color:#fff;
+   		color:#007bff;
+}
+   
 </style>
 
 <div class="findId">
 	<ul class="title">
 		<li>
-			<a href="<%=request.getContextPath()%>/findId.do">아이디 찾기</a>
+			<a href="<%=request.getContextPath()%>/findId.do"><button type="button" class="btn btn-outline-primary" style="height:100%; width:100%">아이디 찾기</button></a>
 		</li>
 		<li>
-			<a href="<%=request.getContextPath()%>/findPw.do">비밀번호 찾기</a	>
+			<a href="<%=request.getContextPath()%>/findPw.do"><button type="button" class="btn btn-primary" style="height:100%; width:100%">비밀번호 찾기</button></a	>
 		</li>
 	</ul>
 	<form action="<%=request.getContextPath()%>/mailPw.do" method="get">								

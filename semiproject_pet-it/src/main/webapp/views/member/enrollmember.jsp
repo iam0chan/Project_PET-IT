@@ -7,10 +7,7 @@
 	* {
 	font-family: 'Noto Sans KR', sans-serif;
 	}
-	.quote_btn-container{
-		width:534.475px;
-		height:80px;
-	}
+	
 	
 	button {
 		border-radius: 3px;
@@ -177,7 +174,7 @@
 <div class="enroll_title">회원가입</div>
 <div class="enroll" id="en_container">
 <div class="enroll_line"><span class="nn">*</span>필수입력사항</div>
-	<form id="enroll_form" action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" >							
+	<form id="enroll_form" action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" onsubmit="enrollCheck();">							
 			<div class="field id">
 					<b>아이디<span class="nn">*</span></b>
 				<span>
@@ -330,6 +327,30 @@
 	<input class="submit btn btn-primary btn-sm" type="submit" value="가입하기" style="font-size:16px; font-weight:bold;">
     </div>
     <script>
+    const enrollCheck=()=>{
+		const memberId=$("#memberId").val();
+		const memberPw=$("#memberPw").val();
+		const memberName=$("#memberName").val();
+		const memberEmail=$("#memberEmail").val();
+		const reg = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^&*()_+]).{6,15}$/;
+		
+		
+		if(!reg.test(memberPw)){
+			alert("영문 특문사용 6~15글자");
+			$("#memberPw").val("");
+			$("#memberPw2").val("");
+			$("#memberPw").focus();
+			return false;
+		}
+		
+		if(memberId==null){
+			alert("아이디를 입력하세요");
+			$("#memberId").val("");
+			$("#memberId").focus();
+			return false;
+		}
+		
+	}
     //약관동의 전체동의 스크립트
     $(document).ready(function() {
         $('#TermsAgreeAll').change(function() {
@@ -464,18 +485,21 @@
 	
 	/* var allowedRegex = /^[0-9a-zA-Z!@#$%^&*()-_+=<>?/,.:;{}[\] ]*$/; */
 	
+	
 	//memberId 정규식
 	function validateId() {
 	    var inputId = document.getElementById("memberId");
 
 	    // 정규표현식: 숫자, 영어소문자 허용
 	    var allowedRegexId = /^[0-9a-z ]*$/;
-
+	    
 	    if (!allowedRegexId.test(inputId.value)) {
 	        // 입력이 허용된 문자가 아닌 경우 입력을 막음
 	        inputId.value = inputId.value.replace(/[^0-9a-z ]/g, '');
 	    }
 	}
+	
+	
 	
 	/* //memberPw 정규식
 	function validatePw() {
