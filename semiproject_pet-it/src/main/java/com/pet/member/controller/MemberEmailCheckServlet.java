@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pet.member.service.MemberService;
+
 /**
- * Servlet implementation class FindIdViewServlet
+ * Servlet implementation class MemberEmailCheckServlet
  */
-@WebServlet("/findId.do")
-public class FindIdViewServlet extends HttpServlet {
+@WebServlet("/memberEmailCheck.do")
+public class MemberEmailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdViewServlet() {
+    public MemberEmailCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +28,14 @@ public class FindIdViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/plain; charset=UTF-8");
 		
-		response.sendRedirect(request.getContextPath()+"/views/member/findId.jsp");
+		String memberEmail = request.getParameter("memberEmail");
+		
+		int result =new MemberService().memberEmailCheck(memberEmail);
+		
+		response.getWriter().print(result);
 	}
 
 	/**
