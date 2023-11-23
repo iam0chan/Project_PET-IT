@@ -84,15 +84,6 @@
 	<div class="titleArea">
 		<h2>1:1문의</h2>
 	</div>
-
-	<div id="list-btn" class="btn-container" style="width: 107px;" >
-		<%if(loginMember!=null
-			&&loginMember.getMemberId().equals("jihyes")){ %>
-			 <div class="Pet-it-adminBtn">
-			 <button onclick="location.assign('<%=request.getContextPath()%>/questionwriter.do')" class="btn btn-outline-success">수정</button>
-			 </div>
-	</div>
-	<%} %>
 	
 	<div class="container mt-3">
 		<div class="row">
