@@ -33,6 +33,7 @@ public class AdminOrderUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
 		long orderNo = Long.parseLong(request.getParameter("orderNo"));
 		String orderName = request.getParameter("orderName");
@@ -53,7 +54,7 @@ public class AdminOrderUpdateServlet extends HttpServlet {
 				.orderEmail(orderEmail)
 				.deliveryReq(deliveryReq)
 				.build();
-		
+		System.out.println("update서블릿 : "+o);
 		int result = new AdminService().updateOrder(o);
 		
 		List<OrderDetail> odl = new AdminService().selectOrderDetailByNo(orderNo);

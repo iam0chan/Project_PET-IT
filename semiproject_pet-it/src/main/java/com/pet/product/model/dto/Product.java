@@ -11,7 +11,7 @@ import lombok.Data;
 public class Product {
 
    private String productNo;
-   private String cateogryNo; // 대분류
+   private String categoryNo; // 대분류
    private String typeNo; //상품타입
    private String productName;
    private int productPrice;

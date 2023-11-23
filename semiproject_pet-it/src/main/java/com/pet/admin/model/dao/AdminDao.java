@@ -103,6 +103,40 @@ public class AdminDao {
 		return result;
 	}
 	
+	public int deleteProductList(Connection conn, String[]productArr) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("deleteProductList"));
+			
+			for(String pa : productArr) {
+				pstmt.setString(1, pa);
+				pstmt.addBatch();
+				pstmt.clearParameters();
+			}
+			int[]results = pstmt.executeBatch();
+			result = 1;
+			
+			for(int i: results) {
+				if(i==-2) {
+					i=1;
+				}else if(i==-3) {
+					i=0;
+				}
+				result*=i;
+			}
+			if(result>0)System.out.println("DAO : db결과성공");
+			else System.out.println("DAO : db결과실패");
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 	public List<OrderDetail> selectOrderDetailByNo(Connection conn, long orderNo) {

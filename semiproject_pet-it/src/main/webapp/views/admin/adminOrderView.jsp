@@ -180,15 +180,18 @@
 		<input type="hidden" name="orderEmail" value="">
 		<input type="hidden" name="deliveryReq" value="">
 	</form>
+	<form id="deleteForm" action="<%=request.getContextPath()%>/adminOrderDelete" method="POST">
+		<input type="hidden" name="orderNo" value="">
+	</form>
 <script>
 
 	//input태그 수정 내용 실시간으로 적용
-/* 	$(document).ready(function() {
+ 	$(document).ready(function() {
 	    $("input").on("change", function() {
 	      var userInput = $(this).val();
 	      $(this).attr("value", userInput);
 	    });
-	}); */
+	});
 
 	//목록으로
 	$('.backList').click(function(){
@@ -196,15 +199,17 @@
 	});
 	
 	//form태그 정보 전송
+	
+	
 	$(".orderEdit").click(function() {
-		$('input[name=orderNo]').val(<%=ol.get(0).getOrderNo()%>);
-		$('input[name=orderName]').val($("#orderName"));
-		$('input[name=orderZipcode]').val($("#orderZipcode"));
-		$('input[name=orderAddr]').val($("#orderAddr"));
-		$('input[name=orderDefAddr]').val($("#orderDefAddr"));
-		$('input[name=orderPhone]').val($("#orderPhone"));
-		$('input[name=orderEmail]').val($("#orderEmail"));
-		$('input[name=deliveryReq]').val($("#deliveryReq"));
+		$('input[name=orderNo]').val($("#orderNo").val());
+		$('input[name=orderName]').val($("#orderName").val());
+		$('input[name=orderZipcode]').val($("#orderZipcode").val());
+		$('input[name=orderAddr]').val($("#orderAddr").val());
+		$('input[name=orderDefAddr]').val($("#orderDefAddr").val());
+		$('input[name=orderPhone]').val($("#orderPhone").val());
+		$('input[name=orderEmail]').val($("#orderEmail").val());
+		$('input[name=deliveryReq]').val($("#deliveryReq").val());
 	    $("#orderForm").submit();
     });
 	

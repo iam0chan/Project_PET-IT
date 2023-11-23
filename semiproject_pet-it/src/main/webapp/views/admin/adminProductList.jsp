@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="java.text.DecimalFormat, java.sql.*, java.util.*, com.pet.payment.model.dto.Order"%>
-<% List<Order> order = (List<Order>) request.getAttribute("orders"); %>
-<%@ include file="adminSideBar.jsp" %>
+    pageEncoding="UTF-8" import="com.pet.product.model.dto.Product, java.util.List, com.pet.product.model.dto.ProductImageFile"%>
+
+<%  List<Product> products = (List<Product>)request.getAttribute("products"); 
+    StringBuilder pageBar = (StringBuilder)request.getAttribute("pageBar");
+    List<ProductImageFile> files = (List<ProductImageFile>)request.getAttribute("files");
+    String productNo = "";
+    String no="";
+%>
+<%@ include file="adminSideBar.jsp" %>  
 
 <title>Pet-It 관리자페이지</title>
-
+<link rel="icon" href="<%=request.getContextPath()%>/img/favicon-16x16.png" type="image/png" />
 <style>
 
 	td {
@@ -74,59 +79,59 @@
 	}
 </style>
 
-<link rel="icon" href="<%=request.getContextPath()%>/img/favicon-16x16.png" type="image/png" />
+
 <!-- content start --> 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h3>주문 관리 페이지</h3> 
+        <h3>상품 관리 페이지</h3> 
       </div>  	
-    <h3 id="title"> 주문 목록 </h3>
+    <h3 id="title"> 상품 목록 </h3>
     <div class="btnArea">
-      	<button type="button" id="btnRefresh" class="btn btn-outline-success">주문목록 새로고침</button>
-        <button type="button" id="btnDelete" class="btn btn-outline-success">선택주문 일괄취소/환불</button>
+      	<button type="button" id="btnRefresh" class="btn btn-outline-success">상품목록 새로고침</button>
+        <button type="button" id="btnDelete" class="btn btn-outline-success">상품목록 일괄삭제</button>
       </div>
 
       <!-- 테이블 -->
       <div id="tableContainer">
-      <table class="table table-hover">
-        <caption></caption>
+      <table class="table table-hover" style="text-align:center;">
+        
         <colgroup>
           <col width="3%" />
           <col width="10%" />
-          <col width="10%" />
-          <col width="10%" />
+          <col width="15%" />
+          <col width="30%" />
           <col width="5%" />
-          <col width="20%" />
-          <col width="10%" />
+          <col width="5%" />
+          <col width="15%" />
           <col width="10%" />
           <col width="10%" />
         </colgroup>
         <thead>
           <tr>
             <th><input type="checkbox" name="" id="chkRowAll"></th>
-            <th>주문번호</th>
-            <th>ID</th>
-            <th>주문자명</th>
-            <th>연락처</th>
-            <th>배송지 주소</th>
-            <th>총 가격</th>
-            <th>주문 수정/취소</th>
+            <th>상품번호</th>
+            <th>상품명</th>
+            <th>상품소개</th>
+            <th>상품가격</th>
+            <th>재고</th>
+            <th>상품 수정/취소</th>
           </tr>
         </thead>
         
         <tbody>
-     <% if(!order.isEmpty()){ %>
-        <% for(Order o : order){%>
+     <% if(!products.isEmpty()){ %>
+        <% for(Product p : products){%>
         		
           <tr>
             <td class="center"><input type="checkbox" name="chkRow" id=""></td>
-            <td class="center" data-cell-header="orderNo"><%=o.getOrderNo()%></td>
-            <td class="center" data-cell-header="content"><%=o.getOrderId()%></td>
-            <td class="center" data-cell-header="content"><%=o.getOrderName()%></td>
-            <td class="center" data-cell-header="content"><%=o.getOrderPhone()%></td>
-            <td class="center" data-cell-header="content"><%=o.getOrderZipcode()%> <%=o.getOrderAddr()%> <%=o.getOrderDefAddr()%></td>
-            <td class="center" data-cell-header="content"><%=o.getOrderTotalPrice()%></td>
-            <td class="center" data-cell-header="btnEditDel"><button class="btn btn-outline-success btnEditDel">주문 수정/취소</button></td>   
+            <td class="center" data-cell-header="productNo"><%=p.getProductNo()%></td>
+            <td class="center" data-cell-header="content"><%=p.getProductName()%></td>
+            <td class="center" data-cell-header="content"><%=p.getProductInfo()%></td>
+            <td class="center" data-cell-header="content"><%=p.getProductPrice()%></td>
+            <td class="center" data-cell-header="content"><%=p.getProductStock()%></td>
+            <td class="center" data-cell-header="btnEditDel">
+            	<button class="btn btn-outline-success btnEditDel">개별 상품 수정</button>
+           	</td>   
           </tr>
           
         <%} %>  
@@ -137,11 +142,9 @@
 
       <!-- pageBar / 버튼 -->
 	 <div id="pageBar">
-     	<%=request.getAttribute("pageBar") %>
+     	<%=pageBar%>
      </div>    
       
-      
-<form id="myForm" action="/submit" method="post">
 
 <!-- Sweet alert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>       
@@ -156,26 +159,26 @@
     	  //일괄 삭제 버튼 클릭
     	  $('#btnDelete').click(function() {
     	    // 체크된 항목 확인
-    	    var arrOrderNo = [];
+    	    var arrProductNo = [];
     	    $('input[name="chkRow"]:checked').each(function(idx, item) {
-    	    	arrOrderNo.push(
+    	    	arrProductNo.push(
     	        $(this).closest('tr').find('td').filter(function() {
-    	          return $(this).data('cellHeader') == 'orderNo';
+    	          return $(this).data('cellHeader') == 'productNo';
     	        }).text()
     	      );
     	    });
 
-    	    if (arrOrderNo.length == 0) {
+    	    if (arrProductNo.length == 0) {
     	    	Swal.fire({
     	    		  icon: "error",
     	    		  title: "이런...",
-    	    		  text: "주문이 선택되지 않았어요!",
+    	    		  text: "상품이 선택되지 않았어요!",
     	    		});
     	      return;
     	    } else {
     	    	Swal.fire({
-    	    		  title: "주문 일괄 삭제/환불",
-    	    		  text: "선택 주문들을 정말 환불하고 삭제합니까?",
+    	    		  title: "상품 일괄 삭제",
+    	    		  text: "선택 상품들을 정말 삭제합니까?",
     	    		  icon: "warning",
     	    		  showCancelButton: true,
     	    		  confirmButtonColor: "#3085d6",
@@ -184,11 +187,11 @@
     	    		}).then((result) => {
     	    		  	if (result.isConfirmed) {
 	    	    		    $.ajax({
-	    	    		    	url : '<%=request.getContextPath()%>/adminOrderDelete',
+	    	    		    	url : '<%=request.getContextPath()%>/adminProductDelete',
 	    	    		    	type : 'POST',
 	    	    		    	dataType : 'json',
 	    	    		    	data : { 
-	    	    		    		arrOrderNo: JSON.stringify(arrOrderNo) 
+	    	    		    		arrProductNo: JSON.stringify(arrProductNo) 
 	   	    		    		},
 	   	    		    		success :(data)=>{
 	   	    		    			location.reload();
@@ -196,7 +199,7 @@
 	    	    		    });
 		    	    			Swal.fire({
 		    	    		      title: "삭제 되었습니다!",
-		    	    		      text: "선택된 주문들이 환불되고 삭제되었습니다",
+		    	    		      text: "선택된 상품들이 삭제되었습니다",
 		    	    		      icon: "success"
 		    	    		    });
 		    	    			location.reload();
@@ -221,11 +224,11 @@
  				//클릭한 행을 제외한 나머지 체크박스 해제  
  				 $(this).closest('tr').siblings().find('input[type="checkbox"]').prop('checked', false);
  			    // 버튼이 위치한 행의 주문번호 td를 선택하여 데이터 가져오기
- 			    var orderNo = $(this).closest('tr').find('td:nth-child(2)').text();
+ 			    var productNo = $(this).closest('tr').find('td:nth-child(2)').text();
 
 	 			   Swal.fire({
-	 	    		  title: "주문 수정/취소",
-	 	    		  text: "상세페이지로 이동할까요?",
+	 	    		  title: "상품 수정",
+	 	    		  text: "수정 페이지로 이동할까요?",
 	 	    		  icon: "warning",
 	 	    		  showCancelButton: true,
 	 	    		  confirmButtonColor: "#3085d6",
@@ -233,7 +236,7 @@
 	 	    		  confirmButtonText: "Yes"
 	 	    		}).then((result) => {
 	 	    			if (result.isConfirmed) {	    				
- 	    					location.href='<%=request.getContextPath()%>/adminOrderView.do?orderNo='+orderNo;
+	 	    				location.href='<%=request.getContextPath()%>/adminProductView.do?productNo='+productNo;
     	    		    }
 					});
  			 	 });
@@ -319,3 +322,5 @@
     	  }
     	}
 </script>
+      
+      

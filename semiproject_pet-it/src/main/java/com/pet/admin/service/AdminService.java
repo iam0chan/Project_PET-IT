@@ -16,16 +16,6 @@ import com.pet.payment.model.dto.Payment;
 public class AdminService {
 	AdminDao dao = new AdminDao();
 	
-	public int deleteOrderList (long[] orderArr) {
-		Connection conn = getConnection();
-		int result=dao.deleteOrderList(conn,orderArr);
-		if(result>0)commit(conn);
-		else rollback(conn);
-		close(conn);
-		return result;
-	}
-	
-	
 	public List<Order> selectOrderList(int cPage, int numPerpage){
 		Connection conn = getConnection();
 		List<Order> order = dao.selectOrderList(conn,cPage,numPerpage);
@@ -64,6 +54,24 @@ public class AdminService {
 	public int updateOrder(Order o) {
 		Connection conn = getConnection();
 		int result = dao.updateOrder(conn,o);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteOrderList (long[] orderArr) {
+		Connection conn = getConnection();
+		int result=dao.deleteOrderList(conn,orderArr);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteProductList (String[] productArr) {
+		Connection conn = getConnection();
+		int result=dao.deleteProductList(conn,productArr);
+		if(result>0)commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}

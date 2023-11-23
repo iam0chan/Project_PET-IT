@@ -25,6 +25,9 @@
       font-size: 3.5rem;
     }
   }
+  *{
+  	font-family:G마켓 산스;
+  }
 </style>
    
 </head>
@@ -42,7 +45,7 @@
         </a>
       <div class="position-sticky pt-3">
       		<p>
-	            <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/index.jsp">
+	            <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/">
 	              <span data-feather="home"></span>
 	              Pet-It 메인페이지로
 	            </a>
@@ -57,9 +60,8 @@
           		</h2>
           		<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="#" class="link" data-content="content">상품등록</a></p>
-        				<p><a href="#" class="link" data-content="content">상품수정</a></p>
-        				<p><a href="#" class="link" data-content="content">상품삭제</a></p>
+        				<p><a href="<%=request.getContextPath()%>/adminProductEnroll.do" class="link" data-content="content">상품등록</a></p>
+        				<p><a href="<%=request.getContextPath()%>/adminProductList.do" class="link" data-content="content">상품수정/삭제</a></p>
 				    </div>
 			   	</div>
           	</div>
@@ -72,10 +74,10 @@
           		</h2>
           		<div id="f-accorMember" class="accordion-collapse collapse" aria-labelledby="accorMember" data-bs-parent="nav-accor-fl">
       				<div class="accordion-body">
-        				<p><a href="">회원정보관리</a></p>
-        				<p><a href="">후기관리</a></p>
-        				<p><a href="">쿠폰관리</a></p>
-        				<p><a href="">적립금관리</a></p>
+        				<p><a href="">회원정보관리(준비중)</a></p>
+        				<p><a href="">후기관리(준비중)</a></p>
+        				<p><a href="">쿠폰관리(준비중)</a></p>
+        				<p><a href="">적립금관리(준비중)</a></p>
 				    </div>
 			   	</div>
           	</div>
@@ -89,7 +91,7 @@
           		<div id="f-accorOrder" class="accordion-collapse collapse" aria-labelledby="accorOrder" data-bs-parent="nav-accor-fl">
       				<div class="accordion-body">
         				<p><a href="<%=request.getContextPath()%>/adminOrder.do">주문/환불 관리</a></p>
-        				<p><a href="">배송 관리</a></p>
+        				<p><a href="">배송 관리(준비중)</a></p>
 				    </div>
 			   	</div>
           	</div>
@@ -103,7 +105,7 @@
           		<div id="f-accorBoard" class="accordion-collapse collapse" aria-labelledby="accorBoard" data-bs-parent="nav-accor-fl">
       				<div class="accordion-body">
         				<p><a href="<%=request.getContextPath() %>/noticeList.do?=<%=m.getMemberId()%>">공지사항 관리</a></p>
-        				<p><a href="">이벤트 관리</a></p>
+        				<p><a href="">이벤트 관리(준비중)</a></p>
 				    </div>
 			   	</div>
           	</div>

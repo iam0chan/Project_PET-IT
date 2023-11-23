@@ -109,7 +109,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div id="pay-method" style="width:30%; text-align:center;">
-			<%=p.getPay_method() %>
+			<%=p.getPay_method().equals("point")?"KakaoPay":"Card" %>
 		</div>
 	</div>	
 	
@@ -119,7 +119,7 @@
 		</div>
 		<div style="width:50%"></div>
 		<div id="apply-num" style="width:30%; text-align:center;">
-			<%=p.getApply_num() %>
+			<%=p.getApply_num()==0?"없음":p.getApply_num() %>
 		</div>
 	</div>
 </section>
