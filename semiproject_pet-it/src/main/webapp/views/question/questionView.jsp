@@ -133,11 +133,17 @@
 		<tr>
 			<th>작성자 : Pet-it</th>
 		</tr>
+		<tr><td></td></tr>
 		<tr>
 			<th style="font-size:13px"><%=qcc.getReplyDate() %></th>		
 		</tr>
-	
-		<tr>
+		<tr><td></td></tr>
+		<tr style="border-bottom:1px solid #ccc8c8;"><td></td></tr>
+		<tr><td></td></tr>
+		<tr><td></td></tr>
+		<tr><td></td></tr>
+		<tr><td></td></tr>
+		<tr >
 			<th><%=qcc.getReplyContent() %></th>
 		</tr>
 	</table>
