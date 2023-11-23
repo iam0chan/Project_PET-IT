@@ -346,8 +346,8 @@ let tell="";
 let postcode ="";
 let productImg = "";
 let orderNo = createOrderNum();
-let order ={};		//주문 객체
 
+let order ={};		//주문 객체
 let orderDetail = {};  //주문 상세 객체
 let orderArr =[]; 	//주문상세 객체 배열
 <%for(OrderDetail odl : ol){ %>
