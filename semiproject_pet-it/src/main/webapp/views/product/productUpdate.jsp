@@ -73,8 +73,8 @@ input#optionPrice {
 							</div>
 							<div class="enrollpage-content">
 								<input type="text" name="productName"
-									placeholder="상품명을 입력하세요 (30자)" maxlength="30"
-									value="<%=product.getProductName()%>" readOnly />
+									placeholder="상품명을 입력하세요." maxlength="20"
+									value="<%=product.getProductName()%>"/>
 							</div>
 						</div>
 						<div class='enroll-content-container'>

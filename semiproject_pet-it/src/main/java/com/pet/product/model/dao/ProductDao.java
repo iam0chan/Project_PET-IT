@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.pet.common.JDBCTemplate;
+import com.pet.common.JDBCTemplate.*;
 import com.pet.product.model.dto.Product;
 import com.pet.product.model.dto.ProductImageFile;
 import com.pet.product.model.dto.ProductOption;
@@ -45,7 +45,7 @@ public class ProductDao {
       System.out.println(item.toString());
       try {
          pstmt = conn.prepareStatement(sql.getProperty("insertProduct"));
-         pstmt.setString(1, item.getCateogryNo());
+         pstmt.setString(1, item.getCategoryNo());
          pstmt.setString(2, item.getTypeNo());
          pstmt.setString(3, item.getProductName());
          pstmt.setInt(4, item.getProductPrice());
@@ -333,7 +333,7 @@ public class ProductDao {
       int updateResult = 0;
       try {
          pstmt = conn.prepareStatement(sql.getProperty("updateProductByNo"));
-         pstmt.setString(1, p.getCateogryNo());
+         pstmt.setString(1, p.getCategoryNo());
          pstmt.setString(2,p.getTypeNo());
          pstmt.setInt(3, p.getProductPrice());
          pstmt.setInt(4, p.getProductStock());
@@ -496,7 +496,7 @@ public class ProductDao {
    private Product getProduct(ResultSet rs) throws SQLException{
       return Product.builder()
             .productNo(rs.getString("product_no"))
-            .cateogryNo(rs.getString("category_no"))
+            .categoryNo(rs.getString("category_no"))
             .typeNo(rs.getString("type_no"))
             .productName(rs.getString("product_name"))
             .productPrice(rs.getInt("product_price"))

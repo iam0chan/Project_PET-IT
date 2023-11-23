@@ -89,7 +89,7 @@ public class ProductUpdateEndServlet extends HttpServlet {
 			}
 //	         PRODUCT UPDATE 정보
 			Product item = Product.builder().productNo(productNo).productName(productName).productPrice(productPrice)
-					.productInfo(productSummary).productStock(productStock).cateogryNo(category).typeNo(type)
+					.productInfo(productSummary).productStock(productStock).categoryNo(category).typeNo(type)
 					.productOptionStatus(optionStatus).productDiscount(discount).prouctPoint(500)
 					.productContent(productContent).build();
 

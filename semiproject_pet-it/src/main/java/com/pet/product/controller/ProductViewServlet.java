@@ -30,6 +30,9 @@ public class ProductViewServlet extends HttpServlet {
 		System.out.println(file.toString()); //파일 정보 체크
 		
 		if(product!=null && file!=null) {
+			//String replaceContent = product.getProductContent().replace("/semiproject_pet-it/","/GDJ71_Pet-it_semi/");
+			//product.setProductContent(product.getProductContent().replace("/semiproject_pet-it/","/GDJ71_Pet-it_semi/"));
+			//System.out.println(product.getProductContent());
 			request.setAttribute("product", product);
 			request.setAttribute("file", file);
 			if(product.getProductDiscount()!=null) {

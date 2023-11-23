@@ -82,7 +82,7 @@ public class ProductEnrollEndServlet extends HttpServlet {
 					.productPrice(productPrice)
 					.productInfo(productSummary)
 					.productStock(productStock)
-					.cateogryNo(category)
+					.categoryNo(category)
 					.typeNo(type)
 					.productOptionStatus(optionStatus)
 					.productDiscount(discount)
