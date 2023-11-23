@@ -1,27 +1,28 @@
 package com.pet.question.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pet.question.model.dto.Question;
 import com.pet.question.model.dto.QuestionComment;
 import com.pet.question.service.QuestionService;
 
 /**
- * Servlet implementation class QuestionViewServlet
+ * Servlet implementation class QuestionCommentInsertServlet
  */
-@WebServlet("/questionView.do")
-public class QuestionViewServlet extends HttpServlet {
+@WebServlet("/insertComment.do")
+public class QuestionCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionViewServlet() {
+    public QuestionCommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +31,28 @@ public class QuestionViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		
-		String no=request.getParameter("no");
+//		int  replyNo =Integer.parseInt(request.getParameter("replyNo"));
+		String questionNo = request.getParameter("questionRef");
+//		String replyDate = request.getParameter("replyDate");
+		String replyContent = request.getParameter("content");
 		
-		Question q = new QuestionService().selectQuestionByNo(no);
-		System.out.println(q);
-		//댓글을 받음
-		QuestionComment qcc = new QuestionService().selectQuestionComment(no);
+		QuestionComment qc = QuestionComment.builder()
+							.questionNo(questionNo)
+							.replyContent(replyContent)
+							.build();
+		System.out.println(qc);
 		
-		request.setAttribute("question", q);
-		request.setAttribute("questionComment", qcc);
-		request.getRequestDispatcher("/views/question/questionView.jsp").forward(request, response);
-		
-
-		
+		int result = new QuestionService().insertQuestionComment(qc);
+	
+		System.out.println(result);
 		
 		
+		response.sendRedirect(request.getContextPath()+"/questionView.do?no="+questionNo); 
 		
 	}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -87,8 +87,8 @@ body {
 					src="<%=request.getContextPath()%>/images/boardIcon.png">
 				</span> <a href="/">
 					<h2>
-						<a href="<%=request.getContextPath()%>/myPage/myBoard.jsp">게시물
-							관리
+						<a href="<%=request.getContextPath()%>/questionList.do">게시물
+                     관리
 					</h2>
 					<div class="content">
 						<p>고객님께서 작성하신 게시물을 관리하는 공간입니다.</p>
