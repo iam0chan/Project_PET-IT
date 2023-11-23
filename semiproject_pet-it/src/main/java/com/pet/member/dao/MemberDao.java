@@ -172,6 +172,38 @@ public class MemberDao {
 	    return result;
 	}
 	
+	//회원가입 이메일중복체크
+		public int memberEmailCheck(Connection conn, String memberEmail) {
+			PreparedStatement pstmt=null;
+			ResultSet rs = null;
+			int result = 0;
+			try {
+		        pstmt = conn.prepareStatement(sql.getProperty("memberEmailCheck"));
+		        pstmt.setString(1, memberEmail);
+		        rs = pstmt.executeQuery();
+
+		        if (rs.next()) {
+		            // 중복된 이메일이 존재하는 경우
+		            result = 0;
+		        } else if (memberEmail.equals("")) {
+		            // memberEmail이 빈 문자열인 경우
+		            result = -1;
+		        } else if(!memberEmail.contains("@")){ 
+		        	result = -2;
+		        }else {
+		            // 중복된 이메일이 존재하지 않는 경우
+		            result = 1;
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(rs);
+		        close(pstmt);
+		    }
+		    return result;
+		}
+	
+	
 	public int memberPwCheck(Connection conn, String memberPw) {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
