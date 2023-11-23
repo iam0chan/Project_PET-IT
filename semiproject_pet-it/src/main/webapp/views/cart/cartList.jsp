@@ -3,8 +3,8 @@
 <%@ include file="/views/header.jsp"%>
 <%@ page import="java.util.List, com.pet.cart.model.dto.Cart"%>
 <%
-List<Cart> cart = (List<Cart>) request.getAttribute("cartList");
-System.out.print(cart);
+	List<Cart> cart = (List<Cart>) request.getAttribute("cartList");
+	int totalPrice=0;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -195,6 +195,10 @@ span.count>span>input {
 	border: 1px solid #d4d4d4;
 	border-radius: 3px 0 0 3px;
 }
+.deleteLoading{
+cen}
+
+
 
 /* .info{
 text-align: center;
@@ -248,9 +252,9 @@ background-color: green;
 				</tr>
 			<%
 			} else {%>
-				<% for (Cart c : cart) { %>
+				<% for (Cart c : cart) { totalPrice+=(c.getProductPrice()*c.getCartProductCount()); %>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" value="<%=c.getCartNo() %>" class="delchoice-cart"></td>
 							<td><img src="<%=request.getContextPath()%>/images/cat_chu.jpg"></td>
 							<td class="product-name">
 								<h5><%=c.getProductName()%></h5>
@@ -261,15 +265,16 @@ background-color: green;
 			
 							<td class="qua-col first-row">
 								<div class="pro-qty">
-									<span class="dec qtybtn">-</span> <input name="cartCnt"
-										class="cartQty" id="cartQty" value="1" type="text"
-										style="width: 100px;"> <span class="inc qtybtn">+</span>
+									<span class="dec qtybtn">-</span> 
+									<input name="cartCnt" class="cartQty" id="cartQty" value="<%=c.getCartProductCount() %>" type="text"
+										style="width: 100px;"> 
+									<span class="inc qtybtn">+</span>
 								</div>
 							</td>
-							<td class="total"><%=c.getProductPrice()%></td>
+							<td class="total"><%=c.getProductPrice()*c.getCartProductCount()%></td>
 			
-							<td class="button"><a href="javascript:;" class="btnNormal"
-								onclick="BasketNew.moveWish(0);">관심상품등록</a></td>
+							<!-- <td class="button"><a href="javascript:;" class="btnNormal"
+								onclick="BasketNew.moveWish(0);">관심상품등록</a></td> -->
 						</tr>
 						<%
 						}
@@ -279,10 +284,14 @@ background-color: green;
 			</tbody>
 		</table>
 
-		<div>
-			<button onclick="deleteSelectedProduct()">선택 상품 삭제</button>
-			<button onclick="continueShopping()">쇼핑 계속하기</button>
+		<div class="btn-container" style="margin-top:20px; display:flex; justify-content:center;">
+		<div style="width:50px; height:30px;">
+			<div class="spinner-border deleteLoading" role="status" style="display:none; margin:0 auto; width:30px !important;"></div>
 		</div>
+			<button onclick="deleteSelectedProduct()" class="btn btn-outline-danger deleteBtn" style="margin:0 5px;" >선택 상품 삭제</button>
+			<button onclick="continueShopping()" class="btn btn-outline-primary" style="margin:0 5px;">쇼핑 계속하기</button>
+		</div>
+			
 
 		<div class="row justify-content-end" align="right">
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
@@ -290,12 +299,12 @@ background-color: green;
 					<h3>장바구니 총 결제 금액</h3>
 					<hr>
 					<p class="d-flex total-price" style="font-size: 30px;">
-						<span>0원</span>
+						<span><%=totalPrice %>원</span>
 					</p>
 				</div>
 				<!-- 주문하기 누르면 주문페이지로 이동 -->
 				<p>
-					<a href="#" class="btn btn-primary py-3 px-4">주문하기</a>
+					<a href="<%=request.getContextPath()%>/cartPay.do" class="btn btn-primary py-3 px-4">주문하기</a>
 				</p>
 			</div>
 		</div>
@@ -315,12 +324,13 @@ background-color: green;
 		});
 	
 	function continueShopping() {
-	    // 쇼핑 계속하기를 누를 경우 카트 화면으로 이동
-	    window.location.href = "<%=request.getContextPath()%>/views/cart/cartList.jsp";
-	}
+        // 쇼핑계속하기 누르면 상품 목록 페이지로 이동
+        window.location.href = "<%=request.getContextPath()%>/productList.do?type=all";
+    }
 	
 	// 선택상품 삭제-->체크박스
 	function checkAll(theForm){
+		
 		if(theForm.remove.length == undefined){
 			theForm.remove.checked = theForm.allCheck.checked;
 		}else{
@@ -328,10 +338,29 @@ background-color: green;
 			theForm.remove[i].checked = theForm.allCheck.checked;
 		}
 	}
-	}
 	
 function deleteSelectedProduct() {
-	alert("선택한 상품이 삭제되었습니다.");
+	const checkedCart=$(".delchoice-cart:checked");
+	let delCart=[];
+	checkedCart.each((i,e)=>{delCart.push(e.value)});
+	console.log(delCart);
+	$.post("<%=request.getContextPath()%>/cart/cartDelete.do",
+			{delCart:JSON.stringify(delCart)})
+			.done(e=>{
+				if(e){
+					checkedCart.parents("tr").remove();
+					alert("선택된 상품을 삭제하였습니다");
+				}
+				else{
+					alert("선택된 상품 삭제를 실패하였습니다.");
+				}
+				$(".deleteBtn").css("display","block");
+				$(".deleteLoading").css("display","none");
+				$(".deleteBtn").removeAttr("disabled");
+			});
+	$(".deleteBtn").attr("disabled",true);
+	$(".deleteBtn").css("display","none");
+	$(".deleteLoading").css("display","block");
 }
 $(document).ready(function () {
     $('.qtybtn').click(function (e) {

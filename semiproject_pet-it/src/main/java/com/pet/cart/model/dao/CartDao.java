@@ -117,6 +117,22 @@ public class CartDao {
 			close(pstmt);
 		}return result;
 	}
+	
+	public int deleteCart(Connection conn, String where) {
+		PreparedStatement pstmt=null;
+		String query=sql.getProperty("deleteCart").replace("#WHERE", where);
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(query);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	
 /*
 	// 장바구니에 DB 정보 추가
 	public int insertCart(Connection conn, Cart cart) {

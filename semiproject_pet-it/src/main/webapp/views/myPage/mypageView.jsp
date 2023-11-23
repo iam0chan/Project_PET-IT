@@ -29,6 +29,7 @@ body {
 				</h2>
 
 				<div class="content">
+				
 					<p>고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.</p>
 				</div>
 				</a>
@@ -38,7 +39,7 @@ body {
 					src="<%=request.getContextPath()%>/images/memberInfoIcon.png">
 				</span> <a href="/">
 					<h2>
-						<a href="<%=request.getContextPath()%>/myPage/myMemberInfo.jsp">회원정보</a>
+						<a href="<%=request.getContextPath()%>/">회원정보</a>
 					</h2>
 					<div class="content">
 						<p>회원이신 고객님의 개인정보를 관리하는 공간입니다.</p>
@@ -87,15 +88,15 @@ body {
 					src="<%=request.getContextPath()%>/images/boardIcon.png">
 				</span> <a href="/">
 					<h2>
-						<a href="<%=request.getContextPath()%>/myPage/myBoard.jsp">게시물
+						<a href="<%=request.getContextPath()%>/questionList.do">게시물
 							관리
 					</h2>
 					<div class="content">
-						<p>고객님께서 작성하신 게시물을 관리하는 공간입니다.</p>
+						<p>고객님께서 작성하신 1:1문의를 관리하는 공간입니다.</p>
 					</div>
 				</a>
 			</article>
-			<article class="sytle7">
+			<%-- <article class="sytle7">
 				<span class="image"> <img
 					src="<%=request.getContextPath()%>/images/addressIcon.png">
 				</span> <a href="/">
@@ -107,7 +108,7 @@ body {
 						<p>자주 사용하는 배송지를 등록하고 관리하실 수 있습니다.</p>
 					</div>
 				</a>
-			</article>
+			</article> --%>
 
 
 

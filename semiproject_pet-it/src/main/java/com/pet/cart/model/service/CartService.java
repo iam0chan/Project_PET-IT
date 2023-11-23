@@ -38,6 +38,33 @@ public class CartService {
 		return result;
 	}
 	
+	public int deleteCart(List<Integer> delCart) {
+		Connection conn=getConnection();
+		int result=0;
+		String where ="(";
+		for(int i=0;i<delCart.size();i++) {
+			if(i!=0) where+=",";
+			where+=delCart.get(i);
+		}
+		where+=")";
+		
+		result=dao.deleteCart(conn,where );
+		
+		if(result!=delCart.size()) {
+			rollback(conn);
+			result=0;
+		}
+//		for(Integer cartNo:delCart) {
+//			result=dao.deleteCart(conn,cartNo);
+//			if(result==0) {
+//				rollback(conn);
+//				return 0;
+//			}
+//		}	
+		commit(conn);
+		close(conn);
+		return result;
+	}
 
 	/*
 	 * private CartDao cartDao;
