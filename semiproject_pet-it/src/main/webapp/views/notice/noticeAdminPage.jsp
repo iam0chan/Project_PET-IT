@@ -98,11 +98,10 @@
 		                    	<button class="btn btn-outline-success" type="reset" id="resetBtn">cancell</button>
 		                    </div>
 			            </div>
-			            
-			            
-			            
 				</form>
 			</div>
+			</div>
+			</section>
 				
 	<script>
 	$("#resetBtn").on("click",function(){
