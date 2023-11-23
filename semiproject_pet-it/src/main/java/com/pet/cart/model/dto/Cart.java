@@ -22,7 +22,7 @@ public class Cart {
 	private String productInfo;
 	private int productPoint;
 	private String productContent;
-	
+	private String productImg;
 	// 상품옵션 추가
 	private String optionName;
     private int optionValue;
