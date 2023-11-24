@@ -11,7 +11,6 @@
 		List<OrderDetail> ol = (List<OrderDetail>)request.getAttribute("orderList"); 
 		Member loginMember=(Member)session.getAttribute("loginMember");
 		int totalPrice=0;
-		System.out.println(ol);
 %>
 
 <%-- <!-- header -->

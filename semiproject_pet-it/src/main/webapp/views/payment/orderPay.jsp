@@ -11,20 +11,6 @@
 
 <!-- header -->
 <%@ include file="/views/header.jsp"%>
-<!-- bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-<!-- PortOne SDK -->
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<!-- Sweet alert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- daum address api -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- jQuery -->
-<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/orderPay/orderPay.css"/>
 
 
 <div id="content-container">
@@ -136,7 +122,7 @@
 		<!-- ----------------상품정보 start -------------------- -->	  
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingTwo">
-			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+			      <button style="padding:20px"class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 			        <div class="btn-text"><b>주문 상품</b></div>
 			      </button>
 			    </h2>
@@ -178,7 +164,7 @@
 		<!-- ----------------쿠폰/적립금 start -------------------- -->
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingThree">
-			      <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+			      <button style="padding:20px" class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
 			        <div class="btn-text"><b>할인 / 부가결제</b></div>
 			      </button>
 			    </h2>
@@ -224,7 +210,7 @@
 		<!-- ----------------total price start -------------------- -->
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingFour">
-			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+			      <button style="padding:20px" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
 			        <div class="btn-text"><b>결제 정보</b></div>
 			      </button>
 			    </h2>
@@ -265,7 +251,7 @@
 		  <!-- ----------------payment choice start -------------------- -->
 			  <div class="accordion-item">
 			    <h2 class="accordion-header" id="headingFive">
-			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+			      <button style="padding:20px" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
 			        <div class="btn-text"><b>결제방법 선택</b></div>
 			      </button>
 			    </h2>
@@ -311,7 +297,7 @@
 				          </div>  		        
 				      	</div>
 			    	</div> -->
-				</form>
+				
 	    	<!-- ----------------point end -------------------- -->
 	    	
 			      <br>
@@ -326,6 +312,22 @@
 
 <!-- js -->
 <script src="<%=request.getContextPath()%>/js/orderPay.js"></script>
+
+<!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<!-- PortOne SDK -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- Sweet alert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- daum address api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/orderPay/orderPay.css"/>
+
 
 <!-- ----------결제하기 버튼 클릭 js----------------- -->
 <script>
@@ -534,4 +536,4 @@ function payment_api(){
 </script>
 	
 <!-- footer -->
-<%@ include file="/views/footer.jsp"%>
+<%-- <%@ include file="/views/footer.jsp"%> --%>
