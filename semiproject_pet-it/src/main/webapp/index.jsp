@@ -99,7 +99,7 @@ section.info_section {
 		</div>
 		<div class="row-collection">
 			<%
-			if (!newProducts.isEmpty()) {
+			if (newProducts!=null) {
 			%>
 			<%
 			for (Product p : newProducts) {

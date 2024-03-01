@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class CartDao {
-	
+
 	private Properties sql = new Properties();
 	{
 		String path = CartDao.class.getResource("/sql/cart/cart_sql.properties").getPath();
@@ -26,7 +26,7 @@ public class CartDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<Cart> selectCart(Connection conn, int cPage, int numPerpage, String member_id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -85,103 +85,48 @@ public class CartDao {
 		}
 		return c;
 	}
-	
-	
-	
-	
+
 	private Cart getCart(ResultSet rs) throws SQLException {
-		return Cart.builder()
-				.cartNo(rs.getString("cart_no"))
-				.productNo(rs.getString("product_no"))
-				.memberId(rs.getString("member_id"))
-				.cartProductCount(rs.getInt("cart_product_count"))
-				.productName(rs.getString("product_name"))
-				.productPrice(rs.getInt("product_price"))
-				.productInfo(rs.getString("product_info"))
-				.productPoint(rs.getInt("product_point"))
-				.productContent(rs.getString("product_content"))
-				.productImg(rs.getString("PRODUCT_FILE_RENAME")).build();
+		return Cart.builder().cartNo(rs.getString("cart_no")).productNo(rs.getString("product_no"))
+				.memberId(rs.getString("member_id")).cartProductCount(rs.getInt("cart_product_count"))
+				.productName(rs.getString("product_name")).productPrice(rs.getInt("product_price"))
+				.productInfo(rs.getString("product_info")).productPoint(rs.getInt("product_point"))
+				.productContent(rs.getString("product_content")).productImg(rs.getString("PRODUCT_FILE_RENAME"))
+				.build();
 	}
+
 	public int insertCart(Connection conn, Cart c) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("insertCart"));
-			pstmt.setString(1,c.getMemberId());
-			pstmt.setString(2,c.getProductNo());
-			pstmt.setInt(3,c.getCartProductCount());
-			pstmt.setString(4,c.getOptionName());
-			pstmt.setInt(5, c.getOptionValue());
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
-	
-	public int deleteCart(Connection conn, String where) {
-		PreparedStatement pstmt=null;
-		String query=sql.getProperty("deleteCart").replace("#WHERE", where);
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(query);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
-	
-	
-/*
-	// 장바구니에 DB 정보 추가
-	public int insertCart(Connection conn, Cart cart) {
+		PreparedStatement pstmt = null;
 		int result = 0;
-		try (PreparedStatement preparedStatement = conn
-				.prepareStatement("INSERT INTO cart (member_id, product_no, cart_product_count, cart_no, enroll_date) "
-						+ "VALUES (?, ?, ?, ?, ?)")) {
-
-			preparedStatement.setString(1, cart.getMemberId());
-			preparedStatement.setString(2, cart.getProductNo());
-			preparedStatement.setInt(3, cart.getCartProductCount());
-			preparedStatement.setString(4, cart.getCartNo());
-			preparedStatement.setDate(5, cart.getEnrollDate());
-
-			result = preparedStatement.executeUpdate();
-
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("insertCart"));
+			pstmt.setString(1, c.getMemberId());
+			pstmt.setString(2, c.getProductNo());
+			pstmt.setInt(3, c.getCartProductCount());
+			pstmt.setString(4, c.getOptionName());
+			pstmt.setInt(5, c.getOptionValue());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return result;
 	}
 
-	// 상품 리스트
-	public List<Cart> getAllCartsByMemberId(Connection conn, String memberId) {
-		List<Cart> carts = new ArrayList<>();
-		String sql = "SELECT * FROM cart WHERE member_id = ?";
-		try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-
-			preparedStatement.setString(1, memberId);
-
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				while (resultSet.next()) {
-					Cart cart = Cart.builder().memberId(resultSet.getString("member_id"))
-							.productNo(resultSet.getString("product_no"))
-							.cartProductCount(resultSet.getInt("cart_product_count"))
-							.cartNo(resultSet.getString("cart_no")).enrollDate(resultSet.getDate("enroll_date"))
-							.build();
-
-					carts.add(cart);
-				}
-			}
-
+	public int deleteCart(Connection conn, String where) {
+		PreparedStatement pstmt = null;
+		String query = sql.getProperty("deleteCart").replace("#WHERE", where);
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace(); // 예외처리
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
-
-		return carts;
+		return result;
 	}
-	*/
+
 }
