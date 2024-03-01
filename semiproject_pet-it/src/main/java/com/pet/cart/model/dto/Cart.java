@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,9 +25,6 @@ public class Cart {
 	private String productImg;
 	// 상품옵션 추가
 	private String optionName;
-    private int optionValue;
-	
-	
-	// 여러 제품 정보를 갖는 리스트
-	//private List<Product> products = new ArrayList<>();
+	private int optionValue;
+
 }

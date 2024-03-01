@@ -18,36 +18,29 @@ import com.pet.cart.model.service.CartService;
 @WebServlet("/cart/cartDelete.do")
 public class CartDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CartDeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String delCartStr=request.getParameter("delCart");
-		boolean responseVal=false;
-		if(delCartStr!=null&&!delCartStr.equals("")) {
-			List<Integer> delCart=new Gson().fromJson(delCartStr,List.class);
-			int result=new CartService().deleteCart(delCart);
-			response.setContentType("application/json;charset=utf-8");
-			responseVal=result!=0;
-		}
-		new Gson().toJson(responseVal,response.getWriter());
-		
+	public CartDeleteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String delCartStr = request.getParameter("delCart");
+		boolean responseVal = false;
+		if (delCartStr != null && !delCartStr.equals("")) {
+			List<Integer> delCart = new Gson().fromJson(delCartStr, List.class);
+			int result = new CartService().deleteCart(delCart);
+			response.setContentType("application/json;charset=utf-8");
+			responseVal = result != 0;
+		}
+		new Gson().toJson(responseVal, response.getWriter());
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
