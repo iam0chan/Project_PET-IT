@@ -12,16 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.pet.cart.model.service.CartService;
 
-/**
- * Servlet implementation class CartDeleteServlet
- */
 @WebServlet("/cart/cartDelete.do")
 public class CartDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public CartDeleteServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +38,6 @@ public class CartDeleteServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
